@@ -1,0 +1,25 @@
+site_name: Learning DSA in Python
+theme:
+  name: material
+  palette:
+    scheme: brown
+
+nav:
+  - Home: index.md
+  - Chapter 1: DS&A-PythonPrimer.md
+  - Chapter 2: DS&A-Object-Oriented-Programming.md
+  - Chapter 3: DS&A-Algorithm-Analysis.md
+  - Chapter 4: DS&A-Recursion.md
+  - Chapter 5: DS&A-Array-Based-Sequences.md
+  - Chapter 6: DS&A-Stacks-Queues-and-Deques.md
+  - Chapter 7: DS&A-Linked-Lists.md
+  - Chapter 8: DS&A-Trees.md
+  - Chapter 9: DS&A-PriorityQueues.md
+  - Chapter 10: DS&A-Maps-HashTables-and-Skip-Lists.md
+  - Chapter 11: DS&A-Search-Trees.md
+  - Chapter 12: DS&A-Sorting-and-Selection.md
+  - Chapter 13: DS&A-Text-Processing.md
+  - Chapter 14: DS&A-Graphs.md
+  - Chapter 15: DS&A-Memory-Management-and-B-Trees.md
+
+repo_url: https://github.com/kantarcise/learningdsainpython
