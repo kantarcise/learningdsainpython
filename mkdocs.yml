@@ -1,5 +1,6 @@
 site_name: Learning DSA in Python
 theme:
+  name: material
   palette:
     - scheme: default
       primary: brown
