@@ -16,7 +16,8 @@ theme:
   font:
     text: EB Garamond
 
-  logo: assets/logo.png
+  logo: assets/lego.svg
+  favicon: assets/lego_favicon.png
 
 nav:
   - Home: index.md
