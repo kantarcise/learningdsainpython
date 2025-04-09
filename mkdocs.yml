@@ -1,18 +1,16 @@
 site_name: Learning DSA in Python
 theme:
   palette:
-    scheme: brown
-
-    # Palette toggle for light mode
     - scheme: default
-      toggle:
-        icon: material/weather-sunny
-        name: Switch to dark mode
-
-    # Palette toggle for dark mode
-    - scheme: slate
+      primary: brown
       toggle:
         icon: material/weather-night
+        name: Switch to dark mode
+
+    - scheme: slate
+      primary: brown
+      toggle:
+        icon: material/weather-sunny
         name: Switch to light mode
   font:
     text: EB Garamond
