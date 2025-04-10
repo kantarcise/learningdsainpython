@@ -1,0 +1,5 @@
+/* Change default paragraph font size */
+.md-typeset p {
+    font-size: 1.1rem; /* or try 18px, 1.2em, etc. */
+    /* line-height: 1.6; */
+  }
