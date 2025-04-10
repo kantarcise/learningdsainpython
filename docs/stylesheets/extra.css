@@ -1,5 +1,33 @@
 /* Change default paragraph font size */
+/* Paragraphs */
 .md-typeset p {
-    font-size: 1.1rem; /* or try 18px, 1.2em, etc. */
-    /* line-height: 1.6; */
+    font-size: 1.1rem;  /* or try 18px, 1.2em, etc. */
+    line-height: 1.6;
   }
+  
+  /* Headings */
+  .md-typeset h1 {
+    font-size: 2.2rem;
+    margin-top: 2rem;
+  }
+  .md-typeset h2 {
+    font-size: 1.8rem;
+    margin-top: 1.6rem;
+  }
+  .md-typeset h3 {
+    font-size: 1.5rem;
+    margin-top: 1.4rem;
+  }
+  .md-typeset h4 {
+    font-size: 1.3rem;
+    margin-top: 1.2rem;
+  }
+  .md-typeset h5 {
+    font-size: 1.15rem;
+    margin-top: 1rem;
+  }
+  .md-typeset h6 {
+    font-size: 1rem;
+    margin-top: 0.8rem;
+  }
+  
