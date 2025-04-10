@@ -1,35 +1,34 @@
-Part of [[Data Structures and Algorithms - In Python]]
-
----
 # Python Primer 🥳
 
 The first chapter is about Python basics.
+
 ## Python Overview
 
-Python is formally an ==interpreted== language (like **PHP**, **Ruby**, and **JavaScript**). Commands are executed through a piece of software known as the Python interpreter. 
+Python is formally an **interpreted** language (like **PHP**, **Ruby**, and **JavaScript**). Commands are executed through a piece of software known as the Python interpreter. 
 
 The interpreter receives a command, evaluates that command, and reports the result of the command.
 
 While the interpreter can be used interactively (especially when debugging), a programmer typically defines a series of commands in advance and saves those commands in a plain text file known as source code or a script. 😌
+
 #### Wisdom: Interpreted vs Compiled ?
 
 > Both are translated into “computer language”, and the computer will be able to know what to do when he reads it (Computer speaks 0 and 1's). The difference is when/how you’ll translate it.
 
-![[fig0.1.png]]
+![Figure 0.1](https://github.com/kantarcise/learningdsainpython/tree/main/docs/assets/images/chapter1/fig0-1.png)
 
 Plain C will not work.  😮
 
-![[fig0.2.png]]
+![Figure 0.2](https://github.com/kantarcise/learningdsainpython/tree/main/docs/assets/images/chapter1/fig0-2.png)
 
 > An interpreted language uses a software called interpreter to translate the original message into the “computer language”, much like a real life interpreter would translate somebody’s Portuguese speech into English in real time.
 
-![[fig0.4.png]]
+![Figure 0.4](https://github.com/kantarcise/learningdsainpython/tree/main/docs/assets/images/chapter1/fig0-4.png)
 
-> A compiled language uses a software called compiler that ==translates== the original message and saves it to another file. You can imagine that the compiler would be the person creating subtitles for a speech.
+> A compiled language uses a software called compiler that **translates** the original message and saves it to another file. You can imagine that the compiler would be the person creating subtitles for a speech.
 
-![[fig0.3.png]]
+![Figure 0.3](https://github.com/kantarcise/learningdsainpython/tree/main/docs/assets/images/chapter1/fig0-3.png)
 
-> The interpreter might come up with the translated message first, as he’s translating in real time, but if he’s asked to translate it again, he’ll have to ==redo the work every time.==
+> The interpreter might come up with the translated message first, as he’s translating in real time, but if he’s asked to translate it again, he’ll have to **redo the work every time.**
 > 
 > The compiler on the other hand already did that work, and won’t have to repeat it since he saved it to a file. Also, it’s a lot easier for the compiler to optimize the message and make it more understandable to the computer, as he won’t need to hear the entire original message again.
 
@@ -37,37 +36,44 @@ Here is Python Internal Workings:
 
 - ****Code Editor:**** Code Editor is the first stage of programs where we write our source code. This is human-readable code written according to Python’s syntax rules. It is where the execution of the program starts first.
 - ****Source code:**** The code written by a programmer in the code editor is then saved as a `.py` file in a system. This file of Python is written in human-readable language that contains the instructions for the computer.
-- ****Compilation Stage:**** The compilation stage of Python is different from any other programming language. Rather than compiling a source code directly into machine code. python compiles a source code into a ==byte code==. In the compilation stage python compiler also checks for syntax errors. after checking all the syntax errors, if no such error is found then it generates a `.pyc` file that contains bytecode.
+- ****Compilation Stage:**** The compilation stage of Python is different from any other programming language. Rather than compiling a source code directly into machine code. python compiles a source code into a **byte code**. In the compilation stage python compiler also checks for syntax errors. after checking all the syntax errors, if no such error is found then it generates a `.pyc` file that contains bytecode.
 - ****Python Virtual Machine(PVM) / Python Interpreter:**** The bytecode then goes into the main part of the conversion is the Python Virtual Machine(PVM). The PVM is the main runtime engine of Python. It is an interpreter that reads and executes the bytecode file, line by line. Here In the Python Virtual Machine translate the byte code into machine code which is the binary language consisting of 0's and 1's. The machine code is highly optimized for the machine it is running on. This binary language is only understandable by the CPU of a system.
 - ****Running Program:**** At last, the CPU executes the given machine code and the main outcome of the program comes as performing task and computation you scripted at the beginning of the stage in your code editor.
 
-Python is an ==object-oriented language== and classes form the basis for all data types. 
+Python is an **object-oriented language** and classes form the basis for all data types. 
 
-In this section, we describe key aspects of Python’s object model, and we introduce Python’s built-in classes, such as the ==`int`== class for integers, the ==`float`== class for floating-point values, and the ==`str`== class for character strings.
+In this section, we describe key aspects of Python’s object model, and we introduce Python’s built-in classes, such as the **`int`** class for integers, the **`float`** class for floating-point values, and the **`str`** class for character strings.
 
 Here are some inheritance maps (possibly outdated) which data takes part of.
 
-![[pythoninheritencemap.png]]
+![python inheritance map](https://github.com/kantarcise/learningdsainpython/tree/main/docs/assets/images/chapter1/pythoninheritencemap.png)
 
 For `abc` module (possibly outdated too):
 
-![[collections_inheritence_map.jpg]]
+![collections inheritance map](https://github.com/kantarcise/learningdsainpython/tree/main/docs/assets/images/chapter1/collections_inheritence_map.png)
 
 and another (possibly outdated too):
 
-![[collections_abc.png]]
+![collections abc](https://github.com/kantarcise/learningdsainpython/tree/main/docs/assets/images/chapter1/collections_abc.png)
 
 If you want to, you can think of the hierarchy from ancestor to child as : *"Container - Collection - Sequence"* 🥰
+
 #### Weakly Typed Language ??
 
-Python is a weakly typed language. That means any variable can hold any type of value, and you can overwrite a variable to have any type of value. In other words, you can assign a new value to a variable that is of a different type than its original value.
+Python is a weakly typed language. That means any variable can hold any type of value, and you can overwrite a variable to have any type of value. 
+
+In other words, you can assign a new value to a variable that is of a different type than its original value.
 
 In contrast, strongly typed languages — such as C and Java — do not allow this.
+
 #### Strongly-typed: Types will not be coerced silently like in JavaScript. 🤔
 
 In JavaScript, which is a weakly-typed language, type coercion often happens implicitly. For example, if you try to perform an operation involving different types (such as adding a number to a string), JavaScript will attempt to coerce one of the operands into a compatible type to complete the operation. This can sometimes lead to unexpected behavior.
 
-In contrast, in a strongly-typed language, such as Python or Java, explicit type conversion is required, and type errors are raised if incompatible types are used together. This means that you must explicitly convert types when necessary, and the compiler or interpreter will not silently coerce types for you.
+In contrast, in a strongly-typed language, such as Python or Java, explicit type conversion is required, and type errors are raised if incompatible types are used together.
+
+This means that you must explicitly convert types when necessary, and the compiler or interpreter will not silently coerce types for you.
+
 ## Objects in Python 😎
   
 There are 33 specially reserved words that cannot be used as identifiers, as shown down below.
@@ -81,7 +87,7 @@ There are 33 specially reserved words that cannot be used as identifiers, as sho
 These are all reserved. Thank you for that reminder. 🥰
 ### Python’s Built-In Classes 🤔 
 
-A class is `immutable` if each object of that class has a fixed value upon instantiation that ==cannot subsequently be changed.== For example, the `float` class is immutable.
+A class is `immutable` if each object of that class has a fixed value upon instantiation that **cannot subsequently be changed.** For example, the `float` class is immutable.
 
 Once an instance has been created, its value cannot be changed (although an identifier referencing that object can be reassigned to a different value).
 
@@ -104,7 +110,7 @@ Basically it comes down to the fact that immutability increases predictability, 
 Mutation hides change, which create (unexpected) side effects, which can cause nasty bugs. When you enforce immutability you can keep your application architecture and mental model simple, which makes it easier to reason about your application.
 ##### Performance
 
-Even though adding values to an immutable Object means that a new instance needs to be created where existing values need to be copied and new values need to be added to the new Object which cost memory, immutable Objects can make use of structural sharing to ==reduce memory overhead.==
+Even though adding values to an immutable Object means that a new instance needs to be created where existing values need to be copied and new values need to be added to the new Object which cost memory, immutable Objects can make use of structural sharing to **reduce memory overhead.**
 
 All updates return new values, but internally structures are shared to drastically reduce memory usage (and Garbage Collection thrashing).
 
@@ -124,7 +130,7 @@ This makes it really easy to see if anything has changed.
 
 Numbers evaluate to `False` if zero, and `True` if nonzero. Sequences and other container types, such as `strings` and `lists`, evaluate to `False` if empty and `True` if nonempty. 
 
-An important application of this interpretation is the use of a non boolean value as a ==condition== in a control structure.
+An important application of this interpretation is the use of a non boolean value as a **condition** in a control structure.
   
 In Python, **Boolean is a SUB TYPE of the integer type!** 😯
 
@@ -149,13 +155,13 @@ if not empty_seq:
 
 The `int` and `float` classes are the primary numeric types in Python. The `int` class is designed to represent integer values with arbitrary magnitude. 
 
-Unlike Java and C++, which support different integral types with different precision (e.g., `int`, `short`, `long`), Python ==automatically chooses== the internal representation for an integer based upon the magnitude of its value.
+Unlike Java and C++, which support different integral types with different precision (e.g., `int`, `short`, `long`), Python **automatically chooses** the internal representation for an integer based upon the magnitude of its value.
 
 Typical literals for integers include ``0, 137, and −23.`` 
 
 ![[fig0.5.jpg]]
 
-In some contexts, it is convenient to express an integral value using ==binary==, ==octal==, or ==hexadecimal==. That can be done by using a prefix of the number 0 and then a character to describe the base. Example of such literals are respectively: ``0b1011, 0o52, and 0x7f.``
+In some contexts, it is convenient to express an integral value using **binary**, **octal**, or **hexadecimal**. That can be done by using a prefix of the number 0 and then a character to describe the base. Example of such literals are respectively: ``0b1011, 0o52, and 0x7f.``
 
 ```python
 test_integer = 23
@@ -164,7 +170,7 @@ octal_int = 0o52
 hexal_int = 0x2c
 ```
 
-The integer constructor, `int()`, returns value ==`0`== by default. 
+The integer constructor, `int()`, returns value **`0`** by default. 
 
 But this constructor can be used to construct an integer value based upon an existing value of another type. 
 
@@ -212,21 +218,21 @@ For example, the call ```float(2)``` returns the floating-point value `2.0`. If 
 
 The `list`, `tuple`, and `str` classes are sequence types in Python, representing a collection of values in which the order is significant.
 
-The ==`list`== class is the most general, representing a sequence of arbitrary objects (akin to an `array` in other languages).
+The **`list`** class is the most general, representing a sequence of arbitrary objects (akin to an `array` in other languages).
 
 ```python
 basic_list_of_integers = [1, 2, 3, 4, 5]
 my_list = [ {"a" : 2}, {"theta" : 3.14}]
 ```
 
-The ==`tuple`== class is an immutable version of the `list` class, benefiting from a streamlined internal representation. 
+The **`tuple`** class is an immutable version of the `list` class, benefiting from a streamlined internal representation. 
 
 ```python
 my_tuple = (1978,)
 you_can_even_do_this = 12 ,
 ```
 
-The ==`str`== class is specially designed for representing an immutable sequence of text characters. We note that Python does not have a separate class for ==characters==; they are ==just strings with length one==.
+The **`str`** class is specially designed for representing an immutable sequence of text characters. We note that Python does not have a separate class for **characters**; they are **just strings with length one**.
 
 ```python
 this_is_not_a_character_it_is_a_string = "a"
@@ -234,7 +240,7 @@ string_for_bros = "be legendary"
 ```
 #### The `list` Class `my_list = ["a", "b", "c"]`
 
-A `list` instance stores a sequence of objects. A `list` is a ==referential structure==, as it **technically stores a sequence of references to its elements.** Elements of a `list` may be arbitrary objects (including the `None` object). Lists are array-based sequences and are zero-indexed, thus a `list` of length n has elements indexed from $0$ to $n − 1$ inclusive.
+A `list` instance stores a sequence of objects. A `list` is a **referential structure**, as it **technically stores a sequence of references to its elements.** Elements of a `list` may be arbitrary objects (including the `None` object). Lists are array-based sequences and are zero-indexed, thus a `list` of length n has elements indexed from $0$ to $n − 1$ inclusive.
 
 ```python
 s = [1, 2, 3, 4, 5, 6, 7]
@@ -291,7 +297,7 @@ this_is_also_tuple = 3,
 The reason for this requirement is that, without the trailing comma, the expression `(17)` alone is viewed as a simple parenthesized numeric expression.
 #### The `str` Class `be = "the_spark"`
 
-Python’s `str` class is specifically designed to efficiently represent an immutable sequence of characters, based upon the ==Unicode international character set.== Strings have a more compact internal representation than the referential lists and tuples, as portrayed in Figure 1.5.
+Python’s `str` class is specifically designed to efficiently represent an immutable sequence of characters, based upon the **Unicode international character set.** Strings have a more compact internal representation than the referential lists and tuples, as portrayed in Figure 1.5.
 
 ![[fig1.15.png]]
 
@@ -310,7 +316,7 @@ Because the backslash has this purpose, the backslash must itself be escaped to 
 
 Other commonly escaped characters are `"\n"` for newline and `"\t"` for tab. 
 
-==Unicode characters== can be included, such as ``'20\u20AC'`` for the string ``20€``.
+**Unicode characters** can be included, such as ``'20\u20AC'`` for the string ``20€``.
 
 ```python
 print("20 \u20AC ONLY!") # 20 € ONLY!
@@ -336,7 +342,7 @@ Here is an example of an `f-string`:
 
 ```python
 a , b = 2, 3
-print(f"{a} is not equal to {b} so the answer is: {a == b}")
+print(f"{a} is not equal to {b} so the answer is: {a ** b}")
 ```
 
 Python raw string treats the backslash character `\` as a literal character. Raw string is useful when a string needs to contain a backslash, such as for a regular expression or Windows directory path, and you don’t want it to be treated as an escape character.
@@ -375,13 +381,13 @@ The major advantage of using a `set`, as opposed to a `list`, is that it has **a
 
 ![[fig0.6.png]]
 
-This is based on a data structure known as ==a hash table== (which will be the primary topic of Chapter 10). However, there are two important restrictions due to the algorithmic underpinnings.
+This is based on a data structure known as **a hash table** (which will be the primary topic of Chapter 10). However, there are two important restrictions due to the algorithmic underpinnings.
 
 The set does not maintain the elements in any particular order. 
 
 However, after Python 3.6, `set.pop()` become non random, so it pops items like Queues.
 
-The second is that only instances of ==immutable types== (`hashable`) can be added to a Python set. 
+The second is that only instances of **immutable types** (`hashable`) can be added to a Python set. 
 
 Therefore, objects such as integers, floating-point numbers, and character strings are eligible to be elements of a set. It is possible to maintain a set of tuples, but not a set of lists or a set of sets, as lists and sets are mutable. The `frozenset` class is an immutable form of the set type, so it is legal to have a set of `frozensets`.
 
@@ -423,7 +429,7 @@ print(4 not in s) # True
 
 Python’s `dict` class represents a dictionary, or mapping, from **a set of distinct keys to associated values.** For example, a dictionary might map from unique student ID numbers, to larger student records (such as the student’s name, address, and course grades). 
 
-Python implements a dict using an almost identical approach to that of a set, but ==with storage of the associated values.==
+Python implements a dict using an almost identical approach to that of a set, but **with storage of the associated values.**
 
 ```python
 my_dict = {"key_one": 12, "key_two": 6}
@@ -443,7 +449,7 @@ pairs = [("ga", "Irish"), ("de", "German")]
 my_dict = dict(pairs)
 ```
 
-Dictionaries iterate over their ==keys==:
+Dictionaries iterate over their **keys**:
 
 ```python
 my_example_dict = {"Tokyo": 4, "Kyoto" : 6, "Osaka": 2}
@@ -452,7 +458,7 @@ for elem in my_example_dict:
 ```
 ## Expressions, Operators, and Precedence
 
-Existing values can be combined into larger syntactic expressions using a variety of special symbols and keywords known as ==operators.==
+Existing values can be combined into larger syntactic expressions using a variety of special symbols and keywords known as **operators.**
 
 The semantics of an operator depends upon the type of its operands. For example, when `a` and `b` are numbers, the syntax `a + b` indicates addition, while if `a` and `b` are strings, the operator indicates concatenation. 
 
@@ -488,7 +494,7 @@ Python supports the following operators to test two notions of equality:
 | -------- | ------------------ |
 | `is`     | same identity      |
 | `is not` | different identity |
-| `==`     | equivalent         |
+| `**`     | equivalent         |
 | `!=`     | not equivalent     |
 
 ```python
@@ -500,11 +506,11 @@ print(a is b) # This is True only when a and b are aliases to same object
 str_1 = "abc"
 str_2 = "abc"
 
-if str_1 == str_2:
+if str_1 ** str_2:
 	print("This is True because these strings considered equivalent, because they match character to character.")
 ```
 
-**Wisdom:** So in general, we use `==` or `!=` , not identity (Identical objects are also equal but we rarely compare identical objects).
+**Wisdom:** So in general, we use `**` or `!=` , not identity (Identical objects are also equal but we rarely compare identical objects).
 #### Comparison Operators:
 Comparison happens lexicographically - Like Oxford Dictionary.
 
@@ -617,7 +623,7 @@ You can use bitwise operators to perform [Boolean logic](https://en.wikipedia.o
 
 ![[bitwise.jpg]]
 
-Bitwise operators were used a lot more in programming when computers didn’t have as **much memory** in them as they do now. Bitwise operators are still used for those working on embedded devices that have ==memory limitations==.
+Bitwise operators were used a lot more in programming when computers didn’t have as **much memory** in them as they do now. Bitwise operators are still used for those working on embedded devices that have **memory limitations**.
 
 Python provides the following bitwise operators for integers: 
 
@@ -629,7 +635,7 @@ Python provides the following bitwise operators for integers:
 | `ˆ`      | bitwise exclusive-or                       |
 | `<<`     | shift bits left, filling in with zeros     |
 | `>>`     | shift bits right, filling in with sign bit |
-**Bitwise And** - `x & 1 == x` for `x == 0 or x == 1` - *And with 1 is bit itself.*
+**Bitwise And** - `x & 1 ** x` for `x ** 0 or x ** 1` - *And with 1 is bit itself.*
 
 ```python
 # Bitwise AND operator 
@@ -655,7 +661,7 @@ g = d & f
 print(g) # 20
 ```
 
-**Bitwise Or** - `x | 0 = x` for `x == 0 or x == 1` - *Or with 0 is the number itself.*
+**Bitwise Or** - `x | 0 = x` for `x ** 0 or x ** 1` - *Or with 0 is the number itself.*
 
 ```python
 # Bitwise OR operator
@@ -743,18 +749,18 @@ print(a << 3) # 312 100111000
 ```
 ##### *Bit masks ?*
 
-On paper, the bit pattern resulting from a left shift becomes longer by as many places as you shift it. That’s also true for Python in general because of how it handles integers. However, in most practical cases, you’ll want to constrain the length of a bit pattern to be a multiple of eight, which is the ==standard byte length==.
+On paper, the bit pattern resulting from a left shift becomes longer by as many places as you shift it. That’s also true for Python in general because of how it handles integers. However, in most practical cases, you’ll want to constrain the length of a bit pattern to be a multiple of eight, which is the **standard byte length**.
 
 For example, if you’re working with a single byte, then shifting it to the left should discard all the bits that go beyond its left boundary:
 
-It’s sort of like looking at an unbounded stream of bits through a fixed-length window. There are a few tricks that let you do this in Python. For example, you can apply a ==bitmask== with the bitwise AND operator:
+It’s sort of like looking at an unbounded stream of bits through a fixed-length window. There are a few tricks that let you do this in Python. For example, you can apply a **bitmask** with the bitwise AND operator:
 
 ```python
 print(39 << 3) # 312 - over 1 byte
 print((39 << 3) & 255) # 56 - bitmaskedded
 ```
 
-Shifting 39 by three places to the left returns a number higher than the maximum value that you can store on a single byte. It takes ==nine== bits, whereas a byte has only ==eight==. 
+Shifting 39 by three places to the left returns a number higher than the maximum value that you can store on a single byte. It takes **nine** bits, whereas a byte has only **eight**. 
 
 To chop off that one extra bit on the left, you can apply a bitmask with the appropriate value. If you’d like to keep more or fewer bits, then you’ll need to modify the mask value accordingly.
 
@@ -813,7 +819,7 @@ Sequences define comparison operations based on lexicographic order, performing 
 
 | operator | meaning |
 | - | - |
-| `s == t` | equivalent (element by element) |
+| `s ** t` | equivalent (element by element) |
 | `s != t` | not equivalent |
 | `s < t` | lexicographically less than |
 | `s <= t` | lexicographically less than or equal to |
@@ -829,7 +835,7 @@ They do not provide order between elements, so comparison is not lexicographic. 
 | -------------- | ----------------------------------------------- |
 | `key in s`     | containment check                               |
 | `key not in s` | non-containment check                           |
-| `s1 == s2`     | s1 is equivalent to s2                          |
+| `s1 ** s2`     | s1 is equivalent to s2                          |
 | `s1 != s2`     | s1 is not equivalent to s2                      |
 | `s1 <= s2`     | s1 is subset of s2                              |
 | `s1 < s2`      | s1 is proper subset of s2                       |
@@ -853,7 +859,7 @@ print(f" is {2} in the hset: {2 in hset}") # True
 print(f" is {7} in the hset: {7 in hset}") # False
 # is 7 in the hset: False
 
-print(f"are these equal: {hset == hset_2}" ) # False
+print(f"are these equal: {hset ** hset_2}" ) # False
 # are these equal: False
 
 print(f" smaller or equal ? : {hset <= hset_2}") # False
@@ -888,7 +894,7 @@ Do not maintain a well defined order on their elements. $O(1)$ access to element
 | `del d[key]`     | remove key and its associated value from dictionary |
 | `key in d`       | containment check                                   |
 | `key not in d`   | non-containment check                               |
-| `d1 == d2`       | d1 is equivalent to d2                              |
+| `d1 ** d2`       | d1 is equivalent to d2                              |
 | `d1 != d2`       | d1 is not equivalent to d2                          |
 
 ```python
@@ -900,7 +906,7 @@ print(hmap.get("alexx", 100)) # 100
 
 print("artour" in hmap) # True
 
-print(hmap == {True: 1}) # False
+print(hmap ** {True: 1}) # False
 
 print(max(hmap)) # "greg" - biggest key, literally
 
@@ -910,7 +916,7 @@ print(max(hmap, key=hmap.get)) # andrej - key for max changed
 
 For an immutable type, such as a number or a string, one should not presume that this syntax changes the value of the existing object, but instead that it will reassign the identifier to a newly constructed value.
 
-==Immutables will be made as new objects!==
+**Immutables will be made as new objects!**
 
 However, it is possible for a type to redefine such semantics to mutate the object, as the `list` class does for the `+=` operator.
 
@@ -945,7 +951,7 @@ Higher precedence will be executed first.
 |8 |bitwise-and |&  |
 |9| bitwise-xor |ˆ  |
 |10| bitwise-or | pipe |  
-|11| comparisons |is, is not, `==`, !=, <, <=, >, >=  |
+|11| comparisons |is, is not, `**`, !=, <, <=, >, >=  |
 |11| containment| in, not in  |
 |12 |logical-not |not expr  |
 |13| logical-and |and  |
@@ -982,9 +988,9 @@ move()
 
 Python offers two distinct looping constructs. 
 
-A ==`while`==  loop allows general repetition based upon the repeated testing of a Boolean condition. 
+A **`while`**  loop allows general repetition based upon the repeated testing of a Boolean condition. 
 
-A ==`for`==  loop provides convenient iteration of values from a defined series (such as characters of a string, elements of a list, or numbers within a given range).
+A **`for`**  loop provides convenient iteration of values from a defined series (such as characters of a string, elements of a list, or numbers within a given range).
 #### While loops - Use when not sure of the loop count
 
 ```python
@@ -1045,23 +1051,23 @@ for j in range(len(data)):
 		big_index = j
 ```
 ### Break and Continue Statements  
-Python supports a ==break== statement that immediately terminate a while or for loop when executed within its body. More formally, if applied within nested control structures, it causes the termination of the most immediately enclosing loop. 
+Python supports a **break** statement that immediately terminate a while or for loop when executed within its body. More formally, if applied within nested control structures, it causes the termination of the most immediately enclosing loop. 
 
 As a typical example, here is code that determines whether a target value occurs in a data set:
 
 ```python
 found = False  
 for item in data:  
-	if item == target:  
+	if item ** target:  
 		found = True  
 		break  
 ```
 
-Python also supports a ==continue== statement that causes the current iteration of a loop body to stop, but with subsequent passes of the loop proceeding as expected.
+Python also supports a **continue** statement that causes the current iteration of a loop body to stop, but with subsequent passes of the loop proceeding as expected.
 
 ```python
 for i in range(6):
-	if i % 2 == 0:
+	if i % 2 ** 0:
 		continue
 	print(i, end = " ")  # 1 3 5
 ```
@@ -1077,7 +1083,7 @@ def count(data, target):  # function signature
 	# body of the function
 	n = 0  
 	for item in data:  
-		if item == target: # found a match  
+		if item ** target: # found a match  
 		n += 1  
 	return n  
 ```
@@ -1145,7 +1151,7 @@ In the context of a function signature, the identiﬁers used to describe the ex
 
 Parameter passing in Python follows the semantics of the standard assignment statement. 
 
-==When a function is invoked, each identiﬁer that serves as a formal parameter is assigned, in the function’s local scope, to the respective actual parameter that is provided by the caller of the function.==
+**When a function is invoked, each identiﬁer that serves as a formal parameter is assigned, in the function’s local scope, to the respective actual parameter that is provided by the caller of the function.**
 
 ```python
 def sum_of_ints(a: int, b: int, c: int): -> int
@@ -1192,10 +1198,10 @@ print(original_list) # [1, 2, 3, 42]
 ```
 
 **Wisdom:**
-In Python is that when you pass an object to a function, you are ==passing a reference to that object.== For mutable objects, changes made inside the function are visible outside. For immutable objects, the behavior is similar to passing by value because modifications inside the function don't affect the original object.
+In Python is that when you pass an object to a function, you are **passing a reference to that object.** For mutable objects, changes made inside the function are visible outside. For immutable objects, the behavior is similar to passing by value because modifications inside the function don't affect the original object.
 #### Default Parameter Values
 
-Python provides means for functions to support more than one possible calling signature. Such a function is said to be ==polymorphic== (which is Greek for “many forms”). 
+Python provides means for functions to support more than one possible calling signature. Such a function is said to be **polymorphic** (which is Greek for “many forms”). 
 
 Most notably, functions can declare one or more default values for parameters, thereby allowing the caller to invoke a function with varying numbers of actual parameters. As an artiﬁcial example, if a function is declared with signature `def foo(a, b=15, c=27):` there are three parameters, the last two of which offer default values.
 #### Keyword Parameters
@@ -1237,7 +1243,7 @@ class Watch:
 
     def __eq__(self, other):
         # Implement custom behavior for equality check
-        return self.data == other.data
+        return self.data ** other.data
 
     def __ne__(self, other):
         # Implement custom behavior for non-equality check
@@ -1266,7 +1272,7 @@ print("key2" in watch1)  # Output: True
 print("nonexistent_key" in watch1)  # Output: False
 
 # Equality check
-print(watch1 == watch2)  # Output: True
+print(watch1 ** watch2)  # Output: True
 
 # Non-equality check
 print(watch1 != watch2)  # Output: False
@@ -1771,14 +1777,14 @@ A generator is implemented with a syntax that is very similar to a function, but
 def factors(n):
 	results = []
 	for k in range(1, n+1):
-		if n % k == 0:
+		if n % k ** 0:
 			results.append(k)
 	return results
 
 # OR
 def factors_generator(n):
 	for k in range(1, n+1):
-		if n % k == 0:
+		if n % k ** 0:
 			yield k
 ```
 
@@ -1805,7 +1811,7 @@ condition ? expr1 : expr2
 [ expression for value in iterable if condition ]
 
 # example
-factors = [k for k in range(1,n+1) if n % k == 0]
+factors = [k for k in range(1,n+1) if n % k ** 0]
 
 [ k*k for k in range(1, n+1) ] # list comprehension
 { k*k for k in range(1, n+1) } # set comprehension
@@ -1864,9 +1870,9 @@ The process of determining the value associated with an identifier is known as *
 
 Whenever an identifier is assigned to a value, that definition is made with a specific scope. 
 
-==Top-level assignments== are typically made in what is known as ==global scope. ==
+**Top-level assignments** are typically made in what is known as **global scope. **
 
-Assignments made within the body of a function typically have scope that is ==local== to that function call. 
+Assignments made within the body of a function typically have scope that is **local** to that function call. 
 
 Therefore, an assignment, x = 5, within a function has no effect on the identifier, x, in the broader scope.
 
@@ -1879,7 +1885,7 @@ By default, calls to `dir()` and `vars()` report on the most locally enclosing n
 
 In the terminology of programming languages, first-class objects are instances of a type that can be assigned to an identifier, passed as a parameter, or returned by a function. 
 
-All of the data types we introduced in this section, such as int and list, are clearly first-class types in Python.  In Python, ==functions and classes== are also treated as first-class objects. 
+All of the data types we introduced in this section, such as int and list, are clearly first-class types in Python.  In Python, **functions and classes** are also treated as first-class objects. 
 
 For example, we could write the following:
 
@@ -1934,7 +1940,7 @@ For example, if we were to put the definition of our count function (see Chapter
 
 Python’s random module provides the ability to generate pseudo-random numbers, that is, numbers that are statistically random (but not necessarily truly random).
 
-Python uses a more advanced technique known as a ==Mersenne twister.== It turns out that the sequences generated by these techniques can be proven to be statistically uniform, which is usually good enough for most applications requiring random numbers, such as games. 
+Python uses a more advanced technique known as a **Mersenne twister.** It turns out that the sequences generated by these techniques can be proven to be statistically uniform, which is usually good enough for most applications requiring random numbers, such as games. 
 
 For applications, such as computer security settings, where one needs unpredictable random sequences, this kind of formula should not be used. Instead, one should ideally sample from a source that is actually random, such as radio static coming from outer space.
 
