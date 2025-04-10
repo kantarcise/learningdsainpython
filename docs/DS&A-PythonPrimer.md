@@ -4,7 +4,9 @@ The first chapter is about Python basics.
 
 ## Python Overview
 
-Python is formally an **interpreted** language (like **PHP**, **Ruby**, and **JavaScript**). Commands are executed through a piece of software known as the Python interpreter. 
+Python is formally an **interpreted** language (like **PHP**, **Ruby**, and **JavaScript**). 
+
+Commands are executed through a piece of software known as the Python interpreter. 
 
 The interpreter receives a command, evaluates that command, and reports the result of the command.
 
@@ -34,11 +36,15 @@ Plain C will not work.  😮
 
 Here is Python Internal Workings:
 
-- ****Code Editor:**** Code Editor is the first stage of programs where we write our source code. This is human-readable code written according to Python’s syntax rules. It is where the execution of the program starts first.
-- ****Source code:**** The code written by a programmer in the code editor is then saved as a `.py` file in a system. This file of Python is written in human-readable language that contains the instructions for the computer.
-- ****Compilation Stage:**** The compilation stage of Python is different from any other programming language. Rather than compiling a source code directly into machine code. python compiles a source code into a **byte code**. In the compilation stage python compiler also checks for syntax errors. after checking all the syntax errors, if no such error is found then it generates a `.pyc` file that contains bytecode.
-- ****Python Virtual Machine(PVM) / Python Interpreter:**** The bytecode then goes into the main part of the conversion is the Python Virtual Machine(PVM). The PVM is the main runtime engine of Python. It is an interpreter that reads and executes the bytecode file, line by line. Here In the Python Virtual Machine translate the byte code into machine code which is the binary language consisting of 0's and 1's. The machine code is highly optimized for the machine it is running on. This binary language is only understandable by the CPU of a system.
-- ****Running Program:**** At last, the CPU executes the given machine code and the main outcome of the program comes as performing task and computation you scripted at the beginning of the stage in your code editor.
+- **Code Editor:** Code Editor is the first stage of programs where we write our source code. This is human-readable code written according to Python’s syntax rules. It is where the execution of the program starts first.
+
+- **Source code:** The code written by a programmer in the code editor is then saved as a `.py` file in a system. This file of Python is written in human-readable language that contains the instructions for the computer.
+
+- **Compilation Stage:** The compilation stage of Python is different from any other programming language. Rather than compiling a source code directly into machine code. python compiles a source code into a **byte code**. In the compilation stage python compiler also checks for syntax errors. after checking all the syntax errors, if no such error is found then it generates a `.pyc` file that contains bytecode.
+
+- **Python Virtual Machine(PVM) / Python Interpreter:** The bytecode then goes into the main part of the conversion is the Python Virtual Machine(PVM). The PVM is the main runtime engine of Python. It is an interpreter that reads and executes the bytecode file, line by line. Here In the Python Virtual Machine translate the byte code into machine code which is the binary language consisting of 0's and 1's. The machine code is highly optimized for the machine it is running on. This binary language is only understandable by the CPU of a system.
+
+- **Running Program:** At last, the CPU executes the given machine code and the main outcome of the program comes as performing task and computation you scripted at the beginning of the stage in your code editor.
 
 Python is an **object-oriented language** and classes form the basis for all data types. 
 
@@ -46,11 +52,11 @@ In this section, we describe key aspects of Python’s object model, and we intr
 
 Here are some inheritance maps (possibly outdated) which data takes part of.
 
-![python inheritance map](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/pythoninheritencemap.png)
+![python inheritance map](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/pythoninheritancemap.png)
 
 For `abc` module (possibly outdated too):
 
-![collections inheritance map](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/collections_inheritence_map.png)
+![collections inheritance map](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/collections_inheritance_map.png)
 
 and another (possibly outdated too):
 
