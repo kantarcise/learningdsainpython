@@ -14,19 +14,19 @@ While the interpreter can be used interactively (especially when debugging), a p
 
 > Both are translated into “computer language”, and the computer will be able to know what to do when he reads it (Computer speaks 0 and 1's). The difference is when/how you’ll translate it.
 
-![Figure 0.1](https://github.com/kantarcise/learningdsainpython/tree/main/docs/assets/images/chapter1/fig0-1.png)
+![Figure 0.1](https://github.com/kantarcise/learningdsainpython/blob/main/docs/assets/images/chapter1/fig0-1.png)
 
 Plain C will not work.  😮
 
-![Figure 0.2](https://github.com/kantarcise/learningdsainpython/tree/main/docs/assets/images/chapter1/fig0-2.png)
+![Figure 0.2](https://github.com/kantarcise/learningdsainpython/blob/main/docs/assets/images/chapter1/fig0-2.png)
 
 > An interpreted language uses a software called interpreter to translate the original message into the “computer language”, much like a real life interpreter would translate somebody’s Portuguese speech into English in real time.
 
-![Figure 0.4](https://github.com/kantarcise/learningdsainpython/tree/main/docs/assets/images/chapter1/fig0-4.png)
+![Figure 0.4](https://github.com/kantarcise/learningdsainpython/blob/main/docs/assets/images/chapter1/fig0-4.png)
 
 > A compiled language uses a software called compiler that **translates** the original message and saves it to another file. You can imagine that the compiler would be the person creating subtitles for a speech.
 
-![Figure 0.3](https://github.com/kantarcise/learningdsainpython/tree/main/docs/assets/images/chapter1/fig0-3.png)
+![Figure 0.3](https://github.com/kantarcise/learningdsainpython/blob/main/docs/assets/images/chapter1/fig0-3.png)
 
 > The interpreter might come up with the translated message first, as he’s translating in real time, but if he’s asked to translate it again, he’ll have to **redo the work every time.**
 > 
@@ -46,15 +46,15 @@ In this section, we describe key aspects of Python’s object model, and we intr
 
 Here are some inheritance maps (possibly outdated) which data takes part of.
 
-![python inheritance map](https://github.com/kantarcise/learningdsainpython/tree/main/docs/assets/images/chapter1/pythoninheritencemap.png)
+![python inheritance map](https://github.com/kantarcise/learningdsainpython/blob/main/docs/assets/images/chapter1/pythoninheritencemap.png)
 
 For `abc` module (possibly outdated too):
 
-![collections inheritance map](https://github.com/kantarcise/learningdsainpython/tree/main/docs/assets/images/chapter1/collections_inheritence_map.png)
+![collections inheritance map](https://github.com/kantarcise/learningdsainpython/blob/main/docs/assets/images/chapter1/collections_inheritence_map.png)
 
 and another (possibly outdated too):
 
-![collections abc](https://github.com/kantarcise/learningdsainpython/tree/main/docs/assets/images/chapter1/collections_abc.png)
+![collections abc](https://github.com/kantarcise/learningdsainpython/blob/main/docs/assets/images/chapter1/collections_abc.png)
 
 If you want to, you can think of the hierarchy from ancestor to child as : *"Container - Collection - Sequence"* 🥰
 
