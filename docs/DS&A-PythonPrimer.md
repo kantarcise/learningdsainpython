@@ -56,7 +56,7 @@ Here are some inheritance maps (possibly outdated) which data takes part of.
 
 For `abc` module (possibly outdated too):
 
-![collections inheritance map](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/collections_inheritance_map.png)
+![collections inheritance map](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/collections_inheritance_map.jpg)
 
 and another (possibly outdated too):
 
