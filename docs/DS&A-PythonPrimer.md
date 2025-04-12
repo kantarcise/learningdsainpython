@@ -28,7 +28,7 @@ Plain C will not work.  😮
 
 > A compiled language uses a software called compiler that **translates** the original message and saves it to another file. You can imagine that the compiler would be the person creating subtitles for a speech.
 
-![Figure 0.3](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/fig0-4.png)
+![Figure 0.3](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/fig0-3.png)
 
 > The interpreter might come up with the translated message first, as he’s translating in real time, but if he’s asked to translate it again, he’ll have to **redo the work every time.**
 > 
@@ -83,6 +83,7 @@ This means that you must explicitly convert types when necessary, and the compil
 ## Objects in Python 😎
   
 There are 33 specially reserved words that cannot be used as identifiers, as shown down below.
+
 #### Reserved Words
 
 - `False` `as` `continue` `else` `from` `in` `not` `return` `yield`
@@ -91,6 +92,7 @@ There are 33 specially reserved words that cannot be used as identifiers, as sho
 - `and` `class` `elif` `for` `import` `nonlocal` `raise` `with`
 
 These are all reserved. Thank you for that reminder. 🥰
+
 ### Python’s Built-In Classes 🤔 
 
 A class is `immutable` if each object of that class has a fixed value upon instantiation that **cannot subsequently be changed.** For example, the `float` class is immutable.
@@ -108,12 +110,16 @@ Once an instance has been created, its value cannot be changed (although an iden
 | set       |  unordered set of distinct objects   |            |
 | frozenset |     immutable form of set class      |          + |
 | dict      | associative mapping (aka dictionary) |            |
+
+
 #### **WHY IMMUTABILITY IS IMPORTANT ANYWAY 🤔**
   
 Basically it comes down to the fact that immutability increases predictability, performance (indirectly) and allows for mutation tracking.
+
 ##### Predictability
 
 Mutation hides change, which create (unexpected) side effects, which can cause nasty bugs. When you enforce immutability you can keep your application architecture and mental model simple, which makes it easier to reason about your application.
+
 ##### Performance
 
 Even though adding values to an immutable Object means that a new instance needs to be created where existing values need to be copied and new values need to be added to the new Object which cost memory, immutable Objects can make use of structural sharing to **reduce memory overhead.**
@@ -121,18 +127,20 @@ Even though adding values to an immutable Object means that a new instance needs
 All updates return new values, but internally structures are shared to drastically reduce memory usage (and Garbage Collection thrashing).
 
 This means that if you append to a vector with 1000 elements, it does not actually create a new vector 1001-elements long. Most likely, internally only a few small objects are allocated.
+
 ##### Mutation Tracking
 
 Besides reduced memory usage, immutability allows you to optimize your application by making use of reference- and value equality.
 
 Easier to answer: "Did anything change?"
 
-![[mutability_meme.jpg]]
+![mutability](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/mutability_meme.jpg)
 
 This makes it really easy to see if anything has changed.
+
 ### Most Used Classes in Python 😍
 
-#### The `bool` class `Flag = True`
+#### The `bool` class - `flag = True`
 
 Numbers evaluate to `False` if zero, and `True` if nonzero. Sequences and other container types, such as `strings` and `lists`, evaluate to `False` if empty and `True` if nonempty. 
 
@@ -157,17 +165,22 @@ empty_seq = []
 if not empty_seq:
 	print("You are here because it is empty!")
 ```
+
 #### The `int` class `my_number = 7`
 
-The `int` and `float` classes are the primary numeric types in Python. The `int` class is designed to represent integer values with arbitrary magnitude. 
+The `int` and `float` classes are the primary numeric types in Python. 
+
+The `int` class is designed to represent integer values with arbitrary magnitude. 
 
 Unlike Java and C++, which support different integral types with different precision (e.g., `int`, `short`, `long`), Python **automatically chooses** the internal representation for an integer based upon the magnitude of its value.
 
 Typical literals for integers include ``0, 137, and −23.`` 
 
-![[fig0.5.jpg]]
+![Figure 0.5](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/fig0-5.jpg)
 
-In some contexts, it is convenient to express an integral value using **binary**, **octal**, or **hexadecimal**. That can be done by using a prefix of the number 0 and then a character to describe the base. Example of such literals are respectively: ``0b1011, 0o52, and 0x7f.``
+In some contexts, it is convenient to express an integral value using **binary**, **octal**, or **hexadecimal**. That can be done by using a prefix of the number 0 and then a character to describe the base. 
+
+Example of such literals are respectively: ``0b1011, 0o52, and 0x7f.``
 
 ```python
 test_integer = 23
@@ -176,7 +189,7 @@ octal_int = 0o52
 hexal_int = 0x2c
 ```
 
-The integer constructor, `int()`, returns value **`0`** by default. 
+The integer constructor, `int()`, returns value `0` by default. 
 
 But this constructor can be used to construct an integer value based upon an existing value of another type. 
 
@@ -192,6 +205,7 @@ The constructor can also be used to parse a string that is presumed to represent
 If `s` represents a string, then `int(s)` produces the integral value that string represents. For example, the expression ```int("137")``` produces the integer value `137`. If an invalid string is given as a parameter, as in ```int("hello")``` , a `ValueError` is raised. 
 
 By default, the string must use base 10. If conversion from a different base is desired, that base can be indicated as a second, optional, parameter. For example, the expression ```int("7f", 16)``` evaluates to the integer `127`.
+
 #### The `float` Class `my_float = 2.347`
 
 The `float` class is the sole floating-point type in Python, using a fixed-precision representation. Its precision is more akin to a `double` in Java or C++, rather than those languages’ `float` type.
@@ -201,7 +215,9 @@ float(3) # 3.0
 float("-inf") # negative infinity - for comparison
 ```
 
-We note that the floating-point equivalent of an integral number can be expressed directly as `2.0`. Technically, the trailing zero is optional, so some programmers might use the expression `2.` to designate this floating-point literal. 
+We note that the floating-point equivalent of an integral number can be expressed directly as `2.0`. 
+
+Technically, the trailing zero is optional, so some programmers might use the expression `2.` to designate this floating-point literal. 
 
 ```python
 my_float = 4.34534
@@ -211,6 +227,7 @@ print(f"{my_float:.2f}")  # 4.35
 ```
 
 One other form of literal for floating-point values uses scientific notation. For example, the literal `6.022e23` represents the mathematical value $$6.022 × 10^{23}$$
+
 ```python
 my_exponential = 2e4
 print(my_exponential) # 20000.0 
