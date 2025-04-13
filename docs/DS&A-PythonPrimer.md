@@ -242,7 +242,9 @@ print(type(my_exponential)) # <class 'float'>
 
 The constructor form of ``float()`` returns `0.0`. When given a parameter, the constructor attempts to return the equivalent floating-point value. 
 
-For example, the call ```float(2)``` returns the floating-point value `2.0`. If the parameter to the constructor is a string, as with ```float("3,14")```, it attempts to parse that string as a floating-point value, raising a `ValueError` as an exception.
+For example, the call ```float(2)``` returns the floating-point value `2.0`.
+
+If the parameter to the constructor is a string, as with ```float("3,14")```, it attempts to parse that string as a floating-point value, raising a `ValueError` as an exception.
 
 #### Sequence Types: The `list`, `tuple`, and `str` Classes
 
@@ -259,12 +261,12 @@ The **`tuple`** class is an immutable version of the `list` class, benefiting fr
 
 ``` py
 my_tuple = (1978,)
-you_can_even_do_this = 12 , # this is also a tuple, we'll learn about this later
+another_tuple = 12 , # this is also a tuple, we'll learn about this later
 ```
 
 The **`str`** class is specially designed for representing an immutable sequence of text characters. We note that Python does not have a separate class for **characters**; they are **just strings with length one**.
 
-```python
+``` py
 this_is_not_a_character_it_is_a_string = "a"
 string_for_bros = "be legendary"
 ```
@@ -273,11 +275,11 @@ string_for_bros = "be legendary"
 
 A `list` instance stores a sequence of objects. 
 
-A `list` is a **referential structure**, as it **technically stores a sequence of references to its elements.** 
+It's a **referential structure**, as it **technically stores a sequence of references to its elements.** 
 
 Elements of a `list` may be arbitrary objects (including the `None` object). 
 
-Lists are array-based sequences and are zero-indexed, thus a `list` of length n has elements indexed from $0$ to $n − 1$ inclusive.
+Lists are array-based sequences and are zero-indexed, thus a `list` of length n has elements indexed from 0 to n − 1 inclusive.
 
 ``` py
 s = [1, 2, 3, 4, 5, 6, 7]
@@ -294,13 +296,13 @@ f.reverse()
 print(f) # [3, 2, 1]
 ```
 
-Lists are perhaps ***the most used container type*** in Python and they will be extremely central to our study of data structures and algorithms. 
+Lists are perhaps ***the most used container type*** in Python and they will be extremely central to our study of data structures and algorithms.
 
 They have many valuable behaviors, including the ability to dynamically expand their capacities as needed (dynamic arrays).
 
-Python uses the characters `[]` as delimiters for a list literal, with `[]` itself being an empty list. 
+Python uses the characters `[]` as delimiters for a list literal, with `[]` itself being an empty list.
 
-As another example, `["red", "green", "blue"]` is a `list` containing three string instances. 
+As another example, `["red", "green", "blue"]` is a `list` containing three string instances.
 
 The contents of a `list` literal need not be expressed as literals, if identifiers a and b have been established, then syntax `[a, b]` is legitimate.
 
@@ -340,7 +342,7 @@ single_element_tuple = ("1",)
 this_is_also_tuple = 3,
 ```
 
-The reason for this requirement is that, without the trailing comma, the expression `(17)` alone is viewed as a simple parenthesized numeric expression.
+The reason for this requirement is that, without the trailing comma, the expression `(17)` alone is viewed as a simple parenthesized numeric expression (which would be an `int`). 😎
 
 #### The `str` Class - `be = "the_spark"`
 
@@ -348,7 +350,7 @@ Python’s `str` class is specifically designed to efficiently represent an immu
 
 Strings have a more compact internal representation than the referential lists and tuples, as portrayed in Figure 1.5.
 
-![Figure 1.15](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/fig1-15.png)
+![Figure 1.5](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/fig1-5.png)
 
 
 String literals can be enclosed in single quotes, as in `'hello'` , or double quotes, as in `"hello"`. 
@@ -357,7 +359,7 @@ This choice is convenient, especially when using another of the quotation charac
 
 ``` py
 greet = "You Got This."
-here_for_you = 'Positivity '
+here_for_you = 'Positivity'
 ```
 
 Alternatively, the quote delimiter can be designated using a backslash as a so-called escape character, as in 
@@ -393,6 +395,8 @@ print("""Welcome to the GPA calculator.
 ```
 
 There are `f-strings` and `r-strings` in Python: `Formatted Strings` and `Raw Strings`
+
+`f-strings` are a way to insert variables or expressions directly into a string in Python — and they’re fast and easy to read.
 
 Here is an example of an `f-string`:
 
@@ -441,15 +445,13 @@ The major advantage of using a `set`, as opposed to a `list`, is that it has **a
 
 ![Figure 0.6](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/fig0-6.png)
 
-This is based on a data structure known as **a hash table** (which will be the primary topic of Chapter 10). However, there are two important restrictions due to the algorithmic underpinnings.
+This is based on a data structure known as **a hash table** (which will be the primary topic of ***Chapter 10***).
 
-The set does not maintain the elements in any particular order. 
+However, there are two important restrictions due to the algorithmic underpinnings.
 
-However, after Python 3.6, `set.pop()` become non random, so it pops items like Queues.
+- The set does not maintain the elements in any particular order. However, after Python 3.6, `set.pop()` become non random, so it pops items like Queues.
 
-The second is that only instances of **immutable types** (`hashable`) can be added to a Python set. 
-
-Therefore, objects such as integers, floating-point numbers, and character strings are eligible to be elements of a set.
+- The second is that only instances of **immutable types** (`hashable`) can be added to a Python set. Therefore, objects such as integers, floating-point numbers, and character strings are eligible to be elements of a set.
 
 It is possible to maintain a set of tuples, but not a set of lists or a set of sets, as lists and sets are mutable.
 
@@ -499,7 +501,7 @@ Python’s `dict` class represents a dictionary, or mapping, from **a set of dis
 
 For example, a dictionary might map from unique student ID numbers, to larger student records (such as the student’s name, address, and course grades). 
 
-Python implements a dict using an almost identical approach to that of a set, but **with storage of the associated values.**
+Python implements a `dict` using an almost identical approach to that of a `set`, but **with storage of the associated values.**
 
 ``` py
 my_dict = {"key_one": 12, "key_two": 6}
