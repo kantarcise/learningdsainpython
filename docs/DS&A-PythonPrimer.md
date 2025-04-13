@@ -34,7 +34,7 @@ Plain C will not work.  😮
 > 
 > The compiler on the other hand already did that work, and won’t have to repeat it since he saved it to a file. Also, it’s a lot easier for the compiler to optimize the message and make it more understandable to the computer, as he won’t need to hear the entire original message again.
 
-Here is Python Internal Workings:
+Here are the Python Internal Workings:
 
 - **Code Editor:** Code Editor is the first stage of programs where we write our source code. This is human-readable code written according to Python’s syntax rules. It is where the execution of the program starts first.
 
@@ -64,34 +64,30 @@ and another (possibly outdated too):
 
 If you want to, you can think of the hierarchy from ancestor to child as : *"Container - Collection - Sequence"* 🥰
 
-#### Weakly Typed Language ??
+#### Strongly vs. Weakly Typed? Understanding Python
 
-Python is a weakly typed language. That means any variable can hold any type of value, and you can overwrite a variable to have any type of value. 
+Python is a **strongly typed** and **dynamically typed** language.
 
-In other words, you can assign a new value to a variable that is of a different type than its original value.
+- **Dynamically typed** means you don’t need to declare a variable’s type — the interpreter figures it out at runtime, and a variable can be reassigned to hold a different type of value.
+  
+- **Strongly typed** means Python does *not* perform implicit type coercion. If you try to add a number to a string (`1 + "1"`), Python will raise a `TypeError`.
 
-In contrast, strongly typed languages — such as C and Java — do not allow this.
+In contrast, **weakly typed** languages like JavaScript often perform **implicit type coercion**. For example, `1 + "1"` in JavaScript will result in `"11"` — converting the number to a string behind the scenes.
 
-#### Strongly-typed: Types will not be coerced silently like in JavaScript. 🤔
-
-In JavaScript, which is a weakly-typed language, type coercion often happens implicitly. For example, if you try to perform an operation involving different types (such as adding a number to a string), JavaScript will attempt to coerce one of the operands into a compatible type to complete the operation. This can sometimes lead to unexpected behavior.
-
-In contrast, in a strongly-typed language, such as Python or Java, explicit type conversion is required, and type errors are raised if incompatible types are used together.
-
-This means that you must explicitly convert types when necessary, and the compiler or interpreter will not silently coerce types for you.
+Strong typing in Python ensures type safety: you must explicitly convert types when needed, helping prevent subtle bugs.
 
 ## Objects in Python 😎
   
 There are 33 specially reserved words that cannot be used as identifiers, as shown down below.
 
-#### Reserved Words
+### Reserved Words
 
 - `False` `as` `continue` `else` `from` `in` `not` `return` `yield`
 - `None` `assert` `def` `except` `global` `is` `or` `try`
 - `True` `break` `del` `finally` `if` `lambda` `pass` `while`
 - `and` `class` `elif` `for` `import` `nonlocal` `raise` `with`
 
-These are all reserved. Thank you for that reminder. 🥰
+These are all reserved. This is just a simple reminder. 🥰
 
 ### Python’s Built-In Classes 🤔 
 
@@ -112,7 +108,7 @@ Once an instance has been created, its value cannot be changed (although an iden
 | dict      | associative mapping (aka dictionary) |            |
 
 
-#### **WHY IMMUTABILITY IS IMPORTANT ANYWAY 🤔**
+#### **Why Immutability is important anyway? 🤔**
   
 Basically it comes down to the fact that immutability increases predictability, performance (indirectly) and allows for mutation tracking.
 
@@ -148,7 +144,7 @@ An important application of this interpretation is the use of a non boolean valu
   
 In Python, **Boolean is a SUB TYPE of the integer type!** 😯
 
-```python
+``` py linenums="1"
 my_bool = True
 my_second_bool = False
 
@@ -166,7 +162,7 @@ if not empty_seq:
 	print("You are here because it is empty!")
 ```
 
-#### The `int` class `my_number = 7`
+#### The `int` class - `my_number = 7`
 
 The `int` and `float` classes are the primary numeric types in Python. 
 
@@ -182,7 +178,7 @@ In some contexts, it is convenient to express an integral value using **binary**
 
 Example of such literals are respectively: ``0b1011, 0o52, and 0x7f.``
 
-```python
+``` py
 test_integer = 23
 another_test_integer = 0x7f
 octal_int = 0o52
@@ -195,7 +191,7 @@ But this constructor can be used to construct an integer value based upon an exi
 
 For example, if `f` represents a floating-point value, the syntax `int(f)` produces the truncated value of `f`. So both `int(3.14)` and `int(3.99)` produce the value `3`, while `int(−3.9)` produces the value `−3`.
 
-```python
+``` py
 int(3.99)  # 3
 int(-2.4)  # -2
 ```
@@ -208,9 +204,9 @@ By default, the string must use base 10. If conversion from a different base is 
 
 #### The `float` Class `my_float = 2.347`
 
-The `float` class is the sole floating-point type in Python, using a fixed-precision representation. Its precision is more akin to a `double` in Java or C++, rather than those languages’ `float` type.
+The `float` class is the sole floating-point type in Python, using a fixed-precision representation. Its precision is more similar to a `double` in Java or C++, rather than those languages’ `float` type.
 
-```python
+``` py
 float(3) # 3.0
 float("-inf") # negative infinity - for comparison
 ```
@@ -219,16 +215,16 @@ We note that the floating-point equivalent of an integral number can be expresse
 
 Technically, the trailing zero is optional, so some programmers might use the expression `2.` to designate this floating-point literal. 
 
-```python
+``` py
 my_float = 4.34534
 
 # value:width.precision
 print(f"{my_float:.2f}")  # 4.35
 ```
 
-One other form of literal for floating-point values uses scientific notation. For example, the literal `6.022e23` represents the mathematical value $$6.022 × 10^{23}$$
+One other form of literal for floating-point values uses scientific notation. For example, the literal `6.022e23` represents the mathematical value $6.022 × 10^{23}$
 
-```python
+``` py
 my_exponential = 2e4
 print(my_exponential) # 20000.0 
 print(type(my_exponential)) # <class 'float'>
@@ -237,22 +233,23 @@ print(type(my_exponential)) # <class 'float'>
 The constructor form of ``float()`` returns `0.0`. When given a parameter, the constructor attempts to return the equivalent floating-point value. 
 
 For example, the call ```float(2)``` returns the floating-point value `2.0`. If the parameter to the constructor is a string, as with ```float("3,14")```, it attempts to parse that string as a floating-point value, raising a `ValueError` as an exception.
+
 #### Sequence Types: The `list`, `tuple`, and `str` Classes
 
 The `list`, `tuple`, and `str` classes are sequence types in Python, representing a collection of values in which the order is significant.
 
-The **`list`** class is the most general, representing a sequence of arbitrary objects (akin to an `array` in other languages).
+The **`list`** class is the most general, representing a sequence of arbitrary objects (similar to an `array` in other languages).
 
-```python
+``` py
 basic_list_of_integers = [1, 2, 3, 4, 5]
 my_list = [ {"a" : 2}, {"theta" : 3.14}]
 ```
 
 The **`tuple`** class is an immutable version of the `list` class, benefiting from a streamlined internal representation. 
 
-```python
+``` py
 my_tuple = (1978,)
-you_can_even_do_this = 12 ,
+you_can_even_do_this = 12 , # this is also a tuple, we'll learn about this later
 ```
 
 The **`str`** class is specially designed for representing an immutable sequence of text characters. We note that Python does not have a separate class for **characters**; they are **just strings with length one**.
@@ -261,11 +258,18 @@ The **`str`** class is specially designed for representing an immutable sequence
 this_is_not_a_character_it_is_a_string = "a"
 string_for_bros = "be legendary"
 ```
-#### The `list` Class `my_list = ["a", "b", "c"]`
 
-A `list` instance stores a sequence of objects. A `list` is a **referential structure**, as it **technically stores a sequence of references to its elements.** Elements of a `list` may be arbitrary objects (including the `None` object). Lists are array-based sequences and are zero-indexed, thus a `list` of length n has elements indexed from $0$ to $n − 1$ inclusive.
+#### The `list` Class - `my_list = ["a", "b", "c"]`
 
-```python
+A `list` instance stores a sequence of objects. 
+
+A `list` is a **referential structure**, as it **technically stores a sequence of references to its elements.** 
+
+Elements of a `list` may be arbitrary objects (including the `None` object). 
+
+Lists are array-based sequences and are zero-indexed, thus a `list` of length n has elements indexed from $0$ to $n − 1$ inclusive.
+
+``` py
 s = [1, 2, 3, 4, 5, 6, 7]
 s[0:4:1] # [1, 2, 3, 4]
 
@@ -273,19 +277,24 @@ s[::-1] # reverses the list
 
 del s[0] # 1 at 'index 0' is a goner.
 # it will be gone when next gc.collect() triggers
+# if this doesn't make sense, don't worry about it!
 
 f = [1,2,3]
 f.reverse()
 print(f) # [3, 2, 1]
 ```
 
-Lists are perhaps the most used container type in Python and they will be extremely central to our study of data structures and algorithms. They have many valuable behaviors, including the ability to dynamically expand their capacities as needed (dynamic arrays).
+Lists are perhaps ***the most used container type*** in Python and they will be extremely central to our study of data structures and algorithms. 
 
-Python uses the characters `[]` as delimiters for a list literal, with `[]` itself being an empty list. As another example, `["red", "green", "blue"]` is a `list` containing three string instances. The contents of a `list` literal need not be expressed as literals;
+They have many valuable behaviors, including the ability to dynamically expand their capacities as needed (dynamic arrays).
 
-if identifiers a and b have been established, then syntax `[a, b]` is legitimate.
+Python uses the characters `[]` as delimiters for a list literal, with `[]` itself being an empty list. 
 
-```python
+As another example, `["red", "green", "blue"]` is a `list` containing three string instances. 
+
+The contents of a `list` literal need not be expressed as literals, if identifiers a and b have been established, then syntax `[a, b]` is legitimate.
+
+``` py
 a = 3
 b = 4
 coll = [a, b]
@@ -293,55 +302,69 @@ coll = [a, b]
 
 The `list()` constructor produces an **empty list** by default.
 
-However, the constructor will accept any parameter that is of an iterable type. We will discuss iteration further in this chapter, but examples of iterable types include all of the standard container types (e.g., `strings`, `list`, `tuples`, `sets`, `dictionaries`). For example, the syntax `list("hello")` produces a list of individual characters, `["h", "e", "l", "l", "o"]`. Also here is a cool thing:
+However, the constructor will accept any parameter that is of an iterable type. 
 
-```python
+We will discuss iteration further in this chapter, but examples of iterable types include all of the standard container types (e.g., `strings`, `list`, `tuples`, `sets`, `dictionaries`). 
+
+For example, the syntax `list("hello")` produces a list of individual characters, `["h", "e", "l", "l", "o"]`. Also here is a cool thing:
+
+``` py
 my_l = list({"a": 1, "b" : 2, "c" : 3})
 print(my_l) # ["a", "b", "c"]
 ```
 
 Because an existing list is itself iterable, the syntax `backup = list(data)` can be used to construct a new list instance referencing the same contents as the original.
 
-```python
+``` py
 prime = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31]
 ```
-#### The `tuple` Class  `any_tuples_here = "?",`
+#### The `tuple` Class - `any_tuples_here = "?",`
 
 The `tuple` class provides an immutable version of a sequence, and therefore its instances have an internal representation that may be more streamlined than that of a `list`.
 
-To express a `tuple` of length one as a literal, a comma must be placed after the element, but within the parentheses. For example, ```(17,)``` is a one-element tuple.
+To express a `tuple` of length one as a literal, a comma must be placed after the element, but within the parentheses. For example, `(17,)` is a one-element tuple.
 
-```python
+``` py
 my_tuple = (1, 3, 6)
 single_element_tuple = ("1",)
 this_is_also_tuple = 3,
 ```
 
 The reason for this requirement is that, without the trailing comma, the expression `(17)` alone is viewed as a simple parenthesized numeric expression.
-#### The `str` Class `be = "the_spark"`
 
-Python’s `str` class is specifically designed to efficiently represent an immutable sequence of characters, based upon the **Unicode international character set.** Strings have a more compact internal representation than the referential lists and tuples, as portrayed in Figure 1.5.
+#### The `str` Class - `be = "the_spark"`
 
-![[fig1.15.png]]
+Python’s `str` class is specifically designed to efficiently represent an immutable sequence of characters, based upon the **Unicode international character set.** 
 
-String literals can be enclosed in single quotes, as in `'hello'` , or double quotes, as in `"hello"`. This choice is convenient, especially when using another of the quotation characters as an actual character in the sequence, as in `"Don't stop".`
+Strings have a more compact internal representation than the referential lists and tuples, as portrayed in Figure 1.5.
 
-```python
-greet = "You Got This Le'Bron"
+![Figure 1.15](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/fig1-15.png)
+
+
+String literals can be enclosed in single quotes, as in `'hello'` , or double quotes, as in `"hello"`. 
+
+This choice is convenient, especially when using another of the quotation characters as an actual character in the sequence, as in `"Don't stop".`
+
+``` py
+greet = "You Got This."
 here_for_you = 'Positivity '
 ```
 
-Alternatively, the quote delimiter can be designated using a backslash as a so-called escape character, as in ``'Don\'t stop'`` .
+Alternatively, the quote delimiter can be designated using a backslash as a so-called escape character, as in 
+
+``` py
+str_with_backslash = 'Don\'t stop'
+```
 
 Because the backslash has this purpose, the backslash must itself be escaped to occur as a natural character of the string literal, as in ``'C:\\Python\\'`` , for a string that would be displayed as `C:\Python\`. 
 
-![[jerry_Strings.jpg]]
+![Jerry Strings](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/jerry_Strings.jpg)
 
 Other commonly escaped characters are `"\n"` for newline and `"\t"` for tab. 
 
 **Unicode characters** can be included, such as ``'20\u20AC'`` for the string ``20€``.
 
-```python
+``` py
 print("20 \u20AC ONLY!") # 20 € ONLY!
 print("the escape room \'is real\'")
 print("\'the numbers mason, what do they mean?\'")
@@ -359,20 +382,23 @@ print("""Welcome to the GPA calculator.
 	Enter a blank line to designate the end.""")
 ```
 
-There are `f-strings` and `r-strings` in python: `Formatted Strings` and `Raw Strings`
+There are `f-strings` and `r-strings` in Python: `Formatted Strings` and `Raw Strings`
 
 Here is an example of an `f-string`:
 
 ```python
-a , b = 2, 3
-print(f"{a} is not equal to {b} so the answer is: {a ** b}")
+# is a equal to b?
+a, b = 2, 3
+print(f"{a} is not equal to {b}")
+answer = "No"
+print(f"The answer is {answer}")
 ```
 
 Python raw string treats the backslash character `\` as a literal character. Raw string is useful when a string needs to contain a backslash, such as for a regular expression or Windows directory path, and you don’t want it to be treated as an escape character.
 
 Here is an example of on `r-string` from PyTorch: 💕
 
-```python
+``` py
 def reset_accumulated_memory_stats(device: Union[Device, int] = None) -> None:
     r"""Reset the "accumulated" (historical) stats tracked by the CUDA memory allocator.
 
@@ -392,17 +418,18 @@ def reset_accumulated_memory_stats(device: Union[Device, int] = None) -> None:
     device = _get_device_index(device, optional=True)
     return torch._C._cuda_resetAccumulatedMemoryStats(device)
 ```
-#### The `set` and the `Frozenset` Classes: `back_to_elementary_school = set([1,2,3])` , `cold = frozenset((1,))`
 
-Python’s `set` class represents the mathematical notion of a `set`, namely a collection of elements, **without duplicates**, and without an inherent order to those elements.  
+#### The `set` and the `Frozenset` Classes: `my_set = set([1,2,3])` , `my_cold_set = frozenset((1,3))`
 
-```python
+Python’s `set` class represents the mathematical notion of a `set`, namely a collection of elements, **without duplicates**, and without an inherent order to those elements.
+
+``` py
 my_set = set("JUSTDO")
 ```
 
 The major advantage of using a `set`, as opposed to a `list`, is that it has **a highly optimized method for checking whether a specific element is contained in the set.**
 
-![[fig0.6.png]]
+![Figure 0.6](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/fig0-6.png)
 
 This is based on a data structure known as **a hash table** (which will be the primary topic of Chapter 10). However, there are two important restrictions due to the algorithmic underpinnings.
 
@@ -412,11 +439,17 @@ However, after Python 3.6, `set.pop()` become non random, so it pops items like 
 
 The second is that only instances of **immutable types** (`hashable`) can be added to a Python set. 
 
-Therefore, objects such as integers, floating-point numbers, and character strings are eligible to be elements of a set. It is possible to maintain a set of tuples, but not a set of lists or a set of sets, as lists and sets are mutable. The `frozenset` class is an immutable form of the set type, so it is legal to have a set of `frozensets`.
+Therefore, objects such as integers, floating-point numbers, and character strings are eligible to be elements of a set.
 
-Python uses curly braces `{}` as delimiters for a set, for example, as `{17}` or ```{ "red" , "green" , "blue" }```. The exception to this rule is that `{}` does not represent an empty set; for historical reasons, it represents an empty dictionary (see next paragraph). Instead, the constructor syntax `set()` produces an empty set.  
+It is possible to maintain a set of tuples, but not a set of lists or a set of sets, as lists and sets are mutable.
 
-```python
+The `frozenset` class is an immutable form of the set type, so it is legal to have a set of `frozensets`.
+
+Python uses curly braces `{}` as delimiters for a set, for example, as `{17}` or ```{ "red" , "green" , "blue" }```.
+
+The exception to this rule is that `{}` does not represent an empty set; for historical reasons, it represents an empty dictionary (see next paragraph). Instead, the constructor syntax `set()` produces an empty set.  
+
+``` py
 my_set = {"sezai", "fatmanur", "ozlem"}
 
 empty_set = set() 
@@ -424,20 +457,22 @@ empty_set = set()
 set("apple") # {"a", "p", "l", "e"} 
 ```
 
-If an iterable parameter is sent to the constructor, then the set of distinct elements is produced. For example, `set("hello")` produces `{"h" ,"e" ,"l" ,"o" }.
+If an iterable parameter is sent to the constructor, then the set of distinct elements is produced. 
+
+For example, `set("hello")` produces `{"h" ,"e" ,"l" ,"o" }`.
 
 Here are most used methods of sets:
 
-```python
+``` py
 s = set()
-s.add(1)
-s.add(2)
-s.add(3)
+s.add(1) # add 1
+s.add(2) # add 2
+s.add(3) # add 3
 
 s.discard(4) # No error
 s.discard(4) # No error
 
-# KeyError: 4
+# This will give a KeyError: 4
 try:
     s.remove(4) 
 except KeyError as e:
@@ -448,37 +483,44 @@ print(s) # {1, 2, 3}
 print(3 in s) # True
 print(4 not in s) # True
 ```
-##### The `dict` Class - `my_dict = {"a" : 1, "b": 2}`
+#### The `dict` Class - `my_dict = {"a" : 1, "b": 2}`
 
-Python’s `dict` class represents a dictionary, or mapping, from **a set of distinct keys to associated values.** For example, a dictionary might map from unique student ID numbers, to larger student records (such as the student’s name, address, and course grades). 
+Python’s `dict` class represents a dictionary, or mapping, from **a set of distinct keys to associated values.** 
+
+For example, a dictionary might map from unique student ID numbers, to larger student records (such as the student’s name, address, and course grades). 
 
 Python implements a dict using an almost identical approach to that of a set, but **with storage of the associated values.**
 
-```python
+``` py
 my_dict = {"key_one": 12, "key_two": 6}
 empty_dict = {}
 ```
 
 A dictionary literal also uses curly braces, and because dictionaries were introduced in Python prior to sets, the literal form `{}` produces an empty dictionary. 
 
-A nonempty dictionary is expressed using a comma-separated series of `key:value` pairs. For example, the dictionary ```{ "ga" : "Irish" , "de" : "German" }``` maps `"ga"` to Irish and `"de"` to German.
+A nonempty dictionary is expressed using a comma-separated series of `key:value` pairs. 
 
-![[hashmaps.jpg]]
+For example, the dictionary ```{ "ga" : "Irish" , "de" : "German" }``` maps `"ga"` to Irish and `"de"` to German.
 
-The constructor for the `dict` class accepts an existing mapping as a parameter, in which case it creates a new dictionary with identical associations as the existing one. Alternatively, the constructor accepts a sequence of key-value pairs as a parameter:
+![Hashmaps](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/hashmaps.jpg)
 
-```python
+The constructor for the `dict` class accepts an existing mapping as a parameter, in which case it creates a new dictionary with identical associations as the existing one. 
+
+Alternatively, the constructor accepts a sequence of key-value pairs as a parameter:
+
+``` py
 pairs = [("ga", "Irish"), ("de", "German")]
 my_dict = dict(pairs)
 ```
 
 Dictionaries iterate over their **keys**:
 
-```python
+``` py
 my_example_dict = {"Tokyo": 4, "Kyoto" : 6, "Osaka": 2}
 for elem in my_example_dict:
 	print(elem, end = " ") # Tokyo Kyoto Osaka
 ```
+
 ## Expressions, Operators, and Precedence
 
 Existing values can be combined into larger syntactic expressions using a variety of special symbols and keywords known as **operators.**
