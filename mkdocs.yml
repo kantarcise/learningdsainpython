@@ -57,6 +57,7 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.arithmatex:
       generic: true
+  - admonition # tip box
 
 extra_javascript:
   - javascripts/katex.js
