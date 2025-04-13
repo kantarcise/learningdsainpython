@@ -525,10 +525,14 @@ for elem in my_example_dict:
 
 Existing values can be combined into larger syntactic expressions using a variety of special symbols and keywords known as **operators.**
 
-The semantics of an operator depends upon the type of its operands. For example, when `a` and `b` are numbers, the syntax `a + b` indicates addition, while if `a` and `b` are strings, the operator indicates concatenation. 
+The semantics of an operator depends upon the type of its operands. 
+
+For example, when `a` and `b` are numbers, the syntax `a + b` indicates addition, while if `a` and `b` are strings, the operator indicates concatenation. 
 
 In this section, we describe Python’s operators in various contexts of the built-in types.
+
 #### Logical Operators:  
+
 Python supports the following keyword operators for Boolean values:  
 
 | Operator | Meaning         |
@@ -536,9 +540,14 @@ Python supports the following keyword operators for Boolean values:
 | `not`    | unary negation  |
 | `and`    | conditional and |
 | `or`     | conditional or  |
-Wisdom: The `and` and `or` operators short-circuit, in that they do not evaluate the second operand if the result can be determined based on the value of the first operand.
 
-```python
+!!! tip
+
+    The `and` and `or` operators short-circuit, in that they do not evaluate the second operand if the result can be determined based on the value of the first operand.
+
+#### Wisdom: The `and` and `or` operators short-circuit, in that they do not evaluate the second operand if the result can be determined based on the value of the first operand.
+
+``` py
 # All numbers evaluate to True
 # All non empty sequences are True
 
@@ -552,7 +561,9 @@ if flag_1 and flag_2:
 if flag_1 or not flag_2:
 	print("Either flag_1 is True or flag_2 is false or both" )
 ```
+
 #### Equality Operators:
+
 Python supports the following operators to test two notions of equality:
 
 | Operator | Meaning            |
