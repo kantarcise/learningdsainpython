@@ -12,7 +12,7 @@ The interpreter receives a command, evaluates that command, and reports the resu
 
 While the interpreter can be used interactively (especially when debugging), a programmer typically defines a series of commands in advance and saves those commands in a plain text file known as source code or a script. 😌
 
-#### Wisdom: Interpreted vs Compiled ?
+### Interpreted vs Compiled ?
 
 > Both are translated into “computer language”, and the computer will be able to know what to do when he reads it (Computer speaks 0 and 1's). The difference is when/how you’ll translate it.
 
@@ -42,7 +42,7 @@ Here are the Python Internal Workings:
 
 - **Compilation Stage:** The compilation stage of Python is different from any other programming language. Rather than compiling a source code directly into machine code. python compiles a source code into a **byte code**. In the compilation stage python compiler also checks for syntax errors. after checking all the syntax errors, if no such error is found then it generates a `.pyc` file that contains bytecode.
 
-- **Python Virtual Machine(PVM) / Python Interpreter:** The bytecode then goes into the main part of the conversion is the Python Virtual Machine(PVM). The PVM is the main runtime engine of Python. It is an interpreter that reads and executes the bytecode file, line by line. Here In the Python Virtual Machine translate the byte code into machine code which is the binary language consisting of 0's and 1's. The machine code is highly optimized for the machine it is running on. This binary language is only understandable by the CPU of a system.
+- **Python Virtual Machine (PVM) / Python Interpreter:** The bytecode then goes into the main part of the conversion is the Python Virtual Machine (PVM). The PVM is the main runtime engine of Python. It is an interpreter that reads and executes the bytecode file, line by line. Here In the Python Virtual Machine translate the byte code into machine code which is the binary language consisting of 0's and 1's. The machine code is highly optimized for the machine it is running on. This binary language is only understandable by the CPU of a system.
 
 - **Running Program:** At last, the CPU executes the given machine code and the main outcome of the program comes as performing task and computation you scripted at the beginning of the stage in your code editor.
 
@@ -54,7 +54,7 @@ Here are some inheritance maps (possibly outdated) which data takes part of.
 
 ![python inheritance map](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/pythoninheritancemap.png)
 
-For `abc` module (possibly outdated too):
+One more (possibly outdated too):
 
 ![collections inheritance map](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/collections_inheritance_map.jpg)
 
@@ -64,7 +64,7 @@ and another (possibly outdated too):
 
 If you want to, you can think of the hierarchy from ancestor to child as : *"Container - Collection - Sequence"* 🥰
 
-#### Strongly vs. Weakly Typed? Understanding Python
+### Strongly vs. Weakly Typed? Understanding Python
 
 Python is a **strongly typed** and **dynamically typed** language.
 
@@ -78,9 +78,13 @@ Strong typing in Python ensures type safety: you must explicitly convert types w
 
 ## Objects in Python 😎
   
-There are 33 specially reserved words that cannot be used as identifiers, as shown down below.
+In Python, everything you make, use, or reference is an instance of some class, and thus, it’s an object.
+
+We'll dive deeper on this idea, but knowing it upfront might be good. 😌
 
 ### Reserved Words
+
+There are 33 specially reserved words that cannot be used as identifiers, as shown down below.
 
 - `False` `as` `continue` `else` `from` `in` `not` `return` `yield`
 - `None` `assert` `def` `except` `global` `is` `or` `try`
@@ -89,11 +93,13 @@ There are 33 specially reserved words that cannot be used as identifiers, as sho
 
 These are all reserved. This is just a simple reminder. 🥰
 
-### Python’s Built-In Classes 🤔 
+### Python’s Built-In Classes 🤔
+
+One thing we will talk about is ***immutability*** before we get to the common built-in classes. 
 
 A class is `immutable` if each object of that class has a fixed value upon instantiation that **cannot subsequently be changed.** For example, the `float` class is immutable.
 
-Once an instance has been created, its value cannot be changed (although an identifier referencing that object can be reassigned to a different value).
+Once an instance has been made, its value cannot be changed (although an identifier referencing that object can be reassigned to a different value).
 
 | Class     |             Description              | Immutable? |
 | :-------- | :----------------------------------: | ---------: |
@@ -112,11 +118,11 @@ Once an instance has been created, its value cannot be changed (although an iden
   
 Basically it comes down to the fact that immutability increases predictability, performance (indirectly) and allows for mutation tracking.
 
-##### Predictability
+- Predictability:
 
 Mutation hides change, which create (unexpected) side effects, which can cause nasty bugs. When you enforce immutability you can keep your application architecture and mental model simple, which makes it easier to reason about your application.
 
-##### Performance
+- Performance:
 
 Even though adding values to an immutable Object means that a new instance needs to be created where existing values need to be copied and new values need to be added to the new Object which cost memory, immutable Objects can make use of structural sharing to **reduce memory overhead.**
 
@@ -124,7 +130,7 @@ All updates return new values, but internally structures are shared to drastical
 
 This means that if you append to a vector with 1000 elements, it does not actually create a new vector 1001-elements long. Most likely, internally only a few small objects are allocated.
 
-##### Mutation Tracking
+- Mutation Tracking:
 
 Besides reduced memory usage, immutability allows you to optimize your application by making use of reference- and value equality.
 
@@ -142,7 +148,7 @@ Numbers evaluate to `False` if zero, and `True` if nonzero. Sequences and other 
 
 An important application of this interpretation is the use of a non boolean value as a **condition** in a control structure.
   
-In Python, **Boolean is a SUB TYPE of the integer type!** 😯
+In Python, **Boolean is a sub type of the integer type!** 😯
 
 ``` py linenums="1"
 my_bool = True
@@ -164,17 +170,17 @@ if not empty_seq:
 
 #### The `int` class - `my_number = 7`
 
-The `int` and `float` classes are the primary numeric types in Python. 
+The `int` and `float` classes are the primary numeric types in Python.
 
-The `int` class is designed to represent integer values with arbitrary magnitude. 
+The `int` class is designed to represent integer values with arbitrary magnitude.
 
 Unlike Java and C++, which support different integral types with different precision (e.g., `int`, `short`, `long`), Python **automatically chooses** the internal representation for an integer based upon the magnitude of its value.
 
-Typical literals for integers include ``0, 137, and −23.`` 
+Typical literals for integers include ``0, 137, and −23.``
 
 ![Figure 0.5](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/fig0-5.jpg)
 
-In some contexts, it is convenient to express an integral value using **binary**, **octal**, or **hexadecimal**. That can be done by using a prefix of the number 0 and then a character to describe the base. 
+In some contexts, it is convenient to express an integral value using **binary**, **octal**, or **hexadecimal**. That can be done by using a prefix of the number 0 and then a character to describe the base.
 
 Example of such literals are respectively: ``0b1011, 0o52, and 0x7f.``
 
@@ -196,13 +202,17 @@ int(3.99)  # 3
 int(-2.4)  # -2
 ```
 
-The constructor can also be used to parse a string that is presumed to represent an integral value (such as one entered by a user). This is called  `Explicit type conversion` which is also known as `typecasting.`
+The constructor can also be used to parse a string that is presumed to represent an integral value (such as one entered by a user).
 
-If `s` represents a string, then `int(s)` produces the integral value that string represents. For example, the expression ```int("137")``` produces the integer value `137`. If an invalid string is given as a parameter, as in ```int("hello")``` , a `ValueError` is raised. 
+This is called  **Explicit type conversion** which is also known as `typecasting`.
+
+If `s` represents a string, then `int(s)` produces the integral value that string represents. 
+
+For example, the expression ```int("137")``` produces the integer value `137`. If an invalid string is given as a parameter, as in ```int("hello")```  a `ValueError` is raised. 
 
 By default, the string must use base 10. If conversion from a different base is desired, that base can be indicated as a second, optional, parameter. For example, the expression ```int("7f", 16)``` evaluates to the integer `127`.
 
-#### The `float` Class `my_float = 2.347`
+#### The `float` Class - `my_float = 2.347`
 
 The `float` class is the sole floating-point type in Python, using a fixed-precision representation. Its precision is more similar to a `double` in Java or C++, rather than those languages’ `float` type.
 
@@ -222,7 +232,7 @@ my_float = 4.34534
 print(f"{my_float:.2f}")  # 4.35
 ```
 
-One other form of literal for floating-point values uses scientific notation. For example, the literal `6.022e23` represents the mathematical value $6.022 × 10^{23}$
+One other form of literal for floating-point values uses scientific notation. For example, the literal `6.022e23` represents the mathematical value $$6.022 × 10^{23}$$
 
 ``` py
 my_exponential = 2e4
@@ -953,7 +963,7 @@ Sequences define comparison operations based on lexicographic order, performing 
 
 #### Operators for Sets and Dictionaries: 
 
-##### Sets:
+##### Sets
 
 They do not provide order between elements, so comparison is not lexicographic. **No orders here**.
 
@@ -1012,7 +1022,7 @@ hset.remove(12)
 hset.discard(7) # does not give an error even though 7 is not in the set
 ```
 
-##### Dictionaries:
+##### Dictionaries
 
 Do not maintain a well defined order on their elements. $O(1)$ access to elements. 😍
 
@@ -1042,7 +1052,7 @@ print(max(hmap)) # "greg" - biggest key, literally
 print(max(hmap, key=hmap.get)) # andrej - key for max changed
 ```
 
-##### Extended Assignment Operators : 
+##### Extended Assignment Operators
 
 For an immutable type, such as a number or a string, one should not presume that this syntax changes the value of the existing object, but instead that it will reassign the identifier to a newly constructed value.
 
@@ -1202,6 +1212,7 @@ for i in range(6):
 		continue
 	print(i, end = " ")  # 1 3 5
 ```
+
 ## Functions
 
 There are functions and methods. We begin with an example to demonstrate the syntax for defining functions in Python.
@@ -1694,6 +1705,7 @@ print(vars(myc)) # {'_x': None, '_C__y': 2}
 ```
 
 These were all for now. For even more check the [official documentation](https://docs.python.org/3/library/functions.html) 💕 
+
 ## Simple I/0 🤔
 
 ### Console I/O
@@ -1770,6 +1782,7 @@ with open("readme.md", 'r') as i_file:
 		i += 1
 
 ```
+
 ## Exception Handling
 
 ### Common Exception Types
@@ -1871,6 +1884,7 @@ while age <= 0:
 		except (ValueError, EOFError):
 			print("Invalid Response")
 ```
+
 ## Iterators and Generators
 
 ### Iterables and Iterators
@@ -1924,6 +1938,7 @@ Notice use of the keyword `yield` rather than return to indicate a result. This 
 It is illegal to combine `yield` and `return` statements in the same implementation, other than a zero-argument `return` statement to cause a generator to end its execution.
 
 Wisdom: In closing, we wish to emphasize the benefits of lazy evaluation when using a generator rather than a traditional function. The results are only computed if requested, and the entire series need not reside in memory at one time.
+
 ## Additional Python Conveniences 🥰
 
 ### Conditional Expressions - Tenary
@@ -1993,6 +2008,7 @@ k = temp
 ```
 
 The unnamed tuple representing the packed values on the right-hand side implicitly serves as the temporary variable when performing such a swap. 😌
+
 ## Scopes and Namespaces
 
 When computing a sum with the syntax x + y in Python, the names x and y must have been previously associated with objects that serve as values; a `NameError` will be raised if no such definitions are found. 
@@ -2032,6 +2048,7 @@ as an alias for the existing print function.
 # we know we can use 
 max(a, b, key = abs)
 ```
+
 ## Modules and Import Statements
 
 Depending on the version of Python, there are approximately 130–150 definitions that were deemed significant enough to be included in that built-in namespace.
@@ -2087,6 +2104,7 @@ All of the methods supported by the Random class are also supported as stand-alo
 | `randrange(start, stop, step)` | Returns a pseudo-random integer in the standard Python range indicated by the parameters. |
 | `choice(seq)`                  | Returns an element of the given sequence chosen pseudo-randomly.                          |
 | `shuffle(seq)`                 | Reorders the elements of the given sequence pseudo-randomly.                              |
+
 ## Cool Printing - [colorprint](https://stackoverflow.com/a/39452138)
 
-Done with third draft! 😎
+Let's move on to discover about Object Oriented Programming.
