@@ -545,8 +545,6 @@ Python supports the following keyword operators for Boolean values:
 
     The `and` and `or` operators short-circuit, in that they do not evaluate the second operand if the result can be determined based on the value of the first operand.
 
-#### Wisdom: The `and` and `or` operators short-circuit, in that they do not evaluate the second operand if the result can be determined based on the value of the first operand.
-
 ``` py
 # All numbers evaluate to True
 # All non empty sequences are True
@@ -573,7 +571,7 @@ Python supports the following operators to test two notions of equality:
 | `**`     | equivalent         |
 | `!=`     | not equivalent     |
 
-```python
+``` py
 a = 2
 b = 2
 
@@ -586,8 +584,12 @@ if str_1 ** str_2:
 	print("This is True because these strings considered equivalent, because they match character to character.")
 ```
 
-**Wisdom:** So in general, we use `**` or `!=` , not identity (Identical objects are also equal but we rarely compare identical objects).
+!!! tip
+
+	**Wisdom:** So in general, we use `**` or `!=` , not identity (Identical objects are also equal but we rarely compare identical objects).
+
 #### Comparison Operators:
+
 Comparison happens lexicographically - Like Oxford Dictionary.
 
 | Operator | Meaning                  |
@@ -596,14 +598,19 @@ Comparison happens lexicographically - Like Oxford Dictionary.
 | `<=`     | less than or equal to    |
 | `>`      | greater than             |
 | `>=`     | greater than or equal to |
-**Wisdom:** They should be between comparable operands.
 
-```python
+!!! tip
+
+	Comparisons should be between comparable operands.
+
+``` py
 'apple' >= 'apple' # True 
 'apple' >= 'orange' # False 
 'orange' >= 'apple' # True
 ```
+
 #### Arithmetic Operators:
+
 Python supports the following arithmetic operators:
 
 | operator | meaning             |
@@ -615,9 +622,12 @@ Python supports the following arithmetic operators:
 | `//`     | integer division    |
 | `%`      | the modulo operator |
 | `**`     | power operator      |
-**Wisdom:** True division implicitly converts the data type to `float`.
 
-```python
+!!! tip
+	
+	True division implicitly converts the data type to `float`.
+
+``` py
 a = 3
 b = 4
 c = 7.8
@@ -656,20 +666,27 @@ print(divmod(10,5)) # 2, 0
 ```
 
 ---
-### Tangent: Is Instance - Functions and Callable 🐘
 
-```python
+#### Tangent: Is Instance - Functions and Callable 🐘
+
+This part is only for the curious, not required right now 😌
+
+``` py
 if isinstance((lambda x : x // 2), function):
     print("yeah that is a function!") # this does not work!
 ```
 
-This gives error. Why?
+This gives error. Why? 🤔
 
-The `isinstance` function takes two arguments: an object and a class or a tuple of classes. It checks whether the object is an instance of the specified class or classes. In your case, you're trying to check whether a lambda function is an instance of the `function` class, but lambdas are not directly instances of the `function` class in Python.
+The `isinstance` function takes two arguments: an object and a class or a tuple of classes.
+
+It checks whether the object is an instance of the specified class or classes. 
+
+In your case, you're trying to check whether a lambda function is an instance of the `function` class, but lambdas are not directly instances of the `function` class in Python.
 
 To check if an object is callable (i.e., a function), you can use the `callable()` function. Here's how you can correct your code:
 
-```python
+``` py
 if callable((lambda x: x // 2)):
     print("Yeah, that is a function!")
 ```
@@ -686,20 +703,35 @@ In Python, callable objects include:
 5. Classes (if they define a `__call__()` method).
 6. Instances of classes that implement the `__call__()` method.
 
-However, not all callable objects are functions. For example, classes can be callable if they define a `__call__()` method, but they are not traditional functions. Similarly, instances of classes that implement the `__call__()` method are callable, but they may not be considered functions in the traditional sense.
+However, not all callable objects are functions.
+
+For example, classes can be callable if they define a `__call__()` method, but they are not traditional functions.
+
+Similarly, instances of classes that implement the `__call__()` method are callable, but they may not be considered functions in the traditional sense.
+
 #### is every function callable?
 
-Yes, in Python, every function is callable. When you define a function using the `def` keyword or with a lambda expression using the `lambda` keyword, the resulting object is callable. This means you can execute the function by using parentheses `()` after its name, passing any required arguments.
+Yes, in Python, every function is callable.
+
+When you define a function using the `def` keyword or with a lambda expression using the `lambda` keyword, the resulting object is callable.
+
+This means you can execute the function by using parentheses `()` after its name, passing any required arguments.
 
 ---
-#### Bitwise Operators:  
-[This](https://realpython.com/python-bitwise-operators/) is a wonderful source on the topic. 
+
+#### Bitwise Operators
+
+Back to our topic 🍓
+
+[This](https://realpython.com/python-bitwise-operators/) is a wonderful source on bitwise operators. 
 
 You can use bitwise operators to perform [Boolean logic](https://en.wikipedia.org/wiki/Boolean_algebra) on individual bits. That’s analogous to using logical operators such as `and`, `or`, and `not`, but on a bit level. 
 
-![[bitwise.jpg]]
+![Bitwise Operators](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/bitwise.jpg)
 
-Bitwise operators were used a lot more in programming when computers didn’t have as **much memory** in them as they do now. Bitwise operators are still used for those working on embedded devices that have **memory limitations**.
+Bitwise operators were used a lot more in programming when computers didn’t have as **much memory** in them as they do now.
+
+Bitwise operators are still used for those working on embedded devices that have **memory limitations**.
 
 Python provides the following bitwise operators for integers: 
 
@@ -711,9 +743,11 @@ Python provides the following bitwise operators for integers:
 | `ˆ`      | bitwise exclusive-or                       |
 | `<<`     | shift bits left, filling in with zeros     |
 | `>>`     | shift bits right, filling in with sign bit |
-**Bitwise And** - `x & 1 ** x` for `x ** 0 or x ** 1` - *And with 1 is bit itself.*
 
-```python
+
+**Bitwise And** - `x & 1 == x` for `x == 0 or x== 1` - *And with 1 is bit itself.*
+
+``` py
 # Bitwise AND operator 
 
 a = 10 # = 1010 (Binary)
@@ -739,7 +773,7 @@ print(g) # 20
 
 **Bitwise Or** - `x | 0 = x` for `x ** 0 or x ** 1` - *Or with 0 is the number itself.*
 
-```python
+``` py
 # Bitwise OR operator
 
 k = 44  #  101100 
@@ -753,21 +787,23 @@ m = k | l
 print(m) # 45
 ```
 
-**Bitwise XOR** - Apple Operator. 🍎
+**Bitwise XOR** - The apple Operator. 🍎
 
 I call this the Apple operator because at Apple, people from diverse backgrounds do amazing things. 
 
 Two of the same just makes `0`, nothing new.
 
 **XOR of a Number with Itself:** `number ^ number = 0` - number can be multiple digits:
+
 - This property is a fundamental characteristic of XOR. 
 - If you XOR a value with itself, all corresponding bits will cancel each other out, resulting in zero.
 
 **XOR of a Number with 0:** `number ^ 0 = number` - number can be multiple digits:
+
 - XOR'ing any value with zero leaves the value unchanged. 
 - This is because XOR compares corresponding bits, and if one of them is zero, the result will be the other bit.
 
-```python
+``` py
 # Bitwise XOR - 
 # same makes 0 different makes 1
 # if you xor a number with itself, the result will be 0
@@ -791,7 +827,7 @@ print(p) # 8
 
 **Bitwise NOT**
 
-```python
+``` py
 # Bitwise NOT
 #  Performs A logical negation on a given number 
 #  by flipping all of its bits.
@@ -808,11 +844,11 @@ s = ~r & 0b11111111
 print(s) # this will be 99. Which we originally expected.
 ```
 
-**Bitwise Shift**
+**Bitwise Shift** - Left and Right Shift explained below.
 
 **Left Shift**
 
-```python
+``` py
 # Bitwise Shift
 
 # Left Shift
@@ -825,24 +861,32 @@ print(a << 3) # 312 100111000
 ```
 ##### *Bit masks ?*
 
-On paper, the bit pattern resulting from a left shift becomes longer by as many places as you shift it. That’s also true for Python in general because of how it handles integers. However, in most practical cases, you’ll want to constrain the length of a bit pattern to be a multiple of eight, which is the **standard byte length**.
+On paper, the bit pattern resulting from a left shift becomes longer by as many places as you shift it. That’s also true for Python in general because of how it handles integers.
+
+However, in most practical cases, you’ll want to constrain the length of a bit pattern to be a multiple of eight, which is the **standard byte length**.
 
 For example, if you’re working with a single byte, then shifting it to the left should discard all the bits that go beyond its left boundary:
 
-It’s sort of like looking at an unbounded stream of bits through a fixed-length window. There are a few tricks that let you do this in Python. For example, you can apply a **bitmask** with the bitwise AND operator:
+It’s sort of like looking at an unbounded stream of bits through a fixed-length window.
 
-```python
+There are a few tricks that let you do this in Python. For example, you can apply a **bitmask** with the bitwise AND operator:
+
+``` py
 print(39 << 3) # 312 - over 1 byte
 print((39 << 3) & 255) # 56 - bitmaskedded
 ```
 
-Shifting 39 by three places to the left returns a number higher than the maximum value that you can store on a single byte. It takes **nine** bits, whereas a byte has only **eight**. 
+Shifting 39 by three places to the left returns a number higher than the maximum value that you can store on a single byte.
 
-To chop off that one extra bit on the left, you can apply a bitmask with the appropriate value. If you’d like to keep more or fewer bits, then you’ll need to modify the mask value accordingly.
+It takes **nine** bits, whereas a byte has only **eight**. 
+
+To chop off that one extra bit on the left, you can apply a bitmask with the appropriate value.
+
+If you’d like to keep more or fewer bits, then you’ll need to modify the mask value accordingly.
 
 **Right Shift**
 
-```python
+``` py
 # Bitwise Right Shift
 
 # Pushes bits to right, rightmost bit drops
@@ -853,12 +897,16 @@ print(a >> 2) # 00100111    39
 print(a >> 3) # 00010011    19
 ```
 
-**Wisdom:** 
-You can further categorize the bitwise shift operators as arithmetic and logical shift operators. 
+!!! tip
+
+	You can further categorize the bitwise shift operators as arithmetic and logical shift operators. 
 
 While Python only lets you do the arithmetic shift, it’s worthwhile to know how other programming languages implement the bitwise shift operators to avoid confusion and surprises.
 
-This distinction comes from the way they handle the **sign bit**, which ordinarily lies at the far left edge of a signed binary sequence. In practice, it’s relevant only to the right shift operator, which can cause a number to flip its sign, leading to [integer overflow](https://en.wikipedia.org/wiki/Integer_overflow).
+This distinction comes from the way they handle the **sign bit**, which ordinarily lies at the far left edge of a signed binary sequence. 
+
+In practice, it’s relevant only to the right shift operator, which can cause a number to flip its sign, leading to [integer overflow](https://en.wikipedia.org/wiki/Integer_overflow).
+
 #### Sequence Operators: 
 
 Each of Python’s built-in sequence types (`str`, `tuple`, and `list`) support the following operator syntaxes:  
@@ -873,7 +921,7 @@ Each of Python’s built-in sequence types (`str`, `tuple`, and `list`) support 
 | `val in  s` | containment check  |
 | `val not in s` | non-containment check |
 
-```python
+``` py
 my_seq = [7, 8, 9]
 
 print(my_seq[1:2]) # 8
@@ -901,11 +949,15 @@ Sequences define comparison operations based on lexicographic order, performing 
 | `s <= t` | lexicographically less than or equal to |
 | `s > t` | lexicographically greater than |
 | `s >= t` | lexicographically greater than or equal to |
+
+
 #### Operators for Sets and Dictionaries: 
 
 ##### Sets:
 
-They do not provide order between elements, so comparison is not lexicographic. **No orders here**. Also there is no slicing for `[]` sets. `Sets` and `frozensets` support the following operators:  
+They do not provide order between elements, so comparison is not lexicographic. **No orders here**.
+
+Also there is no slicing for `[]` sets. `Sets` and `frozensets` support the following operators:  
 
 | operator       | meaning                                         |
 | -------------- | ----------------------------------------------- |
@@ -922,7 +974,7 @@ They do not provide order between elements, so comparison is not lexicographic. 
 | `s1 − s2`      | the set of elements in s1 but not s2            |
 | `s1 ˆ s2`      | the set of elements in precisely one of s1 or s |
 
-```python
+``` py
 hset = {1 , 2 , 3, 4}
 hset_2 = {6, 7, 9, 4}
 hset_3 = {1, 2, 3}
@@ -959,6 +1011,7 @@ hset.add(12)
 hset.remove(12)
 hset.discard(7) # does not give an error even though 7 is not in the set
 ```
+
 ##### Dictionaries:
 
 Do not maintain a well defined order on their elements. $O(1)$ access to elements. 😍
@@ -973,7 +1026,7 @@ Do not maintain a well defined order on their elements. $O(1)$ access to element
 | `d1 ** d2`       | d1 is equivalent to d2                              |
 | `d1 != d2`       | d1 is not equivalent to d2                          |
 
-```python
+``` py
 hmap = {"gary" : 1, "alex": 3, "artour" : 7, "greg": 10, "andrej": 20}
 
 print(hmap["gary"]) # 1
@@ -988,6 +1041,7 @@ print(max(hmap)) # "greg" - biggest key, literally
 
 print(max(hmap, key=hmap.get)) # andrej - key for max changed
 ```
+
 ##### Extended Assignment Operators : 
 
 For an immutable type, such as a number or a string, one should not presume that this syntax changes the value of the existing object, but instead that it will reassign the identifier to a newly constructed value.
@@ -996,7 +1050,7 @@ For an immutable type, such as a number or a string, one should not presume that
 
 However, it is possible for a type to redefine such semantics to mutate the object, as the `list` class does for the `+=` operator.
 
-```python
+``` py
 """
 We can do the following to all mutable values - list - set - dict
 """
@@ -1034,6 +1088,7 @@ Higher precedence will be executed first.
 |14| logical-or| or  |
 |15| conditional|val1 if cond else val2  |
 |16 |assignments| =, +=, −=, =, etc|
+
 ## Control Flow 🌠
 
 ### Conditionals
