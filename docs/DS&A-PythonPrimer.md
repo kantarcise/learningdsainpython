@@ -17,7 +17,7 @@ The interpreter receives a command, evaluates that command, and reports the resu
 
 While the interpreter can be used interactively (especially when debugging), a programmer typically defines a series of commands in advance and saves those commands in a plain text file known as source code or a script. 😌
 
-### Interpreted vs Compiled ?
+### Interpreted vs Compiled
 
 > Both are translated into “computer language”, and the computer will be able to know what to do when he reads it (Computer speaks 0 and 1's). The difference is when/how you’ll translate it.
 
@@ -25,7 +25,7 @@ While the interpreter can be used interactively (especially when debugging), a p
 
 Plain C will not work.  😮
 
-![Figure 0.2](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/fig0-2.png)
+![Figure 0.2](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/fig0-2.png){ align=right }
 
 > An interpreted language uses a software called interpreter to translate the original message into the “computer language”, much like a real life interpreter would translate somebody’s Portuguese speech into English in real time.
 
@@ -33,7 +33,7 @@ Plain C will not work.  😮
 
 > A compiled language uses a software called compiler that **translates** the original message and saves it to another file. You can imagine that the compiler would be the person creating subtitles for a speech.
 
-![Figure 0.3](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/fig0-3.png)
+![Figure 0.3](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/fig0-3.png){ align=right }
 
 > The interpreter might come up with the translated message first, as he’s translating in real time, but if he’s asked to translate it again, he’ll have to **redo the work every time.**
 > 
@@ -69,7 +69,7 @@ and another (possibly outdated too):
 
 If you want to, you can think of the hierarchy from ancestor to child as : *"Container - Collection - Sequence"* 🥰
 
-### Strongly vs. Weakly Typed? Understanding Python
+### Strongly vs. Weakly Typed
 
 Python is a **strongly typed** and **dynamically typed** language.
 
