@@ -21,8 +21,9 @@ Why is there such approach in programming?
 
 ![Figure 2.1](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter2/fig2-1.png){ align=left }
 
-Software implementations should achieve robustness, adaptability, and reusability. These are our goals.
+Software implementations should achieve **robustness**, **adaptability**, and **reusability**.
 
+These are our goals, no matter what kind of application we're building.
 
 #### 1. Robustness (Availability) 🐍
 
@@ -81,13 +82,15 @@ Gotta adapt to your users, use cases, like Airbnb. Do not let your customers be 
 
 Environmental Differences basically result from the mobility of computing devices, applications and people, which leads to highly dynamic computing environments.
 
-Unlike desktop applications, which rely on a carefully configured and largely static set of resources, ubiquitous computing applications are subject to changes in available resources such as network connectivity and input/output devices.
+Unlike desktop applications, which rely on a carefully configured and largely static set of resources, ubiquitous computing applications are subject to changes in available resources such as **network connectivity** and **input/output devices**.
 
 ![Environments](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter2/environment.jpeg){ align=right }
 
-Let's see it. Try to ship for all of these on the right.
+It's a challenge to ship for all of these on the right.
 
-Moreover, they are frequently required to cooperate spontaneously and opportunistically with previously unknown software services in order to accomplish tasks on behalf of users. 
+They also need to be ready to spontaneously and opportunistically cooperate with previously unknown software services to complete tasks on behalf of users.
+
+Pretty tough job, but also a solid opportunity.
 
 #### 3. Reusability 🏂
 
@@ -202,7 +205,11 @@ print_animal_details(lion)  # Output: Name: Simba, Age: 3
 
     The description of this as “duck typing” comes from an adage attributed to poet `James Whitcomb Riley`, stating that *“when I see a bird that walks like a duck and swims like a duck and quacks like a duck, I call that bird a duck.”* 
 
-![Two Ducks](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter2/twoDucks.png){ align=right }
+
+<figure markdown="span">
+  ![ducks](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter2/twoDucks.png)
+  <figcaption>Two Ducks.</figcaption>
+</figure>
 
 Here are some examples of Duck Typing functionality:
 
@@ -210,9 +217,9 @@ Imagine I have a magic wand. It has special powers. If I wave the wand and say 
 
 Does it work on other things? Not sure: so I try it on a truck. Wow - it drives too! I then try it on planes, trains and 1 Woods (they are a type of golf club which people use to 'drive' a golf ball). **They all drive!**
 
-But would it work on say, a teacup? Error: Poof! That didn't work out so good. ====Teacups can't drive!! duh!?
+But would it work on say, a teacup? Error: Poof! That didn't work out so good. Teacups can't drive, duh!?
 
-This is basically the concept of duck typing. It's a _try-before-you-buy_ system. If it works, all is well. But if it fails, like a grenade still in your hand, it's gonna blow up in your face.
+This is basically the concept of duck typing. It's a _try-before-you-buy_ system. If it works, all is well. But if it fails, like a grenade still in your hand.
 
 In other words, we are interested in what the object _can do_, rather than with _what the object is_.
 
@@ -221,9 +228,10 @@ This determines whether an object can be used for a particular purpose. An objec
 More formally, Python supports abstract data types using a mechanism known as an **abstract base class (ABC).** An abstract base class cannot be instantiated (i.e., you cannot directly create an instance of that class), but it defines **one or more common methods that all implementations of the abstraction must have**.
 
 We will make use of several existing abstract base classes coming from Python’s `collections` module, which includes definitions for several common data structure ADTs, and concrete implementations of some of those abstractions.
+
 #### 3. Encapsulation
 
-Different components of a software system should not reveal the internal details of their respective implementations.
+Different components of a software system **should not reveal the internal details** of their respective implementations.
 
 One of the main advantages of encapsulation is that it gives one programmer freedom to implement the details of a component, without concern that other programmers will be writing code that intricately depends on those internal decisions.
 
@@ -245,7 +253,9 @@ lion = Animal("Leo", 5)
 print(lion.get_name())  # Output: Leo`
 ```
 
-Python provides only loose support for encapsulation.  By convention, names of members of a class (both data members and member functions) that start with a **single underscore** `_` character (e.g., `_secret`) are assumed to be nonpublic and should not be relied upon. Those conventions are reinforced by the intentional omission of those members from automatically generated documentation.
+Python provides only loose support for encapsulation.
+
+By convention, names of members of a class (both data members and member functions) that start with a **single underscore** `_` character (e.g., `_secret`) are assumed to be nonpublic and should not be relied upon. Those conventions are reinforced by the intentional omission of those members from automatically generated documentation.
 
 In Python, we have `@property` decorator for `getters` and `setters`. Here is an example:
 
@@ -296,9 +306,12 @@ print(cel.temp)
 cel.temp = -300
 print(cel.temp)
 ```
+
 #### 4.**Inheritance:**
 
-> Inheritance allows a class (subclass or derived class) to inherit the properties and behaviors of another class (super class or base class).  It promotes code reusability.
+> Inheritance allows a class (subclass or derived class) to inherit the properties and behaviors of another class (super class or base class).
+
+It promotes code reusability.
  
 **Example:** Making a Lion class that inherits from the Animal class. 🐯
 
@@ -311,17 +324,20 @@ simba = Lion("Simba", 3)
 simba.eat()  # Output: Simba is eating.
 simba.roar()  # Output: Roar!
 ```
+
 #### 5. **Polymorphism:**
 
-> - Polymorphism allows objects of different classes to be treated as objects of a common base class. 
-> - It enables flexibility and allows a single interface to represent different types.
+> Polymorphism allows objects of different classes to be treated as objects of a common base class. 
+
+It enables flexibility and allows a single interface to represent different types.
 
 Compile-Time Polymorphism (Static Binding):
+
 - Achieved through method overloading and operator overloading.
 - Involves multiple methods or operators with the same name but different parameter types or numbers of parameters.
 - The appropriate method or operator is selected during compile time based on the types of arguments.
 
-```python
+``` py
 """
 This does not work. The interpreter will use the latest definition of the function.
 """
@@ -333,7 +349,7 @@ def add(x, y, z):
 
 But this will work:
 
-```python
+``` py
 def add(x, y, z = 0):
 	return x + y + z
 
@@ -347,7 +363,7 @@ Run-Time Polymorphism (Dynamic Binding):
 - Involves a base class and a derived class, where the derived class provides a specific implementation for a method that is already defined in the base class.
 - The decision on which method to execute is made at runtime based on the actual type of the object.
 
-```python
+``` py
 class Animal:
     def make_sound(self):
         print("Generic animal sound.")
@@ -362,41 +378,46 @@ def animal_sound(animal):
 cat = Cat()
 animal_sound(cat)  # Output: Meow!
 ```
+
 ##### Function Overriding:
 
-Function overriding is a specific form of polymorphism that occurs when a derived class provides a specific implementation for a method that is already defined in its base class. 
+Function overriding is a specific form of polymorphism that occurs when a derived class provides a specific implementation for a method that is already defined in its base class.
 
 It allows objects of the derived class to be treated as objects of the base class while executing their own specific implementations.
+
 ### Design Patterns
 
-Computing researchers and practitioners have developed a variety of organizational concepts and methodologies for designing quality object-oriented software that is concise, correct, and reusable.
+Computing researchers and practitioners have developed a variety of organizational concepts and methodologies for designing quality object-oriented software that is **concise**, **correct**, and **reusable**.
 
 The algorithm design patterns we discuss include the following:
-• Recursion (Chapter 4)
-• Amortization (Chapter 5.3 and 11.4)
-• Divide-and-conquer (Chapter 12.2.1)
-• Prune-and-search, also known as decrease-and-conquer (Chapter 12.7.1)
-• Brute force (Chapter 13.2.1)
-• Dynamic programming (Chapter 13.3).
-• The greedy method (Chapter 13.4.2, 14.6.2, and 14.7)
+
+- Recursion (Chapter 4)
+- Amortization (Chapter 5.3 and 11.4)
+- Divide-and-conquer (Chapter 12.2.1)
+- Prune-and-search, also known as decrease-and-conquer (Chapter 12.7.1)
+- Brute force (Chapter 13.2.1)
+- Dynamic programming (Chapter 13.3).
+- The greedy method (Chapter 13.4.2, 14.6.2, and 14.7)
 
 Software engineering design patterns we discuss include:
 
-• Iterator (Chapter 1.8 and 2.3.4)
-• Adapter (Chapter 6.1.2)
-• Position (Chapter 7.4 and 8.1.2)
-• Composition (Chapter 7.6.1, 9.2.1, and 10.1.4)
-• Template method (Chapter 2.4.3, 8.4.6, 10.1.3, 10.5.2, and 11.2.1)
-• Locator (Chapter 9.5.1)
-• Factory method (Chapter 11.2.1)
+- Iterator (Chapter 1.8 and 2.3.4)
+- Adapter (Chapter 6.1.2)
+- Position (Chapter 7.4 and 8.1.2)
+- Composition (Chapter 7.6.1, 9.2.1, and 10.1.4)
+- Template method (Chapter 2.4.3, 8.4.6, 10.1.3, 10.5.2, and 11.2.1)
+- Locator (Chapter 9.5.1)
+- Factory method (Chapter 11.2.1)
 
-Rather than explain each of these concepts here, however, we introduce them throughout the text as noted above.
+Rather than explain each of these concepts here, however, we introduce them throughout the text as noted above. 🥳
+
 ## Software Development
 
-The design step is perhaps the most important phase in the process of developing software. 
+The design step is perhaps the most important phase in the process of developing software.
+
 ### “**Design is not just what it looks like and feels like.** **Design is how it works.**” Steve Jobs.
 
-How to do it?
+How should we do it?
 
 - **Responsibilities**: Divide the work into different actors, each with a different responsibility. Try to describe responsibilities using action verbs. These actors will form the classes for the program.
 
@@ -411,73 +432,95 @@ A good programmer will naturally develop greater skill in performing these tasks
 As the design takes form, a standard approach to explain and document the design is the use of UML (Unified Modeling Language) diagrams to express the organization of a program. UML diagrams are a standard visual notation to express object-oriented software designs.
 
 There are class diagrams, deployment diagrams, activity and sequence diagrams. You can check them out [here.](https://www.uml-diagrams.org/uml-25-diagrams.html#structure-diagram)
-![[fig2.3.png]]
+
+
+![Figure 2-3](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter2/fig2-3.png)
+
 #### UML 2.5 Structure Diagrams
 
 **Structure diagrams** show **static structure** of the system and its parts on different abstraction and implementation levels and how those parts are related to each other. The elements in a structure diagram represent the meaningful concepts of a system, and may include abstract, real world and implementation concepts.
 
 A class diagram is down below:
 
-![[fig2.30_uml_class_diagram_example.png]]
+<figure markdown="span">
+  ![uml_class_diagram](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter2/fig2_30_uml_class_diagram_example.png)
+  <figcaption>It should be simple enough to follow what's going on.</figcaption>
+</figure>
+
 #### UML 2.5 Behavior Diagrams
 
 **Behavior diagrams** show the **dynamic behavior** of the objects in a system, which can be described as a series of changes to the system over **time**.
 
 A sequence diagram is given down below:
 
-![[fig2.30_sequence-example-facebook-authentication.png]]
+<figure markdown="span">
+  ![uml_class_diagram](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter2/fig2-30-sequence-example-facebook-authentication.png)
+  <figcaption>A sequence, should be interpretable.</figcaption>
+</figure>
+
 ### Pseudo-Code
 
 Pseudo-code is not a computer program, but is more structured than usual prose. It is a mixture of natural language and high-level programming constructs that describe the main ideas behind a generic implementation of a data structure or algorithm.
+
 ### Coding Style and Documentation 👨‍💻
 
-Programs should be made easy to read and understand. You are coding with humans.
+Programs should be made easy to read and understand. Whether you are coding with humans or LLMs.
+
 ### Documentation
 
 Python provides integrated support for embedding formal documentation directly in source code using a mechanism known as a docstring.
 
 Guidelines for authoring useful docstrings are available at: [PEP257](http://www.python.org/dev/peps/pep-0257/). I use [Google's guide](https://google.github.io/styleguide/pyguide.html)
+
 ### Testing and Debugging
 
 Testing is the process of experimentally checking the correctness of a program, while debugging is the process of tracking the execution of a program and discovering the errors in it. Testing and debugging are often the most time-consuming activity in the development of a program.
 
-At the very minimum, we should make sure that every method of a class is tested at least once **(method coverage).** Even better, each code statement in the program should be executed at least once **(statement coverage).**
+At the very minimum, we should make sure that every method of a class is tested at least once **(method coverage).**
 
-Programs often tend to fail on **special cases of the input**. Such cases need to be carefully identified and tested. For example, when testing a method that sorts (that is, puts in order) a sequence of integers, we should consider the following inputs:
+Even better, each code statement in the program should be executed at least once **(statement coverage).**
 
-• The sequence has zero length (no elements).
-• The sequence has one element.
-• All the elements of the sequence are the same.
-• The sequence is already sorted.
-• The sequence is reverse sorted.
+Programs often tend to fail on **special cases of the input**. Such cases need to be carefully identified and tested.
+
+For example, when testing a method that sorts (that is, puts in order) a sequence of integers, we should consider the following inputs:
+
+- The sequence has zero length (no elements).
+- The sequence has one element.
+- All the elements of the sequence are the same.
+- The sequence is already sorted.
+- The sequence is reverse sorted.
 
 As software is maintained, the act of **regression testing** is used, whereby all previous tests are re-executed to ensure that changes to the software do not introduce new bugs in previously tested components.
 
-Bottom-up testing proceeds from lower-level components to higher-level components. For example, bottom-level functions, which **do not invoke other functions, are tested first**, followed by functions that call only bottom-level functions, and soon. 
+Bottom-up testing proceeds from lower-level components to higher-level components.
 
-Similarly a class that does not depend upon any other classes can be tested before another class that depends on the former. This form of testing is usually described as **unit testing**, as the functionality of a specific component is tested in isolation of the larger software project. 
+For example, bottom-level functions, which **do not invoke other functions, are tested first**, followed by functions that call only bottom-level functions, and soon. 
+
+Similarly a class that does not depend upon any other classes can be tested before another class that depends on the former. This form of testing is usually described as **unit testing**, as the functionality of a specific component is tested in isolation of the larger software project.
+
 ### Debugging
 
 The simplest debugging technique consists of using `print()`statements to track the values of variables during the execution of the program.
 
-A better approach is to run the program within a debugger, which is a specialized environment for controlling and monitoring the execution of a program. 
+A better approach is to run the program within a debugger, which is a specialized environment for controlling and monitoring the execution of a program.
 
 The basic functionality provided by a debugger is the insertion of breakpoints within the code. When the program is executed within the debugger, it stops at each breakpoint. While the program is stopped, the current value of variables can be inspected.
 
-The standard Python distribution includes a module named `pdb`, which provides debugging support directly within the interpreter.
+The standard Python distribution includes a module named [`pdb`](https://docs.python.org/3/library/pdb.html), which provides debugging support directly within the interpreter.
+
 ## Class Definitions
 
 A `class` serves as the primary means for abstraction in object-oriented programming.
 
 In Python, **every piece of data is represented as an instance of some class.**
 
-A `class` provides a set of behaviors in the form of member functions (also known as methods), with implementations that are common to all instances of that `class`. 
+A `class` provides a set of behaviors in the form of member functions (also known as methods), with implementations that are common to all instances of that `class`.
 
 A `class` also serves as a blueprint for its instances, effectively determining the way that state information for each instance is represented in the form of attributes (also known as fields, instance variables, or data members).
 
 Syntactically, self identifies the instance upon which a method is invoked. This is not required, it is just a tradition and you want your Python code to be looking like Python code for other developers.
 
-```python
+``` py linenums="1"
 class CreditCard:
     """A consumer credit card"""
     def __init__(self, customer, bank, acnt, limit):
@@ -528,13 +571,21 @@ class CreditCard:
     def make_payment(self, amount):
         self._balance -= amount
 ```
+
 #### The Constructor
 
-Internally, this results in a call to the specially named init method that serves as the constructor of the `class`. It's primary responsibility is to establish the state of a newly made `CreditCard` object with appropriate instance variables.
+Internally, object making in Python first involves a call to the special `__new__` method, which is the actual constructor. 
+
+However, in most cases, we don't override `__new__`. Instead, we customize initialization behavior using the `__init__` method — the initializer — which sets up the internal state of a newly created CreditCard object by assigning values to its instance variables.
 
 ```python
 cc = CreditCard("John Doe", "1st Bank" , "5391 0375 9387 5309" , 1000)
 ```
+
+Internally, this results in a call to the specially named `__init__` method that serves as the constructor of the `class`.
+
+It's primary responsibility is to establish the state of a newly made `CreditCard` object with appropriate instance variables.
+
 #### Encapsulation in Class
 
 A single leading underscore in the name of a data member, such as `_balance`, implies that it is intended as nonpublic. **Users of a class should not directly access such members.**
@@ -544,15 +595,17 @@ As a general rule, we will treat all data members as nonpublic. This allows us t
 We can provide **accessors**, such as `get_balance`, to provide a user of our class read-only access to a trait. If we wish to allow the user to change the state, we can provide appropriate update methods. 
 
 In the context of data structures, encapsulating the internal representation allows us greater flexibility to redesign the way a class works, perhaps to improve the efficiency of the structure.
+
 #### Error Checking in Classes
 
 If a user were to make a call such as `visa.charge("candy")`, our code would presumably crash when attempting to add that parameter to the current balance. 
 
-If this class were to be widely used in a library, we might use more rigorous techniques to raise a `TypeError` when facing such misuse (see Chapter 1.7)
+If this class were to be widely used in a library, we might use more rigorous techniques to raise a `TypeError` when facing such misuse (see [Exception Handling](https://learningdsainpython.kantarcise.com/DS%26A-PythonPrimer/#exception-handling))
 
 Beyond the obvious type errors, our implementation may be susceptible to logical errors. 
 
 For example, if a user were allowed to charge a negative price, such as `visa.charge(−300)`, that would serve to lower the customer’s balance. This provides a loophole for lowering a balance without making a payment.
+
 #### Testing the Class - Method and Statement Coverage
 
 We start by getting to **method coverage** first, meaning every method in the class is at least tested once.
@@ -561,7 +614,7 @@ After that, there should be a **statement coverage**, meaning each code statemen
 
 We can literally put some code in main an look if all the methods are acting accordingly.
 
-```python
+``` py
 if __name__ == "__main__":
 	wallet = []
 
@@ -592,9 +645,8 @@ if __name__ == "__main__":
 	print()
 ```
 
-OR
+OR - we can write Unit tests to check all of them automatically. 🥳
 
-we can write Unittests to check all of them automatically. 🥳
 ### Operator Overloading and Python’s Special Methods
 
 By default, the `+` operator is **undefined** for a new class. However, the author of a class may provide a definition using a technique known as operator overloading.
@@ -602,6 +654,7 @@ By default, the `+` operator is **undefined** for a new class. However, the auth
 This is done by implementing a specially named method. In particular, the `+` operator is overloaded by implementing a method named `__add__` , which takes the right-hand operand as a parameter and which returns the result of the expression.
 
 That is, the syntax, `a + b`, is converted to a method call on object a of the form, `a.__add__(b).
+
 #### Non-Operator Overloads
 
 For example, the syntax, `str(foo)`, is formally a call to the constructor for the string class.
@@ -655,13 +708,16 @@ All overloaded operations down below:
 | `repr(a)`  | `a.__repr__()` |
 | `reversed(a)`  | `a.__reversed__()` |
 | `str(a)` | `a.__str__()` |
-#### Wisdom about `__add__` vs `__radd__`:
 
-Python calls `__radd__` only when the object on the right side of the `+` is your class instance, but the object on the left is not an instance of your class. [Source](http://www.java2s.com/example/python-book/right-side-and-in-place-add-iadd.html)
+!!! tip 
+
+    About `__add__` vs `__radd__`:
+
+    Python calls `__radd__` only when the object on the right side of the `+` is your class instance, but the object on the left is not an instance of your class. [Source](http://www.java2s.com/example/python-book/right-side-and-in-place-add-iadd.html)
 
 The `__add__` method for the object on the left is called instead in all other cases:
 
-```python
+``` py
 class Forest:
 	def __init__(self, name, location, age):
 		self.age = age
@@ -699,6 +755,7 @@ print(for1 + 5)
 print(12 + for1)
 # A forest called: north, at location: TUR, with age: 35
 ```
+
 #### Implied Methods
 
 As a general rule, if a particular special method is not implemented in a user-defined class, the standard syntax that relies upon that method will raise an exception. For example, evaluating the expression, `a + b`, for instances of a user-defined class without `__add__` or `__radd__` will raise an error. 😮
@@ -710,12 +767,14 @@ For example, the bool method, which supports the syntax `if foo:`, has default s
 However, for container types, the `len` method is  typically defined to return the size of the container. 
 
 If such a method exists, then the evaluation of `bool(foo)` is interpreted by default to be `True` for instances with nonzero length, and `False` for instances with zero length, allowing a syntax such as `if waitlist:` to be used to test whether there are one or more entries in the wait list.
-#### CAUTION:
-We should be careful that some natural implications are not automatically provided by Python. 
 
-For example, the `__eq__` method supports syntax `a == b`, but providing that method does not affect the evaluation of syntax `a != b`. (The `__ne__` method should be provided, typically returning `not (a == b)` as a result.)
+!!! warning
 
-Similarly, providing a `__lt__` method supports syntax `a < b`, and indirectly `b > a`, but providing both `__lt__` and `__eq__` does not imply semantics for `a <= b` 😎
+    We should be careful that some natural implications are not automatically provided by Python. 
+
+    For example, the `__eq__` method supports syntax `a == b`, but providing that method does not affect the evaluation of syntax `a != b`. (The `__ne__` method should be provided, typically returning `not (a == b)` as a result.)
+
+    Similarly, providing a `__lt__` method supports syntax `a < b`, and indirectly `b > a`, but providing both `__lt__` and `__eq__` does not imply semantics for `a <= b` 😎
 
 To demonstrate the use of operator overloading we give 2 examples here:
 
@@ -761,6 +820,7 @@ class Vector:
 		"""String representation of the vector"""
 		return f"< {str(self._coords)[1:-1]} >"
 ```
+
 ### Iterators 💛
 
 Iterators support `__next__` which returns the next element of the collection if any, or raises `StopIteration` exception to indicate that there are no further elements. 
@@ -848,6 +908,7 @@ print(range1) # A Range with 8 elements starting from 0 with 1 as step size
 print(range2) # A Range with 10 elements starting from 0 with 1 as step size
 print(range3) # A Range with 4 elements starting from 0 with 3 as step size
 ```
+
 ## Inheritance
 A natural way to organize various structural components of a software package is in a hierarchical fashion:
 
@@ -1123,6 +1184,7 @@ class.
 A `metaclass` is different from a `superclass`, in that it provides a template for the `class` definition itself. Specifically, the `ABCMeta` declaration assures that the constructor for the class raises an error.
 
 The **second** advanced technique is the use of the `@abstractmethod` decorator immediately before the `__len__` and `__getitem__` methods are declared. That declares these two particular methods to be abstract, meaning that we do not provide an implementation within our `Sequence` base class, but that we expect any concrete subclasses to support those two methods.
+
 ## Namespaces and Object Orientation
 
 A **namespace** is an abstraction that manages all of the identifiers that are defined in a particular scope, mapping each name to its associated value. 
@@ -1294,6 +1356,7 @@ Python interpreter begins a **name resolution** process:
 4. raise `AttributeError`
 
 In traditional object-oriented terminology, Python uses what is known as **dynamic dispatch** (or dynamic binding) to determine, at run-time, which implementation of a function to call based upon **the type of the object** upon which it is invoked. This is in contrast to some languages that use static dispatching, making a compile-time decision as to which version of a function to call, based upon the declared type of a variable.
+
 ## Shallow and Deep Copying
 
 In Chapter 1, we emphasized that an assignment statement `foo = bar` makes the name foo an `alias` for the object identified as `bar`. In this section, we consider the task of making a copy of an object, rather than an alias.
