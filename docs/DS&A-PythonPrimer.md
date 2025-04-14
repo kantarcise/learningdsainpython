@@ -189,6 +189,11 @@ Typical literals for integers include ``0, 137, and −23.``
 
 ![Figure 0.5](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/fig0-5.jpg)
 
+<figure markdown="span">
+  ![Figure 0.5](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/fig0-5.jpg)
+  <figcaption>It's that simple actually.</figcaption>
+</figure>
+
 In some contexts, it is convenient to express an integral value using **binary**, **octal**, or **hexadecimal**. That can be done by using a prefix of the number 0 and then a character to describe the base.
 
 Example of such literals are respectively: ``0b1011, 0o52, and 0x7f.``
