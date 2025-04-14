@@ -62,6 +62,8 @@ markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
   - admonition # tip box
+  - toc: 
+     permalink: true # permalinks
 
 extra_javascript:
   - javascripts/katex.js
