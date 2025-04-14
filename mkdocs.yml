@@ -17,6 +17,8 @@ theme:
     text: EB Garamond
   features:
     - content.code.copy
+    - toc.integrate 
+    - navigation.top
 
   logo: assets/lego.svg
   favicon: assets/lego_favicon.png
