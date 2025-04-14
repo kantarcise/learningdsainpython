@@ -1,25 +1,32 @@
+---
+hide:
+  - toc
+---
 
-This is a part of [[Data Structures and Algorithms - In Python]]
-
-----
 # Object Oriented Programming 😍
 
 This chapter is all about object oriented programming.
+
 ## Goals Principles and Patterns
 
 As the name implies, the main “actors” in the object-oriented paradigm are called **objects**. Each object is an instance of a class.
 
 The class definition typically specifies instance variables, also known as data members, that the object contains, as well as the methods, also known as member functions, that the object can execute.
+
 ### OOP Design Goals - Why OOP?
 
-#### - Because we want: Robustness, Adaptability and Reusability
+Why is there such approach in programming?
+
+#### Robustness, Adaptability and Reusability
+
+![Figure 2.1](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter2/fig2-1.png){ align=left }
 
 Software implementations should achieve robustness, adaptability, and reusability. These are our goals.
 
-![[img/ds&a-python/fig2.1.png]]
+
 #### 1. Robustness (Availability) 🐍
 
-We want software to be robust, that is, ==capable of handling unexpected inputs== that are not explicitly defined for its application. 
+We want software to be robust, that is, **capable of handling unexpected inputs** that are not explicitly defined for its application. 
 
 For example, if a program is expecting a positive integer (perhaps representing the price of an item) and instead is given a negative integer, then the program should **be able to recover gracefully** from this error. 
 
@@ -34,7 +41,11 @@ We claim that a system is “robust” if it:
 
 Here are some tactics for achieving Robustness:
 
-![[robustness.png]]
+<figure markdown="span">
+  ![Robustness](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter2/robustness.png)
+  <figcaption>This is a solid starting map.</figcaption>
+</figure>
+
 #### 2. Adaptability ♻️
 
 Software, needs to be able to evolve over time in response to changing conditions in its environment.
@@ -44,35 +55,45 @@ Even if the user-centered design process implemented in a project guarantees a c
 The operational environment will change, the tasks will be distinct, end-users will be [heterogeneous](https://en.wikipedia.org/wiki/Heterogeneous "Heterogeneous"), and their competences and expectations will evolve.
 
 What kind of differences can we expect?
+
 ##### Inter-individual differences
 
 Inter-Individual Differences address varieties among several users along manifold dimensions. Physiological characteristics like disabilities are of major concern for application designers if they want to have their system accepted by a large community. 
 
-![[inter_individual_difference.jpg]]
+<figure markdown="span">
+  ![inter_individual_difference](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter2/inter_individual_difference.jpg)
+  <figcaption>Shipping, for everyone.</figcaption>
+</figure>
+
 The consideration of user preferences like language, color schemes, modality of interaction, menu options or security properties, and numberless other personal preferences are popular sources of adaptation and can be reused in different applications.
+
 ##### Intra-individual differences
+
+![Intra Individual Difference](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter2/intra_individual_difference.jpg){ align=right }
 
 Intra-individual differences consider the evolution and further development of a single user, as well as the task over time.
 
-A static system falls short of changing user requirements as the user's activities and goals ==evolve==.
+A static system falls short of changing user requirements as the user's activities and goals **evolve**.
 
 Gotta adapt to your users, use cases, like Airbnb. Do not let your customers be bored.
 
-![[intra_individual_difference.jpg]]
 ##### Environmental differences
 
 Environmental Differences basically result from the mobility of computing devices, applications and people, which leads to highly dynamic computing environments.
 
 Unlike desktop applications, which rely on a carefully configured and largely static set of resources, ubiquitous computing applications are subject to changes in available resources such as network connectivity and input/output devices.
 
-Let's see it. Try to ship for all down below:
+![Environments](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter2/environment.jpeg){ align=right }
 
-![[environment.jpeg]]
+Let's see it. Try to ship for all of these on the right.
 
 Moreover, they are frequently required to cooperate spontaneously and opportunistically with previously unknown software services in order to accomplish tasks on behalf of users. 
+
 #### 3. Reusability 🏂
 
-The same code should be usable as a component of different systems in various applications. Code reusability is the capacity to re purpose pre-existing code when developing new software applications. 
+The same code should be usable as a component of different systems in various applications.
+
+Code reusability is the capacity to re purpose pre-existing code when developing new software applications. 
 
 Ideally, code reuse should be easy to implement, and any stable, functional code could freely be reused when building a new software application.
 
@@ -84,29 +105,35 @@ pip install requests
 
 Simple usage:
 
-```python
+``` py
 import requests 
 url = 'https://www.example.com' 
 response = requests.get(url) 
-if response.status_code == 200: 
+if response.status_code ** 200: 
 	print('Request was successful!') 
 	print('Response content:', response.text) 
 else: 
 	print('Request failed with status code:', response.status_code)
 ```
   
-The `requests` library is highly reusable.
+The `requests` library is highly reusable. 🎉
+
 ### Object-Oriented Design Principles - Concepts
+
+Here are some fundamental concepts about OOP.
 
 #### 1.  Modularity
 
 Modern software systems typically consist of several different components that must interact correctly in order for the entire system to work properly. Keeping these interactions straight requires that these different components be well organized.
 
-Modularity refers to an organizing principle in which different components of ==a software system are divided into separate functional units.==
+Modularity refers to an organizing principle in which different components of **a software system are divided into separate functional units.**
 
 As a real-world analogy, a house or apartment can be viewed as consisting of several interacting units: *electrical*, *heating* and *cooling*, *plumbing*, and *structural*. 
 
-![[systems_of_a_house.jpg]]
+<figure markdown="span">
+  ![Systems in a house](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter2/systems_of_a_house.jpg)
+  <figcaption>Not easy to keep a house in order.</figcaption>
+</figure>
 
 Rather than viewing these systems as one giant jumble of wires, vents, pipes, and boards, the organized architect designing a house or apartment will view them as separate modules that interact in well-defined ways. 
 
@@ -115,17 +142,18 @@ In so doing, he or she is using modularity to bring a clarity of thought that pr
 Modularity helps everything. 
 
 Robustness is greatly increased because it is easier to test and debug separate components before they are integrated into a larger software system.
+
 #### 2. Abstraction
 
 The notion of abstraction is to **distill ( to distill something said or written is to reduce it but keep the most important part) a complicated system down to its most fundamental parts.**
 
 Typically, describing the parts of a system involves naming them and explaining their functionality. Applying the abstraction paradigm to the design of data structures gives rise to abstract data types (ADTs).
 
-An ADT is a ==mathematical model of a data structure== that specifies ==the type of data stored==, the operations supported on them, and the ==types of parameters of the operations.== 
+An ADT is a **mathematical model of a data structure** that specifies **the type of data stored**, the operations supported on them, and the **types of parameters of the operations.** 
 
 An ADT specifies what each operation does, but not how it does it. We will typically refer to the collective set of behaviors supported by an ADT as its public interface.
 
-```python
+``` py title="abstractions.py" linenums="1"
 class Animal:
     def __init__(self, name, age):
         self.name = name
@@ -165,27 +193,28 @@ def print_animal_details(animal):
 lion = Lion("Simba", 3)
 print_animal_details(lion)  # Output: Name: Simba, Age: 3
 ```
-##### Wisdom:
 
-As a programming language, Python provides a great deal of latitude in regard to the specification of an interface. Python has a tradition of treating abstractions implicitly using a mechanism known as duck typing.
+!!! tip
 
-As an interpreted and dynamically typed language, there is ==no “compile time” checking of data types in Python==, and no formal requirement for declarations of abstract base classes. Instead programmers assume that an object supports a set of known behaviors, with the interpreter raising a run-time error if those assumptions fail.
+    As a programming language, Python provides a great deal of latitude in regard to the specification of an interface. Python has a tradition of treating abstractions implicitly using a mechanism known as duck typing.
 
-The description of this as “duck typing” comes from an adage attributed to poet `James Whitcomb Riley`, stating that *“when I see a bird that walks like a duck and swims like a duck and quacks like a duck, I call that bird a duck.”* 
+    As a interpreted and dynamically typed language, there is **no “compile time” checking of data types in Python**, and no formal requirement for declarations of abstract base classes. Instead programmers assume that an object supports a set of known behaviors, with the interpreter raising a run-time error if those assumptions fail.
 
-> Examples of Duck Typing functionality:
-> 
-> Imagine I have a magic wand. It has special powers. If I wave the wand and say **"Drive!"** to a car, well then, it drives!
-> 
-> Does it work on other things? Not sure: so I try it on a truck. Wow - it drives too! I then try it on planes, trains and 1 Woods (they are a type of golf club which people use to 'drive' a golf ball). **They all drive!**
-> 
-> But would it work on say, a teacup? Error: Poof! That didn't work out so good. ====> Teacups can't drive!! duh!?
-> 
-> This is basically the concept of duck typing. It's a _try-before-you-buy_ system. If it works, all is well. But if it fails, like a grenade still in your hand, it's gonna blow up in your face.
-> 
-> In other words, we are interested in what the object _can do_, rather than with _what the object is_.
+    The description of this as “duck typing” comes from an adage attributed to poet `James Whitcomb Riley`, stating that *“when I see a bird that walks like a duck and swims like a duck and quacks like a duck, I call that bird a duck.”* 
 
-![[twoDucks.png]]
+![Two Ducks](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter2/twoDucks.png){ align=right }
+
+Here are some examples of Duck Typing functionality:
+
+Imagine I have a magic wand. It has special powers. If I wave the wand and say **"Drive!"** to a car, well then, it drives!
+
+Does it work on other things? Not sure: so I try it on a truck. Wow - it drives too! I then try it on planes, trains and 1 Woods (they are a type of golf club which people use to 'drive' a golf ball). **They all drive!**
+
+But would it work on say, a teacup? Error: Poof! That didn't work out so good. ====Teacups can't drive!! duh!?
+
+This is basically the concept of duck typing. It's a _try-before-you-buy_ system. If it works, all is well. But if it fails, like a grenade still in your hand, it's gonna blow up in your face.
+
+In other words, we are interested in what the object _can do_, rather than with _what the object is_.
 
 This determines whether an object can be used for a particular purpose. An object's suitability is determined by the presence of certain attributes, rather than by the type of the object itself.
 
@@ -203,7 +232,7 @@ The only constraint on the programmer of a component is to maintain the public i
 Encapsulation yields robustness and adaptability, for it allows the implementation details of parts of a program to change without adversely affecting other parts, thereby making it easier to fix bugs or add new functionality with relatively local changes to a component.
 
  >   - Encapsulation is the bundling of data (attributes) and methods that operate on the data into a single unit (class). 
- >   - It ==restricts direct access to some of the object's components== and can prevent unintended interference.
+ >   - It **restricts direct access to some of the object's components** and can prevent unintended interference.
      - Example: Accessing the `name` attribute through a method (`get_name`) in the `Animal` class.
 
 ```python
@@ -216,7 +245,7 @@ lion = Animal("Leo", 5)
 print(lion.get_name())  # Output: Leo`
 ```
 
-Python provides only loose support for encapsulation.  By convention, names of members of a class (both data members and member functions) that start with a ==single underscore== `_` character (e.g., `_secret`) are assumed to be nonpublic and should not be relied upon. Those conventions are reinforced by the intentional omission of those members from automatically generated documentation.
+Python provides only loose support for encapsulation.  By convention, names of members of a class (both data members and member functions) that start with a **single underscore** `_` character (e.g., `_secret`) are assumed to be nonpublic and should not be relied upon. Those conventions are reinforced by the intentional omission of those members from automatically generated documentation.
 
 In Python, we have `@property` decorator for `getters` and `setters`. Here is an example:
 
@@ -271,7 +300,7 @@ print(cel.temp)
 
 > Inheritance allows a class (subclass or derived class) to inherit the properties and behaviors of another class (super class or base class).  It promotes code reusability.
  
-==Example:== Making a Lion class that inherits from the Animal class. 🐯
+**Example:** Making a Lion class that inherits from the Animal class. 🐯
 
 ```python
 class Lion(Animal):
@@ -412,7 +441,7 @@ Guidelines for authoring useful docstrings are available at: [PEP257](http://www
 
 Testing is the process of experimentally checking the correctness of a program, while debugging is the process of tracking the execution of a program and discovering the errors in it. Testing and debugging are often the most time-consuming activity in the development of a program.
 
-At the very minimum, we should make sure that every method of a class is tested at least once ==(method coverage).== Even better, each code statement in the program should be executed at least once ==(statement coverage).==
+At the very minimum, we should make sure that every method of a class is tested at least once **(method coverage).** Even better, each code statement in the program should be executed at least once **(statement coverage).**
 
 Programs often tend to fail on **special cases of the input**. Such cases need to be carefully identified and tested. For example, when testing a method that sorts (that is, puts in order) a sequence of integers, we should consider the following inputs:
 
@@ -422,11 +451,11 @@ Programs often tend to fail on **special cases of the input**. Such cases need t
 • The sequence is already sorted.
 • The sequence is reverse sorted.
 
-As software is maintained, the act of ==regression testing== is used, whereby all previous tests are re-executed to ensure that changes to the software do not introduce new bugs in previously tested components.
+As software is maintained, the act of **regression testing** is used, whereby all previous tests are re-executed to ensure that changes to the software do not introduce new bugs in previously tested components.
 
-Bottom-up testing proceeds from lower-level components to higher-level components. For example, bottom-level functions, which ==do not invoke other functions, are tested first==, followed by functions that call only bottom-level functions, and soon. 
+Bottom-up testing proceeds from lower-level components to higher-level components. For example, bottom-level functions, which **do not invoke other functions, are tested first**, followed by functions that call only bottom-level functions, and soon. 
 
-Similarly a class that does not depend upon any other classes can be tested before another class that depends on the former. This form of testing is usually described as ==unit testing==, as the functionality of a specific component is tested in isolation of the larger software project. 
+Similarly a class that does not depend upon any other classes can be tested before another class that depends on the former. This form of testing is usually described as **unit testing**, as the functionality of a specific component is tested in isolation of the larger software project. 
 ### Debugging
 
 The simplest debugging technique consists of using `print()`statements to track the values of variables during the execution of the program.
@@ -440,7 +469,7 @@ The standard Python distribution includes a module named `pdb`, which provides d
 
 A `class` serves as the primary means for abstraction in object-oriented programming.
 
-In Python, ==every piece of data is represented as an instance of some class.==
+In Python, **every piece of data is represented as an instance of some class.**
 
 A `class` provides a set of behaviors in the form of member functions (also known as methods), with implementations that are common to all instances of that `class`. 
 
@@ -526,9 +555,9 @@ Beyond the obvious type errors, our implementation may be susceptible to logical
 For example, if a user were allowed to charge a negative price, such as `visa.charge(−300)`, that would serve to lower the customer’s balance. This provides a loophole for lowering a balance without making a payment.
 #### Testing the Class - Method and Statement Coverage
 
-We start by getting to ==**method coverage**== first, meaning every method in the class is at least tested once.
+We start by getting to **method coverage** first, meaning every method in the class is at least tested once.
 
-After that, there should be a ==**statement coverage**==, meaning each code statement in the program should be executed at least once.
+After that, there should be a **statement coverage**, meaning each code statement in the program should be executed at least once.
 
 We can literally put some code in main an look if all the methods are acting accordingly.
 
@@ -674,7 +703,7 @@ print(12 + for1)
 
 As a general rule, if a particular special method is not implemented in a user-defined class, the standard syntax that relies upon that method will raise an exception. For example, evaluating the expression, `a + b`, for instances of a user-defined class without `__add__` or `__radd__` will raise an error. 😮
 
-There are some operators that have default definitions provided by Python, in the absence of special methods, and there are some operators whose ==definitions are derived from others. ==
+There are some operators that have default definitions provided by Python, in the absence of special methods, and there are some operators whose **definitions are derived from others.**
 
 For example, the bool method, which supports the syntax `if foo:`, has default semantics so that every object other than `None` is evaluated as `True`. 
 
@@ -773,7 +802,7 @@ print(next(my_iterator)) # StopIteration
 
 Prior to Python 3, `range` was a function. It returned huge lists. 😮 This was unnecessarily expensive for time and memory usage.
 
-This is solved by ==lazy evaluation.==
+This is solved by **lazy evaluation.**
 
 Rather than creating a new `list` instance, `range` is a class that can effectively represent the desired range of elements without ever storing them explicitly in memory.
 
@@ -830,7 +859,7 @@ In object-oriented terminology, the existing class is typically described as the
 
 There are two ways in which a subclass can differentiate itself from its super-class. 
 
-A subclass may specialize an existing behavior by providing a new implementation that ==overrides== an existing method. A subclass may also ==extend== its super-class by providing brand new methods.
+A subclass may specialize an existing behavior by providing a new implementation that **overrides** an existing method. A subclass may also **extend** its super-class by providing brand new methods.
 
 ![[img/ds&a-python/fig2.5.png]]
 
@@ -878,7 +907,7 @@ class DangerousCreditCard(CreditCard):
 ```
 
 - The `process_month` method is a new behavior, so there is no inherited version upon which to rely.
-- Several object-oriented languages (e.g., Java, C++) draw a distinction for nonpublic members, allowing declarations of protected or private access modes. Members that are declared as ==protected== are accessible to subclasses, but not to the general public, while members that are declared as ==private== are not accessible to either. 
+- Several object-oriented languages (e.g., Java, C++) draw a distinction for nonpublic members, allowing declarations of protected or private access modes. Members that are declared as **protected** are accessible to subclasses, but not to the general public, while members that are declared as **private** are not accessible to either. 
 - In this respect, we are using `_balance` as if it were protected (but not private).
 - Python does not support formal access control, but names beginning with a single underscore `_` are conventionally akin to protected, while names beginning with a double underscore `__` (other than special methods) are akin to private.
 
@@ -1020,9 +1049,9 @@ if __name__ == "__main__" :
 
 The real purpose of the `Progression` class was to centralize the implementations of behaviors that other progressions needed, thereby streamlining the code that is relegated to those subclasses.
 
-In classic object-oriented terminology, we say a class is an ==abstract base class== if its only purpose is to serve **as a base class through inheritance**.
+In classic object-oriented terminology, we say a class is an **abstract base class** if its only purpose is to serve **as a base class through inheritance**.
 
-More formally, an abstract base class is **one that cannot be directly instantiated**, while a concrete class is one that can be instantiated. By this definition, our `Progression` class is technically ==concrete==, although we essentially designed it as an abstract base class.
+More formally, an abstract base class is **one that cannot be directly instantiated**, while a concrete class is one that can be instantiated. By this definition, our `Progression` class is technically **concrete**, although we essentially designed it as an abstract base class.
 
 In statically typed languages such as Java and C++, an abstract base class serves as a formal type that may guarantee one or more abstract methods. This provides support for polymorphism, as a variable may have an abstract base class as its declared type, even though it refers to an instance of a concrete subclass. 
 
@@ -1030,7 +1059,7 @@ In statically typed languages such as Java and C++, an abstract base class serve
 
 Our reason for focusing on abstract base classes in our study of data structures is that Python’s `collections` module provides several abstract base classes that assist when defining custom data structures that share a common interface with some of Python’s built-in data structures. 
 
-These rely on an object-oriented software design pattern known as the ==template method pattern==. The template method pattern is when an abstract base class provides concrete behaviors that rely upon calls to other abstract behaviors. In that way, as soon as a subclass provides definitions for the missing abstract behaviors, the inherited concrete behaviors are well defined. 
+These rely on an object-oriented software design pattern known as the **template method pattern**. The template method pattern is when an abstract base class provides concrete behaviors that rely upon calls to other abstract behaviors. In that way, as soon as a subclass provides definitions for the missing abstract behaviors, the inherited concrete behaviors are well defined. 
 
 Here is an abstract base class akin to `collections.Sequence`:
 
@@ -1096,7 +1125,7 @@ A `metaclass` is different from a `superclass`, in that it provides a template f
 The **second** advanced technique is the use of the `@abstractmethod` decorator immediately before the `__len__` and `__getitem__` methods are declared. That declares these two particular methods to be abstract, meaning that we do not provide an implementation within our `Sequence` base class, but that we expect any concrete subclasses to support those two methods.
 ## Namespaces and Object Orientation
 
-A ==namespace== is an abstraction that manages all of the identifiers that are defined in a particular scope, mapping each name to its associated value. 
+A **namespace** is an abstraction that manages all of the identifiers that are defined in a particular scope, mapping each name to its associated value. 
 
 In Python, functions, classes, and modules are all **first-class objects**, and so the “value” associated with an identifier in a namespace may in fact be a function, class, or module.
 ### Instance and Class Namespaces
@@ -1238,7 +1267,7 @@ Even though Python provides the `global` and `nonlocal` keywords, it’s not
 
 Here is a [wonderful source](https://www.youtube.com/watch?v=Iwf17zsDAnY) if you want to dive deep. 😍
 
-By default, Python represents each namespace with an instance of the built-in `dict` class (see Chapter 1.2.3) that maps identifying names in that scope to the associated objects. While a dictionary structure supports relatively efficient name look ups, it requires ==additional memory usage== beyond the raw data that it stores (we will explore the data structure used to implement dictionaries in Chapter 10).
+By default, Python represents each namespace with an instance of the built-in `dict` class (see Chapter 1.2.3) that maps identifying names in that scope to the associated objects. While a dictionary structure supports relatively efficient name look ups, it requires **additional memory usage** beyond the raw data that it stores (we will explore the data structure used to implement dictionaries in Chapter 10).
 
 Python provides a more direct mechanism for representing instance namespaces that avoids the use of an auxiliary dictionary. 
 
@@ -1264,7 +1293,7 @@ Python interpreter begins a **name resolution** process:
 3. Look up to Inheritance Hierarchy
 4. raise `AttributeError`
 
-In traditional object-oriented terminology, Python uses what is known as **dynamic dispatch** (or dynamic binding) to determine, at run-time, which implementation of a function to call based upon ==the type of the object== upon which it is invoked. This is in contrast to some languages that use static dispatching, making a compile-time decision as to which version of a function to call, based upon the declared type of a variable.
+In traditional object-oriented terminology, Python uses what is known as **dynamic dispatch** (or dynamic binding) to determine, at run-time, which implementation of a function to call based upon **the type of the object** upon which it is invoked. This is in contrast to some languages that use static dispatching, making a compile-time decision as to which version of a function to call, based upon the declared type of a variable.
 ## Shallow and Deep Copying
 
 In Chapter 1, we emphasized that an assignment statement `foo = bar` makes the name foo an `alias` for the object identified as `bar`. In this section, we consider the task of making a copy of an object, rather than an alias.
