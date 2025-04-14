@@ -19,7 +19,9 @@ theme:
     - content.code.copy
     - toc.integrate 
     - navigation.top
-
+    - navigation.path
+    - navigation.footer
+    
   logo: assets/lego.svg
   favicon: assets/lego_favicon.png
 
