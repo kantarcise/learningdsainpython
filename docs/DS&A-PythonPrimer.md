@@ -1,3 +1,8 @@
+---
+hide:
+  - navigation
+---
+
 # Python Primer 🥳
 
 The first chapter is about Python basics.
@@ -142,7 +147,9 @@ This makes it really easy to see if anything has changed.
 
 ### Most Used Classes in Python 😍
 
-#### The `bool` class - `flag = True`
+#### The `bool` Class
+
+Example: `flag = True`
 
 Numbers evaluate to `False` if zero, and `True` if nonzero. Sequences and other container types, such as `strings` and `lists`, evaluate to `False` if empty and `True` if nonempty. 
 
@@ -168,7 +175,9 @@ if not empty_seq:
 	print("You are here because it is empty!")
 ```
 
-#### The `int` class - `my_number = 7`
+#### The `int` Class
+
+Example: `my_number = 7`
 
 The `int` and `float` classes are the primary numeric types in Python.
 
@@ -212,7 +221,9 @@ For example, the expression ```int("137")``` produces the integer value `137`. I
 
 By default, the string must use base 10. If conversion from a different base is desired, that base can be indicated as a second, optional, parameter. For example, the expression ```int("7f", 16)``` evaluates to the integer `127`.
 
-#### The `float` Class - `my_float = 2.347`
+#### The `float` Class
+
+Example: `my_float = 2.347`
 
 The `float` class is the sole floating-point type in Python, using a fixed-precision representation. Its precision is more similar to a `double` in Java or C++, rather than those languages’ `float` type.
 
@@ -271,7 +282,9 @@ this_is_not_a_character_it_is_a_string = "a"
 string_for_bros = "be legendary"
 ```
 
-#### The `list` Class - `my_list = ["a", "b", "c"]`
+#### The `list` Class
+
+Example: `my_list = ["a", "b", "c"]`
 
 A `list` instance stores a sequence of objects. 
 
@@ -330,7 +343,10 @@ Because an existing list is itself iterable, the syntax `backup = list(data)` ca
 ``` py
 prime = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31]
 ```
-#### The `tuple` Class - `any_tuples_here = "?",`
+
+#### The `tuple` Class
+
+Example: `any_tuples_here = "?",`
 
 The `tuple` class provides an immutable version of a sequence, and therefore its instances have an internal representation that may be more streamlined than that of a `list`.
 
@@ -344,7 +360,9 @@ this_is_also_tuple = 3,
 
 The reason for this requirement is that, without the trailing comma, the expression `(17)` alone is viewed as a simple parenthesized numeric expression (which would be an `int`). 😎
 
-#### The `str` Class - `be = "the_spark"`
+#### The `str` Class
+
+Example: `be = "the_spark"`
 
 Python’s `str` class is specifically designed to efficiently represent an immutable sequence of characters, based upon the **Unicode international character set.** 
 
@@ -433,7 +451,9 @@ def reset_accumulated_memory_stats(device: Union[Device, int] = None) -> None:
     return torch._C._cuda_resetAccumulatedMemoryStats(device)
 ```
 
-#### The `set` and the `Frozenset` Classes: `my_set = set([1,2,3])` , `my_cold_set = frozenset((1,3))`
+#### The `set` and the `Frozenset` Classes
+
+Examples: `my_set = set([1,2,3])` , `my_cold_set = frozenset((1,3))`
 
 Python’s `set` class represents the mathematical notion of a `set`, namely a collection of elements, **without duplicates**, and without an inherent order to those elements.
 
@@ -495,7 +515,10 @@ print(s) # {1, 2, 3}
 print(3 in s) # True
 print(4 not in s) # True
 ```
-#### The `dict` Class - `my_dict = {"a" : 1, "b": 2}`
+
+#### The `dict` Class
+
+Example: `my_dict = {"a" : 1, "b": 2}`
 
 Python’s `dict` class represents a dictionary, or mapping, from **a set of distinct keys to associated values.** 
 
@@ -543,7 +566,7 @@ For example, when `a` and `b` are numbers, the syntax `a + b` indicates addition
 
 In this section, we describe Python’s operators in various contexts of the built-in types.
 
-#### Logical Operators:  
+#### Logical Operators  
 
 Python supports the following keyword operators for Boolean values:  
 
@@ -592,13 +615,13 @@ print(a is b) # This is True only when a and b are aliases to same object
 str_1 = "abc"
 str_2 = "abc"
 
-if str_1 ** str_2:
+if str_1 == str_2:
 	print("This is True because these strings considered equivalent, because they match character to character.")
 ```
 
 !!! tip
 
-	**Wisdom:** So in general, we use `**` or `!=` , not identity (Identical objects are also equal but we rarely compare identical objects).
+	**Wisdom:** So in general, we use `==` or `!=` , not identity (Identical objects are also equal but we rarely compare identical objects).
 
 #### Comparison Operators:
 
@@ -615,11 +638,11 @@ Comparison happens lexicographically - Like Oxford Dictionary.
 
 	Comparisons should be between comparable operands.
 
-``` py
-'apple' >= 'apple' # True 
-'apple' >= 'orange' # False 
-'orange' >= 'apple' # True
-```
+	``` py
+	'apple' >= 'apple' # True 
+	'apple' >= 'orange' # False 
+	'orange' >= 'apple' # True
+	```
 
 #### Arithmetic Operators:
 
@@ -637,7 +660,7 @@ Python supports the following arithmetic operators:
 
 !!! tip
 	
-	True division implicitly converts the data type to `float`.
+	True division (/) implicitly converts the data type to `float`.
 
 ``` py
 a = 3
@@ -739,7 +762,7 @@ Back to our topic 🍓
 
 You can use bitwise operators to perform [Boolean logic](https://en.wikipedia.org/wiki/Boolean_algebra) on individual bits. That’s analogous to using logical operators such as `and`, `or`, and `not`, but on a bit level. 
 
-![Bitwise Operators](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/bitwise.jpg)
+![Bitwise Operators](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/bitwise.jpg){ align=right }
 
 Bitwise operators were used a lot more in programming when computers didn’t have as **much memory** in them as they do now.
 
@@ -757,7 +780,11 @@ Python provides the following bitwise operators for integers:
 | `>>`     | shift bits right, filling in with sign bit |
 
 
-**Bitwise And** - `x & 1 == x` for `x == 0 or x== 1` - *And with 1 is bit itself.*
+**Bitwise And:**
+
+Two things to know:
+
+`x & 1 == x` for `x == 0 or x== 1` - *And with 1 is bit itself.*
 
 ``` py
 # Bitwise AND operator 
@@ -783,7 +810,11 @@ g = d & f
 print(g) # 20
 ```
 
-**Bitwise Or** - `x | 0 = x` for `x ** 0 or x ** 1` - *Or with 0 is the number itself.*
+**Bitwise Or:**
+
+Two things to know:
+
+`x | 0 = x` for `x ** 0 or x ** 1` - *Or with 0 is the number itself.*
 
 ``` py
 # Bitwise OR operator
@@ -949,7 +980,9 @@ result = [0] * 4 # [0, 0, 0, 0]
 print(0 in result) # True
 ```
 
-Python uses zero indexing in sequences. Also we can access elements with negative indexes. Index `-1` denotes the last element in a sequence. 🥰
+Python uses zero indexing in sequences. Also we can access elements with negative indexes.
+
+Index `-1` denotes the last element in a sequence. 🥰
 
 Sequences define comparison operations based on lexicographic order, performing an element by element comparison until the first difference is found.
 
@@ -969,7 +1002,7 @@ Sequences define comparison operations based on lexicographic order, performing 
 
 They do not provide order between elements, so comparison is not lexicographic. **No orders here**.
 
-Also there is no slicing for `[]` sets. `Sets` and `frozensets` support the following operators:  
+Also there is no slicing for sets. `Sets` and `frozensets` support the following operators:  
 
 | operator       | meaning                                         |
 | -------------- | ----------------------------------------------- |
@@ -1026,7 +1059,7 @@ hset.discard(7) # does not give an error even though 7 is not in the set
 
 ##### Dictionaries
 
-Do not maintain a well defined order on their elements. $O(1)$ access to elements. 😍
+Do not maintain a well defined order on their elements. O(1) access to elements. 😍
 
 | operator         | meaning                                             |
 | ---------------- | --------------------------------------------------- |
@@ -1076,7 +1109,7 @@ print(beta) # [1, 2, 3, 4, 5, 6, 7]
 ```
 ##### Operator Precedence
 
-Programming languages must have clear rules for the order in which compound expressions, such as $5 + 2 * 3$, are evaluated.
+Programming languages must have clear rules for the order in which compound expressions, such as (5 + 2 * 3), are evaluated.
 
 Higher precedence will be executed first.
 
@@ -1103,9 +1136,13 @@ Higher precedence will be executed first.
 
 ## Control Flow 🌠
 
+Now let's discover the control flow 🎶
+
 ### Conditionals
 
-Most fundamental control structures are conditional statements and loops. The colon character `:` is used to delimit the beginning of a block of code that acts as a body for a control structure. 
+Most fundamental control structures are conditional statements and loops.
+
+The colon character `:` is used to delimit the beginning of a block of code that acts as a body for a control structure. 
 
 If the body can be stated as a single executable statement, it can **technically be placed on the same line**, to the right of the colon.
 
@@ -1134,6 +1171,7 @@ Python offers two distinct looping constructs.
 A **`while`**  loop allows general repetition based upon the repeated testing of a Boolean condition. 
 
 A **`for`**  loop provides convenient iteration of values from a defined series (such as characters of a string, elements of a list, or numbers within a given range).
+
 #### While loops - Use when not sure of the loop count
 
 ```python
@@ -1163,11 +1201,12 @@ The execution of a while loop begins with a test of the Boolean condition. If th
 After each execution of the body, the loop condition is retested, and if it evaluates to `True`, another iteration of the body is performed.
 
 When the conditional test evaluates to `False` (assuming it ever does), the loop is exited and the flow of control continues just beyond the body of the loop.
+
 #### For loops - Use when a specific limit is apparent
 
 Python’s for-loop syntax is a more convenient alternative to a while loop when iterating through a series of elements.
 
-The for-loop syntax can be used on any type of **iterable** structure, such as a `list`, `tuple`, `str`, `set`, `dict`, or `file` (we will discuss iterators more formally in Chapter 1.8). 
+The for-loop syntax can be used on any type of **iterable** structure, such as a `list`, `tuple`, `str`, `set`, `dict`, or `file` (we will discuss iterators more formally in Chapter 1.8). 😌
 
 Its general syntax appears as follows.
 
@@ -1179,7 +1218,7 @@ for element in iterable:
 
 ```python 
 # for loop
-for j in range(len(data)):  
+for j in range(len(data)):
 	print(j)
 ```
 
@@ -1188,13 +1227,16 @@ In this case, identifier `j` is not an element of the data—it is an integer. B
 For example, we can find the index of the maximum element of a list as follows:  
 
 ```python
-big_index = 0  
-for j in range(len(data)):  
-	if data[j] > data[big_index]:  
+big_index = 0
+for j in range(len(data)):
+	if data[j] > data[big_index]:
 		big_index = j
 ```
-### Break and Continue Statements  
-Python supports a **break** statement that immediately terminate a while or for loop when executed within its body. More formally, if applied within nested control structures, it causes the termination of the most immediately enclosing loop. 
+### Break and Continue Statements
+
+Python supports a **break** statement that immediately terminate a while or for loop when executed within its body.
+
+More formally, if applied within nested control structures, it causes the termination of the most immediately enclosing loop. 
 
 As a typical example, here is code that determines whether a target value occurs in a data set:
 
@@ -1215,7 +1257,7 @@ for i in range(6):
 	print(i, end = " ")  # 1 3 5
 ```
 
-## Functions
+## Functions 🥰
 
 There are functions and methods. We begin with an example to demonstrate the syntax for defining functions in Python.
 
@@ -1239,6 +1281,7 @@ The namespace includes the function’s parameters and any other identifiers tha
 An identifier in the local scope of the function caller has no relation to any identifier with the same name in the caller’s scope (although identifiers in different scopes may be aliases to the same object). 
 
 In our first example, the identifier $n$ has scope that is local to the function call, as does the identifier item, which is established as the loop variable.
+
 ### Return Statement
 
 A `return` statement is used within the body of a function to indicate that the function should immediately cease execution, and that an expressed value should be returned to the caller. 
@@ -1262,11 +1305,12 @@ We can add type hints to our functions to help with this.
 This is done by adding a colon, an optional space, and a data type to a parameter like `dollar_amount: float` .
 
 The `return` type is indicated with a hyphen, a greater than sign, and data type before the colon at the end of the signature line. `-> str`.
+
 ### Documentation in Functions
 
 We gotta use dostrings for fellow humans, and ourselves.
 
-```python
+``` py
 def dollar_to_euro_with_default(dollar_amount: float, 
 								conversion_rate: float = 0.93) -> float:
     """
@@ -1280,11 +1324,12 @@ def dollar_to_euro_with_default(dollar_amount: float,
          euro_amount (float): Euro equivalent of Dollar amount based on conversion rate
          """
     euro_amount = dollar_amount * conversion_rate
-    return euro_amount```
+    return euro_amount
+```
 
 These are special, because we can run the following thanks to docstrings: 
 
-```python
+``` py
 help(dollar_to_euro_with_default)
 # this is not dollar_to_euro_with_default()
 # because we are NOT calling the function, we are referencing the function itself
@@ -1295,9 +1340,9 @@ In the context of a function signature, the identiﬁers used to describe the ex
 
 Parameter passing in Python follows the semantics of the standard assignment statement. 
 
-**When a function is invoked, each identiﬁer that serves as a formal parameter is assigned, in the function’s local scope, to the respective actual parameter that is provided by the caller of the function.**
+**When a function is invoked, each identifier that serves as a formal parameter is assigned, in the function’s local scope, to the respective actual parameter that is provided by the caller of the function.**
 
-```python
+``` py
 def sum_of_ints(a: int, b: int, c: int): -> int
 	return (a + b + c)
 
@@ -1308,14 +1353,17 @@ sum_of_ints(1, 3, 4)
 ```
 
 An advantage to Python’s mechanism for passing information to and from a function is that objects are not copied. This ensures that the invocation of a function is efﬁcient, even in a case where a parameter or return value is a complex object.
-#### Pass By Value or Pass By Reference? 
+
+#### Pass By Value or Pass By Reference?
+
+You will hear this on different programming languages too. Let's discover what it means. 🐑
 
 ##### **Immutable Objects (Pass by Value-Like):**
 
 - For immutable objects like `integers`, `floats`, `strings`, and `tuples`, Python behaves in a way that is similar to **"pass by value"** in other languages.
 - When you pass an immutable object to a function, a copy of the object's value is passed, and modifications made inside the function do not affect the original object.
 
-```python
+``` py
 def modify_value(x):
 	x += 1
 	print("Inside function:", x)
@@ -1327,12 +1375,13 @@ print("Outside function:", num)`
 # Inside function: 6 
 # Outside function: 5
 ```
+
 ##### **Mutable Objects (Pass by Reference-Like):**
 
 - For mutable objects like `lists` and `dictionaries`, Python behaves in a way that is more like **"pass by reference."**
 - When you pass a mutable object to a function, you are passing a reference to the original object. Modifications made inside the function are visible outside, as both the function and the caller are working with the same object.
 
-```python
+``` py
 def modify_list(my_list):
     my_list.append(42)
 
@@ -1341,8 +1390,10 @@ modify_list(original_list)
 print(original_list) # [1, 2, 3, 42]
 ```
 
-**Wisdom:**
-In Python is that when you pass an object to a function, you are **passing a reference to that object.** For mutable objects, changes made inside the function are visible outside. For immutable objects, the behavior is similar to passing by value because modifications inside the function don't affect the original object.
+!!! tip
+	
+	In Python is that when you pass an object to a function, you are **passing a reference to that object.** For mutable objects, changes made inside the function are visible outside. For immutable objects, the behavior is similar to passing by value because modifications inside the function don't affect the original object.
+
 #### Default Parameter Values
 
 Python provides means for functions to support more than one possible calling signature. Such a function is said to be **polymorphic** (which is Greek for “many forms”). 
@@ -1359,11 +1410,14 @@ An invocation of `foo(5)` indicates that `a=5,` while `b` and `c` are assigned t
 Python supports an alternate mechanism for sending a parameter to a function known as a keyword argument. 
 
 A keyword argument is speciﬁed by explicitly assigning an actual parameter to a formal parameter by name. For example, with the above deﬁnition of function foo, a call `foo(c=5)` will invoke the function with parameters `a=10, b=20, c=5`.
+
 ### Special Methods - Dunders For Classes:
 
-You can do magical things with it.
+They are methods with double underscores before and after their name — like `__init__`, `__str__`, `__len__`.
 
-```python
+📛 That’s why they’re called dunders = "double underscores". You can do magical things with it.
+
+``` py
 class Watch:
     def __init__(self, data):
         self.data = data
@@ -1423,7 +1477,7 @@ print(watch1 != watch2)  # Output: False
 ```
 ### Python’s Built-In Functions
 
-Here are -almost- all the built in functions in Python.
+Here are almost all the built in functions in Python. You can use this as a reference.
 
 | Common Built-In Functions        |                                                                                                                                                         |
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1469,7 +1523,7 @@ Here are -almost- all the built in functions in Python.
 | `vars(object)`                   | Return the `__dict__` attribute for a module, class, instance, or any other object with a `__dict__` attribute.                                         |
 | `zip(iterables, strict = False)` | Iterate over several iterables in parallel, producing tuples with an item from each one.                                                                |
 
-```python
+``` py title="discover_functions.py" linenums="1"
 """Function workout"""
 
 print(abs(-76.98)) # 76.98
@@ -1557,7 +1611,7 @@ print(next(myiterator)) # cherry
 
 Continuing from `__iter__`:
 
-```python
+``` py title="discover_more_functions.py" linenums="1"
 """Function workout"""
 
 my_seq = { "2", "5", "7"}
@@ -1606,7 +1660,7 @@ min(list_of_strings, key = len) # f
 
 Continuing from `min()`:
 
-```python
+``` py title="discover_even_more_functions.py" linenums="1"
 # next(_iterable_, _default_)
 
 # this is an iterator
@@ -1643,7 +1697,7 @@ with open("hello.txt") as my_file:
 
 Continuing from `with`:
 
-```python
+``` py title="functions_extended.py" linenums="1"
 ord(char) # Return the Unicode code point of the given character.
 print(ord("1")) # 49
 print(ord("a")) # 97
@@ -1706,15 +1760,23 @@ myc = C()
 print(vars(myc)) # {'_x': None, '_C__y': 2}
 ```
 
-These were all for now. For even more check the [official documentation](https://docs.python.org/3/library/functions.html) 💕 
+These might be useful to understand the basics. 
+
+For even more examples check the [official documentation](https://docs.python.org/3/library/functions.html) 💕 
 
 ## Simple I/0 🤔
+
+Programs are part of a bigger system — and sometimes, that means interacting directly with the user.
 
 ### Console I/O
 
 The primary means for acquiring information from the user console is a built-in function named `input()`.
 
-`input()` is always a string. `print()` has a lot of cools stuff. One of them is f-strings.
+`input()` is always a string.
+
+We've also seen the `print()` function.
+
+`print()` has a lot of cools stuff. One of them is f-strings.
 
 •  By default, the `print` function inserts a separating space into the output between each pair of arguments. You can change this with `sep` argument.
 
@@ -1724,7 +1786,7 @@ For example, colon separated output can be produced as `print(a, b, c, sep = ":"
 
 • By default, the `print` function sends its output to the standard console. However, output can be directed to a ﬁle by indicating an output ﬁle stream (see Chapter 1.6.2) using ﬁle as a keyword parameter.
 
-```python
+``` py
 reply = input("Enter x and y, separated by spaces:" )
 pieces = reply.split()  # returns a list of strings, as separated by spaces
 x = float(pieces[0])
@@ -1733,17 +1795,18 @@ y = float(pieces[1])
 
 Printing to a File:
 
-```python
+``` py
 import os
 
 with open(f"{os.getcwd()}/test.txt", 'w') as f:
     print('This message will be written to a file.', file=f, end="")
 ```
+
 ### Files
 
 Files are typically accessed in Python beginning with a call to a built-in function, named open, that returns a proxy for interactions with the underlying file. For example, the command, `fp = open( sample.txt )`, attempts to open a file named `sample.txt`, returning a proxy that allows read-only access to the text file.
 
-The open function accepts an optional second parameter that determines the access mode. The default mode is `r` for reading. Other common modes are `w` for writing to the file (causing any existing file with that name to be overwritten), or `a` for appending to the end of an existing file. Although we focus on use of text files, it is possible to work with binary files, using access modes such as `rb` or `wb`.
+The `open` function accepts an optional second parameter that determines the access mode. The default mode is `r` for reading. Other common modes are `w` for writing to the file (causing any existing file with that name to be overwritten), or `a` for appending to the end of an existing file. Although we focus on use of text files, it is possible to work with binary files, using access modes such as `rb` or `wb`.
 
 |Calling Syntax|Description |
 | - | -  |
@@ -1758,7 +1821,7 @@ The open function accepts an optional second parameter that determines the acces
 |`fp.writelines(seq)` |Write each of the strings of the given sequence at the current position of the writable file. This command does not insert any newlines, beyond those that are embedded in the strings.|
 |`print(..., file=fp)` |Redirect output of print function to the file.|
 
-```python
+``` py
 # this will only print 1 line
 with open("readme.md") as f:
 	i = 0
@@ -1787,6 +1850,8 @@ with open("readme.md", 'r') as i_file:
 
 ## Exception Handling
 
+Even well-written programs can run into unexpected problems — exception handling lets us deal with them gracefully.
+
 ### Common Exception Types
 
 Exceptions are unexpected events that occur during the execution of a program. An exception might result from a logical error or an unanticipated situation. 
@@ -1807,12 +1872,14 @@ In Python, exceptions (also known as errors) are objects that are raised (or thr
 | `TypeError` | Raised when wrong type of parameter is sent to function | 
 | `ValueError` | Raised when paramater has invalid value (eg, `sqrt(-5)`..) |
 | `ZeroDivisionError` | Raised when any division operator used with 0 as divisor |
+
 ### Raising an Exception
 
 An exception is thrown by executing the raise statement, with an appropriate instance of an exception class as an argument that designates the problem. 
 
 For example, if a function for computing a square root is sent a negative value as a parameter, it can raise an exception with the command:
-```python
+
+``` py
 raise ValueError("x cannot be negative ")
 ```
 
@@ -1822,7 +1889,7 @@ If this exception is not caught within the body of the function, the execution o
 
 If the code you are using under the hood already catches exceptions, you do not have to error check everywhere:
 
-```python
+``` py
 # no need
 def sum(values):
 	if not isinstance(values, collections.Iterable)
@@ -1853,7 +1920,7 @@ def sum(values):
 
 Ask for forgiveness, not permission.
 
-```python 
+``` py
 try: 
 	ratio = x / y
 except ZeroDivisionError:
@@ -1862,7 +1929,7 @@ except ZeroDivisionError:
 
 You can catch more than 1 Exceptions:
 
-```python
+``` py
 try:
 	# some code
 	pass
@@ -1876,7 +1943,7 @@ For this reason, the `try-except` clause is best used when there is reason to be
 
 What if you ABSOLUTELY have to get an age from the user?
 
-```python
+``` py
 age = -1
 while age <= 0:
 	try:
@@ -1889,11 +1956,13 @@ while age <= 0:
 
 ## Iterators and Generators
 
+They let you loop through data efficiently — one item at a time, just when you need it.
+
 ### Iterables and Iterators
 
 Basic container types, such as **`list`, `tuple`, and `set`, qualify as iterable** types.
 
-```python
+``` py
 for element in iterable:
 	pass
 ```
@@ -1902,6 +1971,7 @@ for element in iterable:
 - An iterable is an object, obj, that produces an iterator via the syntax `iter(obj)`.
 
 By these definitions, an instance of a list is an iterable, but not itself an iterator.
+
 ### Lazy Evaluation
 
 Python also supports functions and classes that produce an implicit iterable series of values, that is, without constructing a data structure to store all of its values at once. 
@@ -1909,18 +1979,20 @@ Python also supports functions and classes that produce an implicit iterable ser
 For example, the call `range(1000000)` does not return a list of numbers; it returns a range object that is iterable. It is widely used in Python libraries.
 
 For example, the dictionary class supports methods `keys()`, `values()`, and `items()`, which respectively produce a “view” of all keys, values, or (key,value) pairs within a dictionary.
+
 #### **Why does it matter?**
 
 In the case of range, it allows a loop of the form, for` j in range(1000000):` to execute without setting aside memory for storing one million values.
 
 Also, if such a loop were to be interrupted in some fashion, no time will have been spent computing unused values of the range.
+
 ### Generators
 
 The most convenient technique for creating iterators in Python is through the use of generators.
 
 A generator is implemented with a syntax that is very similar to a function, but instead of returning values, a yield statement is executed to indicate each element of the series.
 
-```python
+``` py
 def factors(n):
 	results = []
 	for k in range(1, n+1):
@@ -1939,13 +2011,17 @@ Notice use of the keyword `yield` rather than return to indicate a result. This 
 
 It is illegal to combine `yield` and `return` statements in the same implementation, other than a zero-argument `return` statement to cause a generator to end its execution.
 
-Wisdom: In closing, we wish to emphasize the benefits of lazy evaluation when using a generator rather than a traditional function. The results are only computed if requested, and the entire series need not reside in memory at one time.
+!! tip
+
+	In closing, we wish to emphasize the benefits of lazy evaluation when using a generator rather than a traditional function. The results are only computed if requested, and the entire series need not reside in memory at one time.
 
 ## Additional Python Conveniences 🥰
 
+Here are a few extra features you might bump into.
+
 ### Conditional Expressions - Tenary
 
-```python
+``` py
 test if a else test_2 # tenary operator
 
 # In C++. 
@@ -1953,9 +2029,10 @@ test if a else test_2 # tenary operator
 condition ? expr1 : expr2
 """
 ```
+
 ### Comprehensions 💯
 
-```python
+``` py
 [ expression for value in iterable if condition ]
 
 # example
@@ -1966,22 +2043,24 @@ factors = [k for k in range(1,n+1) if n % k ** 0]
 ( k*k for k in range(1, n+1) ) # generator comprehension
 { k : k*k for k in range(1, n+1) } # dictionary comprehension
 ```
+
 ### Packing and Unpacking Sequences
 
-```python
+``` py
 data = 2, 4, 6, 8
 print(data) # (2, 4, 6, 8) 
 print(type(data))# <class 'tuple'>
 ```
 
-As a dual to the packing behavior, Python can automatically unpack a sequence, allowing one to assign a series of individual identifiers to the elements of sequence. As an example, we can write 
+As a dual to the packing behavior, Python can automatically unpack a sequence, allowing one to assign a series of individual identifiers to the elements of sequence.
+
+As an example, we can write: 
+
 `a, b, c, d = range(7, 11)`
 
 which has the effect of assigning `a=7, b=8, c=9, and d=10`, as those are the four values in the sequence returned by the call to `range`. 
 
-Classic:
-
-```python
+``` py
 quotient, remainder = divmod(a, b)
 
 mapping = {"a": 2, "b": 3}
@@ -1995,9 +2074,10 @@ for elem in mapping.items():
 	print(elem) # ('a', 2)
 	print(type(elem)) # <class 'tuple'>
 ```
+
 ### Simultaneous **Assignments**
 
-```python
+``` py
 x, y, z = 6, 2, 5
 
 # This will swap values
@@ -2013,7 +2093,7 @@ The unnamed tuple representing the packed values on the right-hand side implicit
 
 ## Scopes and Namespaces
 
-When computing a sum with the syntax x + y in Python, the names x and y must have been previously associated with objects that serve as values; a `NameError` will be raised if no such definitions are found. 
+When computing a sum with the syntax `x + y` in Python, the names `x` and `y` must have been previously associated with objects that serve as values; a `NameError` will be raised if no such definitions are found. 
 
 The process of determining the value associated with an identifier is known as **name resolution.**
 
@@ -2025,11 +2105,12 @@ Assignments made within the body of a function typically have scope that is **lo
 
 Therefore, an assignment, x = 5, within a function has no effect on the identifier, x, in the broader scope.
 
-![[fig1.8.png]]
+![Figure 1.8](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/fig1-8.png)
 
 The function, `dir()`, reports the names of the identifiers in a given namespace (i.e., the keys of the dictionary), while the function, `vars()`, returns the full dictionary. 
 
 By default, calls to `dir()` and `vars()` report on the most locally enclosing namespace in which they are executed.
+
 #### First Class Objects
 
 In the terminology of programming languages, first-class objects are instances of a type that can be assigned to an identifier, passed as a parameter, or returned by a function. 
@@ -2038,7 +2119,7 @@ All of the data types we introduced in this section, such as int and list, are c
 
 For example, we could write the following:
 
-```python
+``` py
 scream = print # assign name ’scream’ to the function denoted as ’print’
 scream("Hello") #  call that function
 
@@ -2063,7 +2144,7 @@ While the built-in namespace includes a few mathematical functions (e.g., `abs`,
 
 Python’s import statement loads definitions from a module into the current namespace. One form of an import statement uses a syntax such as the following:
 
-```python
+``` py
 from math import pi, sqrt
 
 # for whole module
@@ -2073,7 +2154,9 @@ import math
 To make a new module, one simply has to put the relevant definitions in a file named with a `.py` suffix. Those definitions can be imported from any other `.py` file within the same project directory. 
 
 For example, if we were to put the definition of our count function (see Chapter 1.5) into a file named `utility.py`, we could import that function using the syntax, `from utility import count`.
+
 ### Existing Modules
+
 | Module Name   | Description                                                                                    |
 | ------------- | ---------------------------------------------------------------------------------------------- |
 | `array`       | Provides compact array storage for primitive types.                                            |
@@ -2086,6 +2169,7 @@ For example, if we were to put the definition of our count function (see Chapter
 | `re`          | Provides support for processing regular expressions.                                           |
 | `sys`         | Provides additional level of interaction with the Python interpreter.                          |
 | `time`        | Provides support for measuring time, or delaying a program.                                    |
+
 ### Pseudo-Random Number Generation
 
 Python’s random module provides the ability to generate pseudo-random numbers, that is, numbers that are statistically random (but not necessarily truly random).
@@ -2107,6 +2191,14 @@ All of the methods supported by the Random class are also supported as stand-alo
 | `choice(seq)`                  | Returns an element of the given sequence chosen pseudo-randomly.                          |
 | `shuffle(seq)`                 | Reorders the elements of the given sequence pseudo-randomly.                              |
 
-## Cool Printing - [colorprint](https://stackoverflow.com/a/39452138)
+## Cool Printing
 
-Let's move on to discover about Object Oriented Programming.
+If you want to print with style, you can check out [colorprint](https://stackoverflow.com/a/39452138)
+
+## End of Chapter 1
+
+Congratulations! 🥳
+
+You’ve already uncovered a good amount of Python basics. In the upcoming chapters, we’ll build on what you’ve learned here.
+
+Let’s move on and dive into the world of Object-Oriented Programming. 💎
