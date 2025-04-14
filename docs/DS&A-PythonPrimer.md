@@ -27,17 +27,17 @@ Plain C will not work.  😮
 
 ![Figure 0.2](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/fig0-2.png){ align=right }
 
-> An interpreted language uses a software called interpreter to translate the original message into the “computer language”, much like a real life interpreter would translate somebody’s Portuguese speech into English in real time.
+An **interpreted** language uses a software called interpreter to translate the original message into the “computer language”, much like a real life interpreter would translate somebody’s Portuguese speech into English in real time.
 
 ![Figure 0.4](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/fig0-4.png)
 
-> A compiled language uses a software called compiler that **translates** the original message and saves it to another file. You can imagine that the compiler would be the person creating subtitles for a speech.
+A **compiled** language uses a software called compiler that **translates** the original message and saves it to another file. You can imagine that the compiler would be the person creating subtitles for a speech.
 
 ![Figure 0.3](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/fig0-3.png){ align=right }
 
-> The interpreter might come up with the translated message first, as he’s translating in real time, but if he’s asked to translate it again, he’ll have to **redo the work every time.**
-> 
-> The compiler on the other hand already did that work, and won’t have to repeat it since he saved it to a file. Also, it’s a lot easier for the compiler to optimize the message and make it more understandable to the computer, as he won’t need to hear the entire original message again.
+The interpreter might come up with the translated message first, as he’s translating in real time, but if he’s asked to translate it again, he’ll have to **redo the work every time.**
+
+The compiler on the other hand already did that work, and won’t have to repeat it since he saved it to a file. Also, it’s a lot easier for the compiler to optimize the message and make it more understandable to the computer, as he won’t need to hear the entire original message again.
 
 Here are the Python Internal Workings:
 
@@ -186,8 +186,6 @@ The `int` class is designed to represent integer values with arbitrary magnitude
 Unlike Java and C++, which support different integral types with different precision (e.g., `int`, `short`, `long`), Python **automatically chooses** the internal representation for an integer based upon the magnitude of its value.
 
 Typical literals for integers include ``0, 137, and −23.``
-
-![Figure 0.5](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/fig0-5.jpg)
 
 <figure markdown="span">
   ![Figure 0.5](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/fig0-5.jpg)
@@ -393,7 +391,10 @@ str_with_backslash = 'Don\'t stop'
 
 Because the backslash has this purpose, the backslash must itself be escaped to occur as a natural character of the string literal, as in ``'C:\\Python\\'`` , for a string that would be displayed as `C:\Python\`. 
 
-![Jerry Strings](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/jerry_Strings.jpg)
+<figure markdown="span">
+  ![Jerry Strings](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/jerry_Strings.jpg)
+  <figcaption>Let's be patient Jerry!</figcaption>
+</figure>
 
 Other commonly escaped characters are `"\n"` for newline and `"\t"` for tab. 
 
@@ -542,7 +543,7 @@ A nonempty dictionary is expressed using a comma-separated series of `key:value`
 
 For example, the dictionary ```{ "ga" : "Irish" , "de" : "German" }``` maps `"ga"` to Irish and `"de"` to German.
 
-![Hashmaps](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/hashmaps.jpg)
+![Hashmaps](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/hashmaps.jpg){ align=right }
 
 The constructor for the `dict` class accepts an existing mapping as a parameter, in which case it creates a new dictionary with identical associations as the existing one. 
 
@@ -2110,7 +2111,7 @@ Assignments made within the body of a function typically have scope that is **lo
 
 Therefore, an assignment, x = 5, within a function has no effect on the identifier, x, in the broader scope.
 
-![Figure 1.8](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/fig1-8.png)
+![Figure 1-8](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter1/fig1-8.png){ align=right }
 
 The function, `dir()`, reports the names of the identifiers in a given namespace (i.e., the keys of the dictionary), while the function, `vars()`, returns the full dictionary. 
 
