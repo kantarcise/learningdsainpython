@@ -124,7 +124,7 @@ $$
 x = log_b(n) \leftrightarrow b^x = n
 $$
 
-```  title="binary_search.py" linenums="1"
+``` py title="binary_search.py" linenums="1"
 def binary_search(collection: list, target: int) -> int:
 	"""Return the index of a target number in 
 	non decreasing collection. If target is not in the
