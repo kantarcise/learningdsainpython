@@ -572,7 +572,7 @@ class CreditCard:
         self._balance -= amount
 ```
 
-#### The Constructor
+### The Constructor
 
 Internally, object making in Python first involves a call to the special `__new__` method, which is the actual constructor. 
 
@@ -586,7 +586,7 @@ Internally, this results in a call to the specially named `__init__` method that
 
 It's primary responsibility is to establish the state of a newly made `CreditCard` object with appropriate instance variables.
 
-#### Encapsulation in Class
+### Encapsulation in Class
 
 A single leading underscore in the name of a data member, such as `_balance`, implies that it is intended as nonpublic. **Users of a class should not directly access such members.**
 
@@ -910,9 +910,13 @@ print(range3) # A Range with 4 elements starting from 0 with 3 as step size
 ```
 
 ## Inheritance
+
 A natural way to organize various structural components of a software package is in a hierarchical fashion:
 
-![[img/ds&a-python/fig2.4.png]]
+<figure markdown="span">
+  ![Inheritance](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter2/fig2-4.png)
+  <figcaption>A simple approach.</figcaption>
+</figure>
 
 In object-oriented programming, the mechanism for a modular and hierarchical organization is a technique known as **inheritance**.
 
@@ -922,13 +926,18 @@ There are two ways in which a subclass can differentiate itself from its super-c
 
 A subclass may specialize an existing behavior by providing a new implementation that **overrides** an existing method. A subclass may also **extend** its super-class by providing brand new methods.
 
-![[img/ds&a-python/fig2.5.png]]
+<figure markdown="span">
+  ![Exceptions](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter2/fig2-5.png)
+  <figcaption>Inheritance built in.</figcaption>
+</figure>
 
 Here is an example of a Extended class.
 
-The body of our new constructor relies upon making a call to the inherited constructor to perform most of the initialization (in fact, everything other than the recording of the percentage rate). The mechanism for calling the inherited constructor relies on the syntax, `super()`:
+The body of our new constructor relies upon making a call to the inherited constructor to perform most of the initialization (in fact, everything other than the recording of the percentage rate).
 
-```python
+The mechanism for calling the inherited constructor relies on the syntax, `super()`:
+
+``` py  title="dangerous_credit_card.py" linenums="1"
 class DangerousCreditCard(CreditCard):
     """ An extention to the Credit Card that has compound interest and fees
     
@@ -970,17 +979,17 @@ class DangerousCreditCard(CreditCard):
 - The `process_month` method is a new behavior, so there is no inherited version upon which to rely.
 - Several object-oriented languages (e.g., Java, C++) draw a distinction for nonpublic members, allowing declarations of protected or private access modes. Members that are declared as **protected** are accessible to subclasses, but not to the general public, while members that are declared as **private** are not accessible to either. 
 - In this respect, we are using `_balance` as if it were protected (but not private).
-- Python does not support formal access control, but names beginning with a single underscore `_` are conventionally akin to protected, while names beginning with a double underscore `__` (other than special methods) are akin to private.
+- Python does not support formal access control, but names beginning with a single underscore `_` are conventionally similar to protected, while names beginning with a double underscore `__` (other than special methods) are similar to private.
 
 ```python
 class Members:
 	def __init__(self, a, b, c):
-		# this is a akin to public member
+		# this is a similar to public member
 		self.a = a
-		# this is a akin to protected member
+		# this is a similar to protected member
 		self._b = b
 		
-		# this is akin to private member
+		# this is similar to private member
 		self.__c = c
 
 mem = Members(1,2,3)
@@ -992,13 +1001,15 @@ print(mem._Members__c) # 3
 
 Here is an another example of inheritance based on some iterators
 
-				 ---- > ArithmeticProgression
-			    |
-` Progression --`  `|`
-				`|`
-				 `---- > GeometricProgression`
+```
+				    ---- > ArithmeticProgression
+			        |
+` Progression ------|
+				    |
+				    ---- > GeometricProgression
+```
 
-```python
+``` py title="progressions.py" linenums="1"
 class Progression:
     """Iterator producing a generic progression
     
@@ -1106,13 +1117,14 @@ if __name__ == "__main__" :
     FibonacciProgression(4, 6).print_progression(10)
     # 4 6 10 16 26 42 68 110 178 288
 ```
+
 ### Abstract Base Classes
 
 The real purpose of the `Progression` class was to centralize the implementations of behaviors that other progressions needed, thereby streamlining the code that is relegated to those subclasses.
 
 In classic object-oriented terminology, we say a class is an **abstract base class** if its only purpose is to serve **as a base class through inheritance**.
 
-More formally, an abstract base class is **one that cannot be directly instantiated**, while a concrete class is one that can be instantiated. By this definition, our `Progression` class is technically **concrete**, although we essentially designed it as an abstract base class.
+More formally, an abstract base class is **one that cannot be directly instantiated**, while a concrete class is one that can be instantiated. By this definition, our `Progression` class is technically **concrete**, although we essentially designed it as an abstract base class. 🥰
 
 In statically typed languages such as Java and C++, an abstract base class serves as a formal type that may guarantee one or more abstract methods. This provides support for polymorphism, as a variable may have an abstract base class as its declared type, even though it refers to an instance of a concrete subclass. 
 
@@ -1120,11 +1132,13 @@ In statically typed languages such as Java and C++, an abstract base class serve
 
 Our reason for focusing on abstract base classes in our study of data structures is that Python’s `collections` module provides several abstract base classes that assist when defining custom data structures that share a common interface with some of Python’s built-in data structures. 
 
-These rely on an object-oriented software design pattern known as the **template method pattern**. The template method pattern is when an abstract base class provides concrete behaviors that rely upon calls to other abstract behaviors. In that way, as soon as a subclass provides definitions for the missing abstract behaviors, the inherited concrete behaviors are well defined. 
+These rely on an object-oriented software design pattern known as the **template method pattern**. 
 
-Here is an abstract base class akin to `collections.Sequence`:
+The template method pattern is when an abstract base class provides concrete behaviors that rely upon calls to other abstract behaviors. In that way, as soon as a subclass provides definitions for the missing abstract behaviors, the inherited concrete behaviors are well defined. 
 
-```python
+Here is an abstract base class similar to `collections.Sequence`:
+
+```  py title="sequence.py" linenums="1"
 from abc import ABCMeta, abstractmethod
 
 class Sequence(metaclass=ABCMeta):
@@ -1183,13 +1197,14 @@ class.
 
 A `metaclass` is different from a `superclass`, in that it provides a template for the `class` definition itself. Specifically, the `ABCMeta` declaration assures that the constructor for the class raises an error.
 
-The **second** advanced technique is the use of the `@abstractmethod` decorator immediately before the `__len__` and `__getitem__` methods are declared. That declares these two particular methods to be abstract, meaning that we do not provide an implementation within our `Sequence` base class, but that we expect any concrete subclasses to support those two methods.
+The **second** advanced technique is the use of the `@abstractmethod` decorator immediately before the `__len__` and `__getitem__` methods are declared. That declares these two particular methods to be abstract, meaning that we do not provide an implementation within our `Sequence` base class, but that **we expect** any concrete subclasses to support those two methods.
 
 ## Namespaces and Object Orientation
 
 A **namespace** is an abstraction that manages all of the identifiers that are defined in a particular scope, mapping each name to its associated value. 
 
 In Python, functions, classes, and modules are all **first-class objects**, and so the “value” associated with an identifier in a namespace may in fact be a function, class, or module.
+
 ### Instance and Class Namespaces
 
 **Instance namespace**, manages attributes specific to an individual object. 
@@ -1198,11 +1213,16 @@ Each `CreditCard` object has balance, account number, limit and card number.
 
 **Class Namespaces** are defined for each class.
 
-For example, the `make_payment` method of the `CreditCard` class from Chapter 2.3 is not stored independently by each instance of that class. 
+For example, the `make_payment` method of the `CreditCard` class from [Class Definitions](https://learningdsainpython.kantarcise.com/DS%26A-Object-Oriented-Programming/#class-definitions) is not stored independently by each instance of that class. 
 
 The `CreditCard` class namespace includes : `__init__` , `get_customer`, `get_bank`, `get_account`, `get_balance`, `get_limit`, `charge` and `make_payment`. 
 
-![[fig2.8.png]]
+<figure markdown="span">
+  ![Namespaces](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter2/fig2-8.png)
+  <figcaption>A view of namespaces.</figcaption>
+</figure>
+
+
 ### Extra about Namespaces:
 
 Here is the [source for it](https://realpython.com/python-namespaces-scope/). 
@@ -1213,6 +1233,7 @@ In a Python program, there are four types of namespaces:
 2. Global
 3. Enclosing
 4. Local
+
 #### Built in Namespace
 
 The built in namespace in Python:
@@ -1252,28 +1273,35 @@ dir(__builtins__)
 ```
 
 The Python interpreter creates the **built-in namespace** when it starts up. This namespace remains in existence until the interpreter terminates.
+
 #### The Global Namespace
+
 The **global namespace** contains any names defined at the level of the main program. Python creates the global namespace when the main program body starts, and it remains in existence until the interpreter terminates.
 
-Strictly speaking, this may not be the only global namespace that exists. The interpreter also creates a global namespace for any **module** that your program loads with the `import` statement. 
+Strictly speaking, this may not be the only global namespace that exists. The interpreter also creates a global namespace for any **module** that your program loads with the `import` statement.
+
 #### The Local and Enclosing Namespaces
 
 As you learned in the previous tutorial on functions, the interpreter creates a **new namespace whenever a function executes**. That namespace is local to the function and remains in existence until the function terminates.
 
-Functions don’t exist independently from one another only at the level of the main program. You can also define one function inside another:
+Functions don’t exist independently from one another only at the level of the main program. You can also define one function inside another.
+
 #### Variable Scope
 
-The existence of multiple, distinct namespaces means several different instances of a particular name can exist simultaneously while a Python program runs. As long as each instance is in a different namespace, they’re all maintained separately and won’t interfere with one another.
+The existence of multiple, distinct namespaces means several different instances of a particular name can exist simultaneously while a Python program runs.
+
+As long as each instance is in a different namespace, they’re all maintained separately and won’t interfere with one another.
+
+![Figure 2-97](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter2/fig2-97.png){ align=left }
 
 1. **Local**: If you refer to `x` inside a function, then the interpreter first searches for it in the innermost scope that’s local to that function.
 2. **Enclosing**: If `x` isn’t in the local scope but appears in a function that resides inside another function, then the interpreter searches in the enclosing function’s scope.
 3. **Global**: If neither of the above searches is fruitful, then the interpreter looks in the global scope next.
 4. **Built-in**: If it can’t find `x` anywhere else, then the interpreter tries the built-in scope.
 
-![[fig2.97.png]]
 ### Namespace dictionaries `globals()` and `locals()` : 
 
-```python
+``` py
 n = 1
 m = 2
 
@@ -1288,7 +1316,10 @@ foo("for", " real")
 
 Here are 2 keywords to juggle:
 
-![[fig2.99.png]]
+<figure markdown="span">
+  ![Global](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter2/fig2-99.png)
+  <figcaption>global() ?</figcaption>
+</figure>
 
 ```python
 y = 999
@@ -1311,7 +1342,11 @@ add_two_and_print(10) # 12
 print(y) # 888 - y changed inside the function
 ```
 
-![[fig2.98.png]]
+<figure markdown="span">
+  ![Nonlocal](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter2/fig2-98.png)
+  <figcaption>nonlocal ?</figcaption>
+</figure>
+
 
 ```python
 def f():
@@ -1325,6 +1360,7 @@ f() # 40
 ```
 
 Even though Python provides the `global` and `nonlocal` keywords, it’s not always advisable to use them.
+
 ### Dictionaries and `__slots__` Declaration
 
 Here is a [wonderful source](https://www.youtube.com/watch?v=Iwf17zsDAnY) if you want to dive deep. 😍
@@ -1336,6 +1372,7 @@ Python provides a more direct mechanism for representing instance namespaces tha
 To use the streamlined representation for all instances of a class, that class definition must provide a class-level member named `__slots__` that is assigned to a fixed sequence of strings that serve as names for instance variables. 
 
 For example, with our `CreditCard` class, we would declare the following:
+
 ```python
 class CreditCard:
 	__slots__ = _customer , _bank , _account , _balance , _limit
@@ -1346,40 +1383,56 @@ In this example, the right-hand side of the assignment is technically a `tuple` 
 When inheritance is used, if the base class declares `__slots__` , a subclass must also declare `__slots__` to avoid creation of instance dictionaries. 
 
 The declaration in the subclass should only include names of supplemental methods that are newly introduced.
+
 ### Name Resolution and Dynamic Dispatch
 
-When the dot operator syntax is used to access an existing member, such as `obj.foo`, the
-Python interpreter begins a **name resolution** process:
+When the dot operator syntax is used to access an existing member, such as `obj.foo`, the Python interpreter begins a **name resolution** process:
+
 1. Instance namespace
 2. Class Namespace
 3. Look up to Inheritance Hierarchy
 4. raise `AttributeError`
 
-In traditional object-oriented terminology, Python uses what is known as **dynamic dispatch** (or dynamic binding) to determine, at run-time, which implementation of a function to call based upon **the type of the object** upon which it is invoked. This is in contrast to some languages that use static dispatching, making a compile-time decision as to which version of a function to call, based upon the declared type of a variable.
+In traditional object-oriented terminology, Python uses what is known as **dynamic dispatch** (or dynamic binding) to determine, at run-time, which implementation of a function to call based upon **the type of the object** upon which it is invoked.
+
+This is in contrast to some languages that use static dispatching, making a compile-time decision as to which version of a function to call, based upon the declared type of a variable.
 
 ## Shallow and Deep Copying
 
-In Chapter 1, we emphasized that an assignment statement `foo = bar` makes the name foo an `alias` for the object identified as `bar`. In this section, we consider the task of making a copy of an object, rather than an alias.
+In Chapter 1, we emphasized that an assignment statement `foo = bar` makes the name foo an `alias` for the object identified as `bar`.
 
-```python
+In this section, we consider the task of making a copy of an object, rather than an alias.
+
+``` py
 palette = warmtones
 ```
 
-![[fig2.9.png]]
+<figure markdown="span">
+  ![Aliases for the same list](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter2/fig2-9.png)
+  <figcaption>Aliases for the same list</figcaption>
+</figure>
 
 This is just an alias.
 
-```python
+``` py
 palette = list(warmtones)
 ```
 
-![[fig2.10.png]]
+<figure markdown="span">
+  ![Shallow Copy](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter2/fig2-10.png)
+  <figcaption>Shallow Copy</figcaption>
+</figure>
 
-In this case, we explicitly call the `list` constructor, sending the first `list` as a parameter. This causes a new `list` to be created, as shown in Figure 2.10; however, it is what is known as a `shallow copy`. The new `list` is initialized so that its contents are precisely the same as the original sequence. However, Python’s lists are referential, and so the new `list` represents a sequence of references to the same elements as in the first.
+
+In this case, we explicitly call the `list` constructor, sending the first `list` as a parameter. This causes a new `list` to be created, as shown in Figure 2.10; however, it is what is known as a `shallow copy`
+
+The new `list` is initialized so that its contents are precisely the same as the original sequence.
+
+However, Python’s lists are referential, and so the new `list` represents a sequence of references to the same elements as in the first.
 
 This is a better situation than our first attempt, as we can legitimately add or remove elements from palette without affecting `warmtones`. However, if we edit a color instance from the palette list, we effectively change the contents of `warmtones`.
 
-```python
+```  py
 import copy
 palette = copy.deepcopy(warmtones)
 ```
@@ -1388,11 +1441,15 @@ To make a deep copy, we could populate our list by explicitly making copies of t
 
 Python provides a very convenient module, named `copy`, that can produce both shallow copies and deep copies of arbitrary objects.
 
-![[fig2.11.png]]
+<figure markdown="span">
+  ![Deep Copy](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter2/fig2-11.png)
+  <figcaption>Deep Copy</figcaption>
+</figure>
+
 
 Here is the full code:
 
-```python
+```  py title="understanding_copying.py" linenums="1"
 class Color:
 	def __init__(self, red, green, blue):
 		self._red = red
@@ -1448,4 +1505,4 @@ print("New warmstones", new_warmtones)
 print("New palette", palette_deep_copy)
 ```
 
-Done with third draft 🥰
+Now, let's move on to Algorithm Analysis! 🥰
