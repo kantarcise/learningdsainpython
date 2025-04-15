@@ -98,11 +98,12 @@ For any argument *n*, the constant function *f(n)* assigns the value *c*.
 
 In other words, it does not matter what the value of n is; *f(n)* will always be equal to the constant value c.
 
-```python
+``` py
 a = 9
 my_str = "e"
 print(len([1,2,3]))
 ```
+
 ### The Logarithm Function
 
 $$
@@ -140,20 +141,19 @@ def binary_search(collection: list, target: int) -> int:
 	return -1
 ```
 
-By definition, *log_b(1) = 0*. 
+By definition, $log_b(1) = 0$. 
 
 The value *b* is known as the base of the logarithm.
 
 Here are some properties about $log$:
 
-Given real numbers $a > 0,  b > 1,  c > 0, d > 1$ , we have:
+Given real numbers $a > 0$,  $b > 1$,  $c > 0$, $d > 1$ , we have:
 
 1. $log_b(ac) = log_b(a) + log_b(c)$
 2. $log_b(a/c) = log_b(a) − log_b(c)$
 3. $log_b(a^c) = c * log_b(a)$
 4. $log_b a = log_d(a)/ log_d(b)$
 5. $b^{log_d(a)} = a^{log_d(b)}$
-
 
 ### The Linear Function 😍
 
@@ -192,9 +192,9 @@ $$
 f(n) = n * log(n)
 $$
 
-This function grows a **little more rapidly** than the linear function and **a lot less rapidly** than the quadratic function; therefore, we would **greatly prefer** an algorithm with a running time that is proportional to *n\*log(n)*, than one with quadratic running time.
+This function grows a **little more rapidly** than the linear function and **a lot less rapidly** than the quadratic function; therefore, we would **greatly prefer** an algorithm with a running time that is proportional to $n*log(n)$, than one with quadratic running time.
 
-``` py
+``` py title="heap_sort.py" linenums="1"
 from heapq import heapify, heappop
 def heap_sort(seq):
 	heapify(seq)
@@ -203,6 +203,7 @@ def heap_sort(seq):
 		res.append(heappop(seq))
 	return res
 ```
+
 ### The Quadratic Function 😕
 
 Given an input value $n$, the function f assigns the product of *n* with itself (in other words, “n squared”).
@@ -245,12 +246,11 @@ $$
 
 ### The Cubic Function and Other Polynomials 😮
 
-Continuing our discussion of functions that are powers of the input, we consider the cubic function,$$f(n) = n^3$$ which assigns to an input value $n$ the product of $n$ with itself three times.
+Continuing our discussion of functions that are powers of the input, we consider the cubic function, $f(n) = n^3$ which assigns to an input value $n$ the product of $n$ with itself three times.
 
 ### The Exponential Function  😦
 
-Another function used in the analysis of algorithms is the exponential function,
-$$f(n) = b^n$$where $b$ is a positive constant, called the base, and the argument $n$ is the exponent.
+Another function used in the analysis of algorithms is the exponential function, $f(n) = b^n$ where $b$ is a positive constant, called the base, and the argument $n$ is the exponent.
 
 That is, function $f(n)$ assigns to the input argument $n$ the value obtained by multiplying the base $b$ by itself $n$ times.
 
@@ -258,13 +258,14 @@ If we have a loop that starts by performing one operation and then doubles the n
 
 #### Geometric Sums
 
-Suppose we have a loop for which each iteration takes a multiplicative factor longer than the previous one. This loop can be analyzed using the following proposition.
+Suppose we have a loop for which each iteration takes a multiplicative factor longer than the previous one.
 
-Everyone working in computing should know that
-$$1 + 2 + 4 + 8 + · · · + 2^{n−1} = 2^n − 1$$
-for this is the largest integer that can be represented in binary notation using n bits.
+This loop can be analyzed using the following proposition.
+
+Everyone working in computing should know that $1 + 2 + 4 + 8 + · · · + 2^{n−1} = 2^n − 1$ for this is the largest integer that can be represented in binary notation using n bits.
 
 These are called geometric summations, because each term is geometrically larger than the previous one if $a > 1$.
+
 ### The Growth Rates
 
 Here is all the functions we learned:
@@ -273,41 +274,68 @@ Here is all the functions we learned:
 | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
 | `1` | `log(n)` | `n` | `n log(n)` | `n^2` | `n^3` | `a^n` |
 
-![[fig3.99.png]]
+<figure markdown="span">
+  ![big_o](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter3/fig3-99.png)
+  <figcaption>The Big O Chart.</figcaption>
+</figure>
+
 #### The Ceiling and Floor Functions
 
 One additional comment is about floor and ceiling. 
-The analysis of an algorithm may sometimes involve the use of the floor function and ceiling function, which are defined respectively as follows:
-• `ceil(x)` = the largest integer less than or equal to x.
-• `floor(x)` = the smallest integer greater than or equal to x.
 
-![[ceiling.jpg]]
+The analysis of an algorithm may sometimes involve the use of the floor function and ceiling function, which are defined respectively as follows:
+
+- `ceil(x)` = the largest integer less than or equal to x.
+- `floor(x)` = the smallest integer greater than or equal to x.
+
+
+<figure markdown="span">
+  ![ceiling](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter3/ceiling.jpg)
+  <figcaption>Remember from the meme.</figcaption>
+</figure>
 
 Here is a sneak peak for Data Structures coming up, from [this](https://www.bigocheatsheet.com/) wonderful 💚 source:
 
-![[fig3.98.png]]
+<figure markdown="span">
+  ![commons](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter3/fig3-98.png)
+  <figcaption>Common Operations.</figcaption>
+</figure>
 
 Even better, here is a poster that you can use: 💕
 
-![[poster.png]]
+<figure markdown="span">
+  ![Big_o_poster](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter3/poster.png)
+  <figcaption>Full Poster.</figcaption>
+</figure>
+
+
 ## Asymptotic Analysis
 
 In algorithm analysis, we focus on the growth rate of the running time as a function of the input size $n$, taking a “big-picture” approach. 
 
 For example, it is often enough just to know the running time of an algorithm grows proportionally to $n$.
+w
+We analyze algorithms using a mathematical notation for functions that disregards constant factors.
 
-We analyze algorithms using a mathematical notation for functions that disregards constant factors. Namely, we characterize the running times of algorithms by using functions that map the size of the input, $n$, to values that correspond to the main factor that determines the growth rate in terms of $n$.
+Namely, we characterize the running times of algorithms by using functions that map the size of the input, $n$, to values that correspond to the main factor that determines the growth rate in terms of $n$.
+
 ###  The “Big-Oh” Notation
 
-Let $f(n)$ and $g(n)$ be functions mapping positive integers to positive real numbers. We say that $f(n)$ is $O(g(n))$ if there is a real constant $c > 0$ and an integer constant $n_0 ≥ 1$ such that 
-$$f (n) ≤ cg(n)$$ for $$n ≥ n_0$$
+Let $f(n)$ and $g(n)$ be functions mapping positive integers to positive real numbers.
+
+We say that $f(n)$ is $O(g(n))$ if there is a real constant $c > 0$ and an integer constant $n_0 ≥ 1$ such that $f (n) ≤ cg(n)$ for $n ≥ n_0$
+
 This definition is often referred to as the “big-Oh” notation, for it is sometimes pronounced as “ $f (n)$ is big-Oh of $g(n)$."
 
-![[fig3.5.png]]
+
+<figure markdown="span">
+  ![big oh](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter3/fig3-5.png)
+  <figcaption>big-Oh Notation</figcaption>
+</figure>
 
 The big-Oh notation allows us to say that a function $f(n)$ is “less than or equal to” another function $g(n)$ up to a constant factor and in the asymptotic sense as $n$ grows toward infinity.
 
-```python
+``` py
 def find_max(data):
 	"""Return the maximum element from a non empty Python List"""
 	biggest = data[0]
@@ -317,52 +345,85 @@ def find_max(data):
 	return biggest
 ```
 
-Using the big-Oh notation, we can write the following mathematically precise statement on the running time of algorithm `find_max` (Code Fragment 3.1) **for any computer.**
+Using the big-Oh notation, we can write the following mathematically precise statement on the running time of algorithm `find_max` **for any computer.**
 
 > The algorithm, `find_max`, for computing the maximum element of a list of $n$ numbers, runs in $O(n)$ time.
 
-The big-Oh notation allows us **==to ignore constant factors and lower-order terms==** and focus on the main components of a function that affect its growth.
+The big-Oh notation allows us **to ignore constant factors and lower-order terms** and focus on the main components of a function that affect its growth.
 
-$$5n^2 + 3 n * log n + 2n + 5 =>  O(n^2).$$
+$$
+5n^2 + 3 n * log n + 2n + 5 =>  O(n^2).
+$$
+
 ### Big-Omega
 
 Just as the big-Oh notation provides an asymptotic way of saying that a function is “less than or equal to” another function, the following notations provide an asymptotic way of saying that a function grows at a rate that is “greater than or equal to” that of another.
 
-Let $f(n)$ and $g(n)$ be functions mapping positive integers to positive real numbers. We say that $f (n)$ is $Ω(g(n))$, pronounced **“$f(n)$ is big-Omega of $g(n)$**" if $g(n)$ is $O(f(n))$, that is, there is a real constant $c > 0$ and an integer constant $n_0 ≥ 1$ such that
-$$f(n) ≥ cg(n), \:for\:n ≥ n_0$$
+Let $f(n)$ and $g(n)$ be functions mapping positive integers to positive real numbers.
+
+We say that $f (n)$ is $Ω(g(n))$, pronounced **“$f(n)$ is big-Omega of $g(n)$**" if $g(n)$ is $O(f(n))$, that is, there is a real constant $c > 0$ and an integer constant $n_0 ≥ 1$ such that $f(n) ≥ cg(n), \:for\:n ≥ n_0$
+
 This definition allows us to say asymptotically that one function is greater than or equal to another, up to a constant factor.
+
 ### Big-Theta
 
-In addition, there is a notation that allows us to say that two functions grow at the same rate, up to constant factors. We say that $f(n)$ is $Θ(g(n))$, pronounced “$f(n)$ is big-Theta of $g(n)$,” if $f(n)$ is $O(g(n))$ and $f(n)$ is $Ω(g(n))$ , that is, there are real constants $c' > 0$ and $c'' > 0$, and an integer constant $n_0 ≥ 1$ such that
-$$c' g(n) ≤ f (n) ≤ c'' g(n)$$for $$n ≥ n_0 $$
-**Example 3.16:** $$ 3*n* (log n) + 4*n + 5 *(log n)$$ is $$Θ(n * log n)$$
-Justification: $$3*n*(logn) ≤ 3*n*(log n) + 4*n + 5 (log n) ≤ (3 + 4 + 5)* n *(log n) \\ for n ≥ 2$$
+In addition, there is a notation that allows us to say that two functions grow at the same rate, up to constant factors.
+
+We say that $f(n)$ is $Θ(g(n))$, pronounced “$f(n)$ is big-Theta of $g(n)$,” if $f(n)$ is $O(g(n))$ and $f(n)$ is $Ω(g(n))$ , that is, there are real constants $c' > 0$ and $c'' > 0$, and an integer constant $n_0 ≥ 1$ such that $c' g(n) ≤ f (n) ≤ c'' g(n)$ for $n ≥ n_0 $
+
+**Example 3.16:** 
+
+$$
+3*n* (log n) + 4*n + 5 *(log n)
+$$ 
+
+is 
+
+$$
+Θ(n * log n)
+$$
+
+Justification: 
+
+$$
+3*n*(logn) ≤ 3*n*(log n) + 4*n + 5 (log n) ≤ (3 + 4 + 5)* n *(log n) \\ for n ≥ 2
+$$
+
 ### Comparative Analysis
 
 Between two algorithms solving the same problem, why wouldn't we want to choose the better one?
 
-![[table3.2.png]]
+<figure markdown="span">
+  ![Function_growth](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter3/table3-2.png)
+  <figcaption>How fast can the functions grow?</figcaption>
+</figure>
 
 Also, if you write "bad" code, code with worse asymptotical performance, you won't get very far even if you run it for a long time.
 
-![[table3.3.png]]
-### Wisdom: Some Words of Caution
+<figure markdown="span">
+  ![Size](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter3/table3-3.png)
+  <figcaption>Max Problem Size</figcaption>
+</figure>
 
-While it is true that the function $10^{100} n$ is $O(n)$, if this is the running time of an algorithm being compared to one whose running time is $10n log n$, we should prefer the $O(n log n)$ time algorithm, even though the linear-time algorithm is asymptotically faster.
+!!! tip
 
-Even when using the big-Oh notation, we should at least be somewhat mindful of the constant factors and lower-order terms we are “hiding.”
+	While it is true that the function $10^{100} n$ is $O(n)$, if this is the running time of an algorithm being compared to one whose running time is $10n log n$, we should prefer the $O(n log n)$ time algorithm, even though the linear-time algorithm is asymptotically faster.
+
+	Even when using the big-Oh notation, we should at least be somewhat mindful of the constant factors and lower-order terms we are “hiding.”
+
 ### Examples of Algorithm Analysis:
 
-#### `1` Constant Time
+#### Constant Time
 
 Let's think of a list `my_list = ["a", "b", "c"]`
 
 `my_list[1]` is $O(1)$, or `len(my_list)` is $O(1)$. Basically two accesses into memory.
-#### `log(n)` Logarithmic Time
+
+#### Logarithmic Time
 
 Binary Search is a great example for a $Olog(n)$ function
 
-```python
+``` py
 def binary_search(collection: list, target: int) -> int:
 	"""Find the index of target for non decreasing collection
 	If target is not in the collection, return -1"""
@@ -377,20 +438,21 @@ def binary_search(collection: list, target: int) -> int:
 			low = middle + 1
 	return -1
 ```
-#### `n` Linear Time
+#### Linear Time
 
 The `find_max` function was $O(n)$ as we have to traverse the collection once.
 
-```python
+``` py
 def find_max(col):
 	"""Find the maximum value in a given collection"""
 	return max(col, key = float)
 ```
+
 #### `n log n` Time
 
 Classic sorts are $O(n(log n))$. Here is an example with **heap sort** using the Standard Library:
 
-```python
+``` py
 import heapq
 
 def heap_sort(my_list):
@@ -406,12 +468,15 @@ print("Input Array: ", col) # Input list: [60, 20, 40, 70, 30, 10]
 print("Sorted Array: ", heap_sort(col)) # Sorted list: [10, 20, 30, 40, 60, 70]
 ```
 
-If you cannot understand this right now, that is alright. Just keep studying & getting better. 💕
+If you cannot understand this right now, that is alright.
+
+Just keep studying & getting better. 💕
+
 #### `n^2` Quadratic Time 
 
 Here is a quadratic time algorithm:
 
-```python
+``` py
 def prefix_average1(s):
 	"""Return list such that for all j, A[j] equals avarage of s[0], ... s[j]"""
 	n = len(s) # constant time
@@ -426,7 +491,7 @@ def prefix_average1(s):
 
 How about this?
 
-```python
+``` py
 def prefix_average2(S):
 	n = len(S) # o(1)
 	A = [0] * n # o(n)
@@ -441,11 +506,14 @@ def prefix_average2(S):
 
 Although this looks like a better way, it still is $O(n^2)$
 
-![[canwemakeitbetter.jpg]]
+<figure markdown="span">
+  ![better](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter3/canwemakeitbetter.jpg)
+  <figcaption>Find the better way!</figcaption>
+</figure>
 
 Here is one more approach (not even $O(nlogn)$, it is $O(n)$):
 
-```python
+``` py
 def prefix_average3(S):
 	n = len(S) # o(1)
 	A = [0] * n # o(n)
@@ -462,7 +530,7 @@ In algorithm `prefix_average3`, we maintain the current prefix sum in a list `A`
 
 Just as a practice, here it is written again:
 
-```python
+``` py
 # what if we do not calculate the total over and over again?
 def prefix_average_three(collection: list) -> list:
     a = [0] * len(collection)
@@ -477,7 +545,7 @@ prefix_average_three([1,2,3,4,5]) # [1.0, 1.5, 2.0, 2.5, 3.0]
 
 Here is another example, checking disjointedness in sets:
 
-```python
+``` py
 def disjoint1(A,B,C):
     for a in A:
         for b in B:
@@ -489,7 +557,7 @@ def disjoint1(A,B,C):
 
 This is clearly $o(n^3)$. Here is a better version.
 
-```python
+``` py
 def disjoint2(A,B,C):
     for a in A:
         for b in B:
@@ -500,7 +568,9 @@ def disjoint2(A,B,C):
     return True
 ```
 
-In the improved version, it is not simply that we save time if we get lucky. We claim that the worst-case running time for `disjoint2` is $O(n^2)$. 
+In the improved version, it is not simply that we save time if we get lucky.
+
+We claim that the worst-case running time for `disjoint2` is $O(n^2)$. 
 
 There are quadratic many pairs `(a, b)` to consider. 
 
@@ -508,7 +578,7 @@ However, if A and B are each sets of distinct elements, there can be at most $O(
 
 Here is another example, for whether all the elements in the given list are unique:
 
-```python
+``` py
 def unique1(S):
     for j in range(len(S)):
         for k in range(j+1,len(S)):
@@ -519,9 +589,13 @@ def unique1(S):
 
 Pretty clear that its $O(n^2)$. Here is a better way:
 
-An even better algorithm for the element uniqueness problem is based on using sorting as a problem-solving tool. In this case, by sorting the sequence of elements, we are guaranteed that any duplicate elements will be placed next to each other. Thus, to determine if there are any duplicates, all we need to do is perform a single pass over the sorted sequence, looking for consecutive duplicates. 
+An even better algorithm for the element uniqueness problem is based on using sorting as a problem-solving tool.
 
-```python
+In this case, by sorting the sequence of elements, we are guaranteed that any duplicate elements will be placed next to each other. 
+
+Thus, to determine if there are any duplicates, all we need to do is perform a single pass over the sorted sequence, looking for consecutive duplicates. 
+
+``` py
 def unique2(S):
     temp = sorted(S)
     for j in range(1,len(temp)):
@@ -530,7 +604,11 @@ def unique2(S):
     return True
 ```
 
-The built-in function, `sorted`, produces a copy of the original list with elements in sorted order. It guarantees a worst-case running time of $O(n log n)$; see Chapter 12 for a discussion of common sorting algorithms. Once the data is sorted, the subsequent loop runs in $O(n)$ time, and so the entire `unique2` algorithm runs in $O(n log n)$ time.
+The built-in function, `sorted`, produces a copy of the original list with elements in sorted order.
+
+It guarantees a worst-case running time of $O(n log n)$, see Chapter 12 for a discussion of common sorting algorithms.
+
+Once the data is sorted, the subsequent loop runs in $O(n)$ time, and so the entire `unique2` algorithm runs in $O(n log n)$ time.
 
 ## Simple Justification Techniques 🤔
 
@@ -545,6 +623,7 @@ To justify that such a claim is false, we only need to produce a particular x fr
 **Example**: Professor Amongus claims that every number of the form $2i − 1$  is a prime, when i is an integer greater than 1. Professor Amongus is wrong.
 
 **Justification:** To prove Professor Amongus is wrong, we find a counterexample. Fortunately, we need not look too far, for $2^4 − 1 = 15 = 3 · 5$.
+
 ### The “Contra” Attack
 
 Another set of justification techniques involves the use of the negative. The two  primary such methods are the use of the **contrapositive** and the **contradiction**. 
@@ -563,7 +642,9 @@ Then $a*b = 4 jk + 2 j + 2k + 1 = 2(2 jk + j + k) + 1$; hence, $a*b$ is odd.
 
 #### Contradiction
 
-Another negative justification technique is justification by contradiction, which also often involves using DeMorgan’s Law. In applying the justification by contradiction technique, we establish that a statement q is true by first supposing that q is false and then showing that this assumption leads to a **contradiction** (such as $2 != 2$ or $1 > 3$). 
+Another negative justification technique is justification by contradiction, which also often involves using DeMorgan’s Law.
+
+In applying the justification by contradiction technique, we establish that a statement q is true by first supposing that q is false and then showing that this assumption leads to a **contradiction** (such as $2 != 2$ or $1 > 3$). 
 
 By reaching such a **contradiction**, we show that no consistent situation exists with q being false, so q must be true. Of course, in order to reach this conclusion, we must be sure our situation is consistent before we assume q is false.
 
@@ -589,16 +670,19 @@ Moreover, most of these claims are equivalent to saying some statement q(n) is t
 
 We can use induction when we want to show a statement is true for all positive integers n. (Note that this is not the only situation in which we can use induction, and that induction is not (usually) the only way to prove a statement for all positive integers.) 
 
-To use induction, we prove two things: 
-	• Base case: The statement is true in the case where n = 1. 
-	• Inductive step: If the statement is true for n = k, then the statement is also true for n = k + 1.
+To use induction, we prove two things:
 
-This actually produces an infinite chain of implications: 
-	• The statement is true for n = 1 
-	• If the statement is true for n = 1, then it is also true for n = 2 
-	• If the statement is true for n = 2, then it is also true for n = 3 
-	• If the statement is true for n = 3, then it is also true for n = 4 
-	• . . . 
+	- Base case: The statement is true in the case where n = 1. 
+	- Inductive step: If the statement is true for n = k, then the statement is also true for n = k + 1.
+
+This actually produces an infinite chain of implications:
+
+	- The statement is true for n = 1 
+	- If the statement is true for n = 1, then it is also true for n = 2 
+	- If the statement is true for n = 2, then it is also true for n = 3 
+	- If the statement is true for n = 3, then it is also true for n = 4 
+	- . . .
+
 Together, these implications prove the statement for all positive integer values of n. (It does not prove the statement for non-integer values of n, or values of n less than 1.)
 
 #### Loop Invariants
@@ -606,8 +690,8 @@ Together, these implications prove the statement for all positive integer values
 A loop invariant is a statement that we want to prove is satisfied at the beginning of every iteration of a loop. 
 
 In order to prove this, we need to prove three conditions: 
-	Initialization: The loop invariant is satisfied at the beginning of the for loop. 
-	Maintenance: If the loop invariant is true before the i'th iteration, then the loop invariant will be true before the i + 1st iteration. 
-	Termination: When the loop terminates, the invariant gives us a useful property that helps show that the algorithm is correct.
+	- **Initialization**: The loop invariant is satisfied at the beginning of the for loop. 
+	- **Maintenance**: If the loop invariant is true before the i'th iteration, then the loop invariant will be true before the i + 1st iteration. 
+	- **Termination**: When the loop terminates, the invariant gives us a useful property that helps show that the algorithm is correct.
 
 Let's continue with Recursion! 🎋
