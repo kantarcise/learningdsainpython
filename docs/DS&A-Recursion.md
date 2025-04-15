@@ -1,11 +1,14 @@
-Part of [[Data Structures and Algorithms - In Python]]
-
 ---
+hide:
+  - toc
+---
+
 # Recursion 🍒
 
 Recursion is a technique by which a function makes one or more calls to itself during execution.
 
 File System, A Ruler and Binary Search and Fibonacci are great examples.
+
 ## Illustrative Examples
 
 Let's start by working on a factorial.
@@ -14,7 +17,7 @@ The factorial function is important because it is known to equal the number of w
 
 For example, the three characters a, b, and c can be arranged in $3! = 3 · 2 · 1 = 6$ ways: `abc, acb, bac, bca, cab, and cba`.
 
-```python
+``` py
 def factorial(n):
 	# base case
 	if n == 0:
@@ -28,24 +31,31 @@ Recursion is always with a **base case** and **recursive case**.
 
 We illustrate the execution of a recursive function using a recursion trace. Each entry of the trace corresponds to a recursive call. Each new recursive function call is indicated by a downward arrow to a new invocation. When the function returns, an arrow showing this return is drawn and the return value may be indicated alongside this arrow.
 
-![[fig4.1.png]]
+<figure markdown="span">
+  ![rec_trace](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter4/fig4-1.png)
+  <figcaption>Recursion Trace.</figcaption>
+</figure>
 
-In Python, each time a function (recursive or otherwise) is called, a structure known as an activation record or frame is created to store information about the progress of that invocation of the function. 
+In Python, each time a function (recursive or otherwise) is called, a structure known as an activation record or frame is made to store information about the progress of that invocation of the function. 
 
 Let's move on to an English Ruler. 📏
 
 There will be major and minor ticks on the ruler so that we can measure length.
 
-![[fig4.2.png]]
+<figure markdown="span">
+  ![eng_ruler](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter4/fig4-2.png)
+  <figcaption>English Ruler</figcaption>
+</figure>
 
 In general, an interval with a central tick length $L ≥ 1$ is composed of:
-• An interval with a central tick length $L − 1$
-• A single tick of length $L$
-• An interval with a central tick length $L − 1$
+
+- An interval with a central tick length $L − 1$
+- A single tick of length $L$
+- An interval with a central tick length $L − 1$
 
 Here is the code:
 
-```python
+``` py title="rulers.py" linenums="1"
 def draw_line(tick_length, tick_label=''):
     """Draw one line with given tick length (followed by optional label)."""
     line = '-' * tick_length
@@ -96,24 +106,30 @@ Result will be:
 
 Here is the recursion trace for it:
 
-![[fig4.3.png]]
+<figure markdown="span">
+  ![reading_trace](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter4/fig4-3.png)
+  <figcaption>draw_interval trace</figcaption>
+</figure>
 
-Next up, let's look at ==Binary Search==:
+Next up, let's look at **Binary Search**:
 
 It is among the most important of computer algorithms, and it is the reason that we so often store data in sorted order.
 
-The algorithm maintains two parameters, low and high, such that all the candidate entries have index at least low and at most high. Initially, `low = 0` and `high = n − 1`. We then compare the target value to the median candidate, that is, the item `data[mid]` with index
-$$mid = floor((low + high)/2)$$
+The algorithm maintains two parameters, low and high, such that all the candidate entries have index at least low and at most high.
+
+Initially, `low = 0` and `high = n − 1`. We then compare the target value to the median candidate, that is, the item `data[mid]` with index $mid = floor((low + high)/2)$.
+
 We consider three cases:
-• If the target equals `data[mid]`, then we have found the item we are looking for, and the search terminates successfully.
-• If `target < data[mid]`, then we recur on the first half of the sequence, that is, on the interval of indices from `low` to `mid − 1`.
-• If `target > data[mid]`, then we recur on the second half of the sequence, that is, on the interval of indices from `mid + 1` to `high`.
+
+- If the target equals `data[mid]`, then we have found the item we are looking for, and the search terminates successfully.
+- If `target < data[mid]`, then we recur on the first half of the sequence, that is, on the interval of indices from `low` to `mid − 1`.
+- If `target > data[mid]`, then we recur on the second half of the sequence, that is, on the interval of indices from `mid + 1` to `high`.
 
 An unsuccessful search occurs if `low > high`, as the interval `[low, high]` is empty.
 
 Here is a **recursive** approach to binary search:
 
-```python
+``` py title="recursive_binary_search.py" linenums="1"
 def binary_search(arr, target, left=0, right=None):
     if right is None:
         right = len(arr) - 1
@@ -145,25 +161,34 @@ else:
 
 A picture is worth thousand of words:
 
-![[fig4.5.png]]
+<figure markdown="span">
+  ![bin_search_image](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter4/fig4-5.png)
+  <figcaption>Binary Search Image</figcaption>
+</figure>
 
 Let's look at File Systems 🥰:
 
-Modern operating systems define file-system directories (which are also sometimes called “folders”) in a recursive way. The disk space can be calculated recursively.
+Modern operating systems define file-system directories (which are also sometimes called “folders”) in a recursive way.
 
-![[fig4.7.png]]
+The disk space can be calculated recursively.
+
+<figure markdown="span">
+  ![disk_space](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter4/fig4-7.png)
+  <figcaption>Disk Space</figcaption>
+</figure>
+
 
 We will use Standard Library for our implementation in Python.
 
-• `os.path.getsize(path)`: Return the immediate disk usage (measured in bytes) for the file or directory that is identified by the string path (e.g., `/user/rt/courses`).
+- `os.path.getsize(path)`: Return the immediate disk usage (measured in bytes) for the file or directory that is identified by the string path (e.g., `/user/rt/courses`).
 
-• `os.path.isdir(path)`: Return True if entry designated by string path is a directory; False otherwise.
+- `os.path.isdir(path)`: Return True if entry designated by string path is a directory; False otherwise.
 
-• `os.listdir(path)`: Return a list of strings that are the names of all entries within a directory designated by string path. In our sample file system, if the parameter is `/user/rt/courses`, this returns the list `["cs016" , "cs252"]`.
+- `os.listdir(path)`: Return a list of strings that are the names of all entries within a directory designated by string path. In our sample file system, if the parameter is `/user/rt/courses`, this returns the list `["cs016" , "cs252"]`.
 
-• `os.path.join(path, filename)`: Compose the path string and filename string using an appropriate operating system separator between the two (e.g., the / character for a Unix/Linux system, and the `\` character for Windows). Return the string that represents the full path to the file.
+- `os.path.join(path, filename)`: Compose the path string and filename string using an appropriate operating system separator between the two (e.g., the / character for a Unix/Linux system, and the `\` character for Windows). Return the string that represents the full path to the file.
 
-```python
+``` py
 import os
 
 def disk_usage(path):
@@ -179,7 +204,7 @@ def disk_usage(path):
 
 The output can be something like:
 
-```python
+``` py
 disk_usage(os.path.join("/", "home", "sezai", "repository", "perfectHour"))
 """
 5183    /home/sezai/repository/perfectHour/neetcode/007.is_valid_sudoku.py
@@ -189,17 +214,20 @@ disk_usage(os.path.join("/", "home", "sezai", "repository", "perfectHour"))
 2254    /home/sezai/repository/perfectHour/neetcode/150.detect_squares.py
 """
 ```
+
 ## Analyzing Recursive Algorithms - Invocation and Operations 🤔
 
-We learned to analyze the efficiency of functions with big-Oh notation. For recursive algorithms, we will look at the number of operations for each activation.
+We learned to analyze the efficiency of functions with big-Oh notation.
 
-**Invocation:** How many calls are made?
+For recursive algorithms, we will look at the number of operations for each activation.
 
-**Operation:** How much execution is done?
+• **Invocation:** How many calls are made?
+
+• **Operation:** How much execution is done?
 
 The factorial function was:
 
-```python
+``` py
 def factorial(n):
 	if n == 0:
 		return 1
@@ -210,6 +238,7 @@ def factorial(n):
 This function has $n+1$ activation's and constant operations for each of the activation. So overall time complexity is `O(n)`.
 
 In the binary search we perform constant number of primitive operations at each recursive call. So the time complexity is $log(n)$.
+
 ## Recursion Run Amok 😯
 
 ==Run amok== means, is to behave uncontrollably and disruptively.
