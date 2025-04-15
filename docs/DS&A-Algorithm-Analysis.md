@@ -9,9 +9,10 @@ In this book, we are interested in the design of “**good**” data structures 
 
 Simply put, **a data structure is a systematic way of organizing and accessing data, and an algorithm is a step-by-step procedure for performing some task in a finite amount of time.** 
 
-These concepts are central to computing, but to be able to classify some data structures and algorithms as “good,” we must have precise ways of analyzing them.
+These concepts are central to computing, but to be able to classify some data structures and algorithms as “good” we must have precise ways of analyzing them.
 
 Before you continue, do not forget that there is absolutely value in using `time.perf_counter_ns()` on a running code. You can understand where the code is spending it's time the most and make changes on it to see the effects after.
+
 ## Experimental Studies
 
 If an algorithm has been implemented, we can study its running time by executing it on various test inputs and recording the time spent during each execution. 
@@ -22,69 +23,107 @@ We can use CPU cycles, which is a bit better. Even this might not be consistent 
 
 Most advanced one is Python's `timeit` module. 
 
-![[fig3.1.png]]
+<figure markdown="span">
+  ![Figure 3.1](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter3/fig3-1.png)
+  <figcaption>Running time - input size.</figcaption>
+</figure>
 
-But there are some ==challenges== to experimental analysis:
+But there are some **challenges** to experimental analysis:
 
 • Experimental running times of two algorithms are difficult to directly compare unless the experiments are performed in the same hardware and software environments. 😕
 
 • Experiments can be done only on a limited set of test inputs; hence, they leave out the running times of inputs not included in the experiment (and these inputs may be important). 😕
 
 • Algorithm must be fully implemented in order to execute it to study its running time experimentally. 😕
-### Can we move beyond experimental analysis? 🤔
+
+### Moving beyond experimental analysis? 🤔
 
 Is there something independent of OS, takes into account of all possible inputs and with a high level description (without the need of implementation) ?
+
 #### Counting Primitive Operations
 
 To analyze the running time of an algorithm without performing experiments, we perform an analysis directly on a high-level description of the algorithm (either in the form of an actual code fragment, or language-independent pseudo-code). 
 
 We define a set of primitive operations such as the following:
 
-• Assigning an identifier to an object
-• Determining the object associated with an identifier
-• Performing an arithmetic operation (for example, adding two numbers)
-• Comparing two numbers
-• Accessing a single element of a Python `list` by index
-• Calling a function (excluding operations executed within the function)
-• Returning from a function.
+- Assigning an identifier to an object
+- Determining the object associated with an identifier
+- Performing an arithmetic operation (for example, adding two numbers)
+- Comparing two numbers
+- Accessing a single element of a Python `list` by index
+- Calling a function (excluding operations executed within the function)
+- Returning from a function.
 
-![[wesmart.png]]
+<figure markdown="span">
+  ![We smart](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter3/wesmart.png)
+  <figcaption>A better way.</figcaption>
+</figure>
 
 This operation count will correlate to an actual running time in a specific computer, for each primitive operation corresponds to a constant number of instructions, and there are only a fixed number of primitive operations.
-#### Measuring Operations as a Function of Input Size 🤔
 
-To capture the order of growth of an algorithm’s running time, we will associate,  with each algorithm, a function $f(n)$ that **characterizes the number of primitive operations** that are performed as a function of the input size $n$.
+#### Measuring Operations as a Function of Input Size
 
-So the $f(n)$ is to **characterize the number of primitive operations**. 
+To capture the order of growth of an algorithm’s running time, we will associate,  with each algorithm, a function *f(n)* that **characterizes the number of primitive operations** that are performed as a function of the input size *n*.
+
+So the *f(n)* is to **characterize the number of primitive operations**. 
+
 #### Focusing on the Worst Case Input
 
-An algorithm may run faster on some inputs than it does on others of the same size. Thus, we may wish to express the running time of an algorithm as the function of the input size obtained by taking the average over all possible inputs of the same size. Unfortunately, such an average-case analysis is typically quite challenging.
+An algorithm may run faster on some inputs than it does on others of the same size.
+
+Thus, we may wish to express the running time of an algorithm as the function of the input size obtained by taking the average over all possible inputs of the same size. Unfortunately, such an average-case analysis is typically quite challenging.
 
 Worst-case analysis is much easier than average-case analysis, as it requires only the ability to identify the worst-case input, which is often simple.
 
-![[fig3.2.png]]
+<figure markdown="span">
+  ![Timings](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter3/fig3-2.png)
+  <figcaption>Worst case for the win.</figcaption>
+</figure>
 
-That is, designing for the worst case leads to stronger algorithmic “muscles,” much like a track star who always practices by running up an incline. Train with the weights on. 🏋️‍♂️
+That is, designing for the worst case leads to stronger algorithmic “muscles,” much like a track star who always practices by running up an incline.
+
+Train with the weights on. 🏋️‍♂️
+
 ## Seven Functions - `the 7` 😉
 
 In this section, we briefly discuss the seven most important functions used in the analysis of algorithms.
-### The Constant Function - $f(n) = c$
 
-For any argument $n$, the constant function $f(n)$ assigns the value $c$. In other words, it does not matter what the value of n is; $f(n)$ will always be equal to the constant value c.
-$$f(n) = c$$
+### The Constant Function 
+
+$$
+f(n) = c
+$$
+
+For any argument *n*, the constant function *f(n)* assigns the value *c*.
+
+In other words, it does not matter what the value of n is; *f(n)* will always be equal to the constant value c.
 
 ```python
 a = 9
 my_str = "e"
 print(len([1,2,3]))
 ```
-### The Logarithm Function - $log_b(n)$ 
+### The Logarithm Function
 
-One of the interesting and sometimes even surprising aspects of the analysis of data structures and algorithms is the ubiquitous presence of the logarithm function, 
-$$f(n) = log_b(n)$$for some constant $b > 1$. 
+$$
+log_b(n)
+$$ 
 
-This function is defined as follows: $$x = log_b(n)$$ if and only if $$b^x = n$$
-```python
+One of the interesting and sometimes even surprising aspects of the analysis of data structures and algorithms is the ubiquitous presence of the logarithm function:
+
+$$
+f(n) = log_b(n)
+$$
+
+for some constant *b > 1*. 
+
+This function is defined as follows: 
+
+$$
+x = log_b(n) \leftrightarrow b^x = n
+$$
+
+``` py
 def binary_search(collection: list, target: int) -> int:
 	"""Return the index of a target number in 
 	non decreasing collection. If target is not in the
@@ -101,7 +140,9 @@ def binary_search(collection: list, target: int) -> int:
 	return -1
 ```
 
-By definition, $log_b(1) = 0$. The value $b$ is known as the base of the logarithm.
+By definition, *log_b(1) = 0*. 
+
+The value *b* is known as the base of the logarithm.
 
 Here are some properties about $log$:
 
@@ -112,10 +153,15 @@ Given real numbers $a > 0,  b > 1,  c > 0, d > 1$ , we have:
 3. $log_b(a^c) = c * log_b(a)$
 4. $log_b a = log_d(a)/ log_d(b)$
 5. $b^{log_d(a)} = a^{log_d(b)}$
-### The Linear Function 😍 - $f(n) = n$
+
+
+### The Linear Function 😍
 
 Another simple yet important function is the linear function,
-$$f(n) = n$$
+
+$$
+f(n) = n
+$$
 
 That is, given an input value $n$, the linear function $f$ assigns the value $n$ itself.
 
@@ -123,7 +169,7 @@ This function arises in algorithm analysis any time we have to do a single basic
 
 For example, comparing a number $x$ to each element of a sequence of size $n$ will require $n$ comparisons.
 
-```python
+``` py
 seq = ["1", "5", "9"]
 x = 4
 for elem in seq:
@@ -135,14 +181,20 @@ my_list = ["w", "w", "l", "w", "l", "l"]
 ```
 
 The linear function also represents the best running time we can hope to achieve for any algorithm that processes each of n objects that are not already in the computer’s memory, because reading in the n objects already requires n operations.
-### The N-Log-N Function - `sorted(iterable)` or `my_list.sort()`
 
-The function that assigns to an input $n$ the value of $n$ times the logarithm base-two of $n$. 
-$$f(n) = n * log(n)$$
+### The N-Log-N Function
 
-This function grows a **little more rapidly** than the linear function and **a lot less rapidly** than the quadratic function; therefore, we would ==greatly prefer== an algorithm with a running time that is proportional to $n*log (n)$, than one with quadratic running time.
+Examples: `sorted(iterable)` or `my_list.sort()`
 
-```python
+The function that assigns to an input *n* the value of *n* times the logarithm base-two of *n*.
+
+$$
+f(n) = n * log(n)
+$$
+
+This function grows a **little more rapidly** than the linear function and **a lot less rapidly** than the quadratic function; therefore, we would **greatly prefer** an algorithm with a running time that is proportional to *n\*log(n)*, than one with quadratic running time.
+
+``` py
 from heapq import heapify, heappop
 def heap_sort(seq):
 	heapify(seq)
@@ -153,10 +205,13 @@ def heap_sort(seq):
 ```
 ### The Quadratic Function 😕
 
-Given an input value $n$, the function f assigns the product of $n$ with itself (in other words, “n squared”).
-$$f(n) = n ^ 2$$
+Given an input value $n$, the function f assigns the product of *n* with itself (in other words, “n squared”).
 
-```python
+$$
+f(n) = n ^ 2
+$$
+
+``` py
 rows = 5
 # outer loop
 for i in range(1, rows + 1):
@@ -175,16 +230,32 @@ The main reason why the quadratic function appears in the analysis of algorithms
 
 Thus, in such cases, the algorithm performs $n * n = n^2$ operations.
 
-The quadratic function can also arise in the context of nested loops where the first iteration of a loop uses one operation, the second uses two operations, the third uses three operations, and so on. That is, the number of operations is $$1 + 2 + 3 + · · · + (n − 2) + (n − 1) + n = \frac{n * (n-1)}{2}$$![[fig3.3.png]]
+The quadratic function can also arise in the context of nested loops where the first iteration of a loop uses one operation, the second uses two operations, the third uses three operations, and so on.
+
+That is, the number of operations is: 
+
+$$
+1 + 2 + 3 + · · · + (n − 2) + (n − 1) + n = \frac{n * (n-1)}{2}
+$$
+
+<figure markdown="span">
+  ![Justification](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter3/fig3-3.png)
+  <figcaption>Visuals help us understand.</figcaption>
+</figure>
+
 ### The Cubic Function and Other Polynomials 😮
 
 Continuing our discussion of functions that are powers of the input, we consider the cubic function,$$f(n) = n^3$$ which assigns to an input value $n$ the product of $n$ with itself three times.
+
 ### The Exponential Function  😦
 
 Another function used in the analysis of algorithms is the exponential function,
-$$f(n) = b^n$$where $b$ is a positive constant, called the base, and the argument $n$ is the exponent. That is, function $f(n)$ assigns to the input argument $n$ the value obtained by multiplying the base $b$ by itself $n$ times.
+$$f(n) = b^n$$where $b$ is a positive constant, called the base, and the argument $n$ is the exponent.
+
+That is, function $f(n)$ assigns to the input argument $n$ the value obtained by multiplying the base $b$ by itself $n$ times.
 
 If we have a loop that starts by performing one operation and then doubles the number of operations performed with each iteration, then the number of operations performed in the `nth` iteration is $2^n$ .
+
 #### Geometric Sums
 
 Suppose we have a loop for which each iteration takes a multiplicative factor longer than the previous one. This loop can be analyzed using the following proposition.
@@ -460,9 +531,11 @@ def unique2(S):
 ```
 
 The built-in function, `sorted`, produces a copy of the original list with elements in sorted order. It guarantees a worst-case running time of $O(n log n)$; see Chapter 12 for a discussion of common sorting algorithms. Once the data is sorted, the subsequent loop runs in $O(n)$ time, and so the entire `unique2` algorithm runs in $O(n log n)$ time.
+
 ## Simple Justification Techniques 🤔
 
 Sometimes, we will want to make claims about an algorithm, such as showing that it is correct or that it runs fast. In order to rigorously make such claims, we must use mathematical language, and in order to back up such claims, we must justify or **prove** our statements.
+
 ### By Example
 
 > “Every element x in a set S has property P.” 
@@ -475,6 +548,7 @@ To justify that such a claim is false, we only need to produce a particular x fr
 ### The “Contra” Attack
 
 Another set of justification techniques involves the use of the negative. The two  primary such methods are the use of the **contrapositive** and the **contradiction**. 
+
 #### Contrapositive
 
 To justify the statement “if p is true, then q is true,” we establish that “if q is not true, then p is not true” instead. Logically, these two statements are the same, but the latter, which is called the contrapositive of the first, may be easier to think about. 
@@ -486,6 +560,7 @@ To justify the statement “if p is true, then q is true,” we establish that �
 So, suppose $a = 2 j + 1$ and $b = 2k + 1$, for some integers j and k. 
 
 Then $a*b = 4 jk + 2 j + 2k + 1 = 2(2 jk + j + k) + 1$; hence, $a*b$ is odd.
+
 #### Contradiction
 
 Another negative justification technique is justification by contradiction, which also often involves using DeMorgan’s Law. In applying the justification by contradiction technique, we establish that a statement q is true by first supposing that q is false and then showing that this assumption leads to a **contradiction** (such as $2 != 2$ or $1 > 3$). 
@@ -501,6 +576,7 @@ In fact, without loss of generality, we can assume that a is even (since the cas
 Then $a = 2 j$ for some integer $j$. Hence, $ab = (2 j)b = 2( jb)$, that is, $ab$ is even. 
 
 But this is a contradiction: $ab$ cannot simultaneously be odd and even. Therefore, a is odd and b is odd.
+
 ### Induction and Loop Invariants 🍓
 
 This part can be understood from [here.](https://web.stanford.edu/class/archive/cs/cs161/cs161.1176/Sections/161-section-1.pdf)
@@ -508,6 +584,7 @@ This part can be understood from [here.](https://web.stanford.edu/class/archive/
 Most of the claims we make about a running time or a space bound involve an integer parameter n (usually denoting an intuitive notion of the “size” of the problem).
 
 Moreover, most of these claims are equivalent to saying some statement q(n) is true “for all n ≥ 1.” Since this is making a claim about an infinite set of numbers, we cannot justify this exhaustively in a direct fashion. 
+
 #### Induction
 
 We can use induction when we want to show a statement is true for all positive integers n. (Note that this is not the only situation in which we can use induction, and that induction is not (usually) the only way to prove a statement for all positive integers.) 
@@ -523,6 +600,7 @@ This actually produces an infinite chain of implications:
 	• If the statement is true for n = 3, then it is also true for n = 4 
 	• . . . 
 Together, these implications prove the statement for all positive integer values of n. (It does not prove the statement for non-integer values of n, or values of n less than 1.)
+
 #### Loop Invariants
 
 A loop invariant is a statement that we want to prove is satisfied at the beginning of every iteration of a loop. 
@@ -532,4 +610,4 @@ In order to prove this, we need to prove three conditions:
 	Maintenance: If the loop invariant is true before the i'th iteration, then the loop invariant will be true before the i + 1st iteration. 
 	Termination: When the loop terminates, the invariant gives us a useful property that helps show that the algorithm is correct.
 
-Done with third draft 🏂
+Let's continue with Recursion! 🎋
