@@ -7,7 +7,7 @@ hide:
 
 In this book, we are interested in the design of “**good**” data structures and algorithms. 
 
-Simply put, **a data structure is a systematic way of organizing and accessing data, and an algorithm is a step-by-step procedure for performing some task in a finite amount of time.** 
+Simply put, **a data structure is a systematic way of organizing and accessing data and an algorithm is a step-by-step procedure for performing some task in a finite amount of time.** 
 
 These concepts are central to computing, but to be able to classify some data structures and algorithms as “good” we must have precise ways of analyzing them.
 
@@ -124,7 +124,7 @@ $$
 x = log_b(n) \leftrightarrow b^x = n
 $$
 
-``` py
+```  title="binary_search.py" linenums="1"
 def binary_search(collection: list, target: int) -> int:
 	"""Return the index of a target number in 
 	non decreasing collection. If target is not in the
@@ -182,7 +182,7 @@ my_list = ["w", "w", "l", "w", "l", "l"]
 
 The linear function also represents the best running time we can hope to achieve for any algorithm that processes each of n objects that are not already in the computer’s memory, because reading in the n objects already requires n operations.
 
-### The N-Log-N Function
+### The n-log-n Function
 
 Examples: `sorted(iterable)` or `my_list.sort()`
 
