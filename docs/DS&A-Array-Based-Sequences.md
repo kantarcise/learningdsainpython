@@ -42,7 +42,7 @@ A group of related variables can be stored one after another in a contiguous por
 
 ![A Python String in Memory](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-2.png){ align=left }
 
-A programmer can envision a high level abstraction:
+A programmer can envision a high level abstraction to make things easier to work with, like the figure down below for a string:
 
 <figure markdown="span">
   ![abstracted_string](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-3.png)
@@ -59,7 +59,7 @@ Python could attempt to reserve enough space for each cell to hold the maximum l
 
 ![Array of References](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-4.png){ align=left }
 
-Instead, Python represents a `list` or `tuple` instance using an internal storage mechanism of ***an array of object references.***
+Instead, Python represents a `list` or `tuple` instance using an internal storage mechanism of ***an array of object references***, which is really cool.
 
 ![Slicing](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-5.png){ align=right }
 
@@ -79,28 +79,46 @@ Even a command such as `counters[2] += 1` does not technically change the value 
 
 This computes a new integer, with value `0 + 1`, and sets cell `2` to reference the newly computed value.
  
-![Extend](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-9.png){ align=left }
+How does extend work? 
 
-How does extend work? The extended list does not receive copies of those elements, it receives references to those elements.
+<figure markdown="span">
+  ![extend](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-9.png)
+  <figcaption>Extend</figcaption>
+</figure>
+
+The extended list does not receive copies of those elements, it receives references to those elements.
 
 ### Compact Arrays in Python
 
-In the introduction to this section, we emphasized that strings are represented using an array of characters (not an array of references). 
+In the introduction to this section, we emphasized that strings are represented using an array of characters (not an array of references).
 
 We will refer to this more direct representation as **a compact array** because the array is storing the bits that represent the primary data (characters, in the case of strings).
 
 The overall memory usage will be much lower for a compact structure because there is no overhead devoted to the explicit storage of the sequence of memory references (in addition to the primary data).
-#### Wisdom - No need for addresses:
 
-Suppose we wish to store a sequence of one million, 64-bit integers. In theory, we might hope to use only 64 million bits. However, we estimate that a Python `list` will use **four to five times** as much memory. Each element of the list will result in a 64-bit memory address being stored in the primary array, and an `int` instance being stored elsewhere in memory.
-#### Wisdom - Not Near:
+!!! tip
 
-Another important advantage to a compact structure for high-performance computing is that the primary data are stored consecutively in memory. Note well that this is not the case for a referential structure. 
+    No need for addresses:
 
-That is, even though a `list` maintains careful ordering of the sequence of memory addresses, where those elements reside in memory is not determined by the list. Because of the workings of the cache and memory hierarchies of computers, it is often advantageous to have data stored in memory near other data that might be used in the same computations.
+    Suppose we wish to store a sequence of one million, 64-bit integers.
+
+    In theory, we might hope to use only 64 million bits. However, we estimate that a Python `list` will use **four to five times** as much memory.
+
+    Each element of the list will result in a 64-bit memory address being stored in the primary array, and an `int` instance being stored elsewhere in memory.
+
+!!! tip
+
+    Not Near:
+
+    Another important advantage to a compact structure for high-performance computing is that the primary data are stored consecutively     in memory. Note well that this is not the case for a referential structure. 
+
+    That is, even though a `list` maintains careful ordering of the sequence of memory addresses, where those elements reside in memory is not determined by the list.
+    
+    Because of the workings of the cache and memory hierarchies of computers, it is often advantageous to have data stored in memory near other data that might be used in the same computations.
+
 ### `array` module
 
-Primary support for ==compact arrays== is in a module named `array`.
+Primary support for **compact arrays** is in a module named `array`.
 
 ```python
 import array
@@ -109,30 +127,49 @@ primes = array( "i" , [2, 3, 5, 7, 11, 13, 17, 19])
 
 The type code allows the interpreter to determine precisely how many bits are needed per element of the array. The types are based on C programming language.
 
-![[fig5.98.png]]
+<figure markdown="span">
+  ![array_module](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-98.png)
+  <figcaption>Type Codes for array module</figcaption>
+</figure>
 
-The array module does not provide support for making compact arrays of user-defined data types. Compact arrays of such structures can be created with the lower-level support of a module named `ctypes`.
+The array module does not provide support for making compact arrays of user-defined data types.
+
+Compact arrays of such structures can be created with the lower-level support of a module named `ctypes`.
+
 ## Dynamic Arrays and Amortization 🤔
 
 When creating a low-level array in a computer system, the precise size of that array must be explicitly declared in order for the system to properly allocate a consecutive piece of memory for its storage.
 
-Because the system might dedicate neighboring memory locations to store other data, the capacity of an array cannot trivially be increased by expanding into subsequent cells. In the context of representing a Python `tuple` or `str` instance, this constraint is no problem. Instances of those classes are immutable, so the correct size for an underlying array can be fixed when the object is instantiated.
+Because the system might dedicate neighboring memory locations to store other data, the capacity of an array cannot trivially be increased by expanding into subsequent cells.
 
-Python’s `list` class presents a more interesting abstraction. Although a `list` has a particular length when constructed, the class allows us to add elements to the `list`, with no apparent limit on the overall capacity of the `list`. 
+In the context of representing a Python `tuple` or `str` instance, this constraint is no problem.
+
+Instances of those classes are immutable, so the correct size for an underlying array can be fixed when the object is instantiated.
+
+Python’s `list` class presents a more interesting abstraction.
+
+Although a `list` has a particular length when constructed, the class allows us to add elements to the `list`, with no apparent limit on the overall capacity of the `list`. 
 
 To provide this abstraction, Python relies on an algorithmic sleight of hand known as a **dynamic array.**
 
-The first key to providing the semantics of a dynamic array is that a `list` instance maintains an underlying array that often has greater capacity than the current length of the `list`. For example, while a user may have created a `list` with five elements, the system may have reserved an underlying array capable of storing eight object references (rather than only five). 
+The first key to providing the semantics of a dynamic array is that a `list` instance maintains an underlying array that often has greater capacity than the current length of the `list`.
 
-This extra capacity makes it easy to append a new element to the `list` by using the next available cell of the array. If a user continues to append elements to a `list`, any reserved capacity will eventually be exhausted. In that case, the class requests a new, larger array from the system, and initializes the new array so that its prefix matches that of the existing smaller array. 
+For example, while a user may have created a `list` with five elements, the system may have reserved an underlying array capable of storing eight object references (rather than only five). 
+
+This extra capacity makes it easy to append a new element to the `list` by using the next available cell of the array. If a user continues to append elements to a `list`, any reserved capacity will eventually be exhausted.
+
+In that case, the class requests a new, larger array from the system, and initializes the new array so that its prefix matches that of the existing smaller array. 
 
 At that point in time, the old array is no longer needed, so it is reclaimed by the system. 
 
 Intuitively, this strategy is much like that of the hermit crab, which moves into a larger shell when it outgrows its previous one. Yep you heard that right. **Lists are hermit crabs**.
 
-![[fig5.97.png]]
+<figure markdown="span">
+  ![hermit_crab](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-97.png)
+  <figcaption>A hermit crab == Dynamic Array</figcaption>
+</figure>
 
-```python
+``` py
 import sys   # provides getsizeof function
 data = []
 for k in range(n):   # NOTE: must fix choice of n
@@ -160,14 +197,19 @@ Length: 12; Size in bytes : 200
 
 We see that an empty `list` instance already requires a certain number of bytes of memory (72 on our system). This is only the memory allocated by the `list` itself, not elements.
 
-As soon as the first element is inserted into the `list`, we detect a change in the underlying size of the structure. In particular, we see the number of bytes jump from 72 to 104, an increase of exactly 32 bytes. Our experiment was run on a 64-bit machine architecture, meaning that each memory address is a 64-bit number (i.e., 8 bytes).
+As soon as the first element is inserted into the `list`, we detect a change in the underlying size of the structure.
 
-We speculate that the increase of 32 bytes reflects the allocation of an underlying array capable of storing four object references. This hypothesis is consistent with the fact that we do not see any underlying change in the memory usage after inserting the second, third, or fourth element into the `list`.
+In particular, we see the number of bytes jump from 72 to 104, an increase of exactly 32 bytes. Our experiment was run on a 64-bit machine architecture, meaning that **each memory address is a 64-bit number** (i.e., 8 bytes).
+
+We speculate that the increase of 32 bytes reflects the allocation of an underlying array capable of storing four object references.
+
+This hypothesis is consistent with the fact that we do not see any underlying change in the memory usage after inserting the second, third, or fourth element into the `list`.
+
 ### Implementing a Dynamic Array 🤔
 
 How would we do it? See the code down below:
 
-```python
+``` py title="dynamic_array.py" linenums="1"
 import ctypes                                   # provides low-level arrays
 
 class DynamicArray:
@@ -207,17 +249,24 @@ class DynamicArray:
         """Return new array with capacity c."""
         return (c * ctypes.py_object)( ) # see ctypes documentation
 ```
+
 ### Amortized Analysis of Dynamic Arrays 🤨
 
 By doubling the capacity during an array replacement, our new array allows us to add n new elements before the array must be replaced again. In this way, there are many simple append operations for each expensive one (see Figure 5.13).
 
-![[fig5.13.png]]
+<figure markdown="span">
+  ![appending_dynamic_array](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-13.png)
+  <figcaption>What happens while appending</figcaption>
+</figure>
 
 Using an algorithmic design pattern called **amortization**, we can show that performing a sequence of such append operations on a dynamic array is actually quite efficient.
 
 3 dollars for each append, every append that you don't overflow is a profit of 2 dollars. Next big overflow will be using the profit to double the capacity and the math adds up.
 
-![[fig5.14.png]]
+<figure markdown="span">
+  ![amortization](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-14.png)
+  <figcaption>Let's make it easier to understand amortization</figcaption>
+</figure>
 
 Can we approach the problem any other way? 
 
@@ -227,14 +276,23 @@ Doubling seems like the optimal approach.
 
 Another consequence of the rule of a geometric increase in capacity when appending to a dynamic array is that the final array size is guaranteed to be proportional to the overall number of elements. That is, the data structure uses $O(n)$ memory.
 
-This is a very desirable property for a data structure. If a container, such as a Python list, provides operations that cause the removal of one or more elements, greater care must be taken to ensure that a dynamic array guarantees $O(n)$ memory usage. The risk is that repeated insertions may cause the underlying array to grow arbitrarily large, and that there will no longer be a proportional relationship between the actual number of elements and the array capacity after many elements are removed.
+This is a **very desirable property** for a data structure.
 
-A robust implementation of such a data structure will shrink the underlying array, on occasion, while maintaining the $O(1)$ amortized bound on individual operations. However, care must be taken to ensure that the structure cannot rapidly oscillate between growing and shrinking the underlying array, in which case the amortized bound would not be achieved. 
-### Python’s List Class 💙 `["references", "to", "all"]`
+If a container, such as a Python list, provides operations that cause the removal of one or more elements, greater care must be taken to ensure that a dynamic array guarantees $O(n)$ memory usage.
+
+The risk is that repeated insertions may cause the underlying array to grow arbitrarily large, and that there will no longer be a proportional relationship between the actual number of elements and the array capacity after many elements are removed.
+
+A robust implementation of such a data structure will shrink the underlying array, on occasion, while maintaining the $O(1)$ amortized bound on individual operations.
+
+However, care must be taken to ensure that the structure cannot rapidly oscillate between growing and shrinking the underlying array, in which case the amortized bound would not be achieved. 
+
+### Python’s List Class 💙
+
+`["references", "to", "all"]`
 
 A careful examination of the intermediate array capacities suggests that Python is not using a pure geometric progression, nor is it using an arithmetic progression.
 
-```python
+``` py
 from time import time
 def compute_average(n):
 	"""Perform n appends to an empty list and return average time elapsed."""
@@ -248,22 +306,33 @@ def compute_average(n):
 
 Append is getting faster which is expected with less doubling/expanding in size:
 
-![[fig5.96.png]]
+<figure markdown="span">
+  ![avg_run_time_append](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-96.png)
+  <figcaption>Average Running Time for Append</figcaption>
+</figure>
+
 ## Efficiency of Python's Sequence Types
 
 How about the efficiency of other sequence types of Python?  Here are some non mutating methods used by `lists` and `tuples`.
 
-![[fig5.95.png]]
+<figure markdown="span">
+  ![avg_run_time_append](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-95.png)
+  <figcaption>Performance of some non-mutating methods</figcaption>
+</figure>
 
 Tuples are typically more memory efficient. 👨‍💻
 
 Here are some mutating behaviors:
 
-![[fig5.94.png]]
+<figure markdown="span">
+  ![avg_run_time_append](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-94.png)
+  <figcaption>Performance of some mutating methods</figcaption>
+</figure>
+
 
 First thing you see is to append a `list` from the end is better than to be doing that from beginning or the start. You can see the difference here:
 
-```python
+``` py
 """3 different cases"""
 for n in range(N):
 	data.insert(0, None)
@@ -275,11 +344,17 @@ for n in range(N):
 	data.insert(n, None)
 ```
  
-![[fig5.93.png]]
+<figure markdown="span">
+  ![avg_run_time_insert](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-93.png)
+  <figcaption>Average Running Time for Insert</figcaption>
+</figure>
 
 Secondly, popping from the end is really fast ($O(1)$ amortized) but the middle or start is, oh no.
 
-![[fig5.17.png]]
+<figure markdown="span">
+  ![removing_from_middle](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-17.png)
+  <figcaption>Removing From Middle</figcaption>
+</figure>
 
 Also `remove(element)` is just a disaster. Traverse the whole list, find the element, remove it. No efficient way here.
 
@@ -287,7 +362,7 @@ Extending a `list` is just appending hidden under a mask 😉
 
 In effect, a call to `data.extend(other)` produces the same outcome as the code:
 
-```python
+``` py
 for element in other:
 	data.append(element)
 ```
@@ -302,15 +377,16 @@ Secondly, there is less overhead to a single function call that accomplishes all
 
 Finally, for making a `list`, list comprehension is significantly faster than building a list and appending:
 
-```python
+``` py
 n = 73
 squares = [elem * elem for elem in range(1, n+1)]
 ```
-### All the ways you can reverse a `list` ??
+
+### How to reverse a `list` ?
 
 Here it is:
 
-```python
+``` py
 a = ["a", "b", "c", "d" , "e"]
 
 for elem in reversed(a):
@@ -338,7 +414,10 @@ for elem in a:
 print()
 print("This is not good, a changed")
 ```
-### Python's String Class - `"fn_Believed!"`
+
+### Python's String Class
+
+`"fn_Believed!"`
 
 We learned about strings in Chapter 1. Here is how they are analyzed:
 
@@ -353,38 +432,46 @@ The comparison operators (e.g., `==`, `<`) fall into this category as well.
 Some of the most interesting behaviors, from an algorithmic point of view, are those that in some way depend upon finding a string pattern within a larger string; this goal is at the heart of methods such as `__contains__ , find, index, count, replace`, and `split`.
 
 We will dive deep in Chapter 13.
+
 #### Composing Strings
 
 Doing repeated concatenation is terribly inefficient.
-##### WARNING: do not do this
 
-```python
-letters = ""
-for c in document:
-	if c.isalpha():
-		letters += c
-```
+!!! warning
+
+    Do not do this:
+
+    ``` py
+    letters = ""
+    for c in document:
+    	if c.isalpha():
+    		letters += c
+    ```
 
 Constructing the new string would require time proportional to its length. 
 
 If the final result has n characters, the series of concatenations would take time proportional to the familiar sum $1 + 2 +3 + · · · + n$ , and therefore $O(n^{2})$ time.
-##### Instead - Use lists - strings with `split` and `join`
 
-Because appending to end of a list is $O(1)$. 
-```python
+Instead - Use lists - strings with `split` and `join`. 🎋
+
+Because appending to end of a list is $O(1)$.
+
+``` py
 temp = []  # start with empty list
 for c in document:
 	if c.isalpha():
 		temp.append(c)  # append alphabetic character
 letters = "".join(temp)  # compose overall result
 ```
-##### Even better:
 
-```python
+Or even better:
+
+``` py
 letters = "".join([c for c in document if c.isalpha()])
 # not even a list is needed
 letters = "".join(c for c in document if c.isalpha())
 ```
+
 ## Using Array Based Sequences 😍
 
 We talked about leader boards. 
