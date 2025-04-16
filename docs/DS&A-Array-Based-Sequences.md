@@ -57,27 +57,32 @@ To represent such a list with an array, Python must adhere to the requirement th
 
 Python could attempt to reserve enough space for each cell to hold the maximum length string (not just of currently stored strings, but of any string we might ever want to store), but that would be wasteful.
 
+![Array of References](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-4.png){ align=left }
+
 Instead, Python represents a `list` or `tuple` instance using an internal storage mechanism of ***an array of object references.***
 
-![[fig5.4.png]]
+![Slicing](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-5.png){ align=right }
 
 When you compute a slice of a `list`, the result is a new `list` instance, but that new `list` has references to the same elements that are in the original list.
 
-![[fig5.5.png]]
+![List Multiplied](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-7.png){ align=left }
 
 The same semantics is demonstrated when making a new list as a copy of an existing one, with a syntax such as `backup = list(primes)`. This produces a new list that is a **shallow copy**, in that it references the same elements as in the first list. 
 
 What happens when we do `data = [0] * 8` ? 
 
-![[fig5.7.png]]
+![Adding one](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-8.png){ align=right }
 
-This may seem scary. However, we rely on the fact that the referenced integer is **immutable**. Even a command such as `counters[2] += 1` does not technically change the value of the existing integer instance. This computes a new integer, with value `0 + 1`, and sets cell `2` to reference the newly computed value.
+This may seem scary. However, we rely on the fact that the referenced integer is **immutable**.
+
+Even a command such as `counters[2] += 1` does not technically change the value of the existing integer instance.
+
+This computes a new integer, with value `0 + 1`, and sets cell `2` to reference the newly computed value.
  
-![[fig5.8.png]]
+![Extend](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-9.png){ align=left }
 
 How does extend work? The extended list does not receive copies of those elements, it receives references to those elements.
 
-![[fig5.9.png]]
 ### Compact Arrays in Python
 
 In the introduction to this section, we emphasized that strings are represented using an array of characters (not an array of references). 
