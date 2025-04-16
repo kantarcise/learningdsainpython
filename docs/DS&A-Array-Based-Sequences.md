@@ -57,21 +57,28 @@ To represent such a list with an array, Python must adhere to the requirement th
 
 Python could attempt to reserve enough space for each cell to hold the maximum length string (not just of currently stored strings, but of any string we might ever want to store), but that would be wasteful.
 
-![Array of References](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-4.png){ align=left }
-
 Instead, Python represents a `list` or `tuple` instance using an internal storage mechanism of ***an array of object references***, which is really cool.
 
-![Slicing](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-5.png){ align=right }
+<figure markdown="span">
+  ![array_of_references](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-4.png)
+  <figcaption>Array of References</figcaption>
+</figure>
 
 When you compute a slice of a `list`, the result is a new `list` instance, but that new `list` has references to the same elements that are in the original list.
 
-![List Multiplied](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-7.png){ align=left }
+<figure markdown="span">
+  ![slicing](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-5.png)
+  <figcaption>Slicing</figcaption>
+</figure>
 
 The same semantics is demonstrated when making a new list as a copy of an existing one, with a syntax such as `backup = list(primes)`. This produces a new list that is a **shallow copy**, in that it references the same elements as in the first list. 
 
 What happens when we do `data = [0] * 8` ? 
 
-![Adding one](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-8.png){ align=right }
+<figure markdown="span">
+  ![list_multiplied](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-7.png)
+  <figcaption>List Multiplied</figcaption>
+</figure>
 
 This may seem scary. However, we rely on the fact that the referenced integer is **immutable**.
 
@@ -79,7 +86,12 @@ Even a command such as `counters[2] += 1` does not technically change the value 
 
 This computes a new integer, with value `0 + 1`, and sets cell `2` to reference the newly computed value.
  
-How does extend work? 
+<figure markdown="span">
+  ![adding_one](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-8.png)
+  <figcaption>Adding one</figcaption>
+</figure>
+
+Well, how does extend work? 
 
 <figure markdown="span">
   ![extend](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-9.png)
@@ -382,39 +394,41 @@ n = 73
 squares = [elem * elem for elem in range(1, n+1)]
 ```
 
-### How to reverse a `list` ?
+!!! tip 
 
-Here it is:
+    There is one thisg you might find yourself doing over and over again, and it's the topic of reversing a `list` ?
 
-``` py
-a = ["a", "b", "c", "d" , "e"]
+    Here are some guidelines on it:
 
-for elem in reversed(a):
-    print(elem, end = " ") # e d c b a 
-
-print()
-
-for i in range(len(a) - 1, -1 , -1):
-    print(a[i], end = " ") # e d c b a 
-
-print()
-
-for elem in a[::-1]:
-    print(elem, end = " ") # e d c b a 
-
-print()
-
-# The list. reverse() method reverses the elements of the 
-# list in place. The method returns None because it 
-# mutates the original list. 
-a.reverse()
-for elem in a:
-	print(elem, end= " ") # e d c b a 
-
-print()
-print("This is not good, a changed")
-```
-
+    ``` py
+    a = ["a", "b", "c", "d" , "e"]
+    
+    for elem in reversed(a):
+        print(elem, end = " ") # e d c b a 
+    
+    print()
+    
+    for i in range(len(a) - 1, -1 , -1):
+        print(a[i], end = " ") # e d c b a 
+    
+    print()
+    
+    for elem in a[::-1]:
+        print(elem, end = " ") # e d c b a 
+    
+    print()
+    
+    # The list. reverse() method reverses the elements of the 
+    # list in place. The method returns None because it 
+    # mutates the original list. 
+    a.reverse()
+    for elem in a:
+    	print(elem, end= " ") # e d c b a 
+    
+    print()
+    print("This is not good, a changed")
+    ```
+    
 ### Python's String Class
 
 `"fn_Believed!"`
@@ -673,6 +687,7 @@ if __name__ == "__main__":
     answer = cipher._decrypt(coded)
     print(f"Message is : {answer}")
 ```
+
 ## Multidimensional Data Sets 🤭
 
 `Lists`, `tuples`, and `strings` in Python are one-dimensional. 
