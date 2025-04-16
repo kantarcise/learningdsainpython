@@ -1,9 +1,11 @@
-Part of [[Data Structures and Algorithms - In Python]]
-
 ---
+hide:
+  - toc
+---
+
 # All About Linked Lists 🎩
 
-In Chapter 5 we carefully examined Python’s array-based list class, and in Chapter 6 we demonstrated use of that class in implementing the classic stack, queue, and dequeue ADTs. 
+In [Chapter 5](https://learningdsainpython.kantarcise.com/DS%26A-Array-Based-Sequences/) we carefully examined Python’s array-based list class, and in [Chapter 6](https://learningdsainpython.kantarcise.com/DS%26A-Stacks-Queues-and-Deques/) we demonstrated use of that class in implementing the classic stack, queue, and dequeue ADTs. 
 
 Python’s `list` class is highly optimized, and often a great choice for storage. With that said, there are some notable disadvantages:
 
@@ -13,14 +15,28 @@ Python’s `list` class is highly optimized, and often a great choice for storag
 
 In this chapter, we introduce a data structure known as a linked list, which provides an **alternative to an array-based sequence** (such as a Python `list`). 
 
-Both array-based sequences and linked lists keep elements in a certain order, but using a very different style. An array provides the more centralized representation, with one large chunk of memory capable of accommodating references to many elements.
+Both array-based sequences and linked lists keep elements in a certain order, but using a very different style.
 
-A linked list, in contrast, relies on a more distributed representation in which a lightweight object, known as a `Node`, is allocated for each element. Each node maintains a reference to it's element and one or more references to neighboring nodes in order to collectively represent the linear order of the sequence.
+An **array** provides the more centralized representation, with one large chunk of memory capable of accommodating references to many elements.
 
-![[fig7.99.jpg]]
+A **linked list**, in contrast, relies on a more distributed representation in which a lightweight object, known as a `Node`, is allocated for each element.
 
-We will demonstrate a trade-off of advantages and disadvantages when contrasting array-based sequences and linked lists. Elements of a linked list cannot be efficiently accessed by a numeric index `k`, and we cannot tell just by examining a node if it is the second, fifth, or twentieth node in the list. However, linked lists avoid the three disadvantages noted above for array-based sequences.
+Each node maintains a reference to it's element and one or more references to neighboring nodes in order to collectively represent the linear order of the sequence.
+
+<figure markdown="span">
+  ![train](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter7/fig7-99.png)
+  <figcaption>Linked List is just like a Train!</figcaption>
+</figure>
+
+We will demonstrate a trade-off of advantages and disadvantages when contrasting array-based sequences and linked lists.
+
+Elements of a linked list cannot be efficiently accessed by a numeric index `k`, and we cannot tell just by examining a node if it is the second, fifth, or twentieth node in the list.
+
+However, linked lists avoid the three disadvantages noted above for array-based sequences.
+
 ## Where ?
+
+You might be wondering — where is a linked list useful?
 
 A Use/Example of Linked List (Doubly) can be Lift in the Building.
 
@@ -30,17 +46,26 @@ A Use/Example of Linked List (Doubly) can be Lift in the Building.
 - A person can never go beyond the ground/last floor (previous to the head node is assigned `None` in linked list).
 
 Insertion and deletion **within the sequence** in $O(1)$ time, compared to arrays, this is great!
-## Singly Linked Lists - Starting Small 🥰
+
+## Singly Linked Lists 
+
+Let's start really small 🥰
 
 **Summary**: We have head and size. Node is within the class. If there is a tail, check the edge cases.
 
-A singly linked list, in its simplest form, is a collection of nodes that collectively form a linear sequence. 
+A Singly Linked List (SLL), in its simplest form, is a collection of nodes that collectively form a linear sequence. 
 
-![[fig7.1.png]]
+<figure markdown="span">
+  ![node](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter7/fig7-1.png)
+  <figcaption>A Node in Singly Linked List</figcaption>
+</figure>
 
 Each node stores a reference to an object that is an element of the sequence, as well as a reference to the next node of the list:
 
-![[fig7.2.png]]
+<figure markdown="span">
+  ![airport_linked_list](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter7/fig7-2.png)
+  <figcaption>A real example of a Linked List</figcaption>
+</figure>
 
 The first and last node of a linked list are known as the **head** and **tail** of the list, respectively.
 
@@ -50,11 +75,17 @@ By starting at the head, and moving from one node to another by following each n
 
 We can identify the tail as the node having `None` as its next reference.
 
-This process is commonly known as ==traversing the linked list==.
+This process is commonly known as **traversing the linked list**.
 
-For the remainder of this chapter, we continue to illustrate nodes as objects, and each node’s “next” reference as a pointer. However, for the sake of simplicity, we illustrate a node’s element embedded directly within the node structure, even though the element is, in fact, an independent object.
+For the remainder of this chapter, we continue to illustrate nodes as objects, and each node’s “next” reference as a pointer. 
 
-![[fig7.3.png]]
+However, for the sake of simplicity, we illustrate a node’s element embedded directly within the node structure, even though the element is, in fact, an independent object.
+
+<figure markdown="span">
+  ![compact_showing_for_linked_list](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter7/fig7-3.png)
+  <figcaption>A compact view of a Linked List</figcaption>
+</figure>
+
 ### Inserting an Element at the Head of a Singly Linked List
 
 There is no fixed size in a linked list, so it uses space proportionally to its current number of elements.
@@ -68,7 +99,11 @@ How do we add an element to head?
 - increment size
 ```
 
-![[fig7.4.png]]
+<figure markdown="span">
+  ![insertion_at_head](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter7/fig7-4.png)
+  <figcaption>Insertion at head for a SLL</figcaption>
+</figure>
+
 ### Inserting an Element at the Tail of a Singly Linked List
 
 How do we add an element to the tail?
@@ -79,7 +114,11 @@ How do we add an element to the tail?
 - Increment size
 ```
 
-![[fig7.5.png]]
+<figure markdown="span">
+  ![insertion_at_TAIL](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter7/fig7-5.png)
+  <figcaption>Insertion at tail for a SLL</figcaption>
+</figure>
+
 ### Removing an Element from a Singly Linked List - Head
 
 How do we remove an element from head ? 
@@ -92,7 +131,11 @@ How do we remove an element from head ?
 
 This is essentially the reverse operation of inserting a new element to the head. 😌
 
-![[fig7.6.png]]
+<figure markdown="span">
+  ![removal_from_sll](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter7/fig7-6.png)
+  <figcaption>Remove an element from a SLL</figcaption>
+</figure>
+
 ### Removing an Element from a Singly Linked List - Tail 🎃
 
 Unfortunately, we cannot easily delete the last node of a singly linked list. 
@@ -106,6 +149,7 @@ The only way to access this node is to start from the head of the list and searc
 But such a sequence of link-hopping operations could take a long time. 
 
 If we want to support such an operation efficiently, we will need to make our list doubly linked 😍
+
 ### Linked Lists in Real World 🤨
 
 In an interview if you see a question about Linked Lists, you will probably be given the most simple `ListNode` class like the one down below:
@@ -130,7 +174,7 @@ You also know that you can insert from tail but remove from head, so for a queue
 
 Here is an example of implementing a `MinStack` with Linked lists:
 
-```python
+``` py title="min_stack_with_linked_list.py" linenums="1"
 class Node:
     def __init__(self, value, min_val, next = None):
         self.value = value
@@ -172,9 +216,10 @@ class MinStack:
 # Output 
 # [null,null,null,null,-3,null,0,-2]
 ```
+
 ### Implementing a Stack with a Singly Linked List
 
-This is just for practice.
+This part is just for practice.
 
 In designing such an implementation, we need to decide whether to model the top of the stack at the head or at the tail of the list. Where should the head be?
 
@@ -186,7 +231,7 @@ There is clearly a best choice here; we can efficiently insert and delete elemen
 
 Here is the code:
 
-```python
+``` py title="stack_with_linked_list.py" linenums="1"
 class LinkedStack:
     """LIFO Stack implementation using a singly linked list for its storage"""
 
@@ -245,6 +290,7 @@ Here is the analysis of our operations:
 | `S.is_empty()` | $O(1)$ |
 
 All bounds are worst case and space usage is $O(n)$ where n is the current number of elements in the stack.
+
 ### Implementing a Queue with a Singly Linked List
 
 This is also just for practice.
@@ -257,7 +303,7 @@ So clearly, we need to set our linked Lists so that the head is the front of the
 
 Here is the code:
 
-```python
+``` py  title="queue_with_linked_list.py" linenums="1"
 class LinkedQueue:
     """FIFO queue implementation using a singly linked list for storage."""
 
@@ -321,6 +367,7 @@ class LinkedQueue:
 In this implementation, we had to accurately maintain the `_tail` reference.
 
 In terms of performance, the `LinkedQueue` is similar to the `LinkedStack` in that all operations run in worst-case constant time, and the space usage is linear in the current number of elements.
+
 ## Circularly Linked Lists 😯
 
 The array approach of ours for circularity was just and abstraction with the usage of modulo arithmetic.
