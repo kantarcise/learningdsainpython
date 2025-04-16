@@ -1,12 +1,16 @@
-Part of [[Data Structures and Algorithms - In Python]]
-
 ---
+hide:
+  - toc
+---
+
 # Array Based Sequences 🥳
 
-All about lists, tuples and strings; starting from arrays and dynamic arrays.
+This chapter is all about lists, tuples and strings; starting from arrays and dynamic arrays. Which will be the main data structures we'll use. 🎉
+
 ## Python's Sequence Types
 
 In this chapter, we will explore about `list`, `tuple` and `str` classes. Each of them support indexing and accessing to an element within them.
+
 ## Low - Level Arrays 🥰
 
 We have to start with a discussion of the **low level computer architecture**.
@@ -17,7 +21,7 @@ In effect, each byte of memory is associated with a unique number that serves as
 
 In this way, the computer system can refer to the data in “`byte #2150`” versus the data in “`byte #2157`”
 
-![[fig5.1.png]]
+![Representation of Memory](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-1.png){ align=right }
 
 Despite the sequential nature of the numbering system, computer hardware is designed, in theory, so that any byte of the main memory can be efficiently accessed based upon its memory address.
 
@@ -25,26 +29,35 @@ In this sense, we say that a computer’s main memory performs as random access 
 
 In general, a programming language keeps track of the association between an **identifier** and the **memory address** in which the associated value is stored.
 
-A common programming task is to keep track of a sequence of related objects. For example, we may want a video game to keep track of the top ten scores for that game. Rather than use ten different variables for this task, we would prefer to use a single name for the group and use index numbers to refer to the high scores in that group.
+A common programming task is to keep track of a sequence of related objects.
 
-![[fig5.99.png]]
+For example, we may want a video game to keep track of the top ten scores for that game. Rather than use ten different variables for this task, we would prefer to use a single name for the group and use index numbers to refer to the high scores in that group.
+
+<figure markdown="span">
+  ![leaderboard](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-99.png)
+  <figcaption>A Leaderboard.</figcaption>
+</figure>
 
 A group of related variables can be stored one after another in a contiguous portion of the computer’s memory. We will denote such a representation as an array.
 
-![[fig5.2.png]]
+![A Python String in Memory](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-2.png){ align=left }
 
 A programmer can envision a high level abstraction:
 
-![[fig5.3.png]]
+<figure markdown="span">
+  ![abstracted_string](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-3.png)
+  <figcaption>A string, abstracted.</figcaption>
+</figure>
+
 ### Referential Arrays 🤔
 
 What if we wanted to hold names in an array?
 
-To represent such a list with an array, Python must adhere to the requirement that each cell of the array use the same number of bytes. Yet the elements are strings, and ==strings naturally have different lengths==. 
+To represent such a list with an array, Python must adhere to the requirement that each cell of the array use the same number of bytes. Yet the elements are strings, and **strings naturally have different lengths**. 
 
 Python could attempt to reserve enough space for each cell to hold the maximum length string (not just of currently stored strings, but of any string we might ever want to store), but that would be wasteful.
 
-Instead, Python represents a `list` or `tuple` instance using an internal storage mechanism of an array of object references.
+Instead, Python represents a `list` or `tuple` instance using an internal storage mechanism of ***an array of object references.***
 
 ![[fig5.4.png]]
 
