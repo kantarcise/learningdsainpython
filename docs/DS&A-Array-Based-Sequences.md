@@ -462,39 +462,39 @@ Doing repeated concatenation is terribly inefficient.
     		letters += c
     ```
 
-Constructing the new string would require time proportional to its length. 
+    Constructing the new string would require time proportional to its length. 
 
-If the final result has n characters, the series of concatenations would take time proportional to the familiar sum $1 + 2 +3 + · · · + n$ , and therefore $O(n^{2})$ time.
+    If the final result has n characters, the series of concatenations would take time proportional to the familiar sum $1 + 2 +3 + · · · + n$ , and therefore $O(n^{2})$ time.
 
-Instead - Use lists - strings with `split` and `join`. 🎋
+    Instead - Use lists - strings with `split` and `join`. 🎋
 
-Because appending to end of a list is $O(1)$.
+    Because appending to end of a list is $O(1)$.
 
-``` py
-temp = []  # start with empty list
-for c in document:
-	if c.isalpha():
-		temp.append(c)  # append alphabetic character
-letters = "".join(temp)  # compose overall result
-```
+    ``` py
+    temp = []  # start with empty list
+    for c in document:
+    	if c.isalpha():
+    		temp.append(c)  # append alphabetic character
+    letters = "".join(temp)  # compose overall result
+    ```
 
-Or even better:
+    Or even better:
 
-``` py
-letters = "".join([c for c in document if c.isalpha()])
-# not even a list is needed
-letters = "".join(c for c in document if c.isalpha())
-```
+    ``` py
+    letters = "".join([c for c in document if c.isalpha()])
+    # not even a list is needed
+    letters = "".join(c for c in document if c.isalpha())
+    ```
 
 ## Using Array Based Sequences 😍
 
-We talked about leader boards. 
+We talked about leader boards.
 
 To maintain a sequence of high scores, we develop a class named Scoreboard. 
 
 Here is a complete Python implementation of the `Scoreboard` and `NewScore` class.
 
-```python
+``` py title="scoreboard.py" linenums="1"
 class Scoreboard:
     """Fixed length sequence of high scores in nondecreasing order"""
     def __init__(self, capacity=10):
@@ -568,27 +568,34 @@ print(world)
 # Sumail scored 400
 ```
 
-![[fig5.19.png]]
+<figure markdown="span">
+  ![new_game_entry](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-19.png)
+  <figcaption>New Game Entry</figcaption>
+</figure>
+
 ### Sorting a Sequence 💎
 
 Sorting is crucial. If something is sorted, it is really easier to index it.
-#### Insertion Sort `start from 1 - slap city` 🎩
+
+#### Insertion Sort
+
+`start from 1 - slap city` 🎩
 
 We study several sorting algorithms in this book, most of which are described in Chapter 12. As a warm-up, in this section we describe a nice, simple sorting algorithm known as insertion-sort.
 
-We start with the first element in the array. One element by itself is already sorted. 
+• We start with the first element in the array. One element by itself is already sorted. 
 
-Then we consider the next element in the array. If it is smaller than the first, we swap them. 
+• Then we consider the next element in the array. If it is smaller than the first, we swap them. 
 
-Next we consider the third element in the array. We swap it leftward until it is in its proper order with the first two elements. 
+• Next we consider the third element in the array. We swap it leftward until it is in its proper order with the first two elements. 
 
-We then consider the fourth element, and swap it leftward until it is in the proper order with the first three. 
+• We then consider the fourth element, and swap it leftward until it is in the proper order with the first three. 
 
-We continue in this manner with the fifth element, the sixth, and so on, until the whole array is sorted.
+• We continue in this manner with the fifth element, the sixth, and so on, until the whole array is sorted.
 
 **Insertion Sort:** Compare as you insert. Time complexity is $O(n^2)$.
 
-```python
+``` py title="insertion_sort.py" linenums="1"
 def insertionSort(array):
 	"""Sort elements in a list in non decreasing order"""
 	for step in range(1, len(array)):
@@ -614,19 +621,23 @@ insertionSort(data)
 print(f'Sorted data: {data}') # Sorted data: [1, 3, 4, 5, 9]
 ```
 
-![[fig5.20.png]]
+<figure markdown="span">
+  ![insertion_sort](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-20.png)
+  <figcaption>Insertion Sort</figcaption>
+</figure>
+
 ### Simple Cryptography 🔎
 
-### Wisdom:
+!!! tip
 
-The perfect balance between `ord()` and `chr()`. 
+    There is a perfect balance between `ord()` and `chr()`. 
 
-`ord()` takes a one length string and returns an integer code point for that. `chr()` takes an int and returns a one length string for it:
+    `ord()` takes a one length string and returns an integer code point for that. `chr()` takes an int and returns a one length string for it:
 
-```python
-print(ord("A")) # 65
-print(chr(101)) # e
-```
+    ```python
+    print(ord("A")) # 65
+    print(chr(101)) # e
+    ```
 
 An interesting application of strings and lists is cryptography, the science of secret messages and their applications.
 
@@ -634,9 +645,15 @@ An interesting application of strings and lists is cryptography, the science of 
 
 **Decryption**: `Ciphertext` to plain text.
 
-Arguably the earliest encryption scheme is the Caesar cipher, which is named after Julius Caesar, who used this scheme to protect important military messages. (All of Caesar’s messages were written in Latin, of course, which already makes them unreadable for most of us!) The Caesar cipher is a simple way to obscure a message written in a language that forms words with an alphabet.
+Arguably the earliest encryption scheme is the **Caesar cipher**, which is named after Julius Caesar, who used this scheme to protect important military messages (All of Caesar’s messages were written in Latin, of course, which already makes them unreadable for most of us!).
 
-The Caesar cipher involves replacing each letter in a message with the letter that is a certain number of letters after it in the alphabet. So, in an English message, we might replace each A with D, each B with E, each C with F, and so on, if shifting by three characters. We continue this approach all the way up to W, which is replaced with Z. Then, we let the substitution pattern wrap around, so that we replace X with A, Y with B, and Z with C.
+The Caesar cipher is a simple way to obscure a message written in a language that forms words with an alphabet.
+
+The Caesar cipher involves replacing each letter in a message with the letter that is a certain number of letters after it in the alphabet.
+
+So, in an English message, we might replace each A with D, each B with E, each C with F, and so on, if shifting by three characters. 
+
+We continue this approach all the way up to W, which is replaced with Z. Then, we let the substitution pattern wrap around, so that we replace X with A, Y with B, and Z with C.
 
 Our goal is to achieve this conversation:
 
@@ -647,7 +664,7 @@ Message: THE EAGLE IS IN PLAY; MEET AT JOE’S.
 
 Here is the `CeaserCipher` Class:
 
-```python
+``` py title="caesarcipher.py" linenums="1"
 class CaesarCipher():
     """Class for doing encryption and decryption using CaesarCipher"""
     def __init__(self, shift):
@@ -688,6 +705,8 @@ if __name__ == "__main__":
     print(f"Message is : {answer}")
 ```
 
+Feel free to try this out!
+
 ## Multidimensional Data Sets 🤭
 
 `Lists`, `tuples`, and `strings` in Python are one-dimensional. 
@@ -710,14 +729,15 @@ For example, the two-dimensional data:
 
 might be stored in Python as follows:
 
-```python
+``` py
 data = [ [22, 18, 709, 5, 33], [45, 32, 830, 120, 750], [4, 880, 45, 66, 61] ]
 ```
+
 ### Constructing a Multidimensional List
 
-These are mistakes:
+These are some common mistakes:
 
-```python
+``` py
 data = ([0] * c) * r # this just multiplies the list like concatenation
 
 data = [[0] * c] * r 
@@ -726,24 +746,33 @@ data = [[0] * c] * r
 # the visual is down below
 ```
 
-![[fig5.23.png]]
+<figure markdown="span">
+  ![flaws](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-23.png)
+  <figcaption>A Flawed Approach</figcaption>
+</figure>
 
-The correct way: ==LIST COMPREHENSIONS== FOR THE RESCUE.
+The correct way: **LIST COMPREHENSIONS** FOR THE RESCUE.
 
-```python
+``` py
 data = [ [0] * c for i in range(r)]
 ```
 
-By using list comprehension, the expression `[0] * c` is reevaluated for each pass of the embedded for loop. Therefore, we get `r` distinct secondary lists, as desired. (We note that the variable `i` in that command is irrelevant; we simply need a for loop that iterates `r` times.)
+By using list comprehension, the expression `[0] * c` is reevaluated for each pass of the embedded for loop.
 
-![[fig5.24.png]]
+Therefore, we get `r` distinct secondary lists, as desired (We note that the variable `i` in that command is irrelevant; we simply need a for loop that iterates `r` times).
+
+<figure markdown="span">
+  ![valid_matrix](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter5/fig5-24.png)
+  <figcaption>A Valid Matrix</figcaption>
+</figure>
+
 ### Tic Tac Toe  🥰
 
 This game is not even interesting because a good player can always force a tie.
 
 But for just training, here is the code for `TicTacToe`:
 
-```python
+``` py title="tictactoe.py" linenums="1"
 class TicTacToe:
     """Management of a Tic-Tac-Toe game (does not do strategy)."""
 
@@ -812,4 +841,4 @@ if __name__ == '__main__':
         print(winner, 'wins')
 ```
 
-Done with third draft! 💕
+Now, let's move to [Stacks, Queues and Dequeues](https://learningdsainpython.kantarcise.com/DS%26A-Stacks-Queues-and-Deques/). 💚
