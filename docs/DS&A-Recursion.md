@@ -7,13 +7,13 @@ hide:
 
 Recursion is a technique by which a function makes one or more calls to itself during execution.
 
-File System, A Ruler and Binary Search and Fibonacci are great examples.
+File System, A Ruler, Binary Search and Fibonacci are great examples.
 
 ## Illustrative Examples
 
 Let's start by working on a factorial.
 
-The factorial function is important because it is known to equal the number of ways in which n distinct items can be arranged into a sequence, that is, the ==number of permutations of n items.== 
+The factorial function is important because it is known to equal the number of ways in which n distinct items can be arranged into a sequence, that is, the **number of permutations of n items.** 
 
 For example, the three characters a, b, and c can be arranged in $3! = 3 · 2 · 1 = 6$ ways: `abc, acb, bac, bca, cab, and cba`.
 
@@ -29,14 +29,18 @@ def factorial(n):
 
 Recursion is always with a **base case** and **recursive case**.
 
-We illustrate the execution of a recursive function using a recursion trace. Each entry of the trace corresponds to a recursive call. Each new recursive function call is indicated by a downward arrow to a new invocation. When the function returns, an arrow showing this return is drawn and the return value may be indicated alongside this arrow.
+We illustrate the execution of a recursive function using a recursion trace.
+
+Each entry of the trace corresponds to a recursive call. Each new recursive function call is indicated by a downward arrow to a new invocation.
+
+When the function returns, an arrow showing this return is drawn and the return value may be indicated alongside this arrow.
 
 <figure markdown="span">
   ![rec_trace](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter4/fig4-1.png)
   <figcaption>Recursion Trace.</figcaption>
 </figure>
 
-In Python, each time a function (recursive or otherwise) is called, a structure known as an activation record or frame is made to store information about the progress of that invocation of the function. 
+In Python, each time a function (recursive or otherwise) is called, a structure known as an **activation record** or frame is made to store information about the progress of that invocation of the function. 
 
 Let's move on to an English Ruler. 📏
 
@@ -63,19 +67,19 @@ def draw_line(tick_length, tick_label=''):
         line += ' ' + tick_label
     print(line)
 
-def draw_interval(center_lenght):
+def draw_interval(center_length):
     """Draw tick interval based upon a central tick length."""
-    if center_lenght > 0: # stop when length drops to 0
-        draw_interval(center_lenght - 1) # recursively draw top ticks
-        draw_line(center_lenght) # draw center tick
-        draw_interval(center_lenght - 1) # recursively draw bottom ticks
+    if center_length > 0: # stop when length drops to 0
+        draw_interval(center_length - 1) # recursively draw top ticks
+        draw_line(center_length) # draw center tick
+        draw_interval(center_length - 1) # recursively draw bottom ticks
 
-def draw_ruler(num_inches, major_lenght):
+def draw_ruler(num_inches, major_length):
     """Draw English ruler with given number of inches, major tick length."""
-    draw_line(major_lenght, '0') # draw inch 0 line
+    draw_line(major_length, '0') # draw inch 0 line
     for j in range(1, 1 + num_inches):
-        draw_interval(major_lenght - 1) # draw interior ticks for inch
-        draw_line(major_lenght, str(j)) # draw inch j line and label
+        draw_interval(major_length - 1) # draw interior ticks for inch
+        draw_line(major_length, str(j)) # draw inch j line and label
 
 draw_ruler(2, 4)
 ```
@@ -241,13 +245,13 @@ In the binary search we perform constant number of primitive operations at each 
 
 ## Recursion Run Amok 😯
 
-==Run amok== means, is to behave uncontrollably and disruptively.
+> **Run amok** means, is to behave uncontrollably and disruptively.
 
 Although recursion is a very powerful tool, it can easily be misused in various ways.
 
 Let's revisit the element uniqueness problem:
 
-```python
+``` py
 def unique3(S, start, stop):
 	"""Return True if there are no duplicate elements in slice S[start:stop]."""
 	if stop − start <= 1: return True  # at most one item
@@ -256,19 +260,23 @@ def unique3(S, start, stop):
 	else: return S[start] != S[stop−1] # do first and last differ?
 ```
 
-Unfortunately, this is a **terribly inefficient** use of recursion. The non recursive part of each call uses $O(1)$ time, so the overall running time will be proportional to the total number of recursive invocations.
+Unfortunately, this is a **terribly inefficient** use of recursion.
 
-A single call to `unique3` for a problem of size n may result in two recursive calls on problems of size $n − 1.$ Those two calls with size $n − 1$ could in turn result in four calls (two each) with a range of size $n − 2$, and thus eight calls with size $n − 3$ and so on.
+The non recursive part of each call uses $O(1)$ time, so the overall running time will be proportional to the total number of recursive invocations.
 
-Thus, in the worst case, the total number of function calls is given by the geometric summation
-$$1 + 2 + 4 + · · · + 2^{n−1} $$
-which is equal to $2^{n − 1}$ . Thus, the running time of function `unique3` is O($2^n$). 
+A single call to `unique3` for a problem of size n may result in two recursive calls on problems of size $n − 1.$
+
+Those two calls with size $n − 1$ could in turn result in four calls (two each) with a range of size $n − 2$, and thus eight calls with size $n − 3$ and so on.
+
+Thus, in the worst case, the total number of function calls is given by the geometric summation $1 + 2 + 4 + · · · + 2^{n−1}$ which is equal to $2^{n − 1}$ .
+
+Thus, the running time of function `unique3` is O($2^n$). 
 
 This is an incredibly inefficient function for solving the element uniqueness problem.
 
 Here is another example:
 
-```python
+``` py
 def bad_fibonacci(n):
 	"""Return the nth Fibonacci number."""
 	if n <= 1:
@@ -280,13 +288,14 @@ def bad_fibonacci(n):
 Unfortunately, such a direct implementation of the Fibonacci formula results in a terribly inefficient function.
 
 Computing the $n_{th}$ Fibonacci number in this way requires an exponential number of calls to the function.
+
 #### What can we do? 🤔
 
 We can compute $F_{n}$ much more efficiently using a recursion in which each invocation makes only one recursive call. To do so, we need to redefine the expectations of the function.
 
 Rather than having the function return a single value, which is the nth Fibonacci number, we define a recursive function that returns a pair of consecutive Fibonacci numbers ($F_n, F_{n−1}$), using the convention $F_{−1} = 0$.
 
-```python
+``` py
 def good_fibonacci(n):
 	"""Return pair of Fibonacci numbers, F(n) and F(n-1)."""
 	if n <= 1:
@@ -314,7 +323,7 @@ fib(10) # 55
 fib(17) # 1597
 ```
 
-or we can use `lru_cache`:
+or we can use [`lru_cache`](https://docs.python.org/3/library/functools.html#functools.lru_cache):
 
 ```python
 from functools import lru_cache
@@ -329,19 +338,24 @@ def fibo_cached(n):
 
 fibo_cached(10) # 55
 ```
+
 ### Maximum Recursive Depth in Python 🔎
 
-Another danger in the misuse of recursion is known as infinite recursion. If each recursive call makes another recursive call, without ever reaching a base case, then we have an infinite series of such calls.
+Another danger in the misuse of recursion is known as infinite recursion. 😮
+
+If each recursive call makes another recursive call, without ever reaching a base case, then we have an infinite series of such calls.
 
 This is a fatal error.
 
-**Wisdom:** A programmer should ensure that each recursive call is in some way progressing toward a base case (for example, by having a parameter value that decreases with each call). 
+!!! tip
+
+    A programmer should ensure that each recursive call is in some way progressing toward a base case (for example, by having a parameter value that decreases with each call). 
 
 However, to combat against infinite recursions, the designers of Python made an intentional decision to limit the overall number of function activations that can be simultaneously active. 
 
 The precise value of this limit depends upon the Python distribution, but a typical default value is 1000.
 
-```python
+``` py
 import sys
 old = sys.getrecursionlimit() # perhaps 1000 is typical
 sys.setrecursionlimit(1000000) # change to allow 1 million nested calls
@@ -349,12 +363,16 @@ sys.setrecursionlimit(1000000) # change to allow 1 million nested calls
 ## Further into Recursion 👨‍💻 
 
 We organize our presentation by considering the maximum number of recursive calls that may be started from within the body of a single activation.
+
 • If a recursive call starts at most one other, we call this a **linear recursion**.
 • If a recursive call may start two others, we call this a **binary recursion**.
 • If a recursive call may start three or more others, this is **multiple recursion**.
+
 ### Linear Recursion
 
-If a recursive function is designed so that each invocation of the body makes at most one new recursive call, this is know as linear recursion. Of the recursions we have seen so far, the implementation of the factorial function and the `good_fibonacci` function are clear examples of linear recursion.
+If a recursive function is designed so that each invocation of the body makes at most one new recursive call, this is know as linear recursion.
+
+Of the recursions we have seen so far, the implementation of the factorial function and the `good_fibonacci` function are clear examples of linear recursion.
 
 The linear recursion terminology reflects the structure of the recursion trace, not the running time.
 
@@ -369,7 +387,10 @@ def linear_sum(S, n):
 
 Constant operation for $n + 1$ activations. So the overall time complexity is $O(n)$.
 
-![[fig4.10.png]]
+<figure markdown="span">
+  ![fig4_10](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter4/fig4-10.png)
+  <figcaption>Another Recursion trace</figcaption>
+</figure>
 
 Here is a $O(n)$ time power function using recursion:
 
@@ -397,14 +418,20 @@ def power(x, n):
 		return result
 ```
 
-![[fig4.12.png]]
+<figure markdown="span">
+  ![fig4_12](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter4/fig4-12.png)
+  <figcaption>And another Recursion trace</figcaption>
+</figure>
+
 ### Binary Recursion
 
-When a function makes two recursive calls, we say that it uses binary recursion. We have already seen several examples of binary recursion, most notably when drawing the English ruler or in the `bad_fibonacci` function.
+When a function makes two recursive calls, we say that it uses binary recursion.
+
+We have already seen several examples of binary recursion, most notably when drawing the English ruler or in the `bad_fibonacci` function.
 
 Here is another interesting example, binary sum:
 
-```python
+``` py title="binary_sum.py" linenums="1"
 def binary_sum(S, start,stop):
     """Return the sum of the numbers in implicit slice S[start:stop]."""
     if start >= stop :              # zero elements in slice
@@ -417,6 +444,7 @@ def binary_sum(S, start,stop):
 ```
 
 Although binary sum has $2^n$ recursive calls, the time complexity is $O(n)$ because at each call $n$ is halved. You can think it as: $2^{(log2^n)} = n$
+
 ### Multiple Recursion
 
 Generalizing from binary recursion, we define multiple recursion as a process in which a function may make more than two recursive calls. 
@@ -445,21 +473,26 @@ For example, the following are all instances of what are known as summation puzz
 #       Add e back to U {e is now considered as unused}
 ```
 
-![[fig4.14.png]]
+<figure markdown="span">
+  ![puzzle_solve_recursion](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter4/fig4-12.png)
+  <figcaption>PuzzleSolve Recursion trace</figcaption>
+</figure>
+
 ## Designing Recursive Algorithms
 
 In general, an algorithm that uses recursion typically has the following form:
 
-• ==Test for base cases.== We begin by testing for a set of base cases (there should be at least one). These base cases should be defined so that every possible chain of recursive calls will eventually reach a base case, and the handling of each base case should not use recursion.
+• **Test for base cases.** We begin by testing for a set of base cases (there should be at least one). These base cases should be defined so that every possible chain of recursive calls will eventually reach a base case, and the handling of each base case should not use recursion.
 
-• ==Recur==. If not a base case, we perform one or more recursive calls. This recursive step may involve a test that decides which of several possible recursive calls to make. We should define ==each possible recursive call so that it makes progress towards a base case.==
+• **Recur**. If not a base case, we perform one or more recursive calls. This recursive step may involve a test that decides which of several possible recursive calls to make. We should define **each possible recursive call so that it makes progress towards a base case.**
 
-To design a recursive algorithm for a given problem, it is useful to think of the different ways we might define subproblems that have the same general structure as the original problem. 
+To design a recursive algorithm for a given problem, it is useful to think of the different ways we might define subproblems that have the same general structure as the original problem.
 
 If one has difficulty finding the repetitive structure needed to design a recursive algorithm, it is sometimes useful to work out the problem on a few concrete examples to see how the subproblems should be defined.
+
 ## Eliminating Tail Recursion 💕
 
-**Wisdom:**  The main benefit of a recursive approach to algorithm design is that it allows us to succinctly take advantage of a repetitive structure present in many problems.
+The ***main benefit*** of a recursive approach to algorithm design is that it allows us to succinctly take advantage of a repetitive structure present in many problems.
 
 However, the usefulness of recursion comes at a modest cost. 
 
@@ -469,13 +502,13 @@ When computer memory is at a premium, it is useful in some cases to be able to d
 
 Some forms of recursion can be eliminated without any use of axillary memory. A notable such form is known as **tail recursion**.
 
-A recursion is a tail recursion if any recursive call that is made from one context is the very last operation in that context, with the return value of the recursive call (if any) immediately returned by the enclosing recursion.
+A recursion is **a tail recursion** if any recursive call that is made from one context is the very last operation in that context, with the return value of the recursive call (if any) immediately returned by the enclosing recursion.
 
 Any tail recursion can be re implemented non recursively by enclosing the **body in a loop for repetition**, and replacing a recursive call with new parameters by a reassignment of the existing parameters to those values.
 
 Here is an example of reversing a sequence recursively.
 
-```python
+```py
 def reverse(S, start, stop):
     """Reverse elements in implicit slice S[start:stop]."""
     if start < stop - 1: # if at least 2 elements:
@@ -485,7 +518,7 @@ def reverse(S, start, stop):
 
 Here is the iterative version (using two pointers 😮):
 
-```python
+``` py
 def reverse_iterative(S):
     """Reverse elements in sequence S."""
     start, stop = 0, len(S)
@@ -494,4 +527,8 @@ def reverse_iterative(S):
         start, stop = start + 1, stop -1 # narrow the range
 ```
 
-Done with third draft 🥳
+So it's possible to find loop-based equivalents for tail-recursive algorithms — reducing the risk of stack overflow and often improving performance.
+
+This is especially valuable in systems programming, real-time systems, or any environment where memory is constrained.
+
+You are doing great! Let's move on to [Array Based Sequences](https://learningdsainpython.kantarcise.com/DS%26A-Array-Based-Sequences/) 🥳
