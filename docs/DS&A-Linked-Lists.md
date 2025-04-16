@@ -374,7 +374,10 @@ The array approach of ours for circularity was just and abstraction with the usa
 
 With pointers we can actually make circular Linked Lists. 🥰
 
-![[fig7.7.png]]
+<figure markdown="span">
+  ![circular_linked_lists](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter7/fig7-7.png)
+  <figcaption>A Circular Structure!</figcaption>
+</figure>
 
 A circularly linked list provides a more general model than a standard linked list for data sets that are cyclic, that is, which do not have any particular notion of a beginning and end. Here is a more symmetric illustration to the same Circular Linked List:
 
