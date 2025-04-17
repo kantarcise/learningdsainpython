@@ -838,23 +838,32 @@ There is not a one-size-fits-all solution, as each offers distinct advantages an
 
 ### Advantages of Array-Based Sequences
 
-• O(1) ACCESS. 
+• **O(1) access time.**
 
-• LESS CPU OPERATIONS COMPARED TO A LOT OF OVERHEAD IN LINKED LISTS.
+• **Fewer CPU operations compared to the overhead of linked lists.**
 
-• LESS MEMORY.
+• **Lower memory usage.**
 
-• Arrays provide $O(1)$-time access to an element based on an integer index. 
+Arrays provide $O(1)$-time access to an element based on an integer index. 
 
 The ability to access the $kth$ element for any k in $O(1)$ time is a hallmark advantage of arrays.
 
 In contrast, locating the $kth$ element in a linked list requires $O(k)$ time to traverse the list from the beginning, or possibly $O(n − k)$ time, if traversing backward from the end of a doubly linked list.
 
-Operations with equivalent asymptotic bounds typically run a constant factor more efficiently with an array-based structure versus a linked structure. As an example, consider the typical enqueue operation for a queue. Ignoring the issue of resizing an array, this operation for the `ArrayQueue` class involves an arithmetic calculation of the new index, an increment of an integer, and storing a reference to the element in the array. 
+Even when operations have the same asymptotic complexity, arrays are typically faster due to lower constant factors.
+For example, enqueueing in an `ArrayQueue` involves:
 
-In contrast, the process for a `LinkedQueue` requires the instantiation of a node, appropriate linking of nodes, and an increment of an integer. While this operation completes in $O(1)$ time in either model, the actual number of CPU operations will be more in the linked version, especially given the instantiation of the new node.
+- An arithmetic index calculation,
+- A simple increment, and
+- Storing a reference in the array.
 
-Array-based representations typically use proportionally less memory than linked structures. This advantage may seem counter intuitive, especially given that the length of a dynamic array may be longer than the number of elements that it stores. 
+Compare that with `LinkedQueue`, which requires:
+
+- Instantiating a new node,
+- Linking it to the existing nodes, and
+- Then incrementing the size.
+
+Both are $O(1)$ operations, but the linked version requires more CPU work — especially due to the object allocation overhead.
 
 Both array-based lists and linked lists are referential structures, so the primary memory for storing the actual objects that are elements is the same for either structure. What differs is the auxiliary amounts of memory that are used by the two structures. 
 
@@ -862,15 +871,15 @@ For an array-based container of $n$ elements, a typical worst case may be that a
 
 ### Advantages of Link-Based Sequences
 
-• WORST CASE TIME BOUNDS NOT AMORTIZED (REAL TIME SYSTEMS - OS - WEB SERVER - Air Traffic Control)
+• **Worst-case time bounds are not amortized** (important for real-time systems- OS - WebServer - Air Traffic Control)
 
-• $O(1)$ TIME INSERTION AND DELETION AT ARBITRARY POSITIONS (TEXT EDITOR - CURSOR).
+• **$O(1)$ time insertions and deletions at arbitrary positions** (great for [cursor based editing](https://github.com/hotplugin0x01/Cursor_Based_Linked_List) - Text Editor).
 
-• Link-based structures provide worst-case time bounds for their operations. This is in contrast to the amortized bounds associated with the expansion or contraction of a dynamic array. When many individual operations are part of a larger computation, and we only care about the total time of that computation, an amortized bound is as good as a worst-case bound precisely because it gives a guarantee on the sum of the time spent on the individual operations.
+Link-based structures provide worst-case time bounds for their operations. This is in contrast to the amortized bounds associated with the expansion or contraction of a dynamic array. When many individual operations are part of a larger computation, and we only care about the total time of that computation, an amortized bound is as good as a worst-case bound precisely because it gives a guarantee on the sum of the time spent on the individual operations.
 
 However, if data structure operations are used in a **real-time system** that is designed to provide more immediate responses (e.g., an **operating system, Web server, air traffic control system**), a long delay caused by a single (amortized) operation may have an adverse effect.
 
-• Link-based structures support $O(1)$-time insertions and deletions at arbitrary positions. The ability to perform a constant-time insertion or deletion with the `PositionalList` class, by using a Position to efficiently describe the location of the operation, is perhaps the most significant advantage of the linked list. 
+Link-based structures support $O(1)$-time insertions and deletions at arbitrary positions. The ability to perform a constant-time insertion or deletion with the `PositionalList` class, by using a Position to efficiently describe the location of the operation, is perhaps the most significant advantage of the linked list. 
 
 This is in stark contrast to an array-based sequence. Ignoring the issue of resizing an array, inserting or deleting an element from the end of an array based list can be done in constant time. 
 
