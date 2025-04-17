@@ -867,11 +867,13 @@ Both are $O(1)$ operations, but the linked version requires more CPU work — es
 
 Both array-based lists and linked lists are referential structures, so the primary memory for storing the actual objects that are elements is the same for either structure. What differs is the auxiliary amounts of memory that are used by the two structures. 
 
-For an array-based container of $n$ elements, a typical worst case may be that a recently resized dynamic array has allocated memory for $2n$ object references. With linked lists, memory must be devoted **not only to store a reference to each contained object, but also explicit references that link the nodes**. So a singly linked list of length n already requires $2n$ references (an element reference and next reference for each node). With a doubly linked list, there are $3n$ references.
+For an array-based container of $n$ elements, a typical worst case may be that a recently resized dynamic array has allocated memory for $2n$ object references. With linked lists, memory must be devoted **not only to store a reference to each contained object, but also explicit references that link the nodes**.
+
+So a singly linked list of length n already requires $2n$ references (an element reference and next reference for each node). With a doubly linked list, there are $3n$ references. 😮
 
 ### Advantages of Link-Based Sequences
 
-• **Worst-case time bounds are not amortized** (important for real-time systems- OS - WebServer - Air Traffic Control)
+• **Worst-case time bounds are not amortized** (important for real-time systems)
 
 • **$O(1)$ time insertions and deletions at arbitrary positions** (great for [cursor based editing](https://github.com/hotplugin0x01/Cursor_Based_Linked_List) - Text Editor).
 
@@ -879,11 +881,18 @@ Link-based structures provide worst-case time bounds for their operations. This 
 
 However, if data structure operations are used in a **real-time system** that is designed to provide more immediate responses (e.g., an **operating system, Web server, air traffic control system**), a long delay caused by a single (amortized) operation may have an adverse effect.
 
-Link-based structures support $O(1)$-time insertions and deletions at arbitrary positions. The ability to perform a constant-time insertion or deletion with the `PositionalList` class, by using a Position to efficiently describe the location of the operation, is perhaps the most significant advantage of the linked list. 
+Link-based structures support $O(1)$-time insertions and deletions at arbitrary positions.
+
+The ability to perform a constant-time insertion or deletion with the `PositionalList` class, by using a Position to efficiently describe the location of the operation, is perhaps the most significant advantage of the linked list. 
 
 This is in stark contrast to an array-based sequence. Ignoring the issue of resizing an array, inserting or deleting an element from the end of an array based list can be done in constant time. 
 
 However, more general insertions and deletions are expensive. For example, with Python’s array-based list class, a call to insert or pop with index k uses $O(n − k + 1)$ time because of the loop to shift all subsequent elements.
+
+``` py
+my_list.insert(k, item)
+my_list.pop(k)
+```
 
 As an example application, consider a text editor that maintains a document as a sequence of characters. 
 
