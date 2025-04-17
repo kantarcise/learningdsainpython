@@ -1,7 +1,11 @@
-Part of [[Data Structures and Algorithms - In Python]]
-
 ---
-# Maps and Dictionaries 😍
+hide:
+  - toc
+---
+
+# Maps, Hash Tables and Skip Lists
+
+## Maps and Dictionaries 😍
 
 Python’s `dict` class is arguably the most significant data structure in the language. It represents an abstraction known as a dictionary in which unique keys are mapped to associated values. 
 
@@ -20,7 +24,8 @@ Common applications of maps include the following:
 • A computer graphics system may map a color name, such as turquoise , to the triple of numbers that describes the color’s RGB (red-green-blue) representation, such as (64,224,208).
 
 • Python uses a dictionary to represent each namespace, mapping an identifying string, such as `pi` , to an associated object, such as `3.14159`.
-## The Map ADT
+
+### The Map ADT
 
 Here is the map ADT and it's methods:
 
@@ -45,7 +50,8 @@ Here is the map ADT and it's methods:
 | `M != M2` | Return True if maps M and M2 do not have identical key-value associations. |
 
 ![[fig10.99.png]]
-## Application: Counting Word Frequencies
+
+### Application: Counting Word Frequencies
 
 As a case study for using a map, consider the problem of counting the number of occurrences of words in a document. This is a standard task when performing a statistical analysis of a document, for example, when categorizing an email or news article.
 
@@ -67,7 +73,8 @@ for (w,c) in freq.items(): # (key, value) tuples represent (word, count)
 print( "The most frequent word is ", max word)
 print( "Its number of occurrences is ", max count)
 ```
-## Application: Finding The min/max Value based on values of dict
+
+### Application: Finding The min/max Value based on values of dict
 
 Although Python dict's iterate over their keys, we can define `max()`/`min()` with the help of `key` parameter, such that we are able make comparisons based on values:
 
@@ -80,7 +87,8 @@ min(d) # 3
 
 min(d, key = lambda x : d[x]) # 100
 ```
-## Python’s `MutableMapping` Abstract Base Class
+
+### Python’s `MutableMapping` Abstract Base Class
 
 The collections module provides two abstract base classes that are relevant to our current discussion: the `Mapping` and `MutableMapping` classes.
 
@@ -89,7 +97,8 @@ What we define as the map ADT in Chapter 10.1.1 is akin to the `MutableMapping` 
 The significance of these abstract base classes is that they provide a framework to assist in creating a user-defined map class. In particular, the `MutableMapping` class provides concrete implementations for all behaviors other than the first five outlined in Chapter 10.1.1: `__getitem__` , `__setitem__` , `__delitem__` , `len` , and `__iter__` . 
 
 As we implement the map abstraction with various data structures, as long as we provide the five core behaviors, we can inherit all other derived behaviors by simply declaring `MutableMapping` as a parent class.
-## Our `MapBase` Class
+
+### Our `MapBase` Class
 
 We will be providing many different implementations of the map ADT, in the remainder of this chapter and next, using a variety of data structures demonstrating a  trade-off of advantages and disadvantages.
 
@@ -127,7 +136,8 @@ class MapBase(MutableMapping):
       return "key %s value %s" % (self._key, self._value)
       
 ```
-## Simple Unsorted Map Implementation
+
+### Simple Unsorted Map Implementation
 
 An empty table is initialized as `self._table` within the constructor for our map. A python `list` ?
 
@@ -174,7 +184,8 @@ class UnsortedTableMap(MapBase):
         for item in self._table:
             yield item._key  # yield the KEY
 ```
-# Hash Tables
+
+## Hash Tables
 
 In this section, we introduce one of the most practical data structures for implementing a map, and the one that is used by Python’s own implementation of the `dict` class. This structure is known as a **hash table**.
 
@@ -195,7 +206,8 @@ Ideally, keys will be well distributed in the range from $0$ to $N − 1$ by a h
 We will conceptualize our table as a bucket array, as shown in Figure 10.4, in which each bucket may manage a collection of items that are sent to a specific index by the hash function.
 
 ![[fig10.4.png]]
-## Hash Functions
+
+### Hash Functions
 
 The goal of a hash function, $h$, is to map each key $k$ to an integer in the range `[0, N − 1]`, where $N$ is the capacity of the bucket array for a hash table.
 
@@ -204,12 +216,14 @@ If there are two or more keys with the same hash value, then two different items
 ![[fig10.5.png]]
 
 It is common to view the evaluation of a hash function, $h(k)$, as consisting of two portions—a hash code that maps a key k to an integer, and a compression function that maps the hash code to an integer within a range of indices, $[0, N − 1]$, for a bucket array.
-### Hash Codes
+
+#### Hash Codes
 
 The first action that a hash function performs is to take an arbitrary key k in our map and compute an integer that is called the hash code for k; this integer need not be in the range $[0, N − 1]$, and may even be **negative**. We desire that the set of hash codes assigned to our keys should **avoid collisions** as much as possible.
 
 For if the hash codes of our keys cause collisions, then there is no hope for our compression function to avoid them.
-#### Treating the Bit Representation as an Integer
+
+##### Treating the Bit Representation as an Integer
 
 To begin, we note that, for any data type X that is represented using at most as many bits as our integer hash codes, we can simply take as a hash code for X an integer interpretation of its bits. 
 
@@ -218,7 +232,9 @@ For example, the hash code for key `314` could simply be `314`.
 Not good idea. 
 
 Python relies on 32-bit hash codes. If a floating-point number uses a 64-bit representation, its bits cannot be viewed directly as a hash code. One possibility is to use only the high-order 32 bits (or the low-order 32 bits). This hash code, of course, ignores half of the information present in the original key, and if many of the keys in our map only differ in these bits, then they will collide using this simple hash code.
-#### Polynomial Hash Codes
+
+##### Polynomial Hash Codes
+
 The summation and exclusive-or hash codes, described above, are not good choices for character strings or other variable-length objects that can be viewed as tuples of the form $(x_0, x_1 , . . . , x_{n−1})$, where the order of the $x_i$ ’s is significant.
 
 For example, consider a 16-bit hash code for a character string s that sums the Unicode values of the characters in s. This hash code unfortunately produces lots of unwanted collisions for common groups of strings. In particular, `"temp01"` and `"temp10"` collide using this function, as do `"stop"`, `"tops"`, `"pots"`, and `"spot"`.
@@ -231,7 +247,8 @@ $$
 Mathematically speaking, this is simply a polynomial in a that takes the components $(x_0, x_1 , . . . , x_{n−1} )$ of an object $x$ as its coefficients. This hash code is therefore called a ==polynomial hash code==.
 
 Intuitively, a polynomial hash code uses multiplication by different powers as a way to spread out the influence of each component across the resulting hash code.
-#### Cyclic-Shift Hash Codes
+
+##### Cyclic-Shift Hash Codes
 
 A variant of the polynomial hash code replaces multiplication by a with a cyclic shift of a partial sum by a certain number of bits. 
 
@@ -254,7 +271,8 @@ print(hash_code("88")) # 1848
 As with the traditional polynomial hash code, fine-tuning is required when using a cyclic-shift hash code, as we must wisely choose the amount to shift by for each new character.
 
 ![[fig10.98.png]]
-### Hash Codes in Python 🥳
+
+#### Hash Codes in Python 🥳
 
 The standard mechanism for computing hash codes in Python is a built-in function with signature `hash(x)` that returns an integer value that serves as the hash code for object x. 
 
@@ -279,29 +297,34 @@ def __hash__(self):
 An important rule to obey is that if a class defines equivalence through `__eq__` , then any implementation of `__hash__` must be consistent, in that if `x == y`, then `hash(x) == hash(y)`.
 
 This rule extends to any well-defined comparisons between objects of different classes. For example, since Python treats the expression `5 == 5.0` as true, it ensures that `hash(5)` and `hash(5.0)` are the same.
-### Compression Functions 😍
+
+#### Compression Functions 😍
 
 We still have to **map the value we found to the array**.
 
 The hash code for a key k will typically not be suitable for immediate use with a bucket array, because the integer hash code may be negative or may exceed the capacity of the bucket array.
-#### The Division Method
+
+##### The Division Method
 
 A simple compression function is the division method, which maps an integer i to
 $$i \:mod \:N$$
 where N, the size of the bucket array, is a fixed positive integer.
-#### The MAD Method
+
+##### The MAD Method
 
 A more sophisticated compression function, which helps eliminate repeated patterns in a set of integer keys, is the ==Multiply-Add-and-Divide== (or “MAD”) method. 
 
 This method maps an integer $i$ to
 $$[(ai + b)\:mod p]\:mod N,$$
 where N is the size of the bucket array, p is a prime number larger than $N$, and $a$ and $b$ are integers chosen at random from the interval $[0, p − 1]$, with $a$ > 0.
-## Collision-Handling Schemes 🍒
+
+### Collision-Handling Schemes 🍒
 
 The main idea of a hash table is to take a bucket array, `A`, and a hash function, `h`, and use them to implement a map by storing each item `(k, v)` in the “bucket” $A[h(k)]$. This simple idea is challenged, however, when we have two distinct keys, $k1$ and $k2$ , such that `h(k1) = h(k2)`. 
 
 The existence of such collisions prevents us from simply inserting a new item `(k, v)` directly into the bucket $A[h(k)]$. It also complicates our procedure for performing insertion, search, and deletion operations.
-### Separate Chaining
+
+#### Separate Chaining
 
 A simple and efficient way for dealing with collisions is to have each bucket `A[j]` store its own secondary container, holding items `(k, v)` such that $h(k) = j$. 
 
@@ -316,7 +339,8 @@ Therefore, if given a good hash function, the core map operations run in $O(⌈n
 The ratio $λ = n/N$, called the ==load factor== of the hash table, should be bounded by a small constant, preferably below 1. As long as λ is $O(1)$, the core operations on the hash table run in $O(1)$ expected time.
 
 If we go over a certain Load Factor, we resize bucket array. Python's threshold for load factor is 2/3.
-### Open Addressing
+
+#### Open Addressing
 
 The separate chaining rule has many nice properties, such as affording simple implementations of map operations, but it nevertheless has one slight disadvantage: It requires the use of an auxiliary data structure—==a list==—to hold items with colliding keys. 
 
@@ -325,7 +349,8 @@ If ==space is at a premium== (for example, if we are writing a program for a sma
 This approach saves space because no auxiliary structures are employed, but it requires a bit more complexity to deal with collisions. There are several variants of this approach, collectively referred to as open addressing schemes, which we discuss next. 
 
 Open addressing requires that the load factor is always at most 1 and that items are stored directly in the cells of the bucket array itself.
-#### Linear Probing and Its Variants - Open Addressing Methods 💕
+
+##### Linear Probing and Its Variants - Open Addressing Methods 💕
 
 With this approach, if we try to insert an item $(k, v)$ into a bucket `A[j]` that is already occupied, where $j = h(k)$,  then we next try $A[( j + 1) \: mod N].$ If $A[( j + 1) \: mod N]$ is also occupied, then we try $A[( j + 2) \: mod N]$, and so on, until we find an empty bucket that can accept the new item.
 
@@ -344,11 +369,13 @@ A typical way to get around this difficulty is to replace a deleted item with a 
 Linear probing saves memory space but slows us down. 😕
 
 Although use of an open addressing scheme can save space, linear probing suffers from an additional disadvantage. It tends to cluster the items of a map into contiguous runs, which may even overlap (particularly if more than half of the cells in the hash table are occupied). Such contiguous runs of occupied hash cells cause searches to slow down considerably.
+
 #### Quadratic Probing
 
 Another open addressing strategy, known as quadratic probing, iteratively tries the buckets $A[(h(k) + f (i)) \: mod N]$, for $i = 0, 1, 2, . . .,$ where $f (i) = i^2$, until finding an empty bucket. 
 
 As with linear probing, the quadratic probing strategy complicates the removal operation, but it does avoid the kinds of clustering patterns that occur with linear probing.
+
 #### Double Hashing 💖 - `What PYTHON dicts use!`
 
 An open addressing strategy that does not cause clustering of the kind produced by linear probing or the kind produced by quadratic probing is the ==double hashing strategy==. 
@@ -360,7 +387,8 @@ In this scheme, the secondary hash function is not allowed to evaluate to zero; 
 **Python dicts use this!**
 
 Another approach to avoid clustering with open addressing is to iteratively try buckets $A[(h(k) + f (i)) \: mod N]$ where $f(i)$ is based on a pseudo-random number generator, providing a repeatable, but somewhat arbitrary, sequence of subsequent probes that depends upon bits of the original hash code. This is the approach currently used by Python’s dictionary class.
-## Load Factors, Rehashing, and Efficiency 😯
+
+### Load Factors, Rehashing, and Efficiency 😯
 
 In the hash table schemes described so far, it's important that the load factor, $λ = n/N$, be kept below 1. 
 
@@ -375,7 +403,8 @@ We explore the degradation of quadratic probing when λ ≥ 0.5. Experiments sug
 If load factor goes over threshold, dynamic arrays.
 
 If an insertion causes the load factor of a hash table to go above the specified threshold, then it is common to resize the table (to regain the specified load factor) and to reinsert all objects into this new table. Although we need not define a new hash code for each object, we do need to reapply a new compression function that takes into consideration the size of the new table
-### Efficiency of Hash Tables 🤔
+
+#### Efficiency of Hash Tables 🤔
 
 In the worst case, a poor hash function could map every item to the same bucket. This would result in linear-time performance for the core map operations with separate chaining, or with any open addressing model in which the secondary sequence of probes depends only on the hash code.
 
@@ -397,7 +426,8 @@ Python’s `dict` class is implemented with hashing, and the Python interpreter 
 The basic command c = a + b involves two calls to `__getitem__` in the dictionary for the local namespace to retrieve the values identified as a and b, and a call to `__setitem__` to store the result associated with name c in that namespace. 
 
 In our own algorithm analysis, we simply presume that such dictionary operations run in constant time, independent of the number of entries in the namespace. (Admittedly, the number of entries in a typical namespace can almost surely be bounded by a constant.)
-## Python Hash Table Implementation
+
+### Python Hash Table Implementation
 
 We extend the MapBase class (from Code Fragment 10.2), to define a new `HashMapBase` class providing much of the common functionality to our two hash table implementations.
 
@@ -466,7 +496,8 @@ class HashMapBase(MapBase):
         for (k, v) in old:
             self[k] = v  # reinsert old key-value pair
 ```
-### Separate Chaining Implementation
+
+#### Separate Chaining Implementation
 
 A concrete implementation of a hash table with separate chaining.
 
@@ -499,7 +530,8 @@ class ChainHashMap(HashMapBase):
                 for key in bucket:
                     yield key
 ```
-### Linear Probing Implementation
+
+#### Linear Probing Implementation
 
 Our implementation of a `ProbeHashMap` class, using open addressing with linear probing, is down below. In order to support deletions, we use a technique described before, in which we place a special marker in a table location at which an item has been deleted, so that we can distinguish between it and a location that has always been empty.
 
@@ -561,7 +593,8 @@ When a key-value pair is being assigned in the map, we must attempt to find an e
 However, if no match is found, we prefer to re-purpose the first slot marked with `_AVAIL`, if any, when placing the new element in the table. The find slot method enacts this logic, continuing the search until a truly empty slot, but returning the index of the first available slot for an insertion. 
 
 When deleting an existing item within `_bucket_delitem`, we intentionally set the table entry to the AVAIL sentinel in accordance with our strategy.
-# Sorted Maps 🧡
+
+## Sorted Maps 🧡
 
 TODO: Not urgent
 
@@ -612,12 +645,13 @@ for key in a:
 # 12 23
 
 ```
-## Sorted Search Tables
+
+### Sorted Search Tables
 
 TODO: Not urgent
 
 ...
-## Two Applications of Sorted Maps
+### Two Applications of Sorted Maps
 
 
 ### Flight Databases
@@ -640,7 +674,8 @@ Life is full of trade-offs. We often have to trade off a desired performance mea
 TODO: Not urgent
 
 ...
-# Skip Lists 
+
+## Skip Lists 
 
 An interesting data structure for realizing the sorted map ADT is the skip list. 
 
@@ -667,19 +702,22 @@ In addition, the lists in S satisfy the following:
 TODO:
 
 ...
-## Search and Update Operations in a Skip List
+
+### Search and Update Operations in a Skip List
 
 TODO: Not urgent
 
 ...
 
 ![[table10.4.png]]
-## Probabilistic Analysis of Skip Lists
+
+### Probabilistic Analysis of Skip Lists
 
 TODO: Not urgent
 
 ...
-# Sets, Multisets, and Multimaps
+
+## Sets, Multisets, and Multimaps
 
 We conclude this chapter by examining several additional abstractions that are closely related to the map ADT, and that can be implemented using data structures similar to those for a map.
 
@@ -729,12 +767,14 @@ Finally, there exists a variety of behaviors that either update an existing set,
 | `S ˆ= T` | Update set S to become the symmetric difference of itself and set T. |
 | `S − T` | Return a new set containing elements in S but not T. |
 | `S −= T` | Update set S to remove all common elements with set T. |
-## Python’s MutableSet Abstract Base Class
+
+### Python’s MutableSet Abstract Base Class
 
 TODO: Not urgent
 
 ...
-## Implementing Sets, Multisets, and Multimaps
+
+### Implementing Sets, Multisets, and Multimaps
 
 TODO: Not urgent
 
