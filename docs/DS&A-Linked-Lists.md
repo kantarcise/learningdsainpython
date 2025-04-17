@@ -24,7 +24,7 @@ A **linked list**, in contrast, relies on a more distributed representation in w
 Each node maintains a reference to it's element and one or more references to neighboring nodes in order to collectively represent the linear order of the sequence.
 
 <figure markdown="span">
-  ![train](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter7/fig7-99.png)
+  ![train](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter7/fig7-99.jpg)
   <figcaption>Linked List is just like a Train!</figcaption>
 </figure>
 
@@ -375,18 +375,22 @@ The array approach of ours for circularity was just and abstraction with the usa
 With pointers we can actually make circular Linked Lists. 🥰
 
 <figure markdown="span">
-  ![circular_linked_lists](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter7/fig7-7.png)
-  <figcaption>A Circular Structure!</figcaption>
+  ![circular_singly_linked_lists](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter7/fig7-7.png)
+  <figcaption>A Circular Structure for a SLL!</figcaption>
 </figure>
 
 A circularly linked list provides a more general model than a standard linked list for data sets that are cyclic, that is, which do not have any particular notion of a beginning and end. Here is a more symmetric illustration to the same Circular Linked List:
 
-![[fig7.8.png]]
+<figure markdown="span">
+  ![circular_linked_lists](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter7/fig7-8.png)
+  <figcaption>A Circular Linked List!</figcaption>
+</figure>
 
 Even though a circularly linked list has no beginning or end, per se, we must maintain a reference to a particular node in order to make use of the list. We use the identifier `current` to describe such a designated node.
+
 ### Round-Robin Schedulers
 
-This is just for training. 
+This part is just for training.
 
 To motivate the use of a circularly linked list, we consider a **round-robin scheduler**, which iterates through a collection of elements in a circular fashion and “services” each element by performing a given action on it.
 
@@ -394,14 +398,20 @@ Such a scheduler is used, for example, to fairly allocate a resource that must b
 
 For instance, round-robin scheduling is often used to **allocate slices of CPU time** to various applications running concurrently on a computer.
 
-![[fig7.9.png]]
+<figure markdown="span">
+  ![round_robin](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter7/fig7-9.png)
+  <figcaption>Round Robin Scheduling!</figcaption>
+</figure>
 
 We can do this operation better in the following way:
 
-With a `CircularQueue` class that supports the entire queue ADT, together with an additional method, `rotate()`, that moves the first element of the queue to the back. (A similar method is supported by the `deque` class of Python’s collections module - `collections.deque`) With this operation, a round-robin schedule can more efficiently be implemented by repeatedly performing the following steps:
+With a `CircularQueue` class that supports the entire queue ADT, together with an additional method, `rotate()`, that moves the first element of the queue to the back (A similar method is supported by the `deque` class of Python’s collections module - `collections.deque`).
+
+With this operation, a round-robin schedule can more efficiently be implemented by repeatedly performing the following steps:
 
 1. Service element `Q.front()`
 2. `Q.rotate()`
+
 ### Implementing a Queue with a Circularly Linked List
 
 This is for training as well.
@@ -410,7 +420,7 @@ We only need `_tail` pointer because we know the `_head` can be found by followi
 
 Here is the code:
 
-```python
+``` py title="circular_queue.py" linenums="1"
 class Empty(Exception): pass
 
 class CircularQueue:
@@ -503,7 +513,7 @@ class CircularQueue:
 
 Here is the `collections.deque` rotate method:
 
-```python
+``` py
 from collections import deque
 
 a = deque()
@@ -516,6 +526,7 @@ print(a) # dequeue([3,4,5])
 a.rotate()
 print(a) # dequeue([4,5,3])
 ```
+
 ## Doubly Linked Lists  🏯
 
 In a singly linked list, each node maintains a reference to the node that **is immediately after** it.
@@ -526,33 +537,44 @@ More generally, we cannot efficiently delete an arbitrary node from an interior 
 
 To provide greater symmetry, we define a linked list in which each node keeps an explicit reference to the node before it and a reference to the node after it.
 
-Such a structure is known as a ==**doubly linked list.**== 💕
+Such a structure is known as a **Doubly Linked List.** (DLL) 💕
 
 We continue to use the term `next` for the reference to the node that follows another, and we introduce the term `prev` for the reference to the node that precedes it.
+
 #### Header and Sentinels 🤔
 
 In order to avoid some special cases when operating near the boundaries of a doubly linked list, it helps to add special nodes at both ends of the list: a **header** node at the beginning of the list, and a **trailer** node at the end of the list.
 
 These “dummy” nodes are known as sentinels (or guards), and they do not store elements of the primary sequence.
 
-![[fig7.10.png]]
+<figure markdown="span">
+  ![doubly_linked_list](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter7/fig7-10.png)
+  <figcaption>Doubly Linked List</figcaption>
+</figure>
 
 When using sentinel nodes, an empty list is initialized so that the next field of the header points to the trailer, and the prev field of the trailer points to the header; the remaining fields of the sentinels are irrelevant (presumably `None`, in Python).
 
-Although we could implement a doubly linked list without sentinel nodes (as we did with our singly linked list in Chapter 7.1), the slight extra space devoted to the sentinels greatly simplifies the logic of our operations. 
+Although we could implement a doubly linked list without sentinel nodes (as we did with our [singly linked list in Chapter 7](https://learningdsainpython.kantarcise.com/DS%26A-Linked-Lists/#singly-linked-lists)), the slight extra space devoted to the sentinels greatly simplifies the logic of our operations. 
 
 Most notably, the header and trailer nodes never change—only the nodes between them change.
+
 ### Inserting and Deleting with a Doubly Linked List
 
 When a new element is inserted at the front of the sequence, we will simply add the new node between the header and the node that is currently after the header.
 
 Here is how you insert to middle'ish position:
 
-![[fig7.11.png]]
+<figure markdown="span">
+  ![adding_to_a_doubly_linked_list](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter7/fig7-11.png)
+  <figcaption>Adding to middleish position</figcaption>
+</figure>
 
 Here is how you insert at front:
 
-![[fig7.12.png]]
+<figure markdown="span">
+  ![insert_at_front](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter7/fig7-12.png)
+  <figcaption>Insert at front</figcaption>
+</figure>
 
 The deletion of a node, proceeds in the opposite fashion of an insertion. 
 
@@ -560,7 +582,11 @@ The two neighbors of the node to be deleted are linked directly to each other, t
 
 Here is how you delete from a node:
 
-![[fig7.13.png]]
+<figure markdown="span">
+  ![deletion_from_DLL](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter7/fig7-12.png)
+  <figcaption>Deletion from DLL</figcaption>
+</figure>
+
 ### Basic Implementation of a Doubly Linked List
 
 We begin by providing a preliminary implementation of a doubly linked list, in the form of a class named `_DoublyLinkedBase`. 
@@ -577,7 +603,7 @@ The constructor instantiates the two sentinel nodes and links them directly to e
 
 Here is the code:
 
-```python
+``` py title="doubly_linked_base.py" linenums="1"
 class _DoublyLinkedBase:
     """A base class providing doubly linked list representation"""
     
@@ -641,17 +667,22 @@ class _DoublyLinkedBase:
 ```
 
 The other two methods of our class are the nonpublic utilities, `_insert_between` and `_delete_node`.
+
 ### Implementing a Deque with a Doubly Linked List
 
-This is just for training.
-#### Wisdom:
-The double-ended queue (`deque`) ADT was introduced in Chapter 6. With an array-based implementation, we achieve all operations in **amortized $O(1)$** time, due to the occasional need to resize the array. 
+This part is just for training.
+
+!!! tip
+
+    The double-ended queue (`deque`) ADT was introduced in Chapter 6.
+    
+    With an array-based implementation, we achieve all operations in **amortized $O(1)$** time, due to the occasional need to resize the array. 
 
 With an implementation based upon a doubly linked list, we can achieve all `deque` operation in worst-case $O(1)$ time.
 
 Here is the code:
 
-```python
+``` py title="linked_deque.py" linenums="1"
 class LinkedDeque(_DoublyLinkedBase):  # note the use of inheritance
     """Double-ended queue implementation based on a doubly linked list."""
 
@@ -695,22 +726,28 @@ class LinkedDeque(_DoublyLinkedBase):  # note the use of inheritance
             raise Empty("Deque is empty")
         return self._delete_node(self._trailer._prev)  # use inherited method
 ```
+
 ## The Positional List ADT
 
-Warning: I have not bumped into a Data Structure like this in my work, so far. This might be a little too much for diving deep and might be not necessary for beginners:
+!!! warning
+
+    I have not bumped into a Data Structure like this one in my work, so far. This might be a little too much for diving deep and might be not necessary for beginners.
 
 The abstract data types that we have considered thus far, namely stacks, queues, and double-ended queues, only allow update operations that occur at one end of a sequence or the other.
 
 Although we motivated the FIFO semantics of a queue as a model for customers who are waiting to speak with a customer service representative, or fans who are waiting in line to buy tickets to a show, the queue ADT is too limiting. 
 
-What if a waiting customer decides to hang up before reaching the front of the customer
-service queue? 
+What if a waiting customer decides to hang up before reaching the front of the customer service queue? 
 
 Or what if someone who is waiting in line to buy tickets allows a friend to “cut” into line at that position? 
 
 We would like to design an abstract data type that provides a user a way to refer to elements anywhere in a sequence, and to perform arbitrary insertions and deletions.
 
-![[fig7.14.png]]
+<figure markdown="span">
+  ![identify_one](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter7/fig7-14.png)
+  <figcaption>Identify posisition without an index ?</figcaption>
+</figure>
+
 #### A Word Processor
 
 As another example, a text document can be viewed as a long sequence of characters.
@@ -718,6 +755,7 @@ As another example, a text document can be viewed as a long sequence of characte
 A word processor uses the abstraction of a cursor to describe a position within the document without explicit use of an integer index, allowing operations such as “delete the character at the cursor” or “insert a new character just after the cursor.”
 
 Furthermore, we may be able to refer to an inherent position within a document, such as the beginning of a particular section, without relying on a character index (or even a section number) that may change as the document evolves.
+
 #### A Node Reference as a Position?
 
 **One of the great benefits of a linked list structure is that it is possible to perform O(1)-time insertions and deletions at arbitrary positions of the list, as long as we are given a reference to a relevant node of the list.** 
@@ -735,6 +773,7 @@ There are several reasons to prefer that we encapsulate the nodes of a linked li
 • By better encapsulating the internal details of our implementation, we have greater flexibility to redesign the data structure and improve its performance. In fact, with a well-designed abstraction, we can provide a notion of a non-numeric position, even if using an array-based sequence.
 
 For these reasons, instead of relying directly on nodes, we introduce an independent position abstraction to denote the location of an element within a list, and then a complete positional list ADT that can encapsulate a doubly linked list.
+
 ### The Positional List Abstract Data Type
 
 To provide for a general abstraction of a sequence of elements with the ability to identify the location of an element, we define a positional list ADT as well as a simpler position abstract data type to describe a location within a list. 
@@ -789,47 +828,53 @@ TODO: This is not **urgent.** Will be revisited.
 
 ## Link Based vs Array Based Sequences 😍
 
-This part is REALLY important.
+This part is REALLY important because it summarizes everything we've learned.
 
-We close this chapter by reflecting on the relative pros and cons of array-based and link-based data structures that have been introduced thus far. The dichotomy between these approaches presents a common design decision when choosing an appropriate implementation of a data structure. There is not a one-size-fits-all solution, as each offers distinct advantages and disadvantages.
+We close this chapter by reflecting on the relative pros and cons of array-based and link-based data structures that have been introduced thus far.
+
+The dichotomy between these approaches presents a common design decision when choosing an appropriate implementation of a data structure.
+
+There is not a one-size-fits-all solution, as each offers distinct advantages and disadvantages.
+
 ### Advantages of Array-Based Sequences
 
-O(1) ACCESS. 
+• O(1) ACCESS. 
 
-LESS CPU OPERATIONS COMPARED TO A LOT OF OVERHEAD IN LINKED LISTS.
+• LESS CPU OPERATIONS COMPARED TO A LOT OF OVERHEAD IN LINKED LISTS.
 
-LESS MEMORY.
+• LESS MEMORY.
 
 • Arrays provide $O(1)$-time access to an element based on an integer index. 
 
-The ability to access the $kth$ element for any k in $O(1)$ time is a hallmark advantage of arrays. In contrast, locating the $kth$ element in a linked list requires $O(k)$ time to traverse the list from the beginning, or possibly $O(n − k)$ time, if traversing backward from the end of a doubly linked list.
+The ability to access the $kth$ element for any k in $O(1)$ time is a hallmark advantage of arrays.
 
-• Operations with equivalent asymptotic bounds typically run a constant factor more efficiently with an array-based structure versus a linked structure. As an example, consider the typical enqueue operation for a queue. Ignoring the issue of resizing an array, this operation for the `ArrayQueue` class involves an arithmetic calculation of the new index, an increment of an integer, and storing a reference to the element in the array. 
+In contrast, locating the $kth$ element in a linked list requires $O(k)$ time to traverse the list from the beginning, or possibly $O(n − k)$ time, if traversing backward from the end of a doubly linked list.
+
+Operations with equivalent asymptotic bounds typically run a constant factor more efficiently with an array-based structure versus a linked structure. As an example, consider the typical enqueue operation for a queue. Ignoring the issue of resizing an array, this operation for the `ArrayQueue` class involves an arithmetic calculation of the new index, an increment of an integer, and storing a reference to the element in the array. 
 
 In contrast, the process for a `LinkedQueue` requires the instantiation of a node, appropriate linking of nodes, and an increment of an integer. While this operation completes in $O(1)$ time in either model, the actual number of CPU operations will be more in the linked version, especially given the instantiation of the new node.
 
-• Array-based representations typically use proportionally less memory than linked structures. This advantage may seem counter intuitive, especially given that the length of a dynamic array may be longer than the number of elements that it stores. 
+Array-based representations typically use proportionally less memory than linked structures. This advantage may seem counter intuitive, especially given that the length of a dynamic array may be longer than the number of elements that it stores. 
 
 Both array-based lists and linked lists are referential structures, so the primary memory for storing the actual objects that are elements is the same for either structure. What differs is the auxiliary amounts of memory that are used by the two structures. 
 
 For an array-based container of $n$ elements, a typical worst case may be that a recently resized dynamic array has allocated memory for $2n$ object references. With linked lists, memory must be devoted **not only to store a reference to each contained object, but also explicit references that link the nodes**. So a singly linked list of length n already requires $2n$ references (an element reference and next reference for each node). With a doubly linked list, there are $3n$ references.
+
 ### Advantages of Link-Based Sequences
 
-WORST CASE TIME BOUNDS NOT AMORTIZED (REAL TIME SYSTEMS - OS - WEB SERVER - Air Traffic Control)
+• WORST CASE TIME BOUNDS NOT AMORTIZED (REAL TIME SYSTEMS - OS - WEB SERVER - Air Traffic Control)
 
-$O(1)$ TIME INSERTION AND DELETION AT ARBITRARY POSITIONS (TEXT EDITOR - CURSOR).
+• $O(1)$ TIME INSERTION AND DELETION AT ARBITRARY POSITIONS (TEXT EDITOR - CURSOR).
 
 • Link-based structures provide worst-case time bounds for their operations. This is in contrast to the amortized bounds associated with the expansion or contraction of a dynamic array. When many individual operations are part of a larger computation, and we only care about the total time of that computation, an amortized bound is as good as a worst-case bound precisely because it gives a guarantee on the sum of the time spent on the individual operations.
 
 However, if data structure operations are used in a **real-time system** that is designed to provide more immediate responses (e.g., an **operating system, Web server, air traffic control system**), a long delay caused by a single (amortized) operation may have an adverse effect.
 
-• Link-based structures support $O(1)$-time insertions and deletions at arbitrary positions. The ability to perform a constant-time insertion or deletion with the `PositionalList` class, by using a Position to efficiently describe the location of the operation, is perhaps the most significant advantage of the
-linked list. 
+• Link-based structures support $O(1)$-time insertions and deletions at arbitrary positions. The ability to perform a constant-time insertion or deletion with the `PositionalList` class, by using a Position to efficiently describe the location of the operation, is perhaps the most significant advantage of the linked list. 
 
 This is in stark contrast to an array-based sequence. Ignoring the issue of resizing an array, inserting or deleting an element from the end of an array based list can be done in constant time. 
 
-However, more general insertions and deletions are expensive. For example, with Python’s array-based list class, a call to insert or pop with index k uses $O(n − k + 1)$ time because of the loop
-to shift all subsequent elements.
+However, more general insertions and deletions are expensive. For example, with Python’s array-based list class, a call to insert or pop with index k uses $O(n − k + 1)$ time because of the loop to shift all subsequent elements.
 
 As an example application, consider a text editor that maintains a document as a sequence of characters. 
 
@@ -839,4 +884,4 @@ If the character sequence were stored in an array-based sequence (such as a Pyth
 
 With a linked-list representation, an arbitrary edit operation (insertion or deletion of a character at the cursor) can be performed in $O(1$) worst-case time, assuming we are given a position that represents the location of the cursor.
 
-Done with third version! 🥳 
+You are doing incredible! Let's move on to [Trees](https://learningdsainpython.kantarcise.com/DS%26A-Trees/) 🌳
