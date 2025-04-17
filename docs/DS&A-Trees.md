@@ -1,20 +1,27 @@
-Part of [[Data Structures and Algorithms - In Python]]
-
 ---
+hide:
+  - toc
+---
+
 # All About Trees 🌳
 
 Productivity experts say that breakthroughs come by thinking “non linearly.”
 
 In this chapter, we discuss one of the most important nonlinear data structures in computing—trees.
 
-Tree structures are indeed a breakthrough in data organization, for ==they allow us to implement a host of algorithms much faster than when using linear data structures==, such as array-based lists or linked lists.
+Tree structures are indeed a breakthrough in data organization, for **they allow us to implement a host of algorithms much faster than when using linear data structures**, such as array-based lists or linked lists.
 
 Trees also provide a natural organization for data, and consequently have become ubiquitous structures in file systems, graphical user interfaces, databases, Web sites, and other computer systems.
+
 # General Trees
 
 The relationships in a tree are hierarchical, with some objects being “above” and some “below” others.
 
-![[fig8.1.png]]
+<figure markdown="span">
+  ![family_tree](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter8/fig8-1.jpg)
+  <figcaption>A Family Tree</figcaption>
+</figure>
+
 ## Tree Definitions and Properties
 
 A tree is an abstract data type that stores elements hierarchically. 
@@ -23,7 +30,11 @@ With the exception of the top element, each element in a tree has a **parent** e
 
 We typically call the top element the root of the tree, but it is drawn as the highest element, with the other elements being connected below (just the opposite of a botanical tree).
  
-![[fig8.2.png]]
+<figure markdown="span">
+  ![family_tree](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter8/fig8-2.jpg)
+  <figcaption>Organization Structure as a Tree</figcaption>
+</figure>
+
 ### Other Node Relationships - Internal External
 
 Two nodes that are children of the same parent are **siblings**. 
