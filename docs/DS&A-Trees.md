@@ -13,16 +13,16 @@ Tree structures are indeed a breakthrough in data organization, for **they allow
 
 Trees also provide a natural organization for data, and consequently have become ubiquitous structures in file systems, graphical user interfaces, databases, Web sites, and other computer systems.
 
-# General Trees
+## General Trees
 
 The relationships in a tree are hierarchical, with some objects being “above” and some “below” others.
 
 <figure markdown="span">
-  ![family_tree](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter8/fig8-1.jpg)
+  ![family_tree](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter8/fig8-1.png)
   <figcaption>A Family Tree</figcaption>
 </figure>
 
-## Tree Definitions and Properties
+### Tree Definitions and Properties
 
 A tree is an abstract data type that stores elements hierarchically. 
 
@@ -31,11 +31,11 @@ With the exception of the top element, each element in a tree has a **parent** e
 We typically call the top element the root of the tree, but it is drawn as the highest element, with the other elements being connected below (just the opposite of a botanical tree).
  
 <figure markdown="span">
-  ![family_tree](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter8/fig8-2.jpg)
+  ![family_tree](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter8/fig8-2.png)
   <figcaption>Organization Structure as a Tree</figcaption>
 </figure>
 
-### Other Node Relationships - Internal External
+#### Other Node Relationships - Internal External
 
 Two nodes that are children of the same parent are **siblings**. 
 
@@ -49,8 +49,12 @@ Now we revisit an earlier example. We see that the internal nodes of the tree ar
 
 In the UNIX and Linux operating systems, the root of the tree is appropriately called the “root directory,” and is represented by the symbol “/.”
 
-![[fig8.3.png]]
-### ancestor - descendant
+<figure markdown="span">
+  ![file_system_tree](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter8/fig8-3.png)
+  <figcaption>File System Tree</figcaption>
+</figure>
+
+#### ancestor - descendant
 
 A node u is an ancestor of a node v if u = v or u is an ancestor of the parent of v. Conversely, we say that a node v is a descendant of a node u if u is an ancestor of v. 
 
@@ -59,7 +63,8 @@ For example, in Figure 8.3, `cs252/` is an ancestor of `papers/`, and `pr3` is a
 The sub tree of T rooted at a node v is the tree consisting of all the descendants of v in T (including v itself). 
 
 In Figure 8.3, the sub tree rooted at `cs016/` consists of the nodes `cs016/`, `grades`, `homeworks/`, `programs/`, `hw1`, `hw2`, `hw3`, `pr1`, `pr2`, and `pr3`.
-### Edges and Paths in Trees
+
+#### Edges and Paths in Trees
 
 **==An edge==** of tree T is a pair of nodes (u, v) such that u is the parent of v, or vice versa. 
 
@@ -82,14 +87,16 @@ It is a direct or indirect base class of all other types in Python (even if not 
 As a preview of the remainder of this chapter, Figure 8.5 portrays our own hierarchy of classes for representing various forms of a tree.
 
 ![[fig8.5.png]]
-### Ordered Trees
+
+#### Ordered Trees
 
 A tree is ordered if there is a meaningful linear order among the children of each node; that is, we purposefully identify the children of a node as being the first, second, third, and so on. Such an order is usually visualized by arranging siblings left to right, according to their order.
 
 A book, are hierarchically organized as a tree whose internal nodes are parts, chapters, and sections, and whose leaves are paragraphs, tables, figures, and so on.
 
 ![[fig8.6.png]]
-## The Tree Abstract Data Type
+
+### The Tree Abstract Data Type
 
 An element is stored at each position, and positions satisfy parent-child relationships that define the tree structure. A position object for a tree supports the method:
 
@@ -111,6 +118,7 @@ The tree ADT then supports the following accessor methods, allowing a user to na
 | `iter(T)` | Generate an iteration of all elements stored within tree  T. | 
 
 If a tree T is ordered, then `T.children(p)` reports the children of p in the natural order. If `p` is a leaf, then `T.children(p)` generates an empty iteration. In similar regard, if tree T is empty, then both `T.positions( )` and `iter(T)` generate empty iterations.
+
 ### A Tree Abstract Base Class in Python
 
 In discussing the object-oriented design principle of abstraction in Chapter 2, we noted that a public interface for an abstract data type is often managed in Python via duck typing. 
@@ -185,7 +193,8 @@ class Tree:
         """Return True if the tree is Empty"""
         return len(self) == 0
 ```
-## Computing Depth and Height
+
+### Computing Depth and Height
 
 Let p be the position of a node of a tree T. The **depth** of p is the number of ancestors of p, excluding p itself. 
 
@@ -233,7 +242,8 @@ def height(self, p = None):
 		p = self.root()
 	return self._height2(p)  # start height2 recursion
 ```
-# Binary Trees 🧠
+
+## Binary Trees 🧠
 
 2 CHILDREN AT MOST, LEFT OR RIGHT CHILD.
 
@@ -329,7 +339,8 @@ _In a nonempty proper binary tree T , with $n_E$ external nodes and $n_I$ intern
 ![[fig8.10.png]]
 
 _At the start, we have 5 external and 4 internal. In the end, we have 4 external and 3 internal._
-# Implementing Trees 🥰 
+
+## Implementing Trees 🥰 
 
 The `Tree` and `BinaryTree` classes that we have defined thus far in this chapter are both formally abstract base classes. 
 
@@ -612,7 +623,8 @@ Here are the performances of the implementation of the general tree using a link
 | `children(p)` | $O(c_p + 1)$ |
 | `depth(p)` | $O(d_p + 1)$ |
 | `height` | $O(n)$ |
-# Tree Traversal Algorithms
+
+## Tree Traversal Algorithms
 
 A **traversal** of a tree T is a systematic way of accessing, or “visiting” all the positions of T. A lot of ways to traverse:
 ## Preorder and Postorder Traversals of General Trees
@@ -674,19 +686,22 @@ class Solution:
         # last element of temp is the node we want
         return temp[-1]
 ```
-### Postorder Traversal - See the Children Than Look at Parents (DFS)
+
+#### Postorder Traversal - See the Children Than Look at Parents (DFS)
 
 JUST POST IT MAN IDC GIVE ME DETAILS ASAP
 
 In some sense, this algorithm can be viewed as the opposite of the preorder traversal, because it recursively traverses the subtrees rooted at the children of the root first, and then visits the root (hence, the name “postorder”).
 
 ![[fig8.16.png]]
-#### Running-Time Analysis
+
+##### Running-Time Analysis
 
 Both preorder and postorder traversal algorithms are efficient ways to access all the positions of a tree.
 
 The overall running time for the traversal of tree T is $O(n)$, where $n$ is the number of positions in the tree. This running time is asymptotically optimal since the traversal must visit all the $n$ positions of the tree.
-## Breadth-First Tree Traversal - See Everyone At This Level Than Go Deeper 😍 (BFS)
+
+### Breadth-First Tree Traversal - See Everyone At This Level Than Go Deeper 😍 (BFS)
 
 Another common approach is to traverse a tree so that we visit all the positions at depth `d` before we visit the positions at depth `d + 1`. Such an algorithm is known as a **breadth-first traversal**.
 
@@ -700,7 +715,8 @@ The inorder traversal of a binary tree T can be informally viewed as visiting th
 ![[fig8.18.png]]
 
 _3 + 1 × 3/9 − 5 + 2 ..._
-### Binary Search Trees 🤔🤔
+
+#### Binary Search Trees 🤔
 
 An important application of the inorder traversal algorithm arises when we store an ordered sequence of elements in a binary tree, defining a structure we call a **binary search tree.**
 
@@ -714,7 +730,8 @@ Let S be a set whose unique elements have an order relation. For example, S coul
 A binary search tree can be viewed as a binary decision tree (recall Example 8.6), where the question asked at each internal node is whether the element at that node is less than, equal to, or larger than the element being searched for.
 
 Chapter 11 is devoted to the study of search trees.
-## Implementing Tree Traversals in Python
+
+### Implementing Tree Traversals in Python
 
 When first defining the tree ADT in Chapter 8.1.2, we stated that tree T should include support for the following methods:
 
@@ -722,7 +739,8 @@ When first defining the tree ADT in Chapter 8.1.2, we stated that tree T should 
 `iter(T)`: Generate an iteration of all elements stored within tree T.
 
 At that time, we did not make any assumption about the order in which these iterations report their results. In this section, we demonstrate how any of the tree traversal algorithms we have introduced could be used to produce these iterations.
-#### Preorder Traversal
+
+##### Preorder Traversal
 
 Formally, both `preorder` and the utility `_subtree_preorder` are generators. Rather than perform a “visit” action from within this code, we yield each position to the caller and let the caller decide what action to perform at that position.
 
@@ -740,7 +758,8 @@ def _subtree_preorder(self, p):
 		for other in self._subtree_preorder(c): # do preorder of c’s subtree
 			yield other # yielding each to our caller
 ```
-#### Postorder Traversal
+
+##### Postorder Traversal
 
 We can implement a postorder traversal using very similar technique as with a preorder traversal. 
 
@@ -762,7 +781,8 @@ def _subtree_postorder(self, p):
 			yield other   # yielding each to our caller
 	yield p # visit p after its subtrees
 ```
-#### Breadth First Traversal
+
+##### Breadth First Traversal
 
 We can use a `Queue` (A `LinkedQueue`) for this solution. Add the level to the root, and as you empty it add the children of those nodes in the current level.
 
@@ -778,7 +798,8 @@ def breadthfirst(self):
 			for c in self.children(p):
 				fringe.enqueue(c) # add children to back of queue
 ```
-#### Inorder Traversal
+
+##### Inorder Traversal
 
 The idea is cool. You traverse the left tree, you travel the parent than you travel the right tree.
 
@@ -801,12 +822,14 @@ def _subtree_inorder(self, p):
 		for other in self._subtree_inorder(self.right(p)):
 			yield other
 ```
-## Applications of Tree Traversals
+
+### Applications of Tree Traversals
 
 **Wisdom:** Reading a book is preorder, filesystem is postorder, swipe from left to right is inorder.
 
 Here are some examples for using the tree traversals we learned.
-### Table of Contents
+
+#### Table of Contents
 
 When using a tree to represent the hierarchical structure of a document, a preorder traversal of the tree can naturally be used to produce a table of contents for the document.
 
@@ -825,7 +848,7 @@ def preorder_label(T, p, d, path):
 		path[−1] += 1
 	path.pop()
 ```
-### Parenthetic Representations of a Tree
+#### Parenthetic Representations of a Tree
 
 It is not possible to reconstruct a general tree, given only the preorder sequence of elements.
 
@@ -849,7 +872,8 @@ def parenthesize(T, p):
 			parenthesize(T, c)   # recur on child
 		print(")" , end='') # include closing parenthesis
 ```
-### Computing Disk Space
+
+#### Computing Disk Space
 
 The recursive computation of disk space is emblematic of a postorder traversal,as we cannot effectively compute the total space used by a directory until after we know the space that is used by its children directories.
 
@@ -861,7 +885,8 @@ def disk_space(T, p):
 		subtotal += disk space(T, c)  # add child’s space to subtotal
 	return subtotal
 ```
-## Euler Tours and the Template Method Pattern 🤔
+
+### Euler Tours and the Template Method Pattern 🤔
 
 Unfortunately, they also show that the specific implementations of the preorder and postorder methods of our Tree class, or the inorder method of the `BinaryTree` class, are not general enough to capture the range of computations we desire. 
 
@@ -928,7 +953,8 @@ Formally, our framework relies on the following two hooks that can be specialize
 • `_hook_previsit(p, d, path)`: This function is called once for each position, immediately before its subtrees (if any) are traversed. Parameter p is a position in the tree, d is the depth of that position, and path is a list of indices, using the convention described in the discussion of Code Fragment 8.24. No return value is expected from this function.
 
 • `_hook_postvisit(p, d, path, results)`: This function is called once for each position, immediately after its subtrees (if any) are traversed. The first three parameters use the same convention as did hook previsit. The final parameter is a list of objects that were provided as return values from the post visits of the respective subtrees of p. Any value returned by this call will be available to the parent of p during its postvisit.
-### Using Euler Tour
+
+#### Using Euler Tour
 
 Here is a simplification for the indented printing with numbers problem:
 
@@ -947,7 +973,8 @@ class DiskSpaceTour(EulerTour):
 		# we simply add space associated with p to that of its subtrees
 		return p.element().space() + sum(results)
 ```
-### The Euler Tour Traversal of a Binary Tree
+
+#### The Euler Tour Traversal of a Binary Tree
 
 We introduced the concept of an Euler Tour traversal of a general graph, using the template method pattern in designing the `EulerTour` class. That class provided methods hook previsit and hook postvisit that could be overridden to customize a tour. 
 
@@ -1003,7 +1030,8 @@ class BinaryLayout(BinaryEulerTour):
         p.element().setY(d)  # y-coordinate is depth
         self._count += 1  # advance count of processed nodes
 ```
-# Case Study: An Expression Tree
+
+## Case Study: An Expression Tree
 
 In this section, we define a new `ExpressionTree` class that provides support for constructing such trees, and for displaying and evaluating the arithmetic expression that such a tree represents. Our `ExpressionTree` class is defined as a subclass of `LinkedBinaryTree`, and we rely on the nonpublic mutators to construct such trees. Each internal node must store a string that defines a binary operator (e.g., + ), and each leaf must store a numeric value (or a string representing a numeric value).
 
