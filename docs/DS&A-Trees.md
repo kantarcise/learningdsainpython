@@ -134,7 +134,7 @@ If `p` is a leaf, then `T.children(p)` generates an empty iteration.
 
 In similar regard, if tree T is empty, then both `T.positions()` and `iter(T)` generate empty iterations.
 
-### A Tree Abstract Base Class in Python
+#### A Tree Abstract Base Class in Python
 
 In discussing the object-oriented design principle of abstraction in [Chapter 2](https://learningdsainpython.kantarcise.com/DS%26A-Object-Oriented-Programming/#2-abstraction), we noted that a public interface for an abstract data type is often managed in Python via duck typing.
 
@@ -308,7 +308,7 @@ An arithmetic expression can be represented by a **binary tree** whose leaves ar
 
 _An arithmetic expression tree is a proper binary tree, since each operator +, −, ×, and / takes exactly two operands._
 
-##  The Binary Tree Abstract Data Type
+###  The Binary Tree Abstract Data Type
 
 As an abstract data type, a binary tree is a specialization of a tree that supports three additional accessor methods:
 
@@ -359,7 +359,7 @@ class BinaryTree(Tree):
 
 By using inheritance, a binary tree supports all the functionality that was defined for general trees (e.g., `parent`, `is_leaf,` `root`).
 
-## Properties of Binary Trees 😍
+### Properties of Binary Trees 😍
 
 Binary trees have several interesting properties dealing with relationships between their heights and number of nodes.
 
@@ -393,7 +393,7 @@ There are several choices for the internal representation of trees.
 
 We describe the most common representations in this section. We begin with the case of a binary tree, since its shape is more narrowly defined.
 
-## Linked Structure for Binary Trees
+### Linked Structure for Binary Trees
 
 A natural way to realize a binary tree T is to use a linked structure, with a node that maintains references to the element stored at a position p and to the nodes associated with the children and parent of p. 
 
@@ -613,7 +613,7 @@ class LinkedBinaryTree(BinaryTree):
 
 ```
 
-### Performance of the Linked Binary Tree Implementation
+#### Performance of the Linked Binary Tree Implementation
 
 Here is how they look:
 
@@ -626,7 +626,7 @@ Here is how they look:
 | `height` | $O(n)$ | 
 | `add_root`, `add_left`, `add_right`, `replace`, `delete`, `attach` | $O(1)$ | 
 
-## Array-Based Representation of a Binary Tree 💕
+### Array-Based Representation of a Binary Tree 💕
 
 An alternative representation of a binary tree T is based on a way of numbering the positions of T .
 
@@ -678,7 +678,7 @@ Still, for general binary trees, the exponential worst-case space requirement of
 
 Another drawback of an array representation is that some update operations for trees cannot be efficiently supported. For example, deleting a node and promoting its child takes $O(n)$ time because it is not just the child that moves locations within the array, but all descendants of that child.
 
-## Linked Structure for General Trees 😎
+### Linked Structure for General Trees 😎
 
 When representing a binary tree with a linked structure, each node explicitly maintains fields left and right as references to individual children. For a general tree, there is no a priori limit on the number of children that a node may have:
 
@@ -700,9 +700,10 @@ Here are the performances of the implementation of the general tree using a link
 ## Tree Traversal Algorithms
 
 A **traversal** of a tree T is a systematic way of accessing, or “visiting” all the positions of T. A lot of ways to traverse:
-## Preorder and Postorder Traversals of General Trees
 
-### Preorder Traversal - Reading a World Class Book 😉 (DFS)
+### Preorder and Postorder Traversals of General Trees
+
+#### Preorder Traversal - Reading a World Class Book 😉 (DFS)
 
 !!! tip 
 
@@ -797,7 +798,7 @@ Another common approach is to traverse a tree so that we visit all the positions
   <figcaption>Breadth-First Traversal with Tic Tac Toe</figcaption>
 </figure>
 
-## Inorder Traversal of a Binary Tree
+### Inorder Traversal of a Binary Tree
 
 !!! tip
     
