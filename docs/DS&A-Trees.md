@@ -5,7 +5,7 @@ hide:
 
 # All About Trees 🌳
 
-Productivity experts say that breakthroughs come by thinking “non linearly.”
+Productivity experts say that breakthroughs come by thinking ***“non linearly”***.
 
 In this chapter, we discuss one of the most important nonlinear data structures in computing—trees.
 
@@ -39,13 +39,13 @@ We typically call the top element the root of the tree, but it is drawn as the h
 
 Two nodes that are children of the same parent are **siblings**. 
 
-A node v is **external** if v has ==no children==.  A node v is **internal** if it has one or more children. 
+A node `v` is **external** if `v` has **no children**. A node `v` is **internal** if it has one or more children. 
 
 External nodes are also known as **leaves**.
 
 We discussed the hierarchical relationship between files and directories in a computer’s file system, although at the time we did not emphasize the nomenclature of a file system as a tree. 
 
-Now we revisit an earlier example. We see that the internal nodes of the tree are associated with directories and the leaves are associated with regular files. 
+Now we revisit an earlier example. We see that the internal nodes of the tree are associated with directories and the leaves are associated with regular files.
 
 In the UNIX and Linux operating systems, the root of the tree is appropriately called the “root directory,” and is represented by the symbol “/.”
 
@@ -56,19 +56,19 @@ In the UNIX and Linux operating systems, the root of the tree is appropriately c
 
 #### ancestor - descendant
 
-A node u is an ancestor of a node v if u = v or u is an ancestor of the parent of v. Conversely, we say that a node v is a descendant of a node u if u is an ancestor of v. 
+A node `u` is an ancestor of a node `v` if `u` = `v` or u is an ancestor of the parent of `v`. Conversely, we say that a node `v` is a descendant of a node `u` if `u` is an ancestor of `v`. 
 
 For example, in Figure 8.3, `cs252/` is an ancestor of `papers/`, and `pr3` is a descendant of `cs016/`. 
 
-The sub tree of T rooted at a node v is the tree consisting of all the descendants of v in T (including v itself). 
+The sub tree of T rooted at a node `v` is the tree consisting of all the descendants of `v` in T (including `v` itself). 
 
 In Figure 8.3, the sub tree rooted at `cs016/` consists of the nodes `cs016/`, `grades`, `homeworks/`, `programs/`, `hw1`, `hw2`, `hw3`, `pr1`, `pr2`, and `pr3`.
 
 #### Edges and Paths in Trees
 
-**==An edge==** of tree T is a pair of nodes (u, v) such that u is the parent of v, or vice versa. 
+**An edge** of tree T is a pair of nodes (`u`, `v`) such that u is the parent of `v`, or vice versa. 
 
-**==A path==** of T is a sequence of nodes such that any two consecutive nodes in the sequence form an edge. 
+**A path** of T is a sequence of nodes such that any two consecutive nodes in the sequence form an edge. 
 
 For example, the tree in Figure 8.3 contains the path (`cs252/`, `projects/`, `demos/`, `market`).
 
@@ -76,7 +76,10 @@ The inheritance relation between classes in a Python program forms a tree when s
 
 The `BaseException` class is the root of that hierarchy, while all user-defined exception classes should conventionally be declared as descendants of the more specific Exception class.
 
-![[fig8.4.png]]
+<figure markdown="span">
+  ![exception_tree](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter8/fig8-4.png)
+  <figcaption>Python Exception Tree</figcaption>
+</figure>
 
 **Wisdom:**
 
@@ -86,15 +89,23 @@ It is a direct or indirect base class of all other types in Python (even if not 
 
 As a preview of the remainder of this chapter, Figure 8.5 portrays our own hierarchy of classes for representing various forms of a tree.
 
-![[fig8.5.png]]
+<figure markdown="span">
+  ![our_approach_to_trees](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter8/fig8-5.png)
+  <figcaption>Our Tree Hierarchy</figcaption>
+</figure>
 
 #### Ordered Trees
 
-A tree is ordered if there is a meaningful linear order among the children of each node; that is, we purposefully identify the children of a node as being the first, second, third, and so on. Such an order is usually visualized by arranging siblings left to right, according to their order.
+A tree is ordered if there is a meaningful linear order among the children of each node; that is, we purposefully identify the children of a node as being the first, second, third, and so on.
+
+Such an order is usually visualized by arranging siblings left to right, according to their order.
 
 A book, are hierarchically organized as a tree whose internal nodes are parts, chapters, and sections, and whose leaves are paragraphs, tables, figures, and so on.
 
-![[fig8.6.png]]
+<figure markdown="span">
+  ![ordered_tree_as_a_book](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter8/fig8-5.png)
+  <figcaption>Ordered Tree - A Book!</figcaption>
+</figure>
 
 ### The Tree Abstract Data Type
 
@@ -117,15 +128,19 @@ The tree ADT then supports the following accessor methods, allowing a user to na
 | `T.positions()` | Generate an iteration of all positions of tree T. | 
 | `iter(T)` | Generate an iteration of all elements stored within tree  T. | 
 
-If a tree T is ordered, then `T.children(p)` reports the children of p in the natural order. If `p` is a leaf, then `T.children(p)` generates an empty iteration. In similar regard, if tree T is empty, then both `T.positions( )` and `iter(T)` generate empty iterations.
+If a tree T is ordered, then `T.children(p)` reports the children of p in the natural order.
+
+If `p` is a leaf, then `T.children(p)` generates an empty iteration.
+
+In similar regard, if tree T is empty, then both `T.positions()` and `iter(T)` generate empty iterations.
 
 ### A Tree Abstract Base Class in Python
 
-In discussing the object-oriented design principle of abstraction in Chapter 2, we noted that a public interface for an abstract data type is often managed in Python via duck typing. 
+In discussing the object-oriented design principle of abstraction in [Chapter 2](https://learningdsainpython.kantarcise.com/DS%26A-Object-Oriented-Programming/#2-abstraction), we noted that a public interface for an abstract data type is often managed in Python via duck typing.
 
-For example, we defined the notion of the public interface for a queue ADT in Chapter 6, and have since presented several classes that implement the queue interface (e.g., `ArrayQueue` in Chapter 6, `LinkedQueue` and `CircularQueue` in Chapter 7). 
+For example, we defined the notion of the public interface for a queue ADT in Chapter 6, and have since presented several classes that implement the queue interface (e.g., `ArrayQueue` in [Chapter 6](https://learningdsainpython.kantarcise.com/DS%26A-Stacks-Queues-and-Deques/#array-based-queue-implementation), `LinkedQueue` and `CircularQueue` in [Chapter 7](https://learningdsainpython.kantarcise.com/DS%26A-Linked-Lists/#implementing-a-queue-with-a-singly-linked-list)). 
 
-However, we never gave any formal definition of the queue ADT in Python; all of the concrete implementations were self-contained classes that just happen to adhere to the same public interface. 
+However, we never gave any formal definition of the queue ADT in Python; all of the concrete implementations were self-contained classes that just happen to adhere to the same public interface.
 
 A more formal mechanism to designate the relationships between different implementations of the same abstraction is through the definition of one class that serves as an abstract base class, via inheritance, for one or more concrete classes.
 
@@ -139,7 +154,7 @@ We note that, with the `Tree` class being abstract, there is no reason to create
 
 Here is the code:
 
-```python
+``` py title="tree.py" linenums="1"
 class Tree:
     """Abstract base class representing a tree structure"""
     # nested Position class
@@ -196,13 +211,13 @@ class Tree:
 
 ### Computing Depth and Height
 
-Let p be the position of a node of a tree T. The **depth** of p is the number of ancestors of p, excluding p itself. 
+Let ***p*** be the position of a node of a tree T. The **depth** of ***p*** is the number of ancestors of ***p***, excluding ***p*** itself. 
 
 Note that this definition implies that the depth of the root of T is 0.
 
 Here is an approach for our Trees:
 
-```python
+``` py
 def depth(self, p):
 	"""Return the number of levels separating Position p from the root."""
 	if self.is_root(p):
@@ -212,16 +227,20 @@ def depth(self, p):
 ```
 
 The height of a position p in a tree T is also defined recursively:
-	• If p is a leaf, then the height of p is 0.
-	• Otherwise, the height of p is one more than the maximum of the heights of p’s children.
 
-The height of a nonempty tree T is the height of the root of T. For example, the tree of Figure 8.2 has height **4**. In addition, height can also be viewed as follows. 
+• If p is a leaf, then the height of p is 0.
 
-- The height of a nonempty tree T is equal to the maximum of the depths of its leaf positions.
+• Otherwise, the height of p is one more than the maximum of the heights of p’s children.
+
+The height of a nonempty tree T is the height of the root of T.
+
+For example, the tree of Figure 8.2 has height **4**. In addition, height can also be viewed as follows. 
+
+• The height of a nonempty tree T is equal to the maximum of the depths of its leaf positions.
 
 Here is an approach for out trees, to get an idea:
 
-```python
+``` py
 def _height2(self, p): 
 	# time is linear in size of subtree
 	"""Return the height of the subtree rooted at Position p."""
@@ -233,7 +252,7 @@ def _height2(self, p):
 
 The ability to compute heights of sub trees is beneficial, but a user might expect to be able to compute the height of the entire tree without explicitly designating the tree root.
 
-```python
+``` py
 def height(self, p = None):
 	"""Return the height of the subtree rooted at Position p.
 	If p is None, return the height of the entire tree.
@@ -245,37 +264,50 @@ def height(self, p = None):
 
 ## Binary Trees 🧠
 
-2 CHILDREN AT MOST, LEFT OR RIGHT CHILD.
+In binary trees, there are 2 children for every node at most, Left or Right child.
 
 A binary tree is an ordered tree with the following properties:
+
 1. Every node has at most **two children**.
+
 2. Each child node is labeled as being either a **left child** or a **right child**.
+
 3. A left child precedes a right child in the order of children of a node.
 
 The subtree rooted at a left or right child of an internal node v is called a **left subtree** or **right subtree**, respectively, of v. 
 
-A binary tree is ==**proper**== if each node has either zero or two children. Some people also refer to such trees as being **full binary trees**. 
+A binary tree is **proper** if each node has either zero or two children. Some people also refer to such trees as being **full binary trees**. 
 
 Thus, in a proper binary tree, every internal node has exactly two children.
 
-A binary tree that is not proper is ==**improper**==.
-##### Wisdom: - Decision Trees
+A binary tree that is not proper is **improper**.
 
-An important class of binary trees arises in contexts where we wish to represent a number of different outcomes that can result from answering a series of yes-or-no questions. Each internal node is associated with a question.
+!!! tip
+    
+    Decision Trees
 
-Starting at the root, we go to the left or right child of the current node, depending on whether the answer to the question is “Yes” or “No.” With each decision, we follow an edge from a parent to a child, eventually tracing a path in the tree from the root to a leaf.
+    An important class of binary trees arises in contexts where we wish to represent a number of different outcomes that can result from answering a series of yes-or-no questions. Each internal node is associated with a question.
 
-Such binary trees are known as **==decision trees==**, because a leaf position p in such a tree represents a decision of what to do if the questions associated with p’s ancestors are answered in a way that leads to p. 
+    Starting at the root, we go to the left or right child of the current node, depending on whether the answer to the question is “Yes” or “No.” With each decision, we follow an edge from a parent to a child, eventually tracing a path in the tree from the root to a leaf.
+
+    Such binary trees are known as **decision trees**, because a leaf position p in such a tree represents a decision of what to do if the questions associated with p’s ancestors are answered in a way that leads to p. 
 
 A decision tree is a proper binary tree.
 
-![[fig8.7.png]]
+<figure markdown="span">
+  ![a_decision_tree](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter8/fig8-7.png)
+  <figcaption>Decision Tree</figcaption>
+</figure>
 
 An arithmetic expression can be represented by a **binary tree** whose leaves are associated with variables or constants, and whose internal nodes are associated with one of the operators +, −, × , and /.
 
-![[fig8.8.png]]
+<figure markdown="span">
+  ![binary_tree_example](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter8/fig8-8.png)
+  <figcaption>Binary Tree Example</figcaption>
+</figure>
 
 _An arithmetic expression tree is a proper binary tree, since each operator +, −, ×, and / takes exactly two operands._
+
 ##  The Binary Tree Abstract Data Type
 
 As an abstract data type, a binary tree is a specialization of a tree that supports three additional accessor methods:
@@ -290,7 +322,7 @@ Just as `Tree` was defined as an abstract base class, we define a new `BinaryTre
 
 However, our `BinaryTree` class remains abstract, as we still do not provide complete specifications for how such a structure will be represented internally, nor implementations for some necessary behaviors.
 
-```python
+``` py title="binary_tree.py" linenums="1"
 class BinaryTree(Tree):
     """Abstract base class representing a binary tree structure."""
         # --------------------- additional abstract methods ---------------------
@@ -326,36 +358,57 @@ class BinaryTree(Tree):
 ```
 
 By using inheritance, a binary tree supports all the functionality that was defined for general trees (e.g., `parent`, `is_leaf,` `root`).
+
 ## Properties of Binary Trees 😍
 
 Binary trees have several interesting properties dealing with relationships between their heights and number of nodes.
 
-We denote the set of all nodes of a tree T at the same depth $d$ as level d of T. In a binary tree, level $0$ has at most one node (the root), level $1$ has at most two nodes (the children of the root), level $2$ has at most four nodes, and so on. (See Figure 8.9.) In general, level $d$ has at most $2^d$ nodes.
+We denote the set of all nodes of a tree T at the same depth $d$ as level d of T.
 
-![[fig8.9.png]]
+In a binary tree, level $0$ has at most one node (the root), level $1$ has at most two nodes (the children of the root), level $2$ has at most four nodes, and so on (See Figure 8.9.).
+
+In general, level $d$ has at most $2^d$ nodes.
+
+<figure markdown="span">
+  ![binary_tree_max_nodes](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter8/fig8-9.png)
+  <figcaption>Maximum Number of Nodes in Binary Tree</figcaption>
+</figure>
 
 _In a nonempty proper binary tree T , with $n_E$ external nodes and $n_I$ internal nodes, we have $n_E = n_I + 1$._
 
-![[fig8.10.png]]
+<figure markdown="span">
+  ![removal_external_node](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter8/fig8-10.png)
+  <figcaption>Removal of External Node - Binary Tree</figcaption>
+</figure>
 
 _At the start, we have 5 external and 4 internal. In the end, we have 4 external and 3 internal._
 
-## Implementing Trees 🥰 
+## Implementing Trees 🥰
 
 The `Tree` and `BinaryTree` classes that we have defined thus far in this chapter are both formally abstract base classes. 
 
-Although they provide a great deal of support, neither of them can be directly instantiated.
+Although they provide a great deal of support, neither of them can be directly instantiated. 😕
 
-There are several choices for the internal representation of trees. We describe the most common representations in this section. We begin with the case of a binary tree, since its shape is more narrowly defined.
+There are several choices for the internal representation of trees.
+
+We describe the most common representations in this section. We begin with the case of a binary tree, since its shape is more narrowly defined.
+
 ## Linked Structure for Binary Trees
 
 A natural way to realize a binary tree T is to use a linked structure, with a node that maintains references to the element stored at a position p and to the nodes associated with the children and parent of p. 
 
-If p is the root of T , then the parent field of p is `None`. Likewise, if p does not have a left child (respectively, right child), the associated field is `None`. The tree itself maintains an instance variable storing a reference to the root node (if any), and a variable, called `size`, that represents the overall number of nodes of T.
+If p is the root of T , then the parent field of p is `None`. Likewise, if p does not have a left child (respectively, right child), the associated field is `None`.
 
-![[fig8.11.png]]
+The tree itself maintains an instance variable storing a reference to the root node (if any), and a variable, called `size`, that represents the overall number of nodes of T.
 
-For the implementation,  we define a simple, nonpublic `Node` class to represent a node, and a public `Position` class that wraps a node. We provide a validate utility for robustly checking the validity of a given position instance when unwrapping it, and a make position utility for wrapping a node as a position to return to a caller.
+<figure markdown="span">
+  ![linked_structure_binary_tree](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter8/fig8-11.png)
+  <figcaption>Linked Structure for Binary Tree</figcaption>
+</figure>
+
+For the implementation,  we define a simple, nonpublic `Node` class to represent a node, and a public `Position` class that wraps a node.
+
+We provide a validate utility for robustly checking the validity of a given position instance when unwrapping it, and a make position utility for wrapping a node as a position to return to a caller.
 
 For linked binary trees, a reasonable set of update methods to support for general usage are the following:
 
@@ -375,7 +428,7 @@ We have specifically chosen this collection of operations because each can be im
 
 This is going to be a long one. Get ready. Here is the code:
 
-```python
+``` py title="linked_binary_tree.py" linenums="1"
 class LinkedBinaryTree(BinaryTree):
     """Linked representation of a binary tree structure."""
 
@@ -559,6 +612,7 @@ class LinkedBinaryTree(BinaryTree):
             t2._size = 0
 
 ```
+
 ### Performance of the Linked Binary Tree Implementation
 
 Here is how they look:
@@ -571,29 +625,42 @@ Here is how they look:
 | `depth(p)` |  $O(d_p + 1)$
 | `height` | $O(n)$ | 
 | `add_root`, `add_left`, `add_right`, `replace`, `delete`, `attach` | $O(1)$ | 
+
 ## Array-Based Representation of a Binary Tree 💕
 
-An alternative representation of a binary tree T is based on a way of numbering the positions of T . For every position p of T , let $f(p)$ be the integer defined as follows.
+An alternative representation of a binary tree T is based on a way of numbering the positions of T .
+
+For every position p of T , let $f(p)$ be the integer defined as follows.
 
 • If p is the root of T , then $f (p) = 0$.
+
 • If p is the left child of position q, then $f (p) = 2 f (q) + 1$.
+
 • If p is the right child of position q, then $f (p) = 2 f (q) + 2$.
 
 The numbering function $f$ is known as a level numbering of the positions in a binary tree T, for it numbers the positions on each level of T in increasing order from left to right.
 
 Note well that the level numbering is based on potential positions within the tree, not actual positions of a given tree, so they are not necessarily consecutive.
 
-![[fig8.12.png]]
+<figure markdown="span">
+  ![binary_tree_level_numbering](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter8/fig8-12.png)
+  <figcaption>Binary Tree Level Numbering</figcaption>
+</figure>
 
 The level numbering function f suggests a representation of a binary tree T  by means of an array-based structure A (such as a Python `list`), with the element at position p of T stored at index $f (p)$ of the array.
 
-![[fig8.13.png]]
+<figure markdown="span">
+  ![binary_tree_array_structure](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter8/fig8-12.png)
+  <figcaption>Binary Tree with an Array</figcaption>
+</figure>
 
 One advantage of an array-based representation of a binary tree is that a position p can be represented by the single integer $f(p)$, and that position-based methods such as `root`, `parent`, `left`, and `right` can be implemented using simple arithmetic operations on the number $f(p)$.
 
 Based on our formula for the level numbering, the left child of p has index $2 f(p) + 1$, the right child of p has index $2 f (p) + 2$, and the parent of p has index $⌊(f (p) − 1)/2⌋$. 
 
-Reminder: The notation ⌈x⌉ represents the **ceiling** of x, the smallest integer greater than or equal to x. The notation ⌊x⌋ represents is the **floor** of x,  the largest integer less than or equal to x.  
+!!! tip 
+
+    Here is a reminder. The notation ⌈x⌉ represents the **ceiling** of x, the smallest integer greater than or equal to x. The notation ⌊x⌋ represents is the **floor** of x,  the largest integer less than or equal to x.  
 
 The space usage of an array-based representation depends greatly on the shape of the tree. 
 
@@ -601,18 +668,24 @@ Let $n$ be the number of nodes of T , and let $f_M$ be the maximum value of $f(p
 
 The array A requires length $N = 1 + f_M$ , since elements range from $A[0]$ to $A[f_M]$. Note that A may have a number of empty cells that do not refer to existing nodes of T. 
 
-In fact, in the worst case, $N = 2^n − 1$. (==Half of it is empty!==) 
+In fact, in the worst case, $N = 2^n − 1$. (**Half of it is empty!**) 
 
-In Chapter 9, we will see a class of binary trees, called “**heaps**” for which $N = n$. Thus, in spite of the worst-case space usage, there are applications for which the **array representation of a binary tree** is space efficient.
+In Chapter 9, we will see a class of binary trees, called “**heaps**” for which $N = n$.
+
+Thus, in spite of the worst-case space usage, there are applications for which the **array representation of a binary tree** is space efficient.
 
 Still, for general binary trees, the exponential worst-case space requirement of this representation is prohibitive.
 
 Another drawback of an array representation is that some update operations for trees cannot be efficiently supported. For example, deleting a node and promoting its child takes $O(n)$ time because it is not just the child that moves locations within the array, but all descendants of that child.
+
 ## Linked Structure for General Trees 😎
 
 When representing a binary tree with a linked structure, each node explicitly maintains fields left and right as references to individual children. For a general tree, there is no a priori limit on the number of children that a node may have:
 
-![[fig8.14.png]]
+<figure markdown="span">
+  ![linked_structure_general_tree](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter8/fig8-12.png)
+  <figcaption>Linked Structure of a General Tree</figcaption>
+</figure>
 
 Here are the performances of the implementation of the general tree using a linked structure:
 
@@ -631,11 +704,16 @@ A **traversal** of a tree T is a systematic way of accessing, or “visiting” 
 
 ### Preorder Traversal - Reading a World Class Book 😉 (DFS)
 
-YOU PREORDERED A BOOK - YOU ARE CURIOUS - YOU READ IT ALL.
+!!! tip 
+
+    Here is a way to remember what preorder traversal mean: You preorder a book - you are curious - you read it all.
 
 In a preorder traversal of a tree T , the root of T is visited first and then the sub trees rooted at its children are traversed recursively. If the tree is ordered, then the subtrees are traversed according to the order of the children.
 
-![[fig8.15.png]]
+<figure markdown="span">
+  ![preorder_traversal](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter8/fig8-15.png)
+  <figcaption>Preorder Traversal</figcaption>
+</figure>
 
 Here is DFS in the wild:
 
@@ -658,7 +736,7 @@ smallest value (1-indexed) of all the values of the nodes in the tree.
 
 Solution:
 
-```python
+``` py title="kth_smallest.py"
 # Definition for a binary tree node.
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
@@ -689,11 +767,16 @@ class Solution:
 
 #### Postorder Traversal - See the Children Than Look at Parents (DFS)
 
-JUST POST IT MAN IDC GIVE ME DETAILS ASAP
+!!! tip
+
+    Here is how you can remember what postorder traversal means. You just don't care about the noise. You just want to get to the details as soon as possible. You go deep as much as you can.
 
 In some sense, this algorithm can be viewed as the opposite of the preorder traversal, because it recursively traverses the subtrees rooted at the children of the root first, and then visits the root (hence, the name “postorder”).
 
-![[fig8.16.png]]
+<figure markdown="span">
+  ![preorder_traversal](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter8/fig8-16.png)
+  <figcaption>Postorder Traversal</figcaption>
+</figure>
 
 ##### Running-Time Analysis
 
@@ -701,18 +784,33 @@ Both preorder and postorder traversal algorithms are efficient ways to access al
 
 The overall running time for the traversal of tree T is $O(n)$, where $n$ is the number of positions in the tree. This running time is asymptotically optimal since the traversal must visit all the $n$ positions of the tree.
 
-### Breadth-First Tree Traversal - See Everyone At This Level Than Go Deeper 😍 (BFS)
+### Breadth-First Tree Traversal
+
+!!! tip 
+
+    Breadth-First Search - BFS -> See Everyone At This Level Than Go Deeper 😍
 
 Another common approach is to traverse a tree so that we visit all the positions at depth `d` before we visit the positions at depth `d + 1`. Such an algorithm is known as a **breadth-first traversal**.
 
-![[fig8.17.png]]
-## Inorder Traversal of a Binary Tree - Swipe from Left -> Right (DFS)
+<figure markdown="span">
+  ![bfs_tictactoe](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter8/fig8-17.png)
+  <figcaption>Breadth-First Traversal with Tic Tac Toe</figcaption>
+</figure>
+
+## Inorder Traversal of a Binary Tree
+
+!!! tip
+    
+    Inorder Traversal -> Swipe from Left -> Right (DFS)
 
 During an inorder traversal, we visit a position between the recursive traversals of its left and right subtrees. 
  
 The inorder traversal of a binary tree T can be informally viewed as visiting the nodes of T “from left to right.”
  
-![[fig8.18.png]]
+<figure markdown="span">
+  ![inorder_traversal_binary_tree](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter8/fig8-18.png)
+  <figcaption>Inorder Traversal for Binary Tree</figcaption>
+</figure>
 
 _3 + 1 × 3/9 − 5 + 2 ..._
 
@@ -720,31 +818,46 @@ _3 + 1 × 3/9 − 5 + 2 ..._
 
 An important application of the inorder traversal algorithm arises when we store an ordered sequence of elements in a binary tree, defining a structure we call a **binary search tree.**
 
-Let S be a set whose unique elements have an order relation. For example, S could be a set of integers. A binary search tree for S is a binary tree T such that, for each position p of T :
+Let S be a set whose unique elements have an order relation.
+
+For example, S could be a set of integers.
+
+A binary search tree for S is a binary tree T such that, for each position p of T :
+
 • Position p stores an element of S, denoted as e(p).
+
 • Elements stored in the left subtree of p (if any) are less than e(p).
+
 • Elements stored in the right subtree of p (if any) are greater than e(p).
 
-![[fig8.19.png]]
+<figure markdown="span">
+  ![binary_search_tree](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter8/fig8-19.png)
+  <figcaption>Binary Search Tree</figcaption>
+</figure>
 
 A binary search tree can be viewed as a binary decision tree (recall Example 8.6), where the question asked at each internal node is whether the element at that node is less than, equal to, or larger than the element being searched for.
 
-Chapter 11 is devoted to the study of search trees.
+[Chapter 11](https://learningdsainpython.kantarcise.com/DS%26A-Search-Trees/) is devoted to the study of search trees.
 
 ### Implementing Tree Traversals in Python
 
 When first defining the tree ADT in Chapter 8.1.2, we stated that tree T should include support for the following methods:
 
-`T.positions()`: Generate an iteration of all positions of tree T.
-`iter(T)`: Generate an iteration of all elements stored within tree T.
+• `T.positions()`: Generate an iteration of all positions of tree T.
 
-At that time, we did not make any assumption about the order in which these iterations report their results. In this section, we demonstrate how any of the tree traversal algorithms we have introduced could be used to produce these iterations.
+• `iter(T)`: Generate an iteration of all elements stored within tree T.
+
+At that time, we did not make any assumption about the order in which these iterations report their results.
+
+In this section, we demonstrate how any of the tree traversal algorithms we have introduced could be used to produce these iterations.
 
 ##### Preorder Traversal
 
-Formally, both `preorder` and the utility `_subtree_preorder` are generators. Rather than perform a “visit” action from within this code, we yield each position to the caller and let the caller decide what action to perform at that position.
+Formally, both `preorder` and the utility `_subtree_preorder` are generators.
 
-```python
+Rather than perform a “visit” action from within this code, we yield each position to the caller and let the caller decide what action to perform at that position.
+
+``` py
 def preorder(self):
 	"""Generate a preorder iteration of positions in the tree."""
 	if not self.is_empty():
@@ -767,7 +880,7 @@ The only difference is that within the recursive utility for a post-order we wai
 
 Children before parents!
 
-```python
+``` py
 def postorder(self):
 	"""Generate a postorder iteration of positions in the tree."""
 	if not self.is_empty( ):
@@ -786,7 +899,7 @@ def _subtree_postorder(self, p):
 
 We can use a `Queue` (A `LinkedQueue`) for this solution. Add the level to the root, and as you empty it add the children of those nodes in the current level.
 
-```python
+``` py
 def breadthfirst(self):
 	"""Generate a breadth-first iteration of the positions of the tree."""
 	if not self.is_empty():
@@ -801,9 +914,9 @@ def breadthfirst(self):
 
 ##### Inorder Traversal
 
-The idea is cool. You traverse the left tree, you travel the parent than you travel the right tree.
+The idea is cool here. You traverse the left tree, you travel the parent than you travel the right tree.
 
-```python
+``` py
 def inorder(self):
 	"""Generate an inorder iteration of positions in the tree."""
 	if not self.is_empty():
@@ -825,7 +938,7 @@ def _subtree_inorder(self, p):
 
 ### Applications of Tree Traversals
 
-**Wisdom:** Reading a book is preorder, filesystem is postorder, swipe from left to right is inorder.
+**Wisdom:** Here is my way to remember the traversals: Reading a book is preorder, filesystem is postorder, swipe from left to right is inorder.
 
 Here are some examples for using the tree traversals we learned.
 
@@ -833,7 +946,10 @@ Here are some examples for using the tree traversals we learned.
 
 When using a tree to represent the hierarchical structure of a document, a preorder traversal of the tree can naturally be used to produce a table of contents for the document.
 
-![[fig8.20.png]]
+<figure markdown="span">
+  ![table_of_content_tree](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter8/fig8-20.png)
+  <figcaption>Table of Content as Tree</figcaption>
+</figure>
 
 _We indent each element with a number of spaces equal to twice the element’s depth in the tree_
 
@@ -852,9 +968,14 @@ def preorder_label(T, p, d, path):
 
 It is not possible to reconstruct a general tree, given only the preorder sequence of elements.
 
-Some additional context is necessary for the structure of the tree to be well defined. The use of indentation or numbered labels provides such context, with a very human-friendly presentation. However, there are more concise string representations of trees that are computer-friendly.
+Some additional context is necessary for the structure of the tree to be well defined. The use of indentation or numbered labels provides such context, with a very human-friendly presentation.
 
-$$P(T ) = str(p.element()) + ( + P(T_1) + , + ··· + , + P(T_k ) + )$$
+However, there are more concise string representations of trees that are computer-friendly.
+
+$$
+P(T ) = str(p.element()) + ( + P(T_1) + , + ··· + , + P(T_k ) + )
+$$
+
 is where p is the root of T and $T_1$, $T_2$, . . . , $T_k$ are the subtrees rooted at the children of p, which are given in order if T is an ordered tree.
 
 _The opening parenthesis must be produced just before the loop over a position’s children and the closing parenthesis must be produced just after that loop_:
@@ -875,7 +996,7 @@ def parenthesize(T, p):
 
 #### Computing Disk Space
 
-The recursive computation of disk space is emblematic of a postorder traversal,as we cannot effectively compute the total space used by a directory until after we know the space that is used by its children directories.
+The recursive computation of disk space is emblematic of a postorder traversal, as we cannot effectively compute the total space used by a directory until after we know the space that is used by its children directories.
 
 ```python
 def disk_space(T, p):
@@ -890,19 +1011,28 @@ def disk_space(T, p):
 
 Unfortunately, they also show that the specific implementations of the preorder and postorder methods of our Tree class, or the inorder method of the `BinaryTree` class, are not general enough to capture the range of computations we desire. 
 
-In some cases, we need more of a blending of the approaches, with initial work performed before recurring on subtrees, additional work performed after those recursions, and in the case of a binary tree, work performed between the two possible recursions. Furthermore, in some contexts it was important to know the depth of a position, or the complete path from the root to that position, or to return information from one level of the recursion to another.
+In some cases, we need more of a blending of the approaches, with initial work performed before recurring on subtrees, additional work performed after those recursions, and in the case of a binary tree, work performed between the two possible recursions.
 
-In this section, we develop a more general framework for implementing tree traversals based on a concept known as an **Euler Tour traversal**. ==The Euler Tour traversal of a general tree T can be informally defined as a “walk” around T, where we start by going from the root toward its leftmost child, viewing the edges of T as being “walls” that we always keep to our left.==
+Furthermore, in some contexts it was important to know the depth of a position, or the complete path from the root to that position, or to return information from one level of the recursion to another.
 
-Euler tour: We walk around hugging an invisible walk around tree. 
+In this section, we develop a more general framework for implementing tree traversals based on a concept known as an **Euler Tour traversal**. 
 
-![[fig8.21.png]]
+**The Euler Tour traversal of a general tree T can be informally defined as a “walk” around T, where we start by going from the root toward its leftmost child, viewing the edges of T as being “walls” that we always keep to our left.**
+
+!!! tip
+
+    ***Euler Tour***: We walk around hugging an invisible walk around tree. 
+
+<figure markdown="span">
+  ![euler_tour_tree](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter8/fig8-21.png)
+  <figcaption>Euler Tour for a Tree</figcaption>
+</figure>
 
 The complexity of the walk is $O(n)$, because it progresses exactly two times along each of the $n−1$ edges of the tree—once going downward along the edge, and later going upward along the edge.
 
 Here is the code:
 
-```python
+``` py title="euler_tour.py" linenums="1"
 class EulerTour:
     """
     Abstract base class for performing Euler tour of a tree.
@@ -958,7 +1088,7 @@ Formally, our framework relies on the following two hooks that can be specialize
 
 Here is a simplification for the indented printing with numbers problem:
 
-```python
+``` py
 class PreorderPrintIndentedLabeledTour(EulerTour):
 	def _hook_previsit(self, p, d, path):
 		label = ".".join(str(j+1) for j in path) # labels are one-indexed
@@ -967,7 +1097,7 @@ class PreorderPrintIndentedLabeledTour(EulerTour):
 
 Or disk space problem:
 
-```python
+``` py
 class DiskSpaceTour(EulerTour):
 	def _hook_postvisit(self, p, d, path, results):
 		# we simply add space associated with p to that of its subtrees
@@ -976,11 +1106,13 @@ class DiskSpaceTour(EulerTour):
 
 #### The Euler Tour Traversal of a Binary Tree
 
-We introduced the concept of an Euler Tour traversal of a general graph, using the template method pattern in designing the `EulerTour` class. That class provided methods hook previsit and hook postvisit that could be overridden to customize a tour. 
+We introduced the concept of an Euler Tour traversal of a general graph, using the template method pattern in designing the `EulerTour` class.
+
+That class provided methods hook previsit and hook postvisit that could be overridden to customize a tour. 
 
 Down below we provide a `BinaryEulerTour` specialization that includes an additional hook invisit that is called once for each position—after its left subtree is traversed, but before its right subtree is traversed.
 
-```python
+``` py title="binary_euler_tour.py" linenums="1"
 class BinaryEulerTour(EulerTour):
     """Abstract base class for performing Euler tour of a binary tree.
     This version includes an additional _hook_invisit that is called after the tour
@@ -1010,11 +1142,17 @@ class BinaryEulerTour(EulerTour):
 
 We can use this class when we want to draw a graphical layout for a tree:
 
-![[fig8.22.png]]
+<figure markdown="span">
+  ![inorder_drawing_binary_tree](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter8/fig8-22.png)
+  <figcaption>Inorder Drawing of Binary Tree</figcaption>
+</figure>
 
 The geometry is determined by an algorithm that assigns x- and y-coordinates to each position p of a binary tree T using the following two rules:
+
 • x(p) is the number of positions visited before p in an inorder traversal of T .
+
 • y(p) is the depth of p in T .
+
 In this application, we take the convention common in computer graphics that x - coordinates increase left to right and y - coordinates increase top to bottom. So the origin is in the upper left corner of the computer screen.
 
 ```python
@@ -1033,11 +1171,15 @@ class BinaryLayout(BinaryEulerTour):
 
 ## Case Study: An Expression Tree
 
-In this section, we define a new `ExpressionTree` class that provides support for constructing such trees, and for displaying and evaluating the arithmetic expression that such a tree represents. Our `ExpressionTree` class is defined as a subclass of `LinkedBinaryTree`, and we rely on the nonpublic mutators to construct such trees. Each internal node must store a string that defines a binary operator (e.g., + ), and each leaf must store a numeric value (or a string representing a numeric value).
+In this section, we define a new `ExpressionTree` class that provides support for constructing such trees, and for displaying and evaluating the arithmetic expression that such a tree represents.
+
+Our `ExpressionTree` class is defined as a subclass of `LinkedBinaryTree`, and we rely on the nonpublic mutators to construct such trees.
+
+Each internal node must store a string that defines a binary operator (e.g., + ), and each leaf must store a numeric value (or a string representing a numeric value).
 
 Our eventual goal is to build arbitrarily complex expression trees for compound arithmetic expressions such as $(((3 + 1) × 4)/((9 − 5) + 2))$. 
 
-```python
+``` py title="expression_tree.py" linenums="1"
 class ExpressionTree(LinkedBinaryTree):
     """An arithmetic expression tree."""
 
@@ -1103,7 +1245,7 @@ class ExpressionTree(LinkedBinaryTree):
 
 Using a stack, we can build an expression tree:
 
-```python
+``` py
 def build_expression_tree(tokens):
     """Returns an ExpressionTree based upon by a tokenized expression.
     tokens must be an iterable of strings representing a fully parenthesized
@@ -1124,4 +1266,4 @@ def build_expression_tree(tokens):
     return S.pop()
 ```
 
-Done with third version. 💕
+You are doing incredible. Let's now move on to [priority queues](https://learningdsainpython.kantarcise.com/DS%26A-PriorityQueues/) and explore more! 🐤
