@@ -5,15 +5,17 @@ hide:
 
 # Sorting and Selection 🥰
 
-Excited!
+Excited! 💕
 
 ## Why Study Sorting Algorithms?
 
 *Why ?*
 
-- Many advanced algorithms for a variety of problems rely on sorting as a subroutine.
-- Using Python, when calling the built in function, it is good to know what to expect in terms of efficient and how that may depend upon the initial order of elements or the type of objects that are being sorted.
-- Ideas and approaches to sorting led to advances in the development in many other areas of computing.
+• Many advanced algorithms for a variety of problems rely on sorting as a subroutine.
+
+• Using Python, when calling the built in function, it is good to know what to expect in terms of efficient and how that may depend upon the initial order of elements or the type of objects that are being sorted.
+
+• Ideas and approaches to sorting led to advances in the development in many other areas of computing.
 
 ## Merge Sort 🏋️‍♂️
 
@@ -21,34 +23,41 @@ It is using an algorithmic pattern called **Divide and Conquer**. This [wonderfu
 
 If an algorithm exhibit overlapping sub problems, you can use divide and conquer.
 
-### **Divide:** 
+### **Divide** 
 
 If sequence has 0 or 1 element, return. If it has at least 2 elements, divide it into 2.
 
-### **Conquer:** 
+### **Conquer** 
 
 Recursively sort sequences that you have as a result of dividing.
 
-### **Combine:** 
+### **Combine** 
 
 Put back sorted elements into S by merging the sorted sequences into one.
 
 Here is the whole picture:
 
-![[fig12.1.png]]
+<figure markdown="span">
+  ![merge_sort_execution](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter12/fig12-1.png)
+  <figcaption>Merge Sort Execution</figcaption>
+</figure>
 
 Here is step by step approach:
 
-![[fig12.2.png]]
+<figure markdown="span">
+  ![merge_sort_visualized](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter12/fig12-2.png)
+  <figcaption>Merge Sort Visualized</figcaption>
+</figure>
 
 Here is the code:
 
-```python
+``` py title="merge_sort.py" linenums="1"
 def merge_sort(seq):
     if len(seq) <= 1:
         return seq
     mid = len(seq) // 2
 	# divide and conquer
+    # recurring
 	left = merge_sort(seq[:mid])
     right = merge_sort(seq[mid:])
     # combine
@@ -73,13 +82,18 @@ array = [38, 27, 43, 3, 9, 82]
 print("Sorted Array:", merge_sort(array)) # Sorted Array: [3, 9, 27, 38, 43, 82]
 ```
 
-### The running time of MergeSort - `o(n(log(n))`
+### Running time of MergeSort
+
+Answer: `o(n(log(n))`
 
 **Merge method** : $O(n_1+ n_2)$ - The merge function iterates through both left and right arrays exactly once, which takes $O(n)$ time in total, where $n$ is the combined length of left and right.
 
 **Merge Sort Method:** $log(n)$ is the height of the tree, for each division we get that. To divide every node on a tree for merge sort will be proportional to $log(n)$ time and we have $o(n)$ time complexity for n elements in seq.
 
-![[fig12.6.png]]
+<figure markdown="span">
+  ![merge_sort_running_time](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter12/fig12-6.png)
+  <figcaption>Running time of Merge Sort</figcaption>
+</figure>
 
 Just a heads up, you can also use a recurrence relation here.
 
@@ -87,7 +101,7 @@ You can also implement merge sort without recursion.
 
 Here is the code for non recursive version:
 
-```python
+``` py title="merge_sort_iterative.py" linenums="1"
 import math
 
 def merge(src, result, start, inc):
@@ -126,48 +140,72 @@ merge_sort(a)
 print(a) # [1, 2, 3, 4, 9, 43, 51, 51, 57, 234, 1234, 51234]
 ```
 
-## Quick Sort 🧠 - the pivot
+## Quick Sort 🧠
 
-Quick sort is also based on **Divide and Conquer** algorithm.
+Quick sort is also based on **Divide and Conquer** algorithm. The key thing is the **pivot**.
 
-### **Divide:** 
+### **Divide** 
 
-If S has at least two elements (nothing needs to be done if S has zero or one element), select a specific element x from S, which is called the ==pivot==. As is common practice, choose the pivot x to be the last element in S.  
+If S has at least two elements (nothing needs to be done if S has zero or one element), select a specific element x from S, which is called the **pivot**.
 
-Remove all the elements from S and put them into three sequences:  
-	• L, storing the elements in S less than x  
-	• E, storing the elements in S equal to x  
-	• G, storing the elements in S greater than x  
+As is common practice, choose the pivot x to be the last element in S.  
+
+Remove all the elements from S and put them into three sequences:
+
+• L, storing the elements in S less than x  
+
+• E, storing the elements in S equal to x  
+
+• G, storing the elements in S greater than x  
 
 Of course, if the elements of S are distinct, then E holds just one element - the pivot itself.  
 
-### **Conquer:** 
+### **Conquer** 
 
 Recursively sort sequences L and G.  
 
-### **Combine:**
+### **Combine**
 
 Put back the elements into S in order by first inserting the elements of L, then those of E, and finally those of G.
 
-![[fig12.8.png]]
+<figure markdown="span">
+  ![quick_sort_visualized](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter12/fig12-8.png)
+  <figcaption>Visualize Quick Sort</figcaption>
+</figure>
 
 Here it how it works in single figure:
 
-![[fig12.9.png]]
+<figure markdown="span">
+  ![quick_sort_execution](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter12/fig12-9.png)
+  <figcaption>Quick Sort Execution</figcaption>
+</figure>
 
 Here is how it works step by step:
 
-![[fig12.10.png]]
+<figure markdown="span">
+  ![quick_sort_start](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter12/fig12-10.png)
+  <figcaption>Initial Steps of Quick Sort</figcaption>
+</figure>
 
 After all the left side is done, we move on to the right side.
 
-![[fig12.11.png]]
+<figure markdown="span">
+  ![quick_sort_continued](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter12/fig12-11.png)
+  <figcaption>Quick Sort Continued</figcaption>
+</figure>
 
-![[fig12.12.png]]
+And the ending.
+
+<figure markdown="span">
+  ![quick_sort_ending](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter12/fig12-12.png)
+  <figcaption>Quick Sort Ending</figcaption>
+</figure>
 
 ### Running time of Quick Sort
 
-Worst case $o(n^2)$. The height of the tree on quick sort is worst case $o(n - 1)$ NOT $o(logn)$ like it was on merge sort.
+Worst case $o(n^2)$.
+
+The height of the tree on quick sort is worst case $o(n - 1)$ NOT $o(logn)$ like it was on merge sort.
 
 This is because the splitting while comparing to pivot is not guaranteed to be half-half. 
 
@@ -177,17 +215,22 @@ There is **randomized quick sort** where we select the pivot randomly from the s
 
 The expected running time of randomized quick-sort on a sequence S of size $n$ is $O(n log n)$.
 
-![[fig12.13.png]]
+<figure markdown="span">
+  ![visual_running_time_quick_sort](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter12/fig12-13.png)
+  <figcaption>Visual Running Time of Quick Sort</figcaption>
+</figure>
 
 ### In Place Quick Sort
 
-An algorithm is in-place if it uses only a small amount of memory in addition to that needed for the original input. Our implementation of heap-sort, from Chapter 9.4.2, is an example of such an in-place sorting algorithm. 
+An algorithm is in-place if it uses only a small amount of memory in addition to that needed for the original input.
+
+Our implementation of heap-sort, from Chapter 9.4.2, is an example of such an in-place sorting algorithm. 
 
 Quick-sort of an array-based sequence can be adapted to be in-place, and such an optimization is used in most deployed implementations.
 
 In place Quick Sort:
 
-```python
+``` py title="inplace_quick_sort.py" linenums="1"
 def inplace_quick_sort(S, a, b):
     """Sort the list from S[a] to S[b] inclusive using the quick-sort algorithm."""
     if a >= b: return # range is trivially sorted
@@ -216,9 +259,16 @@ inplace_quick_sort(seq, 0, len(seq)-1)
 print(seq) # [2, 4, 123, 324, 621, 45324]
 ```
 
-The main idea behind quick sort is that, we select a pivot, we select two pointers that we are interested in. We keep comparing the values in those pointers and swap when needed. At last, put the pivot just before the right pointer as it should be there.
+The main idea behind quick sort is that, we select a pivot, we select two pointers that we are interested in.
 
-![[fig12.14.png]]
+We keep comparing the values in those pointers and swap when needed.
+
+At last, put the pivot just before the right pointer as it should be there.
+
+<figure markdown="span">
+  ![inplace_quick_sort_divide](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter12/fig12-14.png)
+  <figcaption>Divide for in place Quick Sort</figcaption>
+</figure>
 
 Just a heads up: There is also another method for selecting the pivot, **median of three**.
 
@@ -242,9 +292,11 @@ Can there be anything faster than $O(n(log(n)))$ ? Under some conditions, yeah.
 
 Consider a sequence S of n entries whose keys are integers in the range `[0, N −1]`,  for some integer $N ≥2$, and suppose that S should be sorted according to the keys of the entries. 
 
-In this case, it is possible to sort S in $O(n+ N)$ time. It might seem surprising, but this implies, for example, that if N is $O(n)$, then we can sort S in $O(n)$ time.
+In this case, it is possible to sort S in $O(n+ N)$ time.
 
-```python
+It might seem surprising, but this implies, for example, that if N is $O(n)$, then we can sort S in $O(n)$ time.
+
+``` py title="bucket_sort.py" linenums="1"
 def bucket_sort(seq):
     # Find the minimum and maximum values in the sequence
     min_val = min(seq) # o(n)
@@ -278,11 +330,11 @@ In such cases, the algorithm's efficiency decreases, and it may not provide a si
 
 In summary, the effectiveness of bucket sort is contingent on having a **reasonably uniform distribution** of values within the range, and it's well-suited for situations where the range is not excessively larger than the number of elements.
 
-##### Stable Sorting  - EQUAL KEYS??
+##### Stable Sorting
 
-When sorting key-value pairs, an important issue is ==how equal keys are handled.== 
+When sorting key-value pairs, an important issue is **how equal keys are handled.** 
 
-Let   $S = (( k_0, v_0), . . . , (k_{n−1} , v_{n−1}))$ be a sequence of such entries. 
+Let $S = (( k_0, v_0), . . . , (k_{n−1} , v_{n−1}))$ be a sequence of such entries. 
 
 We say that a sorting  algorithm is stable if, for any two entries $(k_i, v_i)$ and $(k_j, v_j)$ of S such that $k_i = k_j$  and $(k_i, v_i)$ precedes $(k_j, v_j)$  in S before sorting (that is, i < j), entry $(k_i, v_i)$ also precedes entry $(k_j, v_j)$ after sorting.
 
@@ -293,7 +345,7 @@ Stability is important for a sorting algorithm because applications may want to 
 The radix-sort algorithm sorts a sequence S of entries with keys that are pairs, by applying a **stable bucket-sort** on the sequence twice; first using one component of the pair as the key when ordering and then using the second component
 
 Allegedly, here is an example of Radix sort.
-```python
+``` py title="radix_sort.py" linenums="1"
 def counting_sort(arr, exp):
     n = len(arr)
     output = [0] * n
@@ -336,15 +388,21 @@ print("Sorted array:", arr)
 # Sorted array: [2, 24, 45, 66, 75, 90, 170, 802]
 ```
 
-## Comparing Sorting Algorithms - Efficiency - Memory Usage and Stability
+## Comparing Sorting Algorithms
 
-Wisdom: While selecting a sorting algorithm, there are trade offs involving efficiency, memory usage and stability.
+!!! tip
 
-### TRADE OFFS - EFFICIENCY - MEMORY USAGE - STABILITY
+    While selecting a sorting algorithm, there are trade offs involving efficiency, memory usage and stability.
+
+### Tradeoffs
+
+The tradeoffs are around **efficiency**, **memory usage** and **stability**.
 
 #### Insertion Sort
 
-For sorting small sequences, this is great. Also great for almost sorted stuff. That means number of inversions is small. Running time for these is $O(n + m)$ , where m is the number of inversions.
+For sorting small sequences, this is great. Also great for almost sorted stuff.
+
+That means number of inversions is small. Running time for these is $O(n + m)$ , where m is the number of inversions.
 
 #### Heap Sort
 
@@ -356,13 +414,13 @@ Not stable.
 
 It can outperform heap sort and merge sort. It was the default choice in C and Java through version 6.
 
-1. Cache Efficiency: Quicksort often exhibits better cache performance. In quicksort, the partitioning process involves swapping elements based on a pivot, which are usually located in adjacent memory locations. This behavior can lead to better cache utilization, as elements being processed are likely to be in close proximity in memory. In contrast, heap sort and merge sort involve more random access to memory, which can result in cache misses and slower performance.
+1. **Cache Efficiency**: Quicksort often exhibits better cache performance. In quicksort, the partitioning process involves swapping elements based on a pivot, which are usually located in adjacent memory locations. This behavior can lead to better cache utilization, as elements being processed are likely to be in close proximity in memory. In contrast, heap sort and merge sort involve more random access to memory, which can result in cache misses and slower performance.
  
-2. In-Place Sorting: Quicksort can be implemented in an in-place manner, which means it doesn't require additional memory for auxiliary data structures. In contrast, merge sort typically requires extra memory for merging two subarrays, and heap sort requires a separate heap data structure. In situations where memory usage is a concern, quicksort may be a more attractive choice.
+2. **In-Place Sorting**: Quicksort can be implemented in an in-place manner, which means it doesn't require additional memory for auxiliary data structures. In contrast, merge sort typically requires extra memory for merging two subarrays, and heap sort requires a separate heap data structure. In situations where memory usage is a concern, quicksort may be a more attractive choice.
 
-3. Average-Case Efficiency: Quicksort's expected average-case time complexity is $O(n log n)$, which is efficient. It performs well on average for random or well-distributed data, making it suitable for a wide range of real-world datasets.
+3. **Average-Case Efficiency**: Quicksort's expected average-case time complexity is $O(n log n)$, which is efficient. It performs well on average for random or well-distributed data, making it suitable for a wide range of real-world datasets.
 
-4. Fewer Comparisons: Quicksort often requires fewer comparisons and swaps than merge sort, making it more efficient for smaller datasets. This can be an advantage when sorting small or moderately sized lists.
+4. **Fewer Comparisons**: Quicksort often requires fewer comparisons and swaps than merge sort, making it more efficient for smaller datasets. This can be an advantage when sorting small or moderately sized lists.
 
 #### Merge Sort
 
@@ -372,24 +430,26 @@ It is quite difficult to make merge-sort run in-place for arrays, and without th
 
 The GNU sorting utility (and most current versions of the Linux operating system) relies on a multiway merge-sort variant. 
 
-#### Wisdom:
+!!! tip
 
-Since 2003, the standard sort method of Python’s list class has been a hybrid approach named Tim-sort (designed by Tim Peters), which is essentially a bottom-up merge-sort that takes advantage of some initial runs in the data while using insertion-sort to build additional runs. 
+    Here is some wisdom.
 
-You can read about TimSort from Tim in [this link in the codebase](https://github.com/python/cpython/blob/main/Objects/listsort.txt)
+    Since 2003, the standard sort method of Python’s list class has been a hybrid approach named Tim-sort (designed by Tim Peters), which is essentially a bottom-up merge-sort that takes advantage of some initial runs in the data while using insertion-sort to build additional runs. 
 
-Tim-sort has also become the default algorithm for sorting arrays in Java7.
+    You can read about TimSort from Tim in [this link in the codebase](https://github.com/python/cpython/blob/main/Objects/listsort.txt)
 
-| Name                                                                            | Best      | Average   | Worst     | Memory    | Stable | Method              | Other notes                                                                                                                                                                     |
-| ------------------------------------------------------------------------------- | --------- | --------- | --------- | --------- | ------ | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Heapsort](https://en.wikipedia.org/wiki/Heapsort "Heapsort")                   | n log (n) | n log (n) | n log (n) | Selection | No     |                     |                                                                                                                                                                                 |
-| [Merge sort](https://en.wikipedia.org/wiki/Merge_sort "Merge sort")             | n log (n) | n log (n) | n log (n) | n         | Yes    | Merging             | [Highly parallelizable](https://en.wikipedia.org/wiki/Merge_sort#Parallel_merge_sort "Merge sort") (up to _O_(log _n_) using the Three Hungarians' Algorithm).                  |
-| [Timsort](https://en.wikipedia.org/wiki/Timsort "Timsort")                      | n         | n log (n) | n log (n) | n         | Yes    | Insertion & Merging | Makes _n-1_ comparisons when the data is already sorted or reverse sorted.                                                                                                      |
-| [Quicksort](https://en.wikipedia.org/wiki/Quicksort "Quicksort")                | n log (n) | n log (n) | n ^ 2     | log (n)   | No     | Partitioning        | Quicksort is usually done in-place with _O_(log _n_) stack space.                                                                                                               |
+    Tim-sort has also become the default algorithm for sorting arrays in Java7.
+
+| Name      | Best      | Average   | Worst     | Memory    | Stable | Method         | Other notes     |
+| ----- | --------- | --------- | --------- | --------- | ------ | --------- | --------------------- |
+| [Heapsort](https://en.wikipedia.org/wiki/Heapsort "Heapsort")   | n log (n) | n log (n) | n log (n) | Selection | No     |            |                      |
+| [Merge sort](https://en.wikipedia.org/wiki/Merge_sort "Merge sort")   | n log (n) | n log (n) | n log (n) | n  | Yes    | Merging   | [Highly parallelizable](https://en.wikipedia.org/wiki/Merge_sort#Parallel_merge_sort "Merge sort") (up to _O_(log _n_) using the Three Hungarians' Algorithm).     |
+| [Timsort](https://en.wikipedia.org/wiki/Timsort "Timsort")     | n         | n log (n) | n log (n) | n         | Yes    | Insertion & Merging | Makes _n-1_ comparisons when the data is already sorted or reverse sorted.                                                                                                      |
+| [Quicksort](https://en.wikipedia.org/wiki/Quicksort "Quicksort")    | n log (n) | n log (n) | n ^ 2     | log (n)   | No     | Partitioning        | Quicksort is usually done in-place with _O_(log _n_) stack space. |
 | [Insertion sort](https://en.wikipedia.org/wiki/Insertion_sort "Insertion sort") | n         | n ^ 2     | n ^ 2     | 1         | Yes    | Insertion           | _O_(_n_ + _d_), in the worst case over sequences that have _d_ [inversions](https://en.wikipedia.org/wiki/Inversion_(discrete_mathematics) "Inversion (discrete mathematics)"). |
-| [Bubble sort](https://en.wikipedia.org/wiki/Bubble_sort "Bubble sort")          | n         | n ^ 2     | n ^ 2     | 1         | Yes    | Exchanging          | Tiny code size.                                                                                                                                                                 |
-| [Selection sort](https://en.wikipedia.org/wiki/Selection_sort "Selection sort") | n ^ 2     | n ^ 2     | n ^ 2     | 1         | No     | Selection           | Stable with O(n) extra space, when using linked lists, or when made as a variant of Insertion Sort instead of swapping the two items.                                           |
-| [Cycle sort](https://en.wikipedia.org/wiki/Cycle_sort "Cycle sort")             | n ^ 2     | n ^ 2     | n ^ 2     | 1         | No     | Selection           | In-place with theoretically optimal number of writes.                                                                                                                           |
+| [Bubble sort](https://en.wikipedia.org/wiki/Bubble_sort "Bubble sort")          | n         | n ^ 2     | n ^ 2     | 1         | Yes    | Exchanging          | Tiny code size.    |
+| [Selection sort](https://en.wikipedia.org/wiki/Selection_sort "Selection sort") | n ^ 2     | n ^ 2     | n ^ 2     | 1         | No     | Selection           | Stable with O(n) extra space, when using linked lists, or when made as a variant of Insertion Sort instead of swapping the two items.   |
+| [Cycle sort](https://en.wikipedia.org/wiki/Cycle_sort "Cycle sort")   | n ^ 2     | n ^ 2     | n ^ 2     | 1         | No     | Selection    | In-place with theoretically optimal number of writes. |
 
 #### 2 More Sorts  - Just because we are curious.
 
@@ -397,20 +457,28 @@ Tim-sort has also become the default algorithm for sorting arrays in Java7.
 
 An [adaptive](https://en.wikipedia.org/wiki/Adaptive_sort "Adaptive sort") variant of heapsort based upon the [Leonardo sequence](https://en.wikipedia.org/wiki/Leonardo_number "Leonardo number") rather than a traditional [binary heap](https://en.wikipedia.org/wiki/Binary_heap "Binary heap").
 
-In [computer science](https://en.wikipedia.org/wiki/Computer_science "Computer science"), **smoothsort** is a [comparison-based](https://en.wikipedia.org/wiki/Comparison_sort "Comparison sort") [sorting algorithm](https://en.wikipedia.org/wiki/Sorting_algorithm "Sorting algorithm"). A variant of [heapsort](https://en.wikipedia.org/wiki/Heapsort "Heapsort"), it was invented and published by [Edsger Dijkstra](https://en.wikipedia.org/wiki/Edsger_Dijkstra "Edsger Dijkstra") in 1981. Like heapsort, smoothsort is an [in-place algorithm](https://en.wikipedia.org/wiki/In-place_algorithm "In-place algorithm") with an upper bound of _[O](https://en.wikipedia.org/wiki/Big_O_notation "Big O notation")_(_n_ log _n_) operations  but it is not a [stable sort](https://en.wikipedia.org/wiki/Stable_sort "Stable sort"). The advantage of smoothsort is that it comes closer to _O_(_n_) time if the [input is already sorted to some degree], whereas heapsort averages _O_(_n_ log n ) regardless of the initial sorted state.
+In [computer science](https://en.wikipedia.org/wiki/Computer_science "Computer science"), **smoothsort** is a [comparison-based](https://en.wikipedia.org/wiki/Comparison_sort "Comparison sort") [sorting algorithm](https://en.wikipedia.org/wiki/Sorting_algorithm "Sorting algorithm").
+
+A variant of [heapsort](https://en.wikipedia.org/wiki/Heapsort "Heapsort"), it was invented and published by [Edsger Dijkstra](https://en.wikipedia.org/wiki/Edsger_Dijkstra "Edsger Dijkstra") in 1981. Like heapsort, smoothsort is an [in-place algorithm](https://en.wikipedia.org/wiki/In-place_algorithm "In-place algorithm") with an upper bound of _[O](https://en.wikipedia.org/wiki/Big_O_notation "Big O notation")_(_n_ log _n_) operations  but it is not a [stable sort](https://en.wikipedia.org/wiki/Stable_sort "Stable sort").
+
+The advantage of smoothsort is that it comes closer to _O_(_n_) time if the [input is already sorted to some degree], whereas heapsort averages _O_(_n_ log n ) regardless of the initial sorted state.
 
 ##### Advantages
 
-- Smooth Sort is an adaptive sorting algorithm, meaning that it performs well on partially sorted lists.
-- The algorithm has a time complexity of O(n log n), which is the same as merge sort and heap sort.
-- Smooth Sort uses a small amount of extra memory and has a low memory overhead compared to other sorting algorithms, such as merge sort.
+• Smooth Sort is an adaptive sorting algorithm, meaning that it performs well on partially sorted lists.
+
+• The algorithm has a time complexity of O(n log n), which is the same as merge sort and heap sort.
+
+• Smooth Sort uses a small amount of extra memory and has a low memory overhead compared to other sorting algorithms, such as merge sort.
+
 ##### Disadvantages
 
-- Smooth Sort is a complex algorithm, and it is more difficult to implement than some other sorting algorithms, such as insertion sort.
-- The algorithm requires the use of Leonardo numbers, which are a less well-known mathematical concept, so the algorithm may not be as widely used or understood as other algorithms.
+• Smooth Sort is a complex algorithm, and it is more difficult to implement than some other sorting algorithms, such as insertion sort.
+
+• The algorithm requires the use of Leonardo numbers, which are a less well-known mathematical concept, so the algorithm may not be as widely used or understood as other algorithms.
 
 Allegedly, here is the code:
-```python
+``` py title="smooth_sort.py" linenums="1"
 def smooth_sort(arr):
 	n = len(arr)
 
@@ -499,6 +567,8 @@ It gets its name from the observation that merging two sorted lists, A and B,
 
 ## Pythons Built in Sorting
 
+Let's see some code to discover!
+
 ```python
 seq = [5,7,4,23]
 seq.sort() # no new object, the seq is sorted
@@ -533,7 +603,7 @@ As important as it is, sorting is not the only interesting problem dealing with 
 
 There are a number of applications in which we are interested in identifying a single element in terms of its rank relative to the sorted order of the entire set. 
 
-Examples include identifying the ==minimum== and ==maximum== elements, but we may also be interested in, say, identifying the median element, that is, the element such that half of the other elements are smaller and the remaining half are larger. 
+Examples include identifying the **minimum** and **maximum** elements, but we may also be interested in, say, identifying the median element, that is, the element such that half of the other elements are smaller and the remaining half are larger. 
 
 In general, queries that ask for an element with a given rank are called order statistics.
 
