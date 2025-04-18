@@ -821,7 +821,11 @@ TODO: Not urgent
 
 ...
 
-![[table10.4.png]]
+<figure markdown="span">
+  ![skip_list](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter10/table10-4.png)
+  <figcaption>Sorted Map implemented with a Skip List</figcaption>
+</figure>
+
 
 ### Probabilistic Analysis of Skip Lists
 
