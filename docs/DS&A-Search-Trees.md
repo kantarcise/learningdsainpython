@@ -1,7 +1,11 @@
-Part of [[Data Structures and Algorithms - In Python]]
-
 ---
-# Binary Search Trees 😍
+hide:
+  - toc
+---
+
+# Search Trees
+
+## Binary Search Trees 😍
 
 BINARY TREES ARE GREAT SORTED MAPS.
 
@@ -9,12 +13,12 @@ Binary Search Trees (BSTs) exist as a data structure because they provide an eff
 
 > To be precise, binary search trees provide an average Big-O complexity of $O(log(n))$ for search, insert, update, and delete operations. $log(n)$ is much faster than the linear $O(n)$ time required to find elements in an unsorted array. Many popular production databases such as PostgreSQL and MySQL use binary trees under the hood to speed up CRUD operations.
 
-> ### PROS OF A BST
+> PROS OF A BST
 > 
 > - When balanced, a BST provides lightning-fast `O(log(n))` insertions, deletions, and lookups.
 > - Binary search trees are simple to implement. An ordinary BST, unlike a balanced red-black tree, requires very little code to get running.
 
-> ### CONS OF A BST
+> CONS OF A BST
 > 
 > - Slow for a brute-force search. If you need to iterate over each node, you might have more success with an array.
 > - When the tree becomes unbalanced, all fast `O(log(n))` operations quickly degrade to `O(n)`.
@@ -43,12 +47,14 @@ Binary trees are an excellent data structure for storing items of a map, assumin
 ![[fig11.1.png]]
 
 Left is less than root, right is more than root!
-## Navigating a Binary Search Tree 💚
+
+### Navigating a Binary Search Tree 💚
 
 **An inorder traversal of a binary search tree visits positions in increasing order of their keys.**
 
 Since an **inorder traversal** can be executed in linear time, a consequence of this proposition is that we can produce a sorted iteration of the keys of a map in linear time, when represented as a binary search tree.
-## Searches 😍
+
+### Searches 😍
 
 The most important consequence of the structural property of a binary search tree is its namesake search algorithm. We can attempt to locate a particular key in a binary search tree by viewing it as a decision tree (recall Figure 8.7). 
 
@@ -69,9 +75,10 @@ We spend $O(1)$ time per position encountered in the search, the overall search 
 ![[fig11.3.png]]
 
 Admittedly, the height $h$ of T can be as large as the number of entries, $n$, but we expect that it is usually much smaller. Indeed, later in this chapter we show various strategies to maintain an upper bound of $O(log n)$ on the height of a search tree T.
-## Insertions and Deletions
 
-### Insertion:
+### Insertions and Deletions
+
+#### Insertion:
 
 We begin with a search for key k (assuming the map is nonempty). If found, that item’s existing value is reassigned. Otherwise, a node for the new item can be inserted into the underlying tree T in place of the empty subtree that was reached at the end of the failed search.
 
@@ -88,7 +95,8 @@ Algorithm TreeInsert(T, k, v):
 ```
 
 ![[fig11.4.png]]
-### Deletion
+
+#### Deletion
 
 Deleting an item from a binary search tree T is a bit more complex than inserting a new item because the location of the deletion might be anywhere in the tree. (In contrast, insertions are always enacted at the bottom of a path.) 
 
@@ -103,7 +111,8 @@ IF TWO CHILDREN - FIND BEFORE - USE IT AS REPLACEMENT - DELETE
 2) If position p has two children, we cannot simply remove the node from T since this would create a “hole” and two orphaned children.
 
 ![[fig11.6.png]]
-## Python Implementation
+
+### Python Implementation
 
 With a multiple inheritance, here is the code: 
 
@@ -353,12 +362,14 @@ class TreeMap(LinkedBinaryTree, MapBase):
 ```
 
 ...
-## Performance of a Binary Search Tree
+
+### Performance of a Binary Search Tree
 
 An analysis of the operations of our `TreeMap` class is given in Table 11.1. Almost all operations have a worst-case running time that depends on $h$, where $h$ is the height of the current tree. This is because most operations rely on a constant amount of work for each node along a particular path of the tree, and the maximum path length within a tree is proportional to the height of the tree.
 
 ![[fig11.99.png]]
-### **IMPORTANT** 😦
+
+#### **IMPORTANT** 😦
 
 THERE IS NO BALANCING IF YOLO INCREASING OR DECREASING INSERTION 😦
 
@@ -369,7 +380,8 @@ In the worst case, however, T has height $n$, in which case it would look and fe
 ![[fig11.7.png]]
 
 In applications where one cannot guarantee the random nature of updates, it is better to rely on variations of search trees, presented in the remainder of this chapter, that guarantee a worst-case height of $O(log(n)),$ and thus $O(log(n))$ worst-case time for searches, insertions, and deletions.
-# Balanced Search Trees  😍😍 😍
+
+## Balanced Search Trees 😍
 
 In the closing of the previous section, we noted that if we could assume a random series of insertions and removals, the standard binary search tree supports $O(log n)$ expected running times for the basic map operations. However, we may only claim $O(n)$ worst-case time, because some sequences of operations may lead to an unbalanced tree with height proportional to n.
 
@@ -390,12 +402,14 @@ One or more rotations can be combined to provide broader re balancing within a t
 In practice, the modification of a tree T caused by a trinode restructuring operation can be implemented through case analysis either as a single rotation (as in Figure 11.9a and b) or as a double rotation (as in Figure 11.9c and d). The double rotation arises when position x has the middle of the three relevant keys and is first rotated above its parent, and then above what was originally its grandparent. In any of the cases, the trinode restructuring is completed with $O(1)$ running time.
 
 ![[fig11.9.png]]
-## Python Framework for Balancing Search Trees
+
+### Python Framework for Balancing Search Trees
 
 Our `TreeMap` class does not have any balancing. It is supposed to be a base class:
 
 ![[fig11.10.png]]
-### Hooks for Rebalancing Operations
+
+#### Hooks for Rebalancing Operations
 
 Our implementation of the basic map operations in Chapter 11.1.4 includes strategic calls to three nonpublic methods that serve as hooks for rebalancing algorithms: 
 
@@ -416,12 +430,13 @@ def _rebalance_insert(self, p): pass
 def _rebalance_delete(self, p): pass
 def _rebalance_access(self, p): pass
 ```
-### TRANSACTION - WISDOM 💙
+#### TRANSACTION - WISDOM 💙
 
 The `TreeMap` class, which uses a standard binary search tree as its data structure, should be an efficient map data structure, but its worst-case performance for the various operations is linear time, because it is possible that a series of operations results in a tree with linear height. 
 
 In this section, we describe a simple balancing strategy that guarantees **worst-case logarithmic running** time for all the fundamental map operations.
-# AVL Trees - Satisfying Height - Balance 💕
+
+## AVL Trees - Satisfying Height - Balance 💕
 
 The simple correction is to add a rule to the binary search tree definition that will maintain a logarithmic height for the tree. 
 
@@ -431,7 +446,7 @@ By this definition, a leaf position has height 1, while we trivially define the 
 
 In this section, we consider the following **height-balance property**, which characterizes the structure of a binary search tree T in terms of the heights of its nodes.
 
-==**Height-Balance Property**==: For every position p of T , the heights of the children of p differ by at most 1.
+**Height-Balance Property**: For every position p of T , the heights of the children of p differ by at most 1.
 
 Any binary search tree T that satisfies the height-balance property is said to be an AVL tree, named after the initials of its inventors: $$Adel’son-Vel’skii \:and \:Landis.$$ 
 
@@ -440,9 +455,10 @@ Any binary search tree T that satisfies the height-balance property is said to b
 An immediate consequence of the height-balance property is that a subtree of an AVL tree is itself an AVL tree. The height-balance property has also the important consequence of keeping the height small, as shown in the following proposition. 
 
 **Wisdom:** The height of an AVL tree storing n entries is $O(log n)$.
-## Update Operations
 
-### Insertion
+### Update Operations
+
+#### Insertion
 
 We have to restore balance after every insertion:
 
@@ -453,12 +469,14 @@ We restore the balance of the nodes in the binary search tree T by a simple “s
 Also, let y denote the child of z with higher height (and note that y must be an ancestor of p). Finally, let x be the child of y with higher height (there cannot be a tie and position x must also be an ancestor of p, possibly p itself ). We rebalance the subtree rooted at z by calling the trinode restructuring method, restructure(x),
 
 ![[fig11.13.png]]
-### Deletion:
+
+#### Deletion:
 
 TODO
 
 ![[fig11.14.png]]
-### Performance of AVL Trees
+
+#### Performance of AVL Trees
 
 By Proposition 11.2, the height of an AVL tree with n items is guaranteed to be $O(log n)$. 
 
@@ -469,7 +487,8 @@ Because the standard binary search tree operation had running times bounded by t
 ...
 
 ![[fig11.15.png]]
-## Python Implementation
+
+### Python Implementation
 
 TODO: Not urgent
 
@@ -539,7 +558,8 @@ class AVLTreeMap(TreeMap):
     def _rebalance_delete(self, p):
         self._rebalance(p)
 ```
-# Splay Trees 🏂
+
+## Splay Trees 🏂
 
 What are Splay Trees?
 
@@ -550,20 +570,24 @@ This structure is conceptually quite different from the other balanced search tr
 The efficiency of splay trees is due to a certain move-to-root operation, called **splaying**, that is performed at the bottom most position p reached during every insertion, deletion, or even a search. (In essence, this is a tree variant of the move-to-front heuristic that we explored for lists in Chapter 7.6.2.) 
 
 Intuitively, a splay operation causes more frequently accessed elements to remain nearer to the root, thereby reducing the typical search times. The surprising thing about splaying is that it allows us to guarantee a logarithmic amortized running time, for insertions, deletions, and searches.
-## Splaying 🏂
+
+### Splaying 🏂
 
 Given a node x of a binary search tree T , we splay x by moving x to the root of T through a sequence of restructurings. The particular restructurings we perform are important, for it is not sufficient to move x to the root of T by just any sequence of restructurings. The specific operation we perform to move x up depends upon the relative positions of x, its parent y, and (if it exists) x’s grandparent z.
-#### zig-zig
+
+##### zig-zig
 
  The node x and its parent y are both left children or both right children. (See Figure 11.16.) We promote x, making y a child of x and z a child of y, while maintaining the inorder relationships of the nodes in T .
 
 ![[fig11.16.png]]
-#### zig-zag
+
+##### zig-zag
 
 One of x and y is a left child and the other is a right child. (See Figure 11.17.) In this case, we promote x by making x have y and z as its children, while maintaining the inorder relationships of the nodes in T .
 
 ![[fig11.17.png]]
-#### zig
+
+##### zig
 
 x does not have a grandparent. (See Figure 11.18.) In this case, we perform a single rotation to promote x over y, making y a child of x, while maintaining the relative inorder relationships of the nodes in T .
 
@@ -572,7 +596,8 @@ x does not have a grandparent. (See Figure 11.18.) In this case, we perform a si
 TODO: Not urgent
 
 ...
-## When to Splay
+
+### When to Splay
 
 
 Just add figures
@@ -587,7 +612,7 @@ TODO: Not urgent
 
 ...
 
-## Python Implementation
+### Python Implementation
 
 TODO: Not urgent
 
@@ -627,7 +652,8 @@ class SplayTreeMap(TreeMap):
     def _rebalance_access(self, p):
         self._splay(p)
 ```
-## Amortized Analysis of Splaying
+
+### Amortized Analysis of Splaying
 
 The time for performing a splaying step for a position p is asymptotically the same as the time needed just to reach that  position in a top-down search from the root of T.
 
@@ -640,7 +666,8 @@ This amortized performance matches the worst-case performance of AVL trees, (2, 
 TODO: Not urgent
 
 ...
-# (2,4) Trees
+
+## (2,4) Trees
 
 What are (2,4) Trees?
 
@@ -650,7 +677,7 @@ Recall that general trees are defined so that internal nodes may have many child
 
 Map items stored in a search tree are pairs of the form (k, v), where k is the key and v is the value associated with the key.
 
-## Multiway Search Trees
+### Multiway Search Trees
 
 Let w be a node of an ordered tree. We say that w is a d-node if w has d children. We define a multiway search tree to be an ordered tree T that has the following properties, which are illustrated in `Figure 11.23a`:
 	• Each internal node of T has at least two children. That is, each internal node is a d-node such that $d ≥ 2$.
@@ -673,7 +700,8 @@ However, for the sake of exposition, we will discuss these as actual nodes that 
 TODO: Not urgent
 
 ...
-## (2,4)-Tree Operations 
+
+### (2,4)-Tree Operations 
 
 A multiway search tree that keeps the secondary data structures stored at each node small and also keeps the primary multiway tree balanced is the (2, 4) tree, which is sometimes called a 2-4 tree or 2-3-4 tree. This data structure achieves these goals by maintaining two simple properties (see Figure 11.24):
 
@@ -686,7 +714,7 @@ Performing a search in a (2, 4) tree takes O(log n) time and that the specific r
 
 Maintaining the size and depth properties requires some effort after performing insertions and deletions in a (2, 4) tree, however. We discuss these operations next.
 
-### Insertion
+#### Insertion
 
 TODO: Not urgent
 
@@ -694,12 +722,13 @@ TODO: Not urgent
 
 The total time to perform an insertion in a (2, 4) tree is O(log n).
 
-### Deletion
+#### Deletion
 
 TODO: Not urgent
 
 ...
-### Performance
+
+#### Performance
 
 The asymptotic performance of a (2, 4) tree is identical to that of an AVL tree (see Table 11.2) in terms of the sorted map ADT, with guaranteed logarithmic bounds for most operations. The time complexity analysis for a (2, 4) tree having n key-value pairs is based on the following:
 
@@ -708,7 +737,8 @@ The asymptotic performance of a (2, 4) tree is identical to that of an AVL tree 
 • A search, insertion, or removal of an entry visits O(log n) nodes.
 
 Thus, (2, 4) trees provide for fast map search and update operations. They are interestingly related to Red-Black Trees which we will discuss next.
-# Red-Black Trees 💕
+
+## Red-Black Trees 💕
 
 What are Red Black Trees?
 
@@ -726,7 +756,7 @@ Formally, a red-black tree is a binary search tree (see Section 11.1) with nodes
  
 ![[fig11.30.png]]
 
-## Red-Black Tree Operations
+### Red-Black Tree Operations
 
 
 TODO: Not urgent
@@ -734,26 +764,26 @@ TODO: Not urgent
 ...
 
 
-### Insertion
+#### Insertion
 
 TODO: Not urgent
 
 ...
 
-### Deletion
+#### Deletion
 
 TODO: Not urgent
 
 ...
 
 
-### Performance of Red-Black Trees
+#### Performance of Red-Black Trees
 
 Proposition 11.10: The insertion of an item in a red-black tree storing $n$ items can be done in $O(log n)$ time and requires $O(log n)$ recolorings and at most one trinode restructuring.
 
 Proposition 11.11: The algorithm for deleting an item from a red-black tree with $n$ items takes $O(log n)$ time and performs $O(log n)$ recolorings and at most two restructuring operations.
 
-## Python Implementation
+### Python Implementation
 
 TODO: Not urgent
 
