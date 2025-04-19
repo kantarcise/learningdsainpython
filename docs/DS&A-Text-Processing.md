@@ -1,7 +1,9 @@
-Part of [[Data Structures and Algorithms - In Python]]
-
 ---
-# It is a dominant function of computers
+hide:
+  - toc
+---
+
+# Text Processing 📜
 
 Despite the wealth of multimedia information, text processing remains one of the dominant functions of computers.
 
@@ -9,21 +11,28 @@ From Fluent Python - Unicode Text Versus Bytes:
 
 > Humans use text. Computers speak bytes.[1](https://www.oreilly.com/library/view/fluent-python/9781491946237/ch04.html#idm139636562760384)
 > Esther Nam and Travis Fischer, Character Encoding and Unicode in Python
-# Abundance of Digitized Text
+
+## Abundance of Digitized Text
 
 Computer are used to edit, store, and display documents, and to transport documents over the Internet. Furthermore, digital systems are used to archive a wide range of textual information, and new data is being generated at a rapidly increasing pace. 
 
 A large corpus can readily surpass a petabyte of data (which is equivalent to a thousand terabytes (1 PB - 1000 TB), or a million gigabytes). Common examples of digital collections that include textual information are:
 
 • Snapshots of the World Wide Web, as Internet document formats HTML and XML are primarily text formats, with added tags for multimedia content
+
 • All documents stored locally on a user’s computer
+
 • Email archives
+
 • Customer reviews
+
 • Compilations of status updates on social networking sites such as Facebook
+
 • Feeds from sites such as X and Tumblr
 
 In this chapter we explore some of the fundamental algorithms that can be used to efficiently analyze and process large textual data sets. In addition to having interesting applications, text-processing algorithms also highlight some important algorithmic design patterns.
-## Notations for Strings and the Python `str` Class
+
+### Notations for Strings and the Python `str` Class
 
 To allow fairly general notions of a string in our algorithm descriptions, we only assume that characters of a string come from a known alphabet, which we denote as Σ. 
 
@@ -40,7 +49,7 @@ my_str = "sezai"
 my_str_slice = my_str[2:0]  # this is None
 bool(my_str_slice) # this is False
 ```
-### Prefix and Suffix - START AND END PIECE 📜
+#### Prefix and Suffix - START AND END PIECE 📜
 
 In order to distinguish some special kinds of substrings, let us refer to any substring of the form `S[0:k]` for $0 ≤k ≤n$ as a ==prefix of S==; such a prefix results in Python when the first index is omitted from slice notation, as in `S[:k]`. 
 
@@ -59,7 +68,8 @@ my_suffix = "CGC"
 prefix_to_all = "" # null strings are prefixs for all strings.
 suffix_to_all = "" # null strings are suffixes for all strings.
 ```
-### Important Lesson `stringappendlist` - `listappendforstrings`:
+
+#### Important Lesson `stringappendlist` - `listappendforstrings`:
 
 Python Strings are immutable, so if you use `+=` to append to an end of a string, you will make a lot of string instances, using memory. Instead of that, use a `list` and later, `join` it's elements.
 
@@ -77,7 +87,8 @@ for _ in range(5):
 final = "".join(result)
 
 ```
-## Python Strings From Appendix A
+
+### Python Strings From Appendix A
 
 A string is a sequence of characters that come from some alphabet. 
 
@@ -90,7 +101,8 @@ A basic introduction to the `str` class was provided in Chapter 1.2.3, including
 Common operators that are supported by strings, such as the use of `+` for concatenation, were further discussed in Chapter 1.3. 
 
 ==This appendix serves as a more detailed reference==, describing convenient behaviors that strings support for the processing of text. To organize our overview of the `str` class behaviors, we group them into the following broad categories of  functionality.
-### Searching for Substrings  
+
+#### Searching for Substrings  
 
 The operator syntax, pattern in s, can be used to determine if the given pattern occurs as a substring of string s. Table A.1 describes several related methods that determine the number of such occurrences, and the index at which the leftmost or rightmost such occurrence begins. 
 
@@ -106,7 +118,8 @@ Each of the functions in this table accepts two optional parameters, start and e
 |`s.rfind(pattern)` |Return the index starting the rightmost occurrence of pattern; else `-1`  |
 |`s.rindex(pattern)` |Similar to `rfind`, but raise `ValueError` if not found. |
 Using `find` might be safer, if you do not want to raise an `Exception`.
-### Constructing Related Strings  
+
+#### Constructing Related Strings  
 
 Strings in Python are **immutable**, so none of their methods modify an existing string instance. 
 
@@ -129,12 +142,14 @@ Table A.2 provides a summary of such methods, including those that replace a giv
 |`s.strip()` |Return a copy of s, with leading and trailing whitespace removed  |
 |`s.lstrip()`| Return a copy of s, with leading whitespace removed  |
 |`s.rstrip()` |Return a copy of s, with trailing whitespace removed|
+
 Several of these methods accept optional parameters not detailed in the table. For example, the `replace` method replaces all non overlapping occurrences of the old pattern by default, but an optional parameter can limit the number of replacements that are performed. 
 
 The methods that center or justify a text use spaces as the default fill character when padding, but an alternate fill character can be specified as an optional parameter. 
 
 Similarly, all variants of the `strip` methods remove leading and trailing whitespace by default, but an optional string parameter designates the choice of characters that should be removed from the ends.
-### Testing Boolean Conditions  
+
+#### Testing Boolean Conditions  
 
 ==Table A.3== includes methods that test for a Boolean property of a string, such as whether it begins or ends with a pattern, or whether its characters qualify as being alphabetic, numeric, whitespace, etc. 
 
@@ -154,7 +169,8 @@ Conventions for what are considered alphabetic and numeric character codes are e
 |`s.isdecimal()` |Return `True` if all characters of nonempty string represent digits 0–9, including Unicode equivalents  |
 |`s.isnumeric()` |Return `True` if all characters of nonempty string are numeric Unicode characters (e.g., 0–9, equivalents, fraction characters)  |
 | `s.isalnum()`| Return `True` if all characters of nonempty string are either alphabetic or numeric (as per above definitions) |
-### Splitting and Joining Strings  😎
+
+#### Splitting and Joining Strings  😎
 
 ==Table A.4== describes several important methods of Python’s string class, used to compose a sequence of strings together using a delimiter to separate each pair, or to take an existing string and determine a decomposition of that string based upon existence of a given separating pattern.  
 
@@ -197,6 +213,7 @@ If no delimiter (or `None`) is specified, split uses white space as a delimiter;
 list_two = "red and green and blue".split() # Uses whitespace as delimiter
 print(list_two) # [ "red" , "and" , "green" , "and" , "blue" ].
 ```
+
 #### String Formatting  
 
 The format method of the `str` class composes a string that includes one or more formatted arguments. 
@@ -283,7 +300,8 @@ print(b) # 1
 
 print(c) # [2, 3, 4, 5, 6, 7]
 ```
-# Pattern - Matching Algorithms - Back To FLOW of the BOOK
+
+## Pattern - Matching Algorithms - Back To FLOW of the BOOK
 
 In the classic pattern-matching problem, we are given a text string T of length n and a pattern string P of length m, and want to find whether P is a substring of T. If so, we may want to find the lowest index j within T at which P begins, such that `T[j:j+m]` equals P, or perhaps to find all indices of T at which pattern P begins.
 
@@ -350,7 +368,8 @@ print(drake.partition(" ")) # ('Tuscan', ' ', 'Leather')
 ```
 
 In this section, we present three pattern-matching algorithms (with increasing levels of difficulty). For simplicity, we model the outward semantics of our functions upon the find method of the string class, returning the lowest index at which the pattern begins, or `−1` if the pattern is not found.
-## Brute Force - Pattern Matching
+
+### Brute Force - Pattern Matching
 
 The brute-force algorithmic design pattern is a powerful technique for algorithm design when we have something we wish to search for or when we wish to optimize some function. 
 
@@ -379,7 +398,8 @@ Outer loop executes at most $o(n-m+1)$ - inner loop at most $o(m)$. Worst case r
 We run it again and again and again...
 
 ![[fig13.1.png]]
-## Boyer Moore
+
+### Boyer Moore
 
 Can we do it better?
 
@@ -427,6 +447,7 @@ find_boyer_moore("alareference", "ref")  # 3
 Here is a figure on it:
 
 ![[fig13.4.png]]
+
 #### Performance
 
 If using a traditional lookup table, the worst-case running time of the Boyer-Moore algorithm is $O(nm+ |Σ|)$. Namely, the computation of the last function takes time O(m+ |Σ|), and the actual search for the pattern takes $O(n*m)$ time in the worst case, the same as the brute-force algorithm. (With a hash table, the dependence on |Σ| is removed.) An example of a text-pattern pair that achieves the worst case is:
@@ -448,7 +469,8 @@ Similarly, the Boyer-Moore algorithm has a worst-case time complexity of $O(nm +
 The algorithm is designed to efficiently skip large portions of text during the search, making it particularly effective in practice, especially for long texts and relatively short patterns.
 
 ==In both cases, the worst-case scenario is less likely to occur in typical real-world applications, and the algorithms can exhibit superior performance in practice. Experimental evidence and empirical analysis on representative data sets help provide a more accurate understanding of their average-case behavior.==
-## KMP - Knuth Morris Pratt
+
+### KMP - Knuth Morris Pratt
 
 There is still a major inefficiency.
   
@@ -503,12 +525,14 @@ find_kmp("alareference", "fer") # 5
 The Knuth-Morris-Pratt algorithm performs pattern matching on a text string of length n and a pattern string of length m in $O(n+ m)$ time.
 
 ![[fig13.6.png]]
-# Dynamic Programming
+
+## Dynamic Programming
 
 Dynamic programming can often be used to take problems that seem to require exponential time and produce polynomial-time algorithms to solve them.
 
 In addition, the algorithms that result from applications of the dynamic programming technique are usually quite simple—often needing little more than a few lines of code to describe some nested loops for ﬁlling in a table.
-## Matrix Chain Product Example
+
+### Matrix Chain Product Example
 
 Suppose we are given a collection of n two-dimensional matrices for which we
 wish to compute the mathematical product
@@ -597,7 +621,8 @@ Let's break down how dynamic programming (DP) is used in the provided `matrix_ch
 In summary, the result is a dynamic programming table that provides the optimal solution to the matrix chain multiplication problem, minimizing the number of scalar multiplications needed to compute the product of a sequence of matrices. The dynamic programming approach avoids redundant calculations by solving and storing subproblems in a bottom-up fashion.
 
 This was such a complex example. Here is a simpler one.
-## Fibonacci Series
+
+### Fibonacci Series
 
 Dynamic programming is a technique used in computer science and mathematics to solve optimization problems by breaking them down into simpler overlapping subproblems and solving each sub problem only once, storing the solutions to avoid redundant computations. 
 
@@ -622,6 +647,7 @@ Now, let's analyze the time complexity of this naive recursive solution. The tim
 This is because for each Fibonacci number, the function makes two recursive calls, leading to an exponential number of calls.
 
 Now, let's see how dynamic programming can significantly improve the efficiency of this solution.
+
 ##### Dynamic Programming Approach:
 
 We can use memoization to store the results of previously solved subproblems and avoid redundant computations. Here's a simple dynamic programming solution using memoization in Python:
@@ -644,36 +670,48 @@ Now, let's compare the two approaches for calculating $F(5)$ using both the naiv
 The dynamic programming solution is much more efficient, especially for larger values of n. The time complexity of the dynamic programming solution is $O(n)$ due to the memoization, making it exponentially faster than the naive recursive approach.
 
 This example demonstrates the power of dynamic programming in optimizing solutions to problems with overlapping subproblems, and it is a fundamental technique in algorithm design.
-## The Components of a Dynamic Programming Solution
+
+### The Components of a Dynamic Programming Solution
 
 As mentioned above, the dynamic programming technique is used primarily for optimization problems, where we wish to ﬁnd the “best” way of doing something. 
 
 We can apply the dynamic programming technique in such situations if the problem has certain properties:
-### Simple Subproblems: 
+
+#### Simple Subproblems: 
+
 There has to be some way of repeatedly breaking the global optimization problem into subproblems. Moreover, there should be a way to parameterize subproblems with just a few indices, like i, j, k, and so on.
-### Subproblem Optimization: 
+
+#### Subproblem Optimization: 
+
 An optimal solution to the global problem must be a composition of optimal subproblem solutions.
-### Subproblem Overlap: 
+
+#### Subproblem Overlap: 
+
 Optimal solutions to unrelated subproblems can contain subproblems in common.
-## Chat-GPT Wisdom
+
+### Chat-GPT Wisdom
 
 Dynamic programming is a technique for solving optimization problems by breaking them down into simpler overlapping subproblems and solving each subproblem only once, storing the solutions to subproblems to avoid redundant work. This approach is especially useful when a problem has optimal substructure and overlapping subproblems.
 
 Here's a breakdown of the key concepts and benefits of dynamic programming:
-### Optimal Substructure:
+
+#### Optimal Substructure:
 
 This property means that an optimal solution to the problem contains optimal solutions to its subproblems.
 In the matrix chain multiplication problem, the optimal way to multiply a sequence of matrices involves the optimal multiplication of its subsequences.
-### Overlapping Subproblems:
+
+#### Overlapping Subproblems:
 
 Dynamic programming avoids redundant computation by solving subproblems only once and storing their solutions in a table or cache.
 In the matrix chain multiplication problem, there are repeated calculations when considering different subsequences, which can be avoided using dynamic programming.
-### Memoization and Tabulation:
+
+#### Memoization and Tabulation:
 
 Memoization involves storing the results of expensive function calls and returning the cached result when the same inputs occur again.
 
 Tabulation involves filling a table with the results of subproblems and using those results to build up to the solution of the overall problem.
-### Benefits:
+
+##### Benefits:
 
 **Optimization**: Dynamic programming often leads to more efficient solutions by avoiding redundant calculations.
 
@@ -685,11 +723,13 @@ Tabulation involves filling a table with the results of subproblems and using th
 Optimal Substructure:  If a problem can be broken down into smaller independent subproblems and the optimal solution to the problem can be constructed from optimal solutions to its subproblems, it may be suitable for dynamic programming.
 
 Overlapping Subproblems: If the problem involves solving the same subproblems multiple times, dynamic programming can help by avoiding redundant computations.
+
 ### Common Patterns:
 Dynamic programming problems often exhibit one of two common patterns: bottom-up (tabulation) or top-down (memoization). The matrix chain multiplication code you provided is an example of the bottom-up approach.
 
 To identify when to use dynamic programming, consider whether the problem can be decomposed into overlapping subproblems with optimal substructure. If these characteristics are present, dynamic programming might be a powerful approach to solving the problem.
-# Text Compression and Greedy Method
+
+## Text Compression and Greedy Method
 
 This part explains Greedy method from the lens of Huffman Coding. 
 
@@ -698,10 +738,12 @@ Heads up: Given a string X deﬁned over some alphabet, such as the ASCII or Uni
 Text compression is useful in any situation where we wish to reduce bandwidth for digital communications, so as to minimize the time needed to transmit our text. Likewise, text compression is useful for storing large documents more efﬁciently, so as to allow a ﬁxed-capacity storage device to contain as many documents as possible.
 
 ![[fig13.9.png]]
-## Huffman Coding Algorithm
+
+### Huffman Coding Algorithm
 
 Huffman’s algorithm constructs an optimal preﬁx code for a string of length n with d distinct characters in O(n + d log d) time.
-## Greedy Method
+
+### Greedy Method
 
 This design pattern is applied to optimization problems, where we are ==trying to construct some structure while minimizing or maximizing some property of that structure==.
 
@@ -716,7 +758,8 @@ This approach does not always lead to an optimal solution.
 But there are several problems that it does work for, and such problems are said to possess the greedy-choice property. 
 
 This is the property that a global optimal condition can be reached by a series of locally optimal choices (that is, choices that are each the current best from among the possibilities available at the time), starting from a well-deﬁned starting condition. The problem of computing an optimal variable-length preﬁx code is just one example of a problem that possesses the greedy-choice property.
-# Tries
+
+## Tries
 
 This approach is suitable for applications where a series of queries is performed on a ﬁxed text, so that the initial cost of preprocessing the text is compensated by a speedup in each subsequent query (for example, a Web site that offers pattern matching in Shakespeare’s Hamlet or a search engine that offers Web pages on the Hamlet topic).
 
@@ -746,12 +789,14 @@ The O(|Σ|) upper bound on the time to locate a child with a given label is achi
 We can improve the time spent at a node to be O(log |Σ|) or expected O(1), by mapping characters to children using a secondary search table or ==hash table== at each node, or by using a direct lookup table of size |Σ| at each node, if |Σ| is sufﬁciently small (as is the case for DNA strings). 
 
 For these reasons, we typically expect a search for a string of length m to run in O(m) time.
-## Compressed Tries
+
+### Compressed Tries
 
 We can transform T into a compressed trie by replacing each redundant chain $(v_0 , v_1 ) · · · (v_{k−1} , v_k )$ of $k ≥ 2$ edges into a single edge $(v_0 , v_k )$, relabeling $v_k$ with the concatenation of the labels of nodes $v_1 , . . . , v_k$ .
 
 ![[fig13.12.png]]
-## Suffix Tries
+
+### Suffix Tries
 
 Using a sufﬁx trie allows us to save space over a standard trie by using several space
 compression techniques, including those used for the compressed trie.
@@ -762,15 +807,10 @@ Use cases:
 
 1. **Efficient Pattern Matching:**
 - One of the main applications of suffix tries is in pattern matching. Given a pattern, the trie allows for quick determination of whether the pattern exists in the original string.
+
 2. **Longest Common Substring:**
 - Suffix tries can be used to find the longest common substring between two or more strings efficiently.
+
 3. **Substring Retrieval:**
 - It allows for fast retrieval of all occurrences of a substring within the original string.
 
-18.11.2023 - Done with first version!
-
-23.12.2023 -- Second pass done 💕
-
-06.01.2024 - Third Draft is complete 💕
-
-23.01.2024 - Fourth Draft complete.
