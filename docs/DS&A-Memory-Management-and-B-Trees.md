@@ -330,7 +330,7 @@ This concept is known as blocking, and it is motivated by the expectation that o
 In the interface between cache memory and internal memory, such blocks are often called cache lines, and in the interface between internal memory and external memory, such blocks are often called pages.
 
 <figure markdown="span">
-  ![blocks_in_external_memory](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter15/fig15-1.png)
+  ![blocks_in_external_memory](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter15/fig15-2.png)
   <figcaption>Blocks in External Memory</figcaption>
 </figure>
 
