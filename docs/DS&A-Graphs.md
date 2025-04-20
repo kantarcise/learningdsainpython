@@ -9,7 +9,7 @@ This chapter is all about graphs.
 
 ## What is a Graph?
 
-**A graph G is simply a set V of vertices and a collection E of pairs of vertices from V , called edges.** 
+**A graph G is simply a set V of vertices and a collection E of pairs of vertices from V, called edges.** 
 
 Thus, a graph is a way of representing connections or relationships between pairs of objects from some set V.
 
@@ -22,66 +22,76 @@ A lot of definitions about them:
   <figcaption>Graph if Authors</figcaption>
 </figure>
 
-- If all the edges in a graph are undirected, then we say the graph is an ==**undirected graph**==. Likewise, a ==**directed graph**==, also called a digraph, is a graph whose edges are all directed. A graph that has both directed and undirected edges is often called ==**a mixed graph.** ==
+- If all the edges in a graph are undirected, then we say the graph is an **undirected graph**. Likewise, a **directed graph**, also called a digraph, is a graph whose edges are all directed. A graph that has both directed and undirected edges is often called **a mixed graph.** 
 
-- If an edge is directed, its first endpoint is its **==origin==** and the other is the ==**destination**== of the edge.
+- If an edge is directed, its first endpoint is its **origin** and the other is the **destination** of the edge.
 
-- Two vertices u and v are said to be **==adjacent==** if there is an edge whose end vertices are u and v. 
+- Two vertices u and v are said to be **adjacent** if there is an edge whose end vertices are u and v. 
 
-- An edge is said to be **==incident==** to a vertex if the vertex is one of the edge’s endpoints. 
+- An edge is said to be **incident** to a vertex if the vertex is one of the edge’s endpoints. 
 
-- ==**The outgoing edges**== of a vertex are the directed edges whose origin is that vertex. 
+- **The outgoing edges** of a vertex are the directed edges whose origin is that vertex. 
 
-- **==The incoming edges==** of a vertex are the directed edges whose destination is that vertex. 
+- **The incoming edges** of a vertex are the directed edges whose destination is that vertex. 
 
-- The degree of a vertex v, denoted ==**deg(v)**==, is the number of incident edges of v. 
+- The degree of a vertex v, denoted **deg(v)**, is the number of incident edges of v. 
 
-- The in-degree and out-degree of a vertex v are the number of the incoming and outgoing edges of v, and are denoted **==indeg(v)==** and ==**outdeg(v)**== , respectively.
+- The in-degree and out-degree of a vertex v are the number of the incoming and outgoing edges of v, and are denoted **indeg(v)** and **outdeg(v)** , respectively.
 
 A flight network is a great example!
 
-![[fig14.2.graph.png]]
+<figure markdown="span">
+  ![flight_network](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter14/fig14-2.png)
+  <figcaption>Flight Network</figcaption>
+</figure>
 
 For example, `DFW` has out degree of 2 and in degree of 3.
 
-The definition of a graph refers to the group of edges as a collection, not a set, thus allowing two undirected edges to have the same end vertices, and for two directed edges to have the same origin and the same destination. Such edges are called **==parallel edges or multiple edges.==** 
+The definition of a graph refers to the group of edges as a collection, not a set, thus allowing two undirected edges to have the same end vertices, and for two directed edges to have the same origin and the same destination. Such edges are called **parallel edges or multiple edges.** 
 
-A flight network **==can contain parallel edges==**, such that multiple edges between the same pair of vertices could indicate different flights operating on the **==same route at different times of the day.==**
+A flight network **can contain parallel edges**, such that multiple edges between the same pair of vertices could indicate different flights operating on the **same route at different times of the day.**
 
-Another special type of edge is one that connects a vertex to itself. Namely, we say that an edge (undirected or directed) is a **==self-loop==** if its two endpoints coincide.
+Another special type of edge is one that connects a vertex to itself. Namely, we say that an edge (undirected or directed) is a **self-loop** if its two endpoints coincide.
 
-With few exceptions, graphs do not have parallel edges or self-loops. Such graphs are said to be **==simple.==**
+With few exceptions, graphs do not have parallel edges or self-loops. Such graphs are said to be **simple.**
 
 Assume simple unless otherwise specified.
 
-A **==path==** is a sequence of alternating vertices and edges that starts at a vertex and ends at a vertex such that each edge is incident to its predecessor and successor vertex.
+A **path** is a sequence of alternating vertices and edges that starts at a vertex and ends at a vertex such that each edge is incident to its predecessor and successor vertex.
 
-A **==cycle==** is a path that starts and ends at the same vertex, and that includes at least one edge. 
+A **cycle** is a path that starts and ends at the same vertex, and that includes at least one edge. 
 
-We say that a path is **==simple==** if each vertex in the path is distinct, and we say that a cycle is simple if each vertex in the cycle is distinct, except for the first and last one.
+We say that a path is **simple** if each vertex in the path is distinct, and we say that a cycle is simple if each vertex in the cycle is distinct, except for the first and last one.
 
-A **==directed path==** is a path such that all edges are directed and are traversed along their direction
+A **directed path** is a path such that all edges are directed and are traversed along their direction
 
 For example, in Figure 14.2, (BOS, NW 35, JFK, AA 1387, DFW) is a directed simple path, and (LAX, UA 120, ORD, UA 877, DFW, AA 49, LAX) is a directed simple cycle.
 
-![[fig14.2.graph.png]]
+<figure markdown="span">
+  ![flight_network](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter14/fig14-2.png)
+  <figcaption>Flight Network Again, to see paths and cycles</figcaption>
+</figure>
 
-A directed graph is **==acyclic==** if it has no directed cycles.
+A directed graph is **acyclic** if it has no directed cycles.
 
-![[fig14.3.png]]
+<figure markdown="span">
+  ![flight_network](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter14/fig14-3.png)
+  <figcaption>Reachability in Directed Graph</figcaption>
+</figure>
 
 In the propositions that follow, we explore a few important properties of graphs.
 
-- If G is a graph with m edges and vertex set V , then:
-$$_{(v) in (V)}∑ deg(v) = 2m$$
- - If G is a directed graph with m edges and vertex set V , then:
-$$_{(v) in (V)}∑ indeg(v) = _{(v) in (V)}∑ outdeg (v) = m$$
-Total in degree is equal to total out degree.
+- If G is a graph with m edges and vertex set V , then: $_{(v) in (V)}∑ deg(v) = 2m$
+
+- If G is a directed graph with m edges and vertex set V , then: $_{(v) in (V)}∑ indeg(v) = _{(v) in (V)}∑ outdeg (v) = m$. Total in degree is equal to total out degree.
 
 - Let G be an undirected graph with n vertices and m edges.
-	• If G is connected, then m ≥ n − 1.
-	• If G is a tree, then m = n − 1.
-	• If G is a forest, then m ≤ n − 1.
+	
+    - If G is connected, then m ≥ n − 1.
+
+	- If G is a tree, then m = n − 1.
+	
+    - If G is a forest, then m ≤ n − 1.
 
 ### The Graph ADT
 
@@ -97,21 +107,27 @@ In each representation, we maintain a collection to store the **vertices** of a 
 
 However, the four representations differ greatly in the way they organize the edges.
 
-• In an edge list, we maintain an unordered list of all edges. This minimally suffices, but there is no efficient way to locate a particular edge $(u, v)$, or the set of all edges incident to a vertex v.
+• In an **edge list**, we maintain an unordered list of all edges. This minimally suffices, but there is no efficient way to locate a particular edge $(u, v)$, or the set of all edges incident to a vertex v.
 
-• In an adjacency list, we maintain, for each vertex, a separate list containing those edges that are incident to the vertex. The complete set of edges can be determined by taking the union of the smaller sets, while the organization allows us to more efficiently find all edges incident to a given vertex.
+• In an **adjacency list**, we maintain, for each vertex, a separate list containing those edges that are incident to the vertex. The complete set of edges can be determined by taking the union of the smaller sets, while the organization allows us to more efficiently find all edges incident to a given vertex.
 
-• An adjacency map is very similar to an adjacency list, but the secondary container of all edges incident to a vertex is organized as a map, rather than as a list, with the adjacent vertex serving as a key. This allows for access to a specific edge $(u, v)$ in $O(1)$ expected time.
+• An **adjacency map** is very similar to an adjacency list, but the secondary container of all edges incident to a vertex is organized as a map, rather than as a list, with the adjacent vertex serving as a key. This allows for access to a specific edge $(u, v)$ in $O(1)$ expected time.
 
-• An adjacency matrix provides worst-case $O(1)$ access to a specific edge $(u, v)$ by maintaining an n × n matrix, for a graph with n vertices. Each entry is dedicated to storing a reference to the edge $(u, v)$ for a particular pair of vertices u and v; if no such edge exists, the entry will be `None`. Uses a LOT of memory.
+• An **adjacency matrix** provides worst-case $O(1)$ access to a specific edge $(u, v)$ by maintaining an n × n matrix, for a graph with n vertices. Each entry is dedicated to storing a reference to the edge $(u, v)$ for a particular pair of vertices u and v; if no such edge exists, the entry will be `None`. Uses a lot of memory.
 
-![[fig14.98.png]]
+<figure markdown="span">
+  ![graph_performances](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter14/fig14-98.png)
+  <figcaption>Performance of these Data Structures for Graphs</figcaption>
+</figure>
 
 ### Edge List Structure 💙
 
 The edge list structure is possibly the simplest, though not the most efficient, representation of a graph G. All vertex objects are stored in an unordered list V, and all edge objects are stored in unordered list E.
 
-![[fig14.4.png]]
+<figure markdown="span">
+  ![edge_list_graph](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter14/fig14-4.png)
+  <figcaption>Edge List Graph</figcaption>
+</figure>
 
 Performance:
 
@@ -119,60 +135,102 @@ The space usage, which is $O(n + m)$ for representing a graph with n vertices an
 
 The most significant limitations of an edge list structure, especially when compared to the other graph representations, are the $O(m)$ running times of methods `get_edge(u,v)`, `degree(v)`, and `incident_edges(v)`. 
 
-The problem is that with all edges of the graph in an unordered list E, the only way to answer those queries is through an exhaustive inspection of all edges. The other data structures introduced in this section will implement these methods **more efficiently**.
+The problem is that with all edges of the graph in an unordered list E, the only way to answer those queries is through an exhaustive inspection of all edges.
+
+The other data structures introduced in this section will implement these methods **more efficiently**.
  
-![[fig14.97.png]]
+<figure markdown="span">
+  ![edge_list_graph_running_times](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter14/fig14-97.png)
+  <figcaption>Edge List Running Times</figcaption>
+</figure>
 
 ### Adjacency List Structure 💚
 
 In contrast to the edge list representation of a graph, the adjacency list structure groups the edges of a graph by storing them in smaller, secondary containers that are associated with each individual vertex.
 
-Specifically, for each vertex v, we maintain a collection I(v), called the incidence collection of v, whose entries are edges incident to v. (In the case of a directed graph, outgoing and incoming edges can be
-respectively stored in two separate collections, $I_{out}(v)$ and $I_{in}(v)$.) Traditionally, the incidence collection I(v) for a vertex v is a list, which is why we call this way of representing a graph the adjacency list structure.
+Specifically, for each vertex v, we maintain a collection I(v), called the incidence collection of v, whose entries are edges incident to v.
 
-The primary **benefit** of an ==adjacency list== is that the collection $I(v)$ contains exactly those edges that should be reported by the method incident edges(v). Therefore, we can implement this method by iterating the edges of $I(v)$ in $O(deg(v))$ time, where $deg(v)$ is the degree of vertex v. This is the best possible outcome for any graph representation, because there are $deg(v)$ edges to be reported.
+In the case of a directed graph, outgoing and incoming edges can be respectively stored in two separate collections, $I_{out}(v)$ and $I_{in}(v)$. 
 
-![[fig14.5.png]]
+Traditionally, the incidence collection I(v) for a vertex v is a list, which is why we call this way of representing a graph the adjacency list structure.
+
+The primary **benefit** of an **adjacency list** is that the collection $I(v)$ contains exactly those edges that should be reported by the method incident edges(v).
+
+Therefore, we can implement this method by iterating the edges of $I(v)$ in $O(deg(v))$ time, where $deg(v)$ is the degree of vertex v.
+
+This is the best possible outcome for any graph representation, because there are $deg(v)$ edges to be reported.
+
+<figure markdown="span">
+  ![adjacency_list_graph](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter14/fig14-5.png)
+  <figcaption>Adjacency List Graph</figcaption>
+</figure>
 
 Performance:
  
 Asymptotically, the space requirements for an adjacency list are the same as an edge list structure, using $O(n + m)$ space for a graph with n vertices and m edges. 
 
-The primary list of vertices uses $O(n)$ space.  The sum of the lengths of all secondary lists is $O(m)$, for reasons that were formalized in Propositions 14.8 and 14.9. In short, an undirected edge (u, v) is referenced in both I(u) and I(v), but its presence in the graph results in only a constant amount of additional space.
+The primary list of vertices uses $O(n)$ space.  The sum of the lengths of all secondary lists is $O(m)$, for reasons that were formalized in Propositions 14.8 and 14.9.
 
-We have already noted that the incident edges(v) method can be achieved in $O(deg(v))$ time based on use of $I(v)$. We can achieve the `degree(v)` method of the graph ADT to use $O(1)$ time, assuming collection $I(v)$ can report its size in similar time. 
+In short, an undirected edge (u, v) is referenced in both I(u) and I(v), but its presence in the graph results in only a constant amount of additional space.
+
+We have already noted that the incident edges(v) method can be achieved in $O(deg(v))$ time based on use of $I(v)$.
+
+We can achieve the `degree(v)` method of the graph ADT to use $O(1)$ time, assuming collection $I(v)$ can report its size in similar time. 
 
 To locate a specific edge for implementing `get_edge(u,v)`, we can search through either I(u) and I(v). By choosing the smaller of the two, we get $O(min(deg(u), deg(v)))$ running time.
 
-![[fig14.96.png]]
+<figure markdown="span">
+  ![adjacency_list_graph_running_times](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter14/fig14-96.png)
+  <figcaption>Adjacency List Running Times</figcaption>
+</figure>
 
 ### Adjacency Map Structure 💛
 
-Expected $o(1)$ time for edges. I think this is the one! (Vertices as keys, edges as values)
+Expected $o(1)$ time for edges. I think this is the one (Vertices as keys, edges as values)!
 
-In the adjacency list structure, we assume that the secondary incidence collections are implemented as unordered linked lists. Such a collection $I(v)$ uses space proportional to $O(deg(v))$, allows an edge to be added or removed in $O(1)$ time, and allows an iteration of all edges incident to vertex v in $O(deg(v))$ time. 
+In the adjacency list structure, we assume that the secondary incidence collections are implemented as unordered linked lists.
+
+Such a collection $I(v)$ uses space proportional to $O(deg(v))$, allows an edge to be added or removed in $O(1)$ time, and allows an iteration of all edges incident to vertex v in $O(deg(v))$ time. 
 
 However, the best implementation of `get_edge(u,v)` requires $O(min(deg(u), deg(v)))$ time, because we must search through either $I(u)$ or $I(v)$.
 
-We can improve the performance by using a hash-based map to implement I(v) for each vertex v. Specifically, we let the opposite endpoint of each incident edge serve as a key in the map, with the edge structure serving as the value. We call such a graph representation an adjacency map. (See Figure 14.6.) The space usage for an adjacency map remains $O(n + m)$, because I(v) uses $O(deg(v))$ space for each
-vertex v, as with the adjacency list.
+We can improve the performance by using a hash-based map to implement I(v) for each vertex v.
+
+Specifically, we let the opposite endpoint of each incident edge serve as a key in the map, with the edge structure serving as the value.
+
+We call such a graph representation an adjacency map. (See Figure 14.6.) The space usage for an adjacency map remains $O(n + m)$, because I(v) uses $O(deg(v))$ space for each vertex v, as with the adjacency list.
 
 In comparing the performance of adjacency map to other representations (see Table 14.1), we find that it essentially achieves optimal running times for all methods, making it an excellent all-purpose choice as a graph representation.
 
-![[fig14.6.png]]
+<figure markdown="span">
+  ![adjacency_list_graph](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter14/fig14-6.png)
+  <figcaption>Adjacency Map Graph</figcaption>
+</figure>
 
 ### Adjacency Matrix Structure 🧡
 
 $O(1)$ worst case access FOR EDGES. Cool but lots of memory 😯 (Vertices as integers - edges being pairs of integers. Problem is adding and removing vertices. (resize matrix)) 
  
-The adjacency matrix structure for a graph G augments the edge list structure with a matrix A (that is, a two-dimensional array, as in Chapter 5.6), which allows us to locate an edge between a given pair of vertices in worst-case constant time. In the adjacency matrix representation, we think of the vertices as being the integers in the set ${0, 1, . . . , n − 1}$ and the edges as being pairs of such integers. This allows
-us to store references to edges in the cells of a two-dimensional $n × n$ array A.
+The adjacency matrix structure for a graph G augments the edge list structure with a matrix A (that is, a two-dimensional array, as in Chapter 5.6), which allows us to locate an edge between a given pair of vertices in worst-case constant time.
 
-The most significant advantage of an adjacency matrix is that any edge (u, v) can be accessed in worst-case $O(1)$ time; recall that the adjacency map supports that operation in $O(1)$ expected time. However, several operation are less efficient with an adjacency matrix. For example, to find the edges incident to vertex v, we must presumably examine all n entries in the row associated with v; recall that an adjacency list or map can locate those edges in optimal $O(deg(v))$ time. Adding or removing vertices from a graph is problematic, as the matrix must be resized.
+In the adjacency matrix representation, we think of the vertices as being the integers in the set ${0, 1, . . . , n − 1}$ and the edges as being pairs of such integers.
 
-Furthermore, the $O(n^2)$ space usage of an adjacency matrix is typically far worse than the $O(n + m)$ space required of the other representations. Although, in the worst case, the number of edges in a dense graph will be proportional to $n^2$ , most real-world graphs are sparse.
+This allows us to store references to edges in the cells of a two-dimensional $n × n$ array A.
 
-![[fig14.7.png]]
+The most significant advantage of an adjacency matrix is that any edge (u, v) can be accessed in worst-case $O(1)$ time; recall that the adjacency map supports that operation in $O(1)$ expected time.
+
+However, several operation are less efficient with an adjacency matrix. For example, to find the edges incident to vertex v, we must presumably examine all n entries in the row associated with v; recall that an adjacency list or map can locate those edges in optimal $O(deg(v))$ time.
+
+Adding or removing vertices from a graph is problematic, as the matrix must be resized.
+
+Furthermore, the $O(n^2)$ space usage of an adjacency matrix is typically far worse than the $O(n + m)$ space required of the other representations.
+
+Although, in the worst case, the number of edges in a dense graph will be proportional to $n^2$ , most real-world graphs are sparse.
+
+<figure markdown="span">
+  ![adjacency_list_graph](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter14/fig14-6.png)
+  <figcaption>Adjacency Matrix Graph</figcaption>
+</figure>
 
 ### Python Implementation
 
@@ -184,7 +242,7 @@ The list V is replaced by a top-level dictionary D that maps each vertex v to it
 
 See the implementation with adjacency map.
 
-```python
+``` py title="graph.py" linenums="1"
 class Graph:
     """Representation of a simple graph using an adjacency map."""
 
@@ -332,6 +390,8 @@ class Graph:
 
 ### Graphs in Real World:
 
+Here is a typical interview question.
+
 ```markdown
 Given an m x n 2D binary grid grid which represents a map of '1's (land) and '0's (water), return the number of islands.
 
@@ -365,7 +425,7 @@ n == grid[i].length
 grid[i][j] is '0' or '1'.
 ```
 
-```python
+``` py
 class Solution:
     
     def numIslands(self, grid: list[list[str]]) -> int:
@@ -401,23 +461,26 @@ class Solution:
 
 ## Graph Traversals 💗
 
-A traversal is a systematic procedure for exploring a graph by examining all of its vertices and edges. A traversal is efficient if it visits all the vertices and edges in time proportional to their number, that is, in linear time.
+A traversal is a systematic procedure for exploring a graph by examining all of its vertices and edges.
+
+A traversal is efficient if it visits all the vertices and edges in time proportional to their number, that is, in linear time.
 
 Graph traversal algorithms are key to answering many fundamental questions about graphs involving the notion of reachability, that is, in determining how to travel from one vertex to another while following paths of a graph.
 
 Problems to deal with reachability for undirected graphs:
-	• Computing a path from vertex u to vertex v, or reporting that no such path exists.
-	• Given a start vertex s of G, computing, for every vertex v of G, a path with the minimum number of edges between s and v, or reporting that no such path exists.
-	• Testing whether G is connected.
-	• Computing a spanning tree of G, if G is connected.
-	• Computing the connected components of G.
-	• Computing a cycle in G, or reporting that G has no cycles.
+
+	- Computing a path from vertex u to vertex v, or reporting that no such path exists.
+	- Given a start vertex s of G, computing, for every vertex v of G, a path with the minimum number of edges between s and v, or reporting that no such path exists.
+	- Testing whether G is connected.
+	- Computing a spanning tree of G, if G is connected.
+	- Computing the connected components of G.
+	- Computing a cycle in G, or reporting that G has no cycles.
 
 Problems to deal with reachability for directed graphs:
-	• Computing a directed path from vertex u to vertex v, or reporting that no such path exists.
-	• Finding all the vertices of G{arrow} that are reachable from a given vertex s.
-	• Determine whether G{arrow} is acyclic.
-	• Determine whether G{arrow} is strongly connected.
+	- Computing a directed path from vertex u to vertex v, or reporting that no such path exists.
+	- Finding all the vertices of G{arrow} that are reachable from a given vertex s.
+	- Determine whether G{arrow} is acyclic.
+	- Determine whether G{arrow} is strongly connected.
 
 ### DFS
 
