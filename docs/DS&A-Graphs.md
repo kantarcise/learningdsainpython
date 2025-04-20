@@ -461,28 +461,39 @@ class Solution:
 
 ## Graph Traversals 💗
 
-A traversal is a systematic procedure for exploring a graph by examining all of its vertices and edges.
+A **traversal** is a systematic procedure for exploring a graph by examining all of its vertices and edges.
 
 A traversal is efficient if it visits all the vertices and edges in time proportional to their number, that is, in linear time.
 
 Graph traversal algorithms are key to answering many fundamental questions about graphs involving the notion of reachability, that is, in determining how to travel from one vertex to another while following paths of a graph.
 
-Problems to deal with reachability for undirected graphs:
+- Problems to deal with reachability for undirected graphs:
 
 	- Computing a path from vertex u to vertex v, or reporting that no such path exists.
+
 	- Given a start vertex s of G, computing, for every vertex v of G, a path with the minimum number of edges between s and v, or reporting that no such path exists.
+
 	- Testing whether G is connected.
+
 	- Computing a spanning tree of G, if G is connected.
+
 	- Computing the connected components of G.
+
 	- Computing a cycle in G, or reporting that G has no cycles.
 
-Problems to deal with reachability for directed graphs:
+- Problems to deal with reachability for directed graphs:
+
 	- Computing a directed path from vertex u to vertex v, or reporting that no such path exists.
-	- Finding all the vertices of G{arrow} that are reachable from a given vertex s.
-	- Determine whether G{arrow} is acyclic.
-	- Determine whether G{arrow} is strongly connected.
+
+	- Finding all the vertices of $\vec{G}$ that are reachable from a given vertex s.
+
+	- Determine whether $\vec{G}$ is acyclic.
+
+	- Determine whether $\vec{G}$ is strongly connected.
 
 ### DFS
+
+Depth-first search (DFS) is an algorithm for traversing or searching tree or graph data structures.
 
 Wisdom: Sending single agent with a rope in a labyrinth. We go as deep as possible, we backtrack from dead ends.
 
@@ -498,11 +509,16 @@ Algorithm DFS(G,u):      {We assume u has already been marked as visited}
 
 Here is DFS on directed graph:
 
-![[fig14.8.png]]
+<figure markdown="span">
+  ![dfs_on_directed_graph](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter14/fig14-8.png)
+  <figcaption>DFS on Directed Graph</figcaption>
+</figure>
 
 Here is DFS on undirected graph (full arrows are discovery, dotted arrows are back edges):
-
-![[fig14.9.png]]
+<figure markdown="span">
+  ![dfs_on_undirected_graph](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter14/fig14-9.png)
+  <figcaption>DFS on Undirected Graph</figcaption>
+</figure>
 
 #### Properties of DFS
 
@@ -510,11 +526,11 @@ Proposition 14.12: Let G be an undirected graph on which a DFS traversal startin
 
 Depth-first search visits each vertex in the connected component of s.
 
-For G{arrow} DFS visits all reachable.
+For $\vec{G}$ DFS visits all reachable.
 
 #### Running time of DFS
 
-Every edge is examined at most twice.
+For DFS, every edge is examined at most twice.
 
 In terms of its running time, depth-first search is an efficient method for traversing a graph. 
 
@@ -522,25 +538,43 @@ Note that DFS is called at most once on each vertex (since it gets marked as vis
 
 #### When is it good too use DFS?
 
-Proposition 14.14: Let G be an undirected graph with n vertices and m edges. A DFS traversal of G can be performed in $O(n + m)$ time, and can be used to solve the following problems in $O(n + m)$ time:
+**Proposition 14.14**: Let G be an undirected graph with n vertices and m edges.
+
+A DFS traversal of G can be performed in $O(n + m)$ time, and can be used to solve the following problems in $O(n + m)$ time:
+
 • Computing a path between two given vertices of G, if one exists.
+
 • Testing whether G is connected.
+
 • Computing a spanning tree of G, if G is connected.
+
 • Computing the connected components of G.
+
 • Computing a cycle in G, or reporting that G has no cycles.
 
-Proposition 14.15: Let G{arrow} be a directed graph with n vertices and m edges. A DFS traversal of G{arrow} can be performed in $O(n + m)$ time, and can be used to solve the following problems in $O(n + m)$ time:
-• Computing a directed path between two given vertices of G{arrow}, if one exists.
-• Computing the set of vertices of G{arrow} that are reachable from a given vertex s.
-• Testing whether G{arrow} is strongly connected.
-• Computing a directed cycle in G{arrow}, or reporting that G{arrow} is acyclic.
-• Computing the transitive closure of G{arrow} (see Section 14.4).
+**Proposition 14.15**: Let $\vec{G}$ be a directed graph with n vertices and m edges.
 
-**Wisdom :** In real world we use `set()` for visited nodes while traversing. 
+A DFS traversal of $\vec{G}$ can be performed in $O(n + m)$ time, and can be used to solve the following problems in $O(n + m)$ time:
+
+• Computing a directed path between two given vertices of $\vec{G}$, if one exists.
+
+• Computing the set of vertices of $\vec{G}$ that are reachable from a given vertex s.
+
+• Testing whether $\vec{G}$ is strongly connected.
+
+• Computing a directed cycle in $\vec{G}$, or reporting that $\vec{G}$ is acyclic.
+
+• Computing the transitive closure of $\vec{G}$ (see Section 14.4).
+
+!!! tip 
+
+    In real world we use `set()` for visited nodes while traversing. 
 
 ### BFS
 
-In this section, we consider another algorithm for traversing a connected component of a graph, known as a breadth-first search (BFS). 
+Breadth First Search (BFS) is another fundamental graph traversal algorithm. 
+
+In this section, we consider another algorithm for traversing a connected component of a graph, known as a breadth-first search (BFS).
 
 The BFS algorithm is more akin to sending out, in all directions, many explorers who collectively traverse a graph in coordinated fashion.
 
@@ -563,16 +597,24 @@ def BFS(g, s, discovered):
         level = next_level  # relabel 'next' level to become current
 ```
   
-![[fig14,10.png]]
+<figure markdown="span">
+  ![bfs_example](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter14/fig14-10.png)
+  <figcaption>BFS Example</figcaption>
+</figure>
 
 - A path in a breadth-first search tree rooted at vertex s to any other vertex v is guaranteed to be the shortest such path from s to v in terms of the number of edges.
 
-Proposition 14.16: Let G be an undirected or directed graph on which a BFS traversal starting at vertex s has been performed. Then
+**Proposition 14.16**: Let G be an undirected or directed graph on which a BFS traversal starting at vertex s has been performed.
+
+Then
+
 • The traversal visits all vertices of G that are reachable from s.
+
 • For each vertex v at level i, the path of the BFS tree T between s and v has i edges, and any other path of G from s to v has at least i edges.
+
 • If $(u, v)$ is an edge that is not in the BFS tree, then the level number of v can  be at most 1 greater than the level number of u.
 
-- Let G be a graph with n vertices and m edges represented with the adjacency list structure. A BFS traversal of G takes $O(n + m)$ time.
+Let G be a graph with n vertices and m edges represented with the adjacency list structure. A BFS traversal of G takes $O(n + m)$ time.
 
 ## Transitive Closure
 
@@ -582,11 +624,14 @@ If representing a graph with an adjacency list or adjacency map, we can answer t
 
 In an electricity network, we may wish to be able to quickly determine whether current flows from one particular vertex to another. Motivated by such applications, we introduce the following definition. 
 
-The **transitive closure** of a directed graph G{arrow} is itself a directed graph G{arrow}∗ such that the vertices of G{arrow}∗  are the same as the vertices of G{arrow}, and G{arrow}∗  has an edge (u, v), whenever G{arrow}  has a directed path from u to v (including the case where (u, v) is an edge of the original G{arrow}).
+The **transitive closure** of a directed graph $\vec{G}$ is itself a directed graph $\vec{G}$∗ such that the vertices of $\vec{G}$∗  are the same as the vertices of $\vec{G}$, and $\vec{G}$∗  has an edge (u, v), whenever $\vec{G}$  has a directed path from u to v (including the case where (u, v) is an edge of the original $\vec{G}$).
 
-![[fig14.99.transitiveclosure.png]]
+<figure markdown="span">
+  ![transitive_closure](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter14/fig14-10.png)
+  <figcaption>Transitive Closure</figcaption>
+</figure>
 
-FROM Vertice V WHERE CAN I REALLY GO?
+From vertice $V$ where can I go?
 
 TODO:  Not urgent
 
@@ -596,12 +641,22 @@ TODO:  Not urgent
 
 Directed graphs without directed cycles are encountered in many applications.
 
-Such a directed graph is often referred to as a directed acyclic graph, or DAG, for short. Applications of such graphs include the following:
+Such a directed graph is often referred to as a directed acyclic graph, or DAG, for short.
+
+Applications of such graphs include the following:
+
 • Prerequisites between courses of a degree program.
+
 • Inheritance between classes of an object-oriented program.
+
 • Scheduling constraints between the tasks of a project.
 
-![[fig14.12.png]]
+A great example would be [Apache Airflow](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html)!
+
+<figure markdown="span">
+  ![directed_acyclic_graphs](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter14/fig14-12.png)
+  <figcaption>Directed Acyclic Graphs</figcaption>
+</figure>
 
 Topological Sorting ?
 
@@ -612,7 +667,7 @@ TODO:  Not urgent
 
 Just code:
 
-```python
+``` py
 def topological_sort(g):
     """Return a list of verticies of directed acyclic graph g in topological order.
     If graph g has a cycle, the result will be incomplete.
@@ -635,19 +690,27 @@ def topological_sort(g):
     return topo
 ```
 
-![[fig14.13.png]]
+<figure markdown="span">
+  ![topological_sort_example_run](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter14/fig14-13.png)
+  <figcaption>Example Run for Topological Sort</figcaption>
+</figure>
 
 ## Shortest Paths
 
 Some edges are better than others.
 
-We might want to use a graph to represent the roads between cities, and we might be interested in finding the fastest way to travel cross-country. In this case, it is probably not appropriate for all the edges to be equal to each other, for some inter-city distances will likely be much larger than others.
+We might want to use a graph to represent the roads between cities, and we might be interested in finding the fastest way to travel cross-country.
+
+In this case, it is probably not appropriate for all the edges to be equal to each other, for some inter-city distances will likely be much larger than others.
 
 ### Weighted Graphs
 
 A weighted graph is a graph that has a numeric (for example, integer) label $w(e)$ associated with each edge $e$, called the weight of edge $e$. For $e = (u, v)$, we let notation $w(u, v) = w(e)$
 
-![[fig14.14.png]]
+<figure markdown="span">
+  ![weighted_graphs](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter14/fig14-14.png)
+  <figcaption>Weighted Graphs</figcaption>
+</figure>
 
 If there is a negative weight (ORD - 70 JFK: someone paying us to go to JFK) that would be infinite money glitch 😅
 
@@ -655,15 +718,19 @@ If the special case of computing a shortest path when all weights are equal to o
 
 ### Dijkstra's Algorithm 🥳
 
-The main idea in applying the greedy method pattern to the single-source shortest-path problem is to perform a “weighted” breadth-first search starting at the source vertex s. 
+The main idea in applying the greedy method pattern to the single-source shortest-path problem is to perform a “weighted” breadth-first search starting at the source vertex s.
 
-In particular, we can use the greedy method to develop an algorithm that iteratively grows a “cloud” of vertices out of s, with the vertices entering the cloud in order of their distances from s. Thus, in each iteration, the next vertex chosen is the vertex outside the cloud that is closest to s. 
+In particular, we can use the greedy method to develop an algorithm that iteratively grows a “cloud” of vertices out of s, with the vertices entering the cloud in order of their distances from s.
 
-The algorithm terminates when no more vertices are outside the cloud (or when those outside the cloud are not connected to those within the cloud), at which point we have a shortest path from  s to every vertex of G that is reachable from s. 
+Thus, in each iteration, the next vertex chosen is the vertex outside the cloud that is closest to s.
+
+The algorithm terminates when no more vertices are outside the cloud (or when those outside the cloud are not connected to those within the cloud), at which point we have a shortest path from  s to every vertex of G that is reachable from s.
 
 This approach is a simple, but nevertheless powerful, example of the greedy method design pattern. Applying the greedy method to the single-source, shortest-path problem, results in an algorithm known as **Dijkstra’s algorithm**.
 
-Once a new vertex u is pulled into C, we then update the label `D[v]` of each vertex v that is adjacent to u and is outside of C, to reflect the fact that there may be a new and better way to get to v via u. This update operation is known as a relaxation procedure, for it takes an old estimate and checks if it can be improved to get closer to its true value.
+Once a new vertex u is pulled into C, we then update the label `D[v]` of each vertex v that is adjacent to u and is outside of C, to reflect the fact that there may be a new and better way to get to v via u.
+
+This update operation is known as a relaxation procedure, for it takes an old estimate and checks if it can be improved to get closer to its true value.
 
 ```markdown
 Algorithm ShortestPath(G, s):
@@ -682,19 +749,31 @@ Output: The length of a shortest path from s to v for each vertex v of G.
 	return the label D[v] of each vertex v
 ```
 
-![[fig14.15.png]]
+<figure markdown="span">
+  ![dijkstra_weighted_graphs](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter14/fig14-15.png)
+  <figcaption>Dijkstra on a Weighted Graph</figcaption>
+</figure>
 
 Stage f - we find a new better path. ORD -> DFW `1423 (802 - 621)` 
 
-![[fig14.16.png]]
+<figure markdown="span">
+  ![dijkstra_weighted_graphs_continued](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter14/fig14-16.png)
+  <figcaption>Dijkstra on a Weighted Graph Continued</figcaption>
+</figure>
 
-![[fig14.17.png]]
+<figure markdown="span">
+  ![dijkstra_weighted_graphs_end](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter14/fig14-17.png)
+  <figcaption>Dijkstra on a Weighted Graph End</figcaption>
+</figure>
 
 The answer to this question depends on there being no negative-weight edges in the graph, for it allows the greedy method to work correctly, as we show in the proposition that follows.
 
 **Proposition 14.23**: In Dijkstra’s algorithm, whenever a vertex v is pulled into the cloud, the label `D[v]` is equal to d(s, v), the length of a shortest path from s to v.
 
-![[fig14.18.png]]
+<figure markdown="span">
+  ![justification_proposition_14_23](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter14/fig14-18.png)
+  <figcaption>Justification for Proposition 14.23</figcaption>
+</figure>
 
 #### Running Time of Dijkstra
 
@@ -705,17 +784,22 @@ The outer while loop executes O(n) times, since a new vertex is added to the clo
 It works with an adaptable Priority Queue and a unsorted list. 
 
 Overall, the running time of Dijkstra’s algorithm is bounded by the sum of the following:
+
 • n insertions into Q.
+
 • n calls to the remove min method on Q.
+
 • m calls to the update method on Q.
 
-If Q is an adaptable priority queue implemented as a heap, then each of the above operations run in O(log n), and so the overall running time for Dijkstra’s algorithm is $O((n + m) log n)$. Note that if we wish to express the running time as a function of n only, then it is $O(n^{2} * log n)$ in the worst case.
+If Q is an adaptable priority queue implemented as a heap, then each of the above operations run in O(log n), and so the overall running time for Dijkstra’s algorithm is $O((n + m) log n)$.
+
+Note that if we wish to express the running time as a function of n only, then it is $O(n^{2} * log n)$ in the worst case.
 
 Assuming we are given a graph whose edge elements are non negative integer weights. 
 
 Here is the code for Dijkstra:
 
-```python
+``` py title="shortest_path_lengths.py" linenums="1"
 def shortest_path_lengths(g, src):
     """Compute shortest-path distances from src to reachable vertices of g.
     Graph g can be undirected or directed, but must be weighted such that
@@ -751,13 +835,15 @@ def shortest_path_lengths(g, src):
 
 ### Shortest Path Tree
 
-The collection of all shortest paths emanating from source s can be compactly represented by what is known as the shortest-path tree. The paths form a rooted tree because if a shortest path from s to v passes through an intermediate vertex u, it must begin with a shortest path from s to u.
+The collection of all shortest paths emanating from source s can be compactly represented by what is known as the shortest-path tree.
+
+The paths form a rooted tree because if a shortest path from s to v passes through an intermediate vertex u, it must begin with a shortest path from s to u.
 
 In this section, we demonstrate that the shortest-path tree rooted at source s can be reconstructed in $O(n + m)$ time, given the set of `d[v]` values produced by Dijkstra’s algorithm using s as the source.
 
 Here is the Python function that reconstructs the shortest paths, based on knowledge of the single-source distances:
 
-```python
+``` py
 def shortest_path_tree(g, s, d):
     """Reconstruct shortest-path tree rooted at vertex s, given distance map d.
     Return tree as a map from each reachable vertex v (other than s) to the
@@ -776,7 +862,7 @@ def shortest_path_tree(g, s, d):
 
 ## Minimum Spanning Trees
 
-Find the tree T that contains all vertices of G and has min total Weight.
+What if our goal was to find the tree T that contains all vertices of G and has min total Weight.
 
 MST - Minimum spanning Trees
 
@@ -790,7 +876,9 @@ TODO: not urgent
 
 Make a single tree like Dijkstra.
 
-In the Prim-Jarnı́k algorithm, we grow a minimum spanning tree from a single cluster starting from some “root” vertex s. The main idea is similar to that of Dijkstra’s algorithm. 
+In the Prim-Jarnı́k algorithm, we grow a minimum spanning tree from a single cluster starting from some “root” vertex s.
+
+The main idea is similar to that of Dijkstra’s algorithm. 
 
 We begin with some vertex s, defining the initial “cloud” of vertices C. Then, in each iteration, we choose a minimum-weight edge e = (u, v), connecting a vertex u in the cloud C to a vertex v outside of C. 
 
@@ -798,13 +886,19 @@ The vertex v is then brought into the cloud C and the process is repeated until 
 
 Again, the crucial fact about minimum spanning trees comes into play, for by always choosing the smallest-weight edge joining a vertex inside C to one outside C, we are assured of always adding a valid edge to the MST.
 
-![[fig14.20.png]]
+<figure markdown="span">
+  ![prim_jarnik_start](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter14/fig14-20.png)
+  <figcaption>Prim Jarnik Start</figcaption>
+</figure>
 
-![[fig14.21.png]]
+<figure markdown="span">
+  ![prim_jarnik_end](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter14/fig14-21.png)
+  <figcaption>Prim Jarnik End</figcaption>
+</figure>
 
 Here is Python implementation of the Prim-Jarnı́k algorithm for the minimum spanning tree problem:
 
-```python
+``` py title="prim_jarnik.py" linenums="1"
 def MST_PrimJarnik(g):
     """Compute a minimum spanning tree of weighted graph g.
     Return a list of edges that comprise the MST (in arbitrary order).
@@ -861,19 +955,32 @@ Algorithm Kruskal(G):
 	return tree T
 ```
 
-![[fig14.22.png]]
+<figure markdown="span">
+  ![kruskal_start](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter14/fig14-22.png)
+  <figcaption>Kruskal on a Weighted Graph Start</figcaption>
+</figure>
 
-![[fig14.23.png]]
+<figure markdown="span">
+  ![kruskal_continued](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter14/fig14-23.png)
+  <figcaption>Kruskal on a Weighted Graph Continued</figcaption>
+</figure>
 
-![[fig14.24.png]]
+<figure markdown="span">
+  ![kruskal_end](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter14/fig14-14.png)
+  <figcaption>Kruskal on a Weighted Graph End</figcaption>
+</figure>
 
 #### The Running Time of Kruskal’s Algorithm
 
-There are two primary contributions to the running time of Kruskal’s algorithm. The first is the need to consider the edges in non decreasing order of their weights, and the second is the management of the cluster partition. Analyzing its running time requires that we give more details on its implementation.
+There are two primary contributions to the running time of Kruskal’s algorithm.
+
+The first is the need to consider the edges in non decreasing order of their weights, and the second is the management of the cluster partition.
+
+Analyzing its running time requires that we give more details on its implementation.
 
 Here is Python implementation of Kruskal’s algorithm for the minimum spanning tree problem:
 
-```python
+``` py title="kruskal.py" linenums="1"
 def MST_Kruskal(g):
     """Compute a minimum spanning tree of a graph using Kruskal's algorithm.
     Return a list of edges that comprise the MST.
