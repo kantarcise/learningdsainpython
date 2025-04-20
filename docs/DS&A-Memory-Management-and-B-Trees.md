@@ -1,6 +1,8 @@
-Part of [[Data Structures and Algorithms - In Python]]
+---
+hide:
+  - toc
+---
 
-----
 # Memory Management and B-Trees 💕
 
 Our study of data structures thus far has focused primarily upon the efﬁciency of computations, as measured by the number of primitive operations that are executed on a central processing unit (CPU). 
@@ -18,7 +20,8 @@ We **ﬁrst** discuss ways in which memory is allocated and deallocated during t
 Although we often ==abstract a computer’s memory as consisting of a single pool of interchangeable locations,== in practice, the data used by an executing program is stored and transferred between a combination of physical memories ==(**e.g., CPU registers, caches, internal memory, and external memory)**==. 
 
 We consider the use of classic data structures in the algorithms used to manage memory, and how the use of memory hierarchies impacts the choice of data structures and algorithms for classic problems such as searching and sorting.
-# Memory Management
+
+## Memory Management
 
 Computer memory is organized into a sequence of words.
 
@@ -27,7 +30,8 @@ The number associated with each memory is the **==memory address.==** It is A ON
 ![[fig15.0.png]]
 
 In order to run programs and store information, computers memory must be managed so as to determine which data is stored in what memory cells.
-## Memory Allocation
+
+### Memory Allocation
 
 With Python, all objects are stored in a pool of memory, known as the memory heap or Python heap (which should not be confused with the “heap” data structure presented in Chapter 9). 
 
@@ -40,7 +44,10 @@ w = Widget()
 ```
 
 is executed, assuming Widget is the name of a class, a new instance of the class is created and stored somewhere within the memory heap. The Python interpreter is responsible for negotiating the use of space with the operating system and for managing the use of the memory heap when executing a Python program.
-### Fragmentation. Internal and external. How to deal with it? best fit. first fit. next fit. Worst fit.
+
+#### Fragmentation
+
+Internal and external. How to deal with it? best fit. first fit. next fit. Worst fit.
 
 Memory allocation in a heap, where memory is divided into contiguous blocks and managed through a linked list called the ==free list.== As memory is allocated and deallocated, the collection of holes in the free lists changes, with the unused memory being separated into disjoint holes divided by blocks of used memory. 
 
@@ -57,7 +64,8 @@ Various allocation algorithms, such as best-fit, first-fit, next-fit, and worst-
 Best-fit tends to produce more external fragmentation, first-fit causes fragmentation at the front of the free list, next-fit spreads fragmentation but makes large allocations difficult, and worst-fit aims to maintain large contiguous sections of free memory to address fragmentation issues. 
 
 The choice of algorithm depends on the trade-offs between speed and fragmentation.
-## Garbage Collection
+
+### Garbage Collection
 
 George said, [this changed everything](https://youtu.be/N2bXEUSAiTI?t=310).
 
@@ -81,6 +89,7 @@ An indirect reference to a live object is a reference that occurs within the sta
 The set of live objects are defined recursively; thus, any objects that are referenced within the list that is referenced by the widget are also classified as live objects. 
 
 The Python interpreter assumes that live objects are the active objects currently being used by the running program; these objects should not be deallocated. Other objects can be garbage collected.
+
 #### Reference Counts
 
 Within the state of every Python object is an integer known as its reference count. This is the count of how many references to the object exist anywhere in the system. Every time a reference is assigned to this object, its reference count is incremented, and every time one of those references is reassigned to something else, the reference count for the former object is decremented. 
@@ -92,6 +101,7 @@ The Python interpreter allows a running program to examine an object’s referen
 It is worth noting that because the formal parameter of that function is assigned to the actual parameter sent by the caller, there is temporarily one additional reference to that object in the local namespace of the function at the time the count is reported. 
 
 The advantage of having a reference count for each object is that if an object’s count is ever decremented to zero, that object cannot possibly be a live object and therefore the system can immediately deallocate the object (or place it in a queue of objects that are ready to be deallocated).
+
 #### Cycle Detection
 
 Having references to each other but not reachable from root.
@@ -101,6 +111,7 @@ Having a nonzero reference count doesn't guarantee an object's liveness. Objects
 An example is given where a `list`, even with a nonzero reference count, may become garbage collected if the identifier referencing it goes out of scope. To address such cases, advanced garbage collection methods, like the mark-sweep algorithm, are employed periodically, especially when memory becomes scarce. 
 
 These algorithms detect and collect unreachable objects, even when their reference counts are nonzero, preventing memory leaks. The specifics of garbage collection in Python are abstracted in the `gc` module and may vary depending on the interpreter's implementation.
+
 #### Mark and Sweep Algorithm
 
 In the mark-sweep garbage collection algorithm, each object is associated with a "mark" bit to determine liveness. When garbage collection is initiated, all mark bits are cleared. 
@@ -110,17 +121,20 @@ The algorithm then marks root objects as "live" and performs a depth-first searc
 Subsequently, the algorithm scans the memory heap, reclaiming space used by unmarked objects, and may coalesce allocated space to eliminate external fragmentation temporarily. This scanning and reclamation constitute the "sweep" phase. 
 
 The algorithm, which reclaims space proportionate to the number of live objects, their references, and the memory heap size, is efficient in managing memory usage.
+
 #### DFS In Place 😮
 
 TODO: not urgent.
 
 ...
-## Additional Memory Used by Python Interpreter
+
+### Additional Memory Used by Python Interpreter
 
 We have discussed, in Chapter 15.1.1, how the Python interpreter allocates memory for objects within a memory heap. 
 
 However, this is not the only memory that is used when executing a Python program. In this section, we discuss some other important uses of memory.
-### Run Time Call Stack
+
+#### Run Time Call Stack
 
 Stacks have a most important application to the run-time environment of Python programs. 
 
@@ -170,7 +184,8 @@ The namespace maps identifiers, which serve as parameters and local variables, t
 The activation record for a function call also includes a reference to the function definition itself, and a special variable, known as the program counter, to maintain the address of the statement within the function that is currently executing. 
 
 When one function returns control to another, the stored program counter for the suspended function allows the interpreter to properly continue execution of that function.
-### Recursion
+
+#### Recursion
 
 One of the benefits of using a stack to implement the nesting of function calls is that it allows programs to use recursion. Example: Factorial.
 
@@ -179,21 +194,24 @@ $n! = n*(n-1)*(n-2)*(n-3)*...*1$
 First time only n in the activation record. Recursion makes a new activation record.
 
 The function recursively calls itself to compute `(n − 1)!`, causing a new activation record, with its own namespace and parameter, to be pushed onto the call stack. In turn, this recursive invocation calls itself to compute `(n − 2)!`, and so on. The chain of recursive invocations, and thus the call stack, grows up to size n + 1, with the most deeply nested call being `factorial(0)`, which returns 1 without any further recursion.
-### Operand Stack
+
+#### Operand Stack
 
 Interestingly, there is actually another place where the Python interpreter uses a stack. Arithmetic expressions, such as `((a + b) ∗ (c + d))/e,` are evaluated by the interpreter using an ==operand stack==.
 
 A simple binary operation, such as a + b, is computed by pushing a on the stack, pushing b on the stack, and then calling an instruction that pops the top two items from the stack, performs the binary operation on them, and pushes the result back onto the stack.
 
 push `a`, push `b` push `__add__`  which pops last 2 elements and adds them.
-# Memory Hierarchies and Caching
+
+## Memory Hierarchies and Caching
 
 With the increased use of computing in society, software applications must manage extremely large data sets. 
 
 Such applications include the processing of online financial transactions, the organization and maintenance of databases, and analyses of customers’ purchasing histories and preferences. 
 
 The amount of data can be so large that the overall performance of algorithms and data structures sometimes depends more on the time to access the data than on the speed of the CPU.
-## Memory Systems
+
+### Memory Systems
 
 Memory is in a hierarchy.
 
@@ -208,7 +226,8 @@ At the third level in the hierarchy is the **internal memory**, which is also kn
 Another level in the hierarchy is the **external memory**, which usually consists of disks, CD drives, DVD drives, and/or tapes. This memory is very large, but it is also very slow. 
 
 Data stored through an **external network** can be viewed as yet another level in this hierarchy, with even greater storage capacity, but even slower access.
-## Caching Strategies
+
+### Caching Strategies
 
 The significance of the memory hierarchy on the performance of a program depends greatly upon the size of the problem we are trying to solve and the physical characteristics of the computer system. 
 
@@ -219,7 +238,8 @@ Often, the bottleneck occurs between two levels of the memory hierarchy—the on
 100000 to 10000000 times longer - General Purpose external memory drive. 😮😮😮😮
 
 Most algorithms are not designed with the memory hierarchy in mind, in spite of the great variance between access times for the different levels. Indeed, all of the algorithm analyses described in this book so far have assumed that all memory accesses are equal. This assumption might seem, at first, to be a great oversight— and one we are only addressing now in the final chapter—but there are good reasons why it is actually a reasonable assumption to make.
-### Caching and blocking
+
+#### Caching and blocking
 
 Another justification for the memory-access equality assumption is that operating system designers have developed general mechanisms that allow most memory accesses to be fast. These mechanisms are based on two important locality-of- reference properties that most software possesses:
 	• Temporal locality: If a program accesses a certain memory location, then there is increased likelihood that it accesses that same location again in the near future. For example, it is common to use the value of a counter variable in several different expressions, including one to increment the counter’s value. In fact, a common adage among computer architects is that a program spends 90 percent of its time in 10 percent of its code.
@@ -232,7 +252,8 @@ The first design choice is called virtual memory. This concept consists of provi
 The second design choice is motivated by spatial locality. Specifically, if data stored at a secondary-level memory location $l$ is accessed, then we bring into primary-level memory a large block of contiguous locations that include the location $l$. (See Figure 15.2.) This concept is known as blocking, and it is motivated by the expectation that other secondary-level memory locations close to $l$ will soon be accessed. In the interface between cache memory and internal memory, such blocks are often called cache lines, and in the interface between internal memory and external memory, such blocks are often called pages.
 
 ![[fig15.2.png]]
-### Caching in Web Browsers 
+
+#### Caching in Web Browsers 
 
 For motivation, we consider a related problem that arises when revisiting information presented in Web pages. To exploit temporal locality of reference, it is often advantageous to store copies of Web pages in a cache memory, so these pages can be quickly retrieved when requested again. 
 
@@ -254,7 +275,8 @@ In addition, we can consider a simple and purely random strategy:
 ![[fig15.3.png]]
 
 In experiments, best way to approach is: LRU > FIFO > Random
-# External Searching and B - Trees
+
+## External Searching and B - Trees
 
 Consider the problem of maintaining a large collection of items that does not fit in main memory, such as a typical database. 
 
@@ -263,7 +285,8 @@ In this context, we refer to the secondary- memory blocks as disk blocks. Likewi
 Recalling the great time difference that exists between main memory accesses and disk accesses, the main goal of maintaining such a collection in external memory is to ==minimize the number of disk transfers== needed to perform a query or update. 
 
 We refer to this count as the **I/O complexity** of the algorithm involved.
-## Some Inefficient External-Memory Representations
+
+### Some Inefficient External-Memory Representations
 
 A typical operation we would like to support is the search for a key in a map. If we were to store n items unordered in a doubly linked list, searching for a particular key within the list requires n transfers in the worst case, since each link hop we perform on the linked list might access a different block of memory.
 
@@ -289,7 +312,7 @@ Thus, these methods all require $O(log_{2}n)$ transfers in the worst case to per
 
 But we can do better! We can perform map queries and updates using only $O(log_{B} n) = O(log n/ log B)$ transfers.
 
-## (a,b) Trees
+### (a,b) Trees
 
 To reduce the number of external-memory accesses when searching, we can represent our map using a multiway search tree (Chapter 11.5.1). This approach gives rise to a generalization of the (2, 4) tree data structure known as the (a, b) tree.
 
@@ -297,7 +320,7 @@ TODO: not urgent
 
 ...
 
-## B-Trees
+### B-Trees
 
 A version of the (a, b) tree data structure, which is the best-known method for maintaining a map in external memory, is called the “B-tree.” (See Figure 15.4.) 
 
@@ -311,12 +334,14 @@ Since we discussed the standard map query and update methods for (a, b) trees ab
 TODO: Not urgent
 
 ...
-# External-Memory Sorting 
+
+## External-Memory Sorting 
 
 In addition to data structures, such as maps, that need to be implemented in external memory, there are many algorithms that must also operate on input sets that are too large to fit entirely into internal memory. 
 
 In this case, the objective is to solve the algorithmic problem using as few block transfers as possible. The most classic domain for such external-memory algorithms is the sorting problem.
-## Multiway Merge-Sort
+
+### Multiway Merge-Sort
 
 An efficient way to sort a set `S` of $n$ objects in external memory amounts to a simple external-memory variation on the familiar merge-sort algorithm. 
 
@@ -326,7 +351,8 @@ TODO: not urgent
 
 ...
 
-## Multiway Merging
+
+### Multiway Merging
 
 In a standard merge-sort (Chapter 12.2), the merge process combines two sorted sequences into one by repeatedly taking the smaller of the items at the front of the two respective lists. 
 
@@ -343,4 +369,6 @@ TODO: not urgent
 ...
 
 
-Done with third version  🥰
+Unbelievable. You made it to the end.
+
+I hope you discovered things that will help you in your journey. Onto the next adventure! 
