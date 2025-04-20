@@ -1,10 +1,13 @@
-Part of [[Data Structures and Algorithms - In Python]]
-
 ---
+hide:
+  - toc
+---
+
 # Graphs 🥰
 
 This chapter is all about graphs.
-# Graphs
+
+## What is a Graph?
 
 **A graph G is simply a set V of vertices and a collection E of pairs of vertices from V , called edges.** 
 
@@ -14,7 +17,10 @@ A lot of definitions about them:
 
 - Edges in a graph are either **directed or undirected.** An edge $(u, v)$ is said to be directed from $u$ to $v$ if the pair $(u, v)$ is ordered, with $u$ preceding $v$. An edge $(u, v)$ is said to be undirected if the pair $(u, v)$ is not ordered.
 
-![[fig14.1.png]]
+<figure markdown="span">
+  ![graph_of_authors](https://raw.githubusercontent.com/kantarcise/learningdsainpython/refs/heads/main/docs/assets/images/chapter14/fig14-1.png)
+  <figcaption>Graph if Authors</figcaption>
+</figure>
 
 - If all the edges in a graph are undirected, then we say the graph is an ==**undirected graph**==. Likewise, a ==**directed graph**==, also called a digraph, is a graph whose edges are all directed. A graph that has both directed and undirected edges is often called ==**a mixed graph.** ==
 
@@ -76,12 +82,14 @@ Total in degree is equal to total out degree.
 	• If G is connected, then m ≥ n − 1.
 	• If G is a tree, then m = n − 1.
 	• If G is a forest, then m ≤ n − 1.
-## The Graph ADT
+
+### The Graph ADT
 
 TODO: Not urgent
 
 ...
-# Data Structures for Graphs 🥰
+
+## Data Structures for Graphs 🥰
 
 We will see four data structures for representing a graph.
 
@@ -98,7 +106,8 @@ However, the four representations differ greatly in the way they organize the ed
 • An adjacency matrix provides worst-case $O(1)$ access to a specific edge $(u, v)$ by maintaining an n × n matrix, for a graph with n vertices. Each entry is dedicated to storing a reference to the edge $(u, v)$ for a particular pair of vertices u and v; if no such edge exists, the entry will be `None`. Uses a LOT of memory.
 
 ![[fig14.98.png]]
-## Edge List Structure 💙
+
+### Edge List Structure 💙
 
 The edge list structure is possibly the simplest, though not the most efficient, representation of a graph G. All vertex objects are stored in an unordered list V, and all edge objects are stored in unordered list E.
 
@@ -113,7 +122,8 @@ The most significant limitations of an edge list structure, especially when comp
 The problem is that with all edges of the graph in an unordered list E, the only way to answer those queries is through an exhaustive inspection of all edges. The other data structures introduced in this section will implement these methods **more efficiently**.
  
 ![[fig14.97.png]]
-## Adjacency List Structure 💚
+
+### Adjacency List Structure 💚
 
 In contrast to the edge list representation of a graph, the adjacency list structure groups the edges of a graph by storing them in smaller, secondary containers that are associated with each individual vertex.
 
@@ -135,7 +145,8 @@ We have already noted that the incident edges(v) method can be achieved in $O(de
 To locate a specific edge for implementing `get_edge(u,v)`, we can search through either I(u) and I(v). By choosing the smaller of the two, we get $O(min(deg(u), deg(v)))$ running time.
 
 ![[fig14.96.png]]
-## Adjacency Map Structure 💛
+
+### Adjacency Map Structure 💛
 
 Expected $o(1)$ time for edges. I think this is the one! (Vertices as keys, edges as values)
 
@@ -149,7 +160,8 @@ vertex v, as with the adjacency list.
 In comparing the performance of adjacency map to other representations (see Table 14.1), we find that it essentially achieves optimal running times for all methods, making it an excellent all-purpose choice as a graph representation.
 
 ![[fig14.6.png]]
-## Adjacency Matrix Structure 🧡
+
+### Adjacency Matrix Structure 🧡
 
 $O(1)$ worst case access FOR EDGES. Cool but lots of memory 😯 (Vertices as integers - edges being pairs of integers. Problem is adding and removing vertices. (resize matrix)) 
  
@@ -161,7 +173,8 @@ The most significant advantage of an adjacency matrix is that any edge (u, v) ca
 Furthermore, the $O(n^2)$ space usage of an adjacency matrix is typically far worse than the $O(n + m)$ space required of the other representations. Although, in the worst case, the number of edges in a dense graph will be proportional to $n^2$ , most real-world graphs are sparse.
 
 ![[fig14.7.png]]
-## Python Implementation
+
+### Python Implementation
 
 For each vertex v, we use a Python dictionary to represent the secondary incidence map $I(v)$. 
 
@@ -316,7 +329,8 @@ class Graph:
         self._outgoing[u][v] = e
         self._incoming[v][u] = e
 ```
-# Graphs in Real World:
+
+### Graphs in Real World:
 
 ```markdown
 Given an m x n 2D binary grid grid which represents a map of '1's (land) and '0's (water), return the number of islands.
@@ -384,7 +398,8 @@ class Solution:
         
         return result
 ```
-# Graph Traversals 💗
+
+## Graph Traversals 💗
 
 A traversal is a systematic procedure for exploring a graph by examining all of its vertices and edges. A traversal is efficient if it visits all the vertices and edges in time proportional to their number, that is, in linear time.
 
@@ -403,7 +418,8 @@ Problems to deal with reachability for directed graphs:
 	• Finding all the vertices of G{arrow} that are reachable from a given vertex s.
 	• Determine whether G{arrow} is acyclic.
 	• Determine whether G{arrow} is strongly connected.
-## DFS
+
+### DFS
 
 Wisdom: Sending single agent with a rope in a labyrinth. We go as deep as possible, we backtrack from dead ends.
 
@@ -424,21 +440,24 @@ Here is DFS on directed graph:
 Here is DFS on undirected graph (full arrows are discovery, dotted arrows are back edges):
 
 ![[fig14.9.png]]
-### Properties of DFS
+
+#### Properties of DFS
 
 Proposition 14.12: Let G be an undirected graph on which a DFS traversal starting at a vertex s has been performed. Then the traversal visits all vertices in the connected component of s, and the discovery edges form a spanning tree of the connected component of s.
 
 Depth-first search visits each vertex in the connected component of s.
 
 For G{arrow} DFS visits all reachable.
-### Running time of DFS
+
+#### Running time of DFS
 
 Every edge is examined at most twice.
 
 In terms of its running time, depth-first search is an efficient method for traversing a graph. 
 
 Note that DFS is called at most once on each vertex (since it gets marked as visited), and therefore every edge is examined at most twice for an undirected graph, once from each of its end vertices, and at most once in a directed graph, from its origin vertex.
-### When is it good too use DFS?
+
+#### When is it good too use DFS?
 
 Proposition 14.14: Let G be an undirected graph with n vertices and m edges. A DFS traversal of G can be performed in $O(n + m)$ time, and can be used to solve the following problems in $O(n + m)$ time:
 • Computing a path between two given vertices of G, if one exists.
@@ -455,7 +474,8 @@ Proposition 14.15: Let G{arrow} be a directed graph with n vertices and m edges.
 • Computing the transitive closure of G{arrow} (see Section 14.4).
 
 **Wisdom :** In real world we use `set()` for visited nodes while traversing. 
-## BFS
+
+### BFS
 
 In this section, we consider another algorithm for traversing a connected component of a graph, known as a breadth-first search (BFS). 
 
@@ -490,7 +510,8 @@ Proposition 14.16: Let G be an undirected or directed graph on which a BFS trave
 • If $(u, v)$ is an edge that is not in the BFS tree, then the level number of v can  be at most 1 greater than the level number of u.
 
 - Let G be a graph with n vertices and m edges represented with the adjacency list structure. A BFS traversal of G takes $O(n + m)$ time.
-# Transitive Closure
+
+## Transitive Closure
 
 We have seen that graph traversals can be used to answer basic questions of reachability in a directed graph.
 
@@ -508,7 +529,7 @@ TODO:  Not urgent
 
 ...
 
-# Directed Acyclic Graphs
+## Directed Acyclic Graphs
 
 Directed graphs without directed cycles are encountered in many applications.
 
@@ -552,12 +573,14 @@ def topological_sort(g):
 ```
 
 ![[fig14.13.png]]
-# Shortest Paths
+
+## Shortest Paths
 
 Some edges are better than others.
 
 We might want to use a graph to represent the roads between cities, and we might be interested in finding the fastest way to travel cross-country. In this case, it is probably not appropriate for all the edges to be equal to each other, for some inter-city distances will likely be much larger than others.
-## Weighted Graphs
+
+### Weighted Graphs
 
 A weighted graph is a graph that has a numeric (for example, integer) label $w(e)$ associated with each edge $e$, called the weight of edge $e$. For $e = (u, v)$, we let notation $w(u, v) = w(e)$
 
@@ -566,7 +589,8 @@ A weighted graph is a graph that has a numeric (for example, integer) label $w(e
 If there is a negative weight (ORD - 70 JFK: someone paying us to go to JFK) that would be infinite money glitch 😅
 
 If the special case of computing a shortest path when all weights are equal to one was solved with the BFS traversal algorithm.
-## Dijkstra's Algorithm 🥳
+
+### Dijkstra's Algorithm 🥳
 
 The main idea in applying the greedy method pattern to the single-source shortest-path problem is to perform a “weighted” breadth-first search starting at the source vertex s. 
 
@@ -608,7 +632,8 @@ The answer to this question depends on there being no negative-weight edges in t
 **Proposition 14.23**: In Dijkstra’s algorithm, whenever a vertex v is pulled into the cloud, the label `D[v]` is equal to d(s, v), the length of a shortest path from s to v.
 
 ![[fig14.18.png]]
-## Running Time of Dijkstra
+
+#### Running Time of Dijkstra
 
 Let us first assume that we are representing the graph G using an adjacency list or adjacency map structure. 
 
@@ -660,7 +685,8 @@ def shortest_path_lengths(g, src):
                     pq.update(pqlocator[v], d[v], v)  # update the pq entry
     return cloud  # only includes reachable vertices
 ```
-## Shortest Path Tree
+
+### Shortest Path Tree
 
 The collection of all shortest paths emanating from source s can be compactly represented by what is known as the shortest-path tree. The paths form a rooted tree because if a shortest path from s to v passes through an intermediate vertex u, it must begin with a shortest path from s to u.
 
@@ -684,7 +710,8 @@ def shortest_path_tree(g, s, d):
                     tree[v] = e  # edge e is used to reach v
     return tree
 ```
-# Minimum Spanning Trees
+
+## Minimum Spanning Trees
 
 Find the tree T that contains all vertices of G and has min total Weight.
 
@@ -695,7 +722,8 @@ MST - Minimum spanning Trees
 TODO: not urgent
 
 ...
-## Prim Jarnik Algorithm
+
+### Prim Jarnik Algorithm
 
 Make a single tree like Dijkstra.
 
@@ -746,7 +774,8 @@ def MST_PrimJarnik(g):
                     pq.update(pqlocator[v], d[v], (v, link))  # update the pq entry
     return tree
 ```
-## Kruskal's Algorithm
+
+### Kruskal's Algorithm
 
 Make a forest , make discards and merges if needed UNTIL you find the ADEQUATELY BIG tree.
 
@@ -774,7 +803,8 @@ Algorithm Kruskal(G):
 ![[fig14.23.png]]
 
 ![[fig14.24.png]]
-### The Running Time of Kruskal’s Algorithm
+
+#### The Running Time of Kruskal’s Algorithm
 
 There are two primary contributions to the running time of Kruskal’s algorithm. The first is the need to consider the edges in non decreasing order of their weights, and the second is the management of the cluster partition. Analyzing its running time requires that we give more details on its implementation.
 
@@ -806,11 +836,12 @@ def MST_Kruskal(g):
             forest.union(a, b)
     return tree
 ```
-# Disjoint Partitions and Union-Find Structures
+
+## Disjoint Partitions and Union-Find Structures
 
 TODO , not urgent
 
 ...
 
 
-Done with third version 💕
+On to the last chapter, [Memory Management and B-Trees](https://learningdsainpython.kantarcise.com/DS%26A-Memory-Management-and-B-Trees/) 💕
